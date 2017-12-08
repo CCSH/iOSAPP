@@ -21,4 +21,6 @@
 #   define SHLog(...)
 #endif
 
-#import "AFNetworking.h"
+#import "MacroHeader.h"
+#import "ClassHeader.h"
+#import "InterfaceHead.h"
