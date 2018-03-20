@@ -19,7 +19,7 @@
     dispatch_once(&onceToken, ^{
         
         //获取本地的数据库文件，没有则创建
-        queue = [FMDatabaseQueue databaseQueueWithPath:[NSString stringWithFormat:@"%@/CooTalk_db.db",kSHDBPath]];
+        queue = [FMDatabaseQueue databaseQueueWithPath:[NSString stringWithFormat:@"%@/iOSAPP_db.db",kSHDBPath]];
         
         [queue inTransaction:^(FMDatabase *db,BOOL *rollback) {
             

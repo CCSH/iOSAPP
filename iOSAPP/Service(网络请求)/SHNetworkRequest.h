@@ -10,8 +10,7 @@
 
 @interface SHNetworkRequest : NSObject
 
-
-#pragma mark 登录
+#pragma mark - 登录接口
 + (void)getLoginAppWithName:(NSString *)name password:(NSString *)password result:(void (^)(IServerBaseModel *model,NSError *error))result;
 
 @end

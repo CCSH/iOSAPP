@@ -11,10 +11,10 @@
 
 @implementation SHNetworkRequest
 
-#pragma mark - 登录
+#pragma mark - 登录接口
 + (void)getLoginAppWithName:(NSString *)name password:(NSString *)password result:(void (^)(IServerBaseModel *model,NSError *error))result{
     
-    NSString *url = [NSString stringWithFormat:@"%@/%@",@"https://www.baidu.com",@"login"];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",kMainUrl,kUser_login];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:name forKey:@"name"];
@@ -24,13 +24,13 @@
 
         IServerBaseModel *model = [[IServerBaseModel alloc]init];
         
-        NSLog(@"详单查询接口 --- %@",model.result);
+        NSLog(@"登录接口 --- %@",model.result);
         if (result) {
             result(model,nil);
         }
     } failure:^(NSError *error) {
         
-        NSLog(@"详单查询接口 --- %@",[error description]);
+        NSLog(@"登录接口 --- %@",[error description]);
         if (result) {
             result(nil,error);
         }
