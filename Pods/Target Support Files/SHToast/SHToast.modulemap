@@ -1,0 +1,6 @@
+framework module SHToast {
+  umbrella header "SHToast-umbrella.h"
+
+  export *
+  module * { export * }
+}
