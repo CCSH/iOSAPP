@@ -49,6 +49,13 @@ for (int i = 0; i< count##Model; i++){\
 }\
 free(properties##Model);\
 
+//控制日志输出
+#ifdef DEBUG
+#   define SHLog(log, ...) NSLog((@"\n%s\n[Line %d]\n"  log), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#   define SHLog(...)
+#endif
+
 //计算耗时
 #define TICK        CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 #define TOCKFor(A)  SHLog(@"耗时计算-%@: %f",(A),CFAbsoluteTimeGetCurrent() - start);

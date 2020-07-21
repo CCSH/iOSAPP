@@ -5,16 +5,24 @@ inhibit_all_warnings!
 
 target 'iOSAPP' do
  #数据请求
- pod 'AFNetworking', '~> 3.1.0'
+ pod 'AFNetworking'
  #刷新
- pod 'MJRefresh', '~> 3.1.12'
+ pod 'MJRefresh'
  #数据处理
- pod 'MJExtension', '~> 3.0.13'
+ pod 'MJExtension'
  #图片加载
- pod 'SDWebImage', '~> 4.1.0'
+ pod 'SDWebImage'
  #数据库
- pod 'FMDB', '~> 2.7.2'
+ pod 'FMDB'
  #加载框
- pod 'MBProgressHUD', '~> 1.0.0'
+ pod 'MBProgressHUD'
+ #Toast
+ pod 'SHToast'
+ #复杂滚动布局
+ pod 'SHScrollLayout'
+ #拓展
+ pod 'SHExtension'
+ #g滚动视图
+ pod 'SHScrollView'
 
 end

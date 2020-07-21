@@ -7,7 +7,6 @@
 //
 
 #import "SHSQLite.h"
-#import <FMDB/FMDB.h>
 
 @implementation SHSQLite
 
