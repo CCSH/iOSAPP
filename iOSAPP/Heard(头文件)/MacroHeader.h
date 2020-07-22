@@ -82,8 +82,4 @@ free(properties##Model);\
 #pragma mark 其他信息
 //APP版本
 #define kAppVersion         @"app_version"
-//APP语言
-#define kAppLanguage        @"app_language"
-//用户密码
-#define kPassword        @"password"
 

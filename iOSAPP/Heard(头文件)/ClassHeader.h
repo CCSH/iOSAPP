@@ -23,3 +23,4 @@
 #import "SHBaseViewController.h"
 #import "SHBaseTableViewCell.h"
 #import "SHBaseNavViewController.h"
+#import "SHSQLite.h"

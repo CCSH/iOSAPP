@@ -15,23 +15,24 @@
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"登录";
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
+{
     
-    [kSHUserDef setObject:@"1" forKey:kPassword];
-    
-    MainTabBarController *view = [[MainTabBarController alloc]init];
-    
+    MainTabBarController *view = [[MainTabBarController alloc] init];
+
     AppDelegate *app = SHAppDelegate;
     app.window.rootViewController = view;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

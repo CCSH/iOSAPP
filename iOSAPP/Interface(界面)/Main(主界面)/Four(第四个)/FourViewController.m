@@ -22,12 +22,11 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    [kSHUserDef removeObjectForKey:kPassword];
+    [SHSQLite deleteLoginInfoWithUid:@"1"];
     
-    LoginViewController *view = [[LoginViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:view];
-    AppDelegate *app = SHAppDelegate;
-    app.window.rootViewController = nav;
+    LoginViewController *vc = [[LoginViewController alloc]init];
+    SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nav;
 }
 
 - (void)didReceiveMemoryWarning {

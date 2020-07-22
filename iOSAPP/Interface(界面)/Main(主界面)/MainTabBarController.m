@@ -39,21 +39,19 @@
 
     //添加子控制器
     OneViewController *oneVC = [[OneViewController alloc] init];
-    [self addOneChlildVC:oneVC title:@"第一个" imageName:@"image" selectedImageName:@"image"];
+    [self addOneChlildVC:oneVC title:@"第一个" img:@"image" selectedImg:@"image"];
 
     TwoViewController *telView = [[TwoViewController alloc] init];
-    [self addOneChlildVC:telView title:@"第二个" imageName:@"image" selectedImageName:@"image"];
+    [self addOneChlildVC:telView title:@"第二个" img:@"image" selectedImg:@"image"];
 
     ThreeViewController *addressView = [[ThreeViewController alloc] init];
-    [self addOneChlildVC:addressView title:@"第三个" imageName:@"image" selectedImageName:@"image"];
+    [self addOneChlildVC:addressView title:@"第三个" img:@"image" selectedImg:@"image"];
 
     FourViewController *settingView = [[FourViewController alloc] init];
-    [self addOneChlildVC:settingView title:@"第四个" imageName:@"image" selectedImageName:@"image"];
+    [self addOneChlildVC:settingView title:@"第四个" img:@"image" selectedImg:@"image"];
 
     //设置展示
-    self.selectedIndex = 1;
-    
-        self.tabBarController.delegate = self;
+    self.selectedIndex = 0;
 }
 
 /**
@@ -61,26 +59,23 @@
  *
  *  @param childVC         子控制器对象
  *  @param title             标题
- *  @param imageName         图标
- *  @param selectedImageName 选中的图标
+ *  @param img         图标
+ *  @param selectedImg 选中的图标
  */
-- (void)addOneChlildVC:(UIViewController *)childVC title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName
+- (void)addOneChlildVC:(UIViewController *)childVC
+                 title:(NSString *)title
+                   img:(NSString *)img
+           selectedImg:(NSString *)selectedImg
 {
     childVC.title = title;
 
     //设置点击图片
-    childVC.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    childVC.tabBarItem.image = [[UIImage imageNamed:img] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImg] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     // 添加为tabbar控制器的子控制器
     SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:childVC];
     [self addChildViewController:nav];
-//    self.tabBarController.navigationController.navigationBarHidden = YES;
-}
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(nonnull UIViewController *)viewController
-{
-    return YES;
 }
 
 #pragma mark - VC界面周期
