@@ -14,6 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIWindow *window;
 
+#pragma mark - 获取堆栈中的某个控制器
+- (UIViewController *)getStackVCWithPageVC:(Class)pageVC;
+
+#pragma mark - 获取堆栈中的指定位置的控制器
+- (UIViewController *)getStackVCWithIndex:(int)index;
+
+#pragma mark - 替换某个控制器到堆栈中
+- (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at;
+
 @end
 
 NS_ASSUME_NONNULL_END

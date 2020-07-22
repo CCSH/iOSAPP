@@ -10,17 +10,75 @@
 
 @interface SHBaseViewController ()
 
-
-
 @end
 
 @implementation SHBaseViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
     self.window = [[[UIApplication sharedApplication] delegate] window];
 }
 
+#pragma mark - 获取堆栈中的某个控制器
+- (UIViewController *)getStackVCWithPageVC:(Class)pageVC
+{
+    NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
+
+    __block UIViewController *vc = nil;
+    [vcs enumerateObjectsUsingBlock:^(UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+      if ([obj isKindOfClass:pageVC])
+      {
+          vc = obj;
+          *stop = YES;
+      }
+    }];
+
+    return vc;
+}
+
+#pragma mark - 获取堆栈中的指定位置的控制器
+- (UIViewController *)getStackVCWithIndex:(int)index
+{
+    NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
+
+    if (vcs.count)
+    {
+        if (vcs.count > abs(index))
+        {
+            return vcs[index];
+        }
+        else
+        {
+            return vcs[vcs.count + index];
+        }
+    }
+
+    return nil;
+}
+
+#pragma mark - 替换某个控制器到堆栈中
+- (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at
+{
+    NSMutableArray< UIViewController * > *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+
+    if (vcs.count > abs(at))
+    {
+        if (at > 0)
+        {
+            vcs[at] = vc;
+        }
+        else
+        {
+            vcs[vcs.count + at] = vc;
+        }
+        [self.navigationController setViewControllers:vcs animated:false];
+
+        return true;
+    }
+    
+    return false;
+}
 @end
