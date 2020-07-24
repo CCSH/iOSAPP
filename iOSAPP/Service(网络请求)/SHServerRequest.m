@@ -27,7 +27,7 @@
     if (error)
     {
         //网络错误 提示用户
-        [SHToast showWithText:@"网络错误"];
+        [SHToast showWithText:request_error];
         if (block)
         {
             block(nil, error);
@@ -35,7 +35,7 @@
         return;
     }
 
-    if ([model.result isEqualToString:@"0"])
+    if ([model.result isEqualToString:success_code])
     {
         //成功
         if (block)

@@ -13,6 +13,9 @@
 #endif /* InterfaceHead_h */
 //网络请求接口
 
+static NSString *request_error = @"网络异常";
+static NSString *success_code = @"200";
+
 #pragma mark - 主机地址
 #define kHostUrl @"http://www.baidu.com/"
 
