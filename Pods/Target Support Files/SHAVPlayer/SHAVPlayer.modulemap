@@ -1,0 +1,6 @@
+framework module SHAVPlayer {
+  umbrella header "SHAVPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

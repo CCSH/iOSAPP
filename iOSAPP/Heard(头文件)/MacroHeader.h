@@ -79,7 +79,7 @@ free(properties##Model);\
 #define kSHUserDef [NSUserDefaults standardUserDefaults]
 #define kSHUserDefGet(KEY) [[NSUserDefaults standardUserDefaults] objectForKey:(KEY)]
 
-#pragma mark 其他信息
+#pragma mark UserDefKey
 //APP版本
 #define kAppVersion         @"app_version"
 

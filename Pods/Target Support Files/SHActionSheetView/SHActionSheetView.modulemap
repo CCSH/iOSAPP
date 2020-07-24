@@ -1,0 +1,6 @@
+framework module SHActionSheetView {
+  umbrella header "SHActionSheetView-umbrella.h"
+
+  export *
+  module * { export * }
+}

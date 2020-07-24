@@ -23,6 +23,11 @@ PODS:
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
+  - SHActionSheetView (1.2.1)
+  - SHAlertView (2.0.5):
+    - SHClickTextView
+  - SHAVPlayer (1.6.4)
+  - SHClickTextView (2.0.1)
   - SHExtension (1.0.7):
     - SHExtension/NSString (= 1.0.7)
     - SHExtension/Tool (= 1.0.7)
@@ -50,13 +55,16 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - SDWebImage
+  - SHActionSheetView
+  - SHAlertView
+  - SHAVPlayer
   - SHExtension
   - SHScrollLayout
   - SHScrollView
   - SHToast
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - FMDB
     - MBProgressHUD
@@ -67,6 +75,11 @@ SPEC REPOS:
     - SHScrollLayout
     - SHScrollView
     - SHToast
+  trunk:
+    - SHActionSheetView
+    - SHAlertView
+    - SHAVPlayer
+    - SHClickTextView
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -75,11 +88,15 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  SHActionSheetView: 00d2d81dd9c4cb03ebb2683705840d50a203f474
+  SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
+  SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
+  SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
   SHExtension: a5f9b8b652664cc4fc393e0b6a4306411f2c814c
   SHScrollLayout: 776b5e00af6808dcbef14a2d36d7104afc6b3e81
   SHScrollView: 245df8c848dabec12c76e144b6c7f1d75f85854a
   SHToast: 0902c24dd5ff73225a2885bc7e01379758bdc680
 
-PODFILE CHECKSUM: 6600916e76cd775401eb75d4837e1bfeec46ca9c
+PODFILE CHECKSUM: 7b1e122c03f61d85d6900c6f84c15e0158a421ac
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.9.3

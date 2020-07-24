@@ -22,7 +22,12 @@ target 'iOSAPP' do
  pod 'SHScrollLayout'
  #拓展
  pod 'SHExtension'
- #g滚动视图
+ #滚动视图
  pod 'SHScrollView'
-
+ #Alert弹窗
+ pod 'SHAlertView'
+ #Sheet弹窗
+ pod 'SHActionSheetView'
+ #音视频播放
+ pod 'SHAVPlayer'
 end
