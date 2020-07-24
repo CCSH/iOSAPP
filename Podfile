@@ -9,7 +9,7 @@ target 'iOSAPP' do
  #刷新
  pod 'MJRefresh'
  #数据处理
- pod 'MJExtension'
+ pod 'YYModel'
  #图片加载
  pod 'SDWebImage'
  #数据库

@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import <FMDB/FMDB.h>
 #import <SHToast.h>
+#import <YYModel.h>
 #import "SHFileHelper.h"
 #import "AppDelegate+SHExtension.h"
 #import "SHBaseViewController.h"

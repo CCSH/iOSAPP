@@ -16,7 +16,6 @@
 #pragma mark - 处理参数
 + (NSMutableDictionary *)handleParameterWithDic:(NSDictionary *)dic
 {
-
     NSMutableDictionary *para = [[NSMutableDictionary alloc] initWithDictionary:dic];
 
     return para;
@@ -49,7 +48,7 @@
         //服务器错误 提示用户
         if (block)
         {
-            block(nil, [NSError errorWithDomain:@"domain" code:[model.result integerValue] userInfo:@{@"msg":model.msg}]);
+            block(nil, [NSError errorWithDomain:@"domain" code:[model.result integerValue] userInfo:@{@"msg" : model.msg}]);
         }
     }
 }
@@ -83,7 +82,7 @@
         progress:nil
         success:^(id responseObj) {
           //处理数据
-          SHRequestBaseModel *model = [[SHRequestBaseModel alloc] init];
+          SHRequestBaseModel *model = [SHRequestBaseModel yy_modelWithJSON:responseObj];
           [self handleDataWithModel:model error:nil block:result];
         }
         failure:^(NSError *error) {
