@@ -13,9 +13,26 @@
 #endif /* MacroHeader_h */
 //宏定义
 
-//设备物理宽高
+//设备物理WH
 #define kSHWidth ([UIScreen mainScreen].bounds.size.width)
 #define kSHHeight ([UIScreen mainScreen].bounds.size.height)
+//状态栏H
+#define StatusBarH (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
+//导航栏H
+#define NavBarH 44.0
+//状态栏 + 导航栏
+#define NavAndStatusH (StatusBarH + NavBarH)
+//全面屏判断
+#define IsFullScreen (StatusBarH != 20)
+//底部安全H
+#define SafeBottomH (IsFullScreen ? 34 : 0)
+//tabbarH
+#define TabBarH (49.0)
+//Tabbar安全H
+#define TabBarSafeH (TabBarH + SafeBottomH)
+//内容安全H
+#define ContentAreaH (kSHHeight - NavAndStatusH)
+#define ContentSafeAreaH (ContentAreaH - SafeBottomH)
 
 //界面宽高
 #define kSHViewWidth (self.view.frame.size.width)

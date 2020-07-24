@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
     self.window = [[[UIApplication sharedApplication] delegate] window];
+
 }
 
 #pragma mark - 获取堆栈中的某个控制器
