@@ -8,6 +8,7 @@
 
 #import "OneViewController.h"
 
+
 @interface OneViewController ()
 
 @end
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    weakify(self)
+    strongify(self)
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

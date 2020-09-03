@@ -17,26 +17,29 @@
 #define kSHWidth ([UIScreen mainScreen].bounds.size.width)
 #define kSHHeight ([UIScreen mainScreen].bounds.size.height)
 //状态栏H
-#define StatusBarH (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
+#define kStatusBarH (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
 //导航栏H
-#define NavBarH 44.0
+#define kNavBarH 44.0
 //状态栏 + 导航栏
-#define NavAndStatusH (StatusBarH + NavBarH)
+#define kNavAndStatusH (kStatusBarH + kNavBarH)
 //全面屏判断
-#define IsFullScreen (StatusBarH != 20)
+#define kIsFullScreen (kStatusBarH != 20)
 //底部安全H
-#define SafeBottomH (IsFullScreen ? 34 : 0)
+#define kSafeBottomH (kIsFullScreen ? 34 : 0)
 //tabbarH
-#define TabBarH (49.0)
+#define kTabBarH (49.0)
 //Tabbar安全H
-#define TabBarSafeH (TabBarH + SafeBottomH)
+#define kTabBarSafeH (kTabBarH + kSafeBottomH)
 //内容安全H
-#define ContentAreaH (kSHHeight - NavAndStatusH)
-#define ContentSafeAreaH (ContentAreaH - SafeBottomH)
+#define kContentAreaH (kkSHHeight - kNavAndStatusH)
+#define kContentSafeAreaH (kContentAreaH - kSafeBottomH)
 
 //界面宽高
 #define kSHViewWidth (self.view.frame.size.width)
 #define kSHViewHeight (self.view.frame.size.height)
+
+//字体
+#define kFont(A) [UIFont systemFontOfSize:A]
 
 //是否为V以上系统
 #define IOS(V) [[[UIDevice currentDevice] systemVersion] floatValue] >= V
@@ -45,26 +48,19 @@
 #define kRGB(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
 //系统delegate
-#define SHAppDelegate (AppDelegate *)[UIApplication sharedApplication].delegate
+#define kSHAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+//引用
+#define weakify(obj) @autoreleasepool{} __weak typeof(obj) weak_##obj = obj;
+#define strongify(obj) @autoreleasepool{} __strong typeof(obj) strong_##obj = weak_##obj;
 
 //描边
-#define kSHViewBorderRadius(View, Radius, Width, Color)\
+#define kSHViewStroke(V, R, W, C)\
 \
-[View.layer setMasksToBounds:YES];\
-[View.layer setBorderWidth:(Width)];\
-[View.layer setCornerRadius:(Radius)];\
-[View.layer setBorderColor:[Color CGColor]]
-
-//清除模型中的所有数据
-#define kSHClearModelData(Model) \
-\
-Model *_model##Model = [[Model alloc] init];\
-u_int count##Model;\
-objc_property_t *properties##Model = class_copyPropertyList([Model class], &count##Model);\
-for (int i = 0; i< count##Model; i++){\
-[_model##Model setValue:nil forKey:[NSString stringWithFormat:@"%s",property_getName(properties##Model[i])]];\
-}\
-free(properties##Model);\
+[V.layer setMasksToBounds:YES];\
+[V.layer setBorderWidth:(W)];\
+[V.layer setCornerRadius:(R)];\
+[V.layer setBorderColor:[C CGColor]];
 
 //控制日志输出
 #ifdef DEBUG
@@ -99,4 +95,8 @@ free(properties##Model);\
 #pragma mark UserDefKey
 //APP版本
 #define kAppVersion         @"app_version"
+
+#pragma mark 通知
+//刷新界面
+#define kNotReload @"not-reload"
 

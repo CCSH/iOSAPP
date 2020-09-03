@@ -27,7 +27,7 @@
     
     MainTabBarController *view = [[MainTabBarController alloc] init];
 
-    AppDelegate *app = SHAppDelegate;
+    AppDelegate *app = kSHAppDelegate;
     app.window.rootViewController = view;
 }
 
