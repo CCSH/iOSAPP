@@ -8,12 +8,22 @@
 
 #import "AppDelegate.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (SHExtension)
 
+typedef enum : NSUInteger
+{
+    RootVCType_home,   //首页
+    RootVCType_wecome, //欢迎页
+    RootVCType_login,  //登录
+} RootVCType;
+
 #pragma mark - 配置
 - (void)config;
+
+- (void)configVC:(RootVCType)type;
 
 @end
 

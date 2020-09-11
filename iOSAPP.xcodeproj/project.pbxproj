@@ -31,6 +31,7 @@
 		5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */; };
 		5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */; };
 		83B4BAF424CADD6800F8E27B /* UITableView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UITableView+SHExtension.m */; };
+		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseViewController.m; sourceTree = "<group>"; };
 		83B4BAF224CADD6800F8E27B /* UITableView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UITableView+SHExtension.m"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UITableView+SHExtension.m"; sourceTree = "<absolute>"; };
 		83B4BAF324CADD6800F8E27B /* UITableView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITableView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UITableView+SHExtension.h"; sourceTree = "<absolute>"; };
+		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
+		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
 		E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAPP/Pods-iOSAPP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,6 +177,8 @@
 		5C8BEC5F24C696D300412B3B /* Main(主界面) */ = {
 			isa = PBXGroup;
 			children = (
+				83C8913B250B56D3001AE9D1 /* SHTabBar.h */,
+				83C8913C250B56D3001AE9D1 /* SHTabBar.m */,
 				5C8BEC6A24C696D300412B3B /* MainTabBarController.h */,
 				5C8BEC6324C696D300412B3B /* MainTabBarController.m */,
 				5C8BEC6424C696D300412B3B /* One(第一个) */,
@@ -504,6 +509,7 @@
 				5C8BECA424C696D300412B3B /* ThreeViewController.m in Sources */,
 				5C8BECC024C69A7E00412B3B /* SHServerRequest.m in Sources */,
 				5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */,
+				83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */,
 				5C8BECA824C696D300412B3B /* SHSQLite.m in Sources */,
 				5C8BECBC24C6988200412B3B /* SHRequestBaseModel.m in Sources */,
 				5C8BECA724C696D300412B3B /* RegisterViewController.m in Sources */,

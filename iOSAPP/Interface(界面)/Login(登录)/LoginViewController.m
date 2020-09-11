@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "MainTabBarController.h"
 
 @interface LoginViewController ()
 
@@ -24,11 +23,10 @@
 
 - (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
 {
-    
-    MainTabBarController *view = [[MainTabBarController alloc] init];
+    [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
 
     AppDelegate *app = kSHAppDelegate;
-    app.window.rootViewController = view;
+    [app configVC:RootVCType_home];
 }
 
 - (void)didReceiveMemoryWarning

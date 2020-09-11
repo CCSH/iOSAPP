@@ -12,8 +12,12 @@
 #import "ThreeViewController.h"
 #import "FourViewController.h"
 #import "SHBaseNavViewController.h"
+#import "SHBaseViewController.h"
+#import "SHTabBar.h"
 
 @interface MainTabBarController () < UITabBarControllerDelegate >
+
+@property (nonatomic, strong) SHTabBar *shTabBar;
 
 @end
 
@@ -23,11 +27,10 @@
 {
     [super viewDidLoad];
 
-    //设置底部背景
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSHWidth, 49)];
-    backView.backgroundColor = [UIColor whiteColor];
-    [self.tabBar insertSubview:backView atIndex:0];
-    self.tabBar.opaque = YES;
+    self.shTabBar = [[SHTabBar alloc] init];
+    [self setValue:self.shTabBar forKey:@"tabBar"];
+    
+    self.delegate = self;
 
     //设置底部标题颜色
     UIColor *titleNormalColor = [UIColor lightGrayColor];
@@ -43,6 +46,8 @@
 
     TwoViewController *telView = [[TwoViewController alloc] init];
     [self addOneChlildVC:telView title:@"第二个" img:@"image" selectedImg:@"image"];
+    
+    [self addOneChlildVC:nil title:nil img:nil selectedImg:nil];
 
     ThreeViewController *addressView = [[ThreeViewController alloc] init];
     [self addOneChlildVC:addressView title:@"第三个" img:@"image" selectedImg:@"image"];
@@ -67,6 +72,11 @@
                    img:(NSString *)img
            selectedImg:(NSString *)selectedImg
 {
+    
+    if (!childVC) {
+        childVC = [[SHBaseViewController alloc]init];
+    }
+    
     childVC.title = title;
 
     //设置点击图片
@@ -75,31 +85,22 @@
 
     // 添加为tabbar控制器的子控制器
     SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:childVC];
+    nav.view.tag = 1 + self.viewControllers.count;
     [self addChildViewController:nav];
 }
 
-#pragma mark - VC界面周期
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [self.selectedViewController beginAppearanceTransition:YES animated:animated];
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    [self.selectedViewController endAppearanceTransition];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    [self.selectedViewController beginAppearanceTransition:NO animated:animated];
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    [self.selectedViewController endAppearanceTransition];
-//}
+#pragma mark - UITabBarControllerDelegate
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    
+    if (viewController.view.tag == 3) {
+        [self.shTabBar didSelectItem:2];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    [self.shTabBar didSelectItem:self.selectedIndex];
+}
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "FourViewController.h"
-#import "LoginViewController.h"
+#import "WelcomeViewController.h"
 
 @interface FourViewController ()
 
@@ -23,10 +23,6 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [SHSQLite deleteLoginInfoWithUid:@"1"];
-    
-    LoginViewController *vc = [[LoginViewController alloc]init];
-    SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nav;
 }
 
 - (void)didReceiveMemoryWarning {
