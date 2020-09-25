@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5C25FEA61F68D72600F080A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25FEA51F68D72600F080A4 /* main.m */; };
-		5C25FEAF1F68D72600F080A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEAD1F68D72600F080A4 /* Main.storyboard */; };
 		5C25FEB11F68D72600F080A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB01F68D72600F080A4 /* Assets.xcassets */; };
 		5C25FEB41F68D72600F080A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */; };
 		5C8BECA024C696D300412B3B /* FourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6124C696D300412B3B /* FourViewController.m */; };
@@ -40,7 +39,6 @@
 		20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C25FEA11F68D72600F080A4 /* iOSAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C25FEA51F68D72600F080A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5C25FEAE1F68D72600F080A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C25FEB01F68D72600F080A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C25FEB31F68D72600F080A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C25FEB51F68D72600F080A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 		5C25FEA41F68D72600F080A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5C25FEAD1F68D72600F080A4 /* Main.storyboard */,
 				5C25FEB01F68D72600F080A4 /* Assets.xcassets */,
 				5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */,
 				5C25FEB51F68D72600F080A4 /* Info.plist */,
@@ -420,7 +417,6 @@
 			files = (
 				5C25FEB41F68D72600F080A4 /* LaunchScreen.storyboard in Resources */,
 				5C25FEB11F68D72600F080A4 /* Assets.xcassets in Resources */,
-				5C25FEAF1F68D72600F080A4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,14 +520,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5C25FEAD1F68D72600F080A4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5C25FEAE1F68D72600F080A4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -666,7 +654,7 @@
 				INFOPLIST_FILE = iOSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinwei.iOSAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};
@@ -683,7 +671,7 @@
 				INFOPLIST_FILE = iOSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xinwei.iOSAPP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};
