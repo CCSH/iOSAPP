@@ -28,28 +28,16 @@
     {
         //网络错误 提示用户
         [SHToast showWithText:request_error];
-        if (block)
-        {
-            block(nil, error);
-        }
-        return;
     }
-
-    if ([model.result isEqualToString:success_code])
-    {
-        //成功
-        if (block)
-        {
-            block(model, nil);
-        }
-    }
-    else
+    else if (![model.result isEqualToString:success_code])
     {
         //服务器错误 提示用户
-        if (block)
-        {
-            block(nil, [NSError errorWithDomain:@"domain" code:[model.result integerValue] userInfo:@{@"msg" : model.msg}]);
-        }
+        error = [NSError errorWithDomain:@"domain" code:[model.result integerValue] userInfo:@{@"msg" : model.msg}];
+    }
+
+    if (block)
+    {
+        block(model, error);
     }
 }
 

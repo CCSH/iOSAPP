@@ -14,8 +14,6 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-
-
 @interface AppDelegate (SHExtension) < UNUserNotificationCenterDelegate >
 
 @end
@@ -36,7 +34,7 @@
 {
     //当前版本号
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    
+
     //判断版本号(为空或者不为当前版本)
     if (kSHUserDefGet(kAppVersion) == nil || ![kSHUserDefGet(kAppVersion) isEqualToString:currentVersion])
     {
@@ -50,7 +48,7 @@
     else
     {
         SHLog(@"不出现启动图");
-        
+
         //判断是否登录过
         if ([SHSQLite getLoginInfoWithUid:@"1"][@"user_id"])
         {
@@ -75,22 +73,22 @@
             MainTabBarController *vc = [[MainTabBarController alloc] init];
             self.window.rootViewController = vc;
         }
-            break;
+        break;
         case RootVCType_wecome:
         {
             WelcomeViewController *vc = [[WelcomeViewController alloc] init];
             SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
             self.window.rootViewController = nav;
         }
-            break;
+        break;
         case RootVCType_login:
         {
             LoginViewController *vc = [[LoginViewController alloc] init];
             SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
             self.window.rootViewController = nav;
         }
-            break;
-            
+        break;
+
         default:
             break;
     }
@@ -100,35 +98,25 @@
 - (void)configNotification
 {
     UIApplication *application = [UIApplication sharedApplication];
-    
-    if (IOS(10))
-    {
-        //iOS 10 later
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        //必须写代理，不然无法监听通知的接收与点击事件
-        center.delegate = self;
-        
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
-                              completionHandler:^(BOOL granted, NSError *_Nullable error) {
-            if (!error && granted)
-            {
-                //用户点击允许
-                SHLog(@"注册成功");
-            }
-            else
-            {
-                //用户点击不允许
-                SHLog(@"注册失败");
-            }
-        }];
-    }
-    else
-    {
-        //iOS 8 - iOS 10系统
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-    
+
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    //必须写代理，不然无法监听通知的接收与点击事件
+    center.delegate = self;
+
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
+                          completionHandler:^(BOOL granted, NSError *_Nullable error) {
+                            if (!error && granted)
+                            {
+                                //用户点击允许
+                                SHLog(@"注册成功");
+                            }
+                            else
+                            {
+                                //用户点击不允许
+                                SHLog(@"注册失败");
+                            }
+                          }];
+
     //注册远端消息通知
     [application registerForRemoteNotifications];
 }
@@ -170,7 +158,7 @@
 {
     NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
+
     SHLog(@"远程推送证书Token：%@", deviceString);
 }
 
@@ -260,7 +248,7 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary< UIApplicationOpenURLOptionsKey, id > *)options
 {
     SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
-    
+
     return YES;
 }
 
