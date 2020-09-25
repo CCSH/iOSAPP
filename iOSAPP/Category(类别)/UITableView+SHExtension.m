@@ -14,7 +14,7 @@
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:block];
     header.stateLabel.font = [UIFont systemFontOfSize:12];
-    header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:12];
+    header.lastUpdatedTimeLabel.text = @"";
     self.mj_header = header;
 }
 
