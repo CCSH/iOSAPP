@@ -77,11 +77,21 @@ static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
 #pragma mark 处理价格(小数点后两位)
 + (NSString *)handlePriceWithStr:(NSString *)str;
 
-
 #pragma mark - 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
 + (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;
 
+#pragma mark - 格式化TextField字符串
++ (void)handleTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string rule:(NSArray *)rule;
+
+#pragma mark - 格式化字符串
+/// 格式化字符串
+/// @param text 内容
+/// @param rule 格式([@"3",@"4",@"4"])
++ (NSString *)handleStrWithText:(NSString *)text rule:(NSArray *)rule;
+
+#pragma mark - 获取某个字符在字符串中出现的次数
++ (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target;
 
 @end
 

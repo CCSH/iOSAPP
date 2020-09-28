@@ -288,4 +288,96 @@
     return view;
 }
 
+#pragma mark - 格式化TextField字符串
++ (void)handleTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string rule:(NSArray *)rule{
+    
+    NSString *text = textField.text;
+    
+    if (string.length == 0) {
+        //删除空格则多删除一位
+        NSString *temp = [text substringWithRange:range];
+        if ([temp isEqualToString:@" "]) {
+            range = NSMakeRange(range.location - 1, range.length + 1);
+        }
+    }
+    
+    //去除空格
+    NSString *str = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+    text = [text stringByReplacingCharactersInRange:range withString:str];
+    
+    NSInteger count = [SHTool appearCountWithStr:[text substringWithRange:NSMakeRange(0, range.location)] target:@" "];
+
+    text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    textField.text = [self handleStrWithText:text rule:rule];
+    
+    //记录光标位置
+    if (string.length) {
+        
+        if ((textField.text.length >= range.location + str.length)) {
+
+            NSString *temp = [textField.text substringWithRange:NSMakeRange(0, range.location + str.length)];
+
+           count = [self appearCountWithStr:temp target:@" "] - count;
+           range = NSMakeRange(range.location + count, 0);
+        }
+
+        range = NSMakeRange(range.location + str.length, 0);
+    }
+    
+    //保护删除最后一位
+    if (range.location > textField.text.length) {
+        range = NSMakeRange(textField.text.length, 0);
+    }
+    
+    //设置光标位置
+    UITextPosition *position = [textField positionFromPosition:textField.beginningOfDocument offset:range.location];
+    UITextRange *textRange = [textField textRangeFromPosition:position toPosition:position];
+    
+    textField.selectedTextRange = textRange;
+}
+
+#pragma mark - 格式化字符串
++ (NSString *)handleStrWithText:(NSString *)text rule:(NSArray *)rule{
+    
+    __block NSString *tempStr = @"";
+    __block NSInteger tempIndex = 0;
+    
+    [rule enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSRange range = NSMakeRange(tempIndex, obj.intValue);
+        tempIndex = range.location + range.length;
+        NSInteger start = tempIndex - obj.intValue;
+        
+        if (text.length <= tempIndex) {
+            
+            //拼接剩余
+            tempStr = [tempStr stringByAppendingString:[text substringWithRange:NSMakeRange(start, text.length - start)]];
+            *stop = YES;
+        }else{
+            //插入字符
+            NSString *temp = [text substringWithRange:range];
+            temp = [temp stringByAppendingString:@" "];
+            tempStr = [tempStr stringByAppendingString:temp];
+            
+            if (idx == rule.count - 1) {//最后一位
+                start = tempIndex;
+                //拼接剩余
+                tempStr = [tempStr stringByAppendingString:[text substringWithRange:NSMakeRange(start, text.length - start)]];
+            }
+        }
+    }];
+    
+    return tempStr;
+}
+
+#pragma mark - 获取某个字符在字符串中出现的次数
++ (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target{
+    
+    NSArray *temp = [str componentsSeparatedByString:target];
+    
+    return temp.count - 1;
+}
+
+
 @end

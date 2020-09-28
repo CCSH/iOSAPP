@@ -1,51 +1,51 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - MBProgressHUD (1.0.0)
-  - MJRefresh (3.1.12)
-  - SDWebImage (4.1.0):
-    - SDWebImage/Core (= 4.1.0)
-  - SDWebImage/Core (4.1.0)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.5.0)
+  - SDWebImage (5.9.1):
+    - SDWebImage/Core (= 5.9.1)
+  - SDWebImage/Core (5.9.1)
   - SHActionSheetView (1.2.1)
   - SHAlertView (2.0.5):
     - SHClickTextView
   - SHAVPlayer (1.6.4)
   - SHClickTextView (2.0.1)
-  - SHExtension (1.0.7):
-    - SHExtension/NSString (= 1.0.7)
-    - SHExtension/Tool (= 1.0.7)
-    - SHExtension/UIButton (= 1.0.7)
-    - SHExtension/UIColor (= 1.0.7)
-    - SHExtension/UIImage (= 1.0.7)
-    - SHExtension/UIImageView (= 1.0.7)
-    - SHExtension/UIView (= 1.0.7)
-  - SHExtension/NSString (1.0.7)
-  - SHExtension/Tool (1.0.7)
-  - SHExtension/UIButton (1.0.7)
-  - SHExtension/UIColor (1.0.7)
-  - SHExtension/UIImage (1.0.7)
-  - SHExtension/UIImageView (1.0.7)
-  - SHExtension/UIView (1.0.7)
-  - SHScrollLayout (1.0.8)
+  - SHExtension (1.1.0):
+    - SHExtension/NSString (= 1.1.0)
+    - SHExtension/Tool (= 1.1.0)
+    - SHExtension/UIButton (= 1.1.0)
+    - SHExtension/UIColor (= 1.1.0)
+    - SHExtension/UIImage (= 1.1.0)
+    - SHExtension/UIImageView (= 1.1.0)
+    - SHExtension/UIView (= 1.1.0)
+  - SHExtension/NSString (1.1.0)
+  - SHExtension/Tool (1.1.0)
+  - SHExtension/UIButton (1.1.0)
+  - SHExtension/UIColor (1.1.0)
+  - SHExtension/UIImage (1.1.0)
+  - SHExtension/UIImageView (1.1.0)
+  - SHExtension/UIView (1.1.0)
+  - SHScrollLayout (2.0.2)
   - SHScrollView (2.5.0):
     - SDWebImage
-  - SHToast (1.1.0)
+  - SHToast (1.2.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -64,39 +64,38 @@ DEPENDENCIES:
   - YYModel
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
     - FMDB
     - MBProgressHUD
     - MJRefresh
     - SDWebImage
-    - SHExtension
-    - SHScrollLayout
-    - SHScrollView
-    - SHToast
-  trunk:
     - SHActionSheetView
     - SHAlertView
     - SHAVPlayer
     - SHClickTextView
+    - SHExtension
+    - SHScrollLayout
+    - SHScrollView
+    - SHToast
     - YYModel
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SHActionSheetView: 00d2d81dd9c4cb03ebb2683705840d50a203f474
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
   SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
   SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
-  SHExtension: a5f9b8b652664cc4fc393e0b6a4306411f2c814c
-  SHScrollLayout: 776b5e00af6808dcbef14a2d36d7104afc6b3e81
+  SHExtension: 4954f7c07cf43efbc430004a2c253c0e20d1a81d
+  SHScrollLayout: a78de4d0522b951a7473d7df82527909bf51a4ee
   SHScrollView: 245df8c848dabec12c76e144b6c7f1d75f85854a
-  SHToast: 0902c24dd5ff73225a2885bc7e01379758bdc680
+  SHToast: 54be86c2d5d95160cd8028a59e2cfe99f38655f6
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: f8694a19d3bde5a95d337a1c0751c0e9edb4f0b8
+PODFILE CHECKSUM: 6518f9cb6db91ae8e7031f4bfd949cbeaf880098
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.rc.1

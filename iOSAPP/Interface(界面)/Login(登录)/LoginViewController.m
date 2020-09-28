@@ -25,7 +25,7 @@
 {
     [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
 
-    AppDelegate *app = kSHAppDelegate;
+    AppDelegate *app = kAppDelegate;
     [app configVC:RootVCType_home];
 }
 

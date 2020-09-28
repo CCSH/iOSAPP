@@ -85,7 +85,7 @@
 		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
 		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
 		83FE1025251D8C2E006E727A /* ClassHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHeader.h; sourceTree = "<group>"; };
-		83FE1026251D8C2E006E727A /* InterfaceHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHead.h; sourceTree = "<group>"; };
+		83FE1026251D8C2E006E727A /* InterfaceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
 		83FE1027251D8C2E006E727A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		83FE1028251D8C2E006E727A /* MacroHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroHeader.h; sourceTree = "<group>"; };
 		E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAPP/Pods-iOSAPP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		5C25FEA31F68D72600F080A4 /* iOSAPP */ = {
 			isa = PBXGroup;
 			children = (
-				83FE1024251D8C2E006E727A /* Head(头文件) */,
+				83FE1024251D8C2E006E727A /* Header(头文件) */,
 				5C8BECC424C69DD900412B3B /* BaseClass(基类) */,
 				5C8BEC8C24C696D300412B3B /* Category(类别) */,
 				5C8BEC7F24C696D300412B3B /* Common(公共) */,
@@ -132,7 +132,7 @@
 				5C8BEC8924C696D300412B3B /* Model(模型) */,
 				5C8BEC8624C696D300412B3B /* Other(其他) */,
 				5C8BEC7A24C696D300412B3B /* Service(网络请求) */,
-				5C8BEC7724C696D300412B3B /* Sqlite(数据库) */,
+				5C8BEC7724C696D300412B3B /* Storage(存储) */,
 				5C25FEA41F68D72600F080A4 /* Supporting Files */,
 			);
 			path = iOSAPP;
@@ -238,13 +238,13 @@
 			path = "Register(注册)";
 			sourceTree = "<group>";
 		};
-		5C8BEC7724C696D300412B3B /* Sqlite(数据库) */ = {
+		5C8BEC7724C696D300412B3B /* Storage(存储) */ = {
 			isa = PBXGroup;
 			children = (
 				5C8BEC7924C696D300412B3B /* SHSQLite.h */,
 				5C8BEC7824C696D300412B3B /* SHSQLite.m */,
 			);
-			path = "Sqlite(数据库)";
+			path = "Storage(存储)";
 			sourceTree = "<group>";
 		};
 		5C8BEC7A24C696D300412B3B /* Service(网络请求) */ = {
@@ -327,15 +327,15 @@
 			path = "BaseClass(基类)";
 			sourceTree = "<group>";
 		};
-		83FE1024251D8C2E006E727A /* Head(头文件) */ = {
+		83FE1024251D8C2E006E727A /* Header(头文件) */ = {
 			isa = PBXGroup;
 			children = (
 				83FE1027251D8C2E006E727A /* PrefixHeader.pch */,
 				83FE1025251D8C2E006E727A /* ClassHeader.h */,
-				83FE1026251D8C2E006E727A /* InterfaceHead.h */,
+				83FE1026251D8C2E006E727A /* InterfaceHeader.h */,
 				83FE1028251D8C2E006E727A /* MacroHeader.h */,
 			);
-			path = "Head(头文件)";
+			path = "Header(头文件)";
 			sourceTree = "<group>";
 		};
 		8CCAE27E56201EEE836CD64C /* Pods */ = {
@@ -650,12 +650,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iOSAPP/Head(头文件)/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};
 			name = Debug;
@@ -667,12 +668,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iOSAPP/Head(头文件)/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}";
 			};
 			name = Release;

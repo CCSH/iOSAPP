@@ -18,11 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = kColorTable_4;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [SHSQLite deleteLoginInfoWithUid:@"1"];
+    [kAppDelegate configVC:RootVCType_login];
 }
 
 - (void)didReceiveMemoryWarning {

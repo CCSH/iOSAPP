@@ -26,19 +26,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[UINavigationBar appearance] setTintColor:kColorMain];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
 
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_2}
+                                                forState:UIControlStateNormal];
+
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain} forState:UIControlStateSelected];
+
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)} forState:UIControlStateNormal];
+    
+
+    //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];
     
     self.delegate = self;
-
-    //设置底部标题颜色
-    UIColor *titleNormalColor = [UIColor lightGrayColor];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:titleNormalColor, NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-
-    //设置底部标题点击颜色
-    UIColor *titleSelectedColor = kRGB(18, 137, 255, 1);
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:titleSelectedColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 
     //添加子控制器
     OneViewController *oneVC = [[OneViewController alloc] init];
