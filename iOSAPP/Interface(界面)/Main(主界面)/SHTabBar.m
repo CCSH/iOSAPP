@@ -48,8 +48,8 @@
     {
         // 转换坐标系
         CGPoint newPoint = [self.minView convertPoint:point fromView:self];
-        // 判断触摸点是否在button上
-        if (CGRectContainsPoint(self.minView.bounds, newPoint))
+        // 判断触摸点是否在视图上
+        if (CGRectContainsPoint(self.minView.bounds, newPoint) && !self.isHidden)
         {
             return self.minView;
         }
@@ -62,7 +62,7 @@
 {
     if (index == 2)
     {
-        NSLog(@"点击了中间！！！");
+        [SHToast showWithText:@"点击了中间！！！"];
     }
 }
 

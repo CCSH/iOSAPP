@@ -23,6 +23,7 @@
 #import <FMDB/FMDB.h>
 #import <SHToast.h>
 #import <YYModel.h>
+#import <Bugly/Bugly.h>
 
 #import "AppDelegate.h"
 #import "SHFileHelper.h"

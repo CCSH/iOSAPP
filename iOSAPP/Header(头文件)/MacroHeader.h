@@ -35,8 +35,11 @@
 #define kTabBarH (49.0)
 //Tabbar安全H
 #define kTabBarSafeH (kTabBarH + kSafeBottomH)
-//内容安全H
-#define kContentAreaH (kkSHHeight - kNavAndStatusH)
+//有导航栏内容安全H
+#define kNavContentAreaH (kkSHHeight - kNavAndStatusH)
+#define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
+//无导航栏内容安全H
+#define kContentAreaH (kkSHHeight - kStatusBarH)
 #define kContentSafeAreaH (kContentAreaH - kSafeBottomH)
 
 //字体

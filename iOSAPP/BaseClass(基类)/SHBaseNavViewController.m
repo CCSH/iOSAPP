@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[UINavigationBar appearance] setTintColor:kColorMain];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

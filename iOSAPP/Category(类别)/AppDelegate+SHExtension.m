@@ -31,7 +31,8 @@
 #pragma mark 配置其他
 - (void)configOther
 {
-    //三方配置
+    //bugly配置
+    [Bugly startWithAppId:kBuglyID];
 }
 
 #pragma mark 配置界面逻辑

@@ -26,9 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[UINavigationBar appearance] setTintColor:kColorMain];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
 
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_2}
                                                 forState:UIControlStateNormal];
@@ -37,7 +34,6 @@
 
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)} forState:UIControlStateNormal];
     
-
     //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];

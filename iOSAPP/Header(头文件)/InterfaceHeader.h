@@ -19,6 +19,8 @@ static NSString *success_code = @"200";
 #pragma mark - 主机地址
 #define kHostUrl @"http://www.baidu.com/"
 
+#define kBuglyID @"fc42b13a1b"
+
 
 #pragma mark - 登录接口
 #define kLogin @"user/test/user_login"

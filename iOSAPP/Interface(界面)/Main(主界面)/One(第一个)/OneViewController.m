@@ -27,7 +27,8 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+    NSArray *arr = [[NSArray alloc]init];
+    NSLog(@"%@",arr[1]);
 }
 
 /*

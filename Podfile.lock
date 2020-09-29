@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - Bugly (2.5.71)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -50,6 +51,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Bugly
   - FMDB
   - MBProgressHUD
   - MJRefresh
@@ -66,6 +68,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Bugly
     - FMDB
     - MBProgressHUD
     - MJRefresh
@@ -82,6 +85,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
@@ -96,6 +100,6 @@ SPEC CHECKSUMS:
   SHToast: 54be86c2d5d95160cd8028a59e2cfe99f38655f6
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 6518f9cb6db91ae8e7031f4bfd949cbeaf880098
+PODFILE CHECKSUM: 0bd606c45bab02603b6edb0a7d9df38d17848f2d
 
 COCOAPODS: 1.10.0.rc.1

@@ -32,5 +32,7 @@ target 'iOSAPP' do
  pod 'SHAVPlayer'
  #环信ui
  #pod 'EaseUI', :git => 'https://github.com/easemob/easeui-ios-hyphenate-cocoapods.git', :tag => '3.3.7'
+ #bug收集
+ pod 'Bugly'
 
 end
