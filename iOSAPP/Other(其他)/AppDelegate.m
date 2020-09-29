@@ -26,6 +26,10 @@
     
     //配置界面
     [self config];
+    
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    //必须写代理，不然无法监听通知的接收与点击事件
+    center.delegate = self;
 
     return YES;
 }

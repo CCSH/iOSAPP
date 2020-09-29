@@ -14,7 +14,7 @@
 #parameter_type="2"
 ##上传类型
 #parameter_upload="1"
-##上传类型
+#上传bugly
 #parameter_bugly="1"
 ##上传appstore
 ##账号
@@ -173,8 +173,8 @@ publishRun
 buglyRun () {
     # 输入打包类型
     echo "\033[36;1m请选择是否上传bugly(输入序号, 按回车即可) \033[0m"
-    echo "\033[33;1m1. 上传 \033[0m"
-    echo "\033[33;1m2. 不上传 \033[0m"
+    echo "\033[33;1m1. 不上传 \033[0m"
+    echo "\033[33;1m2. 上传 \033[0m"
     
     if [ ${#parameter_bugly} == 0 ]
     then
@@ -185,11 +185,11 @@ buglyRun () {
 
     if [ "$parameter_bugly" == "1" ]; then
         echo "\033[32m****************\n您选择了不上传 bugly\n****************\033[0m\n"
-    elif [ "$parameter_upload" == "2" ]; then
+    elif [ "$parameter_bugly" == "2" ]; then
         echo "\033[32m****************\n您选择了上传 bugly\n****************\033[0m\n"
     else
         echo "\n\033[31;1m**************** 您输入的参数,无效请重新输入!!! ****************\033[0m\n"
-        parameter_upload=""
+        parameter_bugly=""
         buglyRun
     fi
 }
@@ -258,8 +258,11 @@ xcodebuild -exportArchive \
 #app 名字
 app_name=`find . -name *.ipa | awk -F "[/.]" '{print $(NF-1)}'`
 
+#app 版本号
+bundle_version=`xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION ='`
+
 #指定输出ipa名称 : project_name + bundle_build_version
-ipa_name="$app_name-V($bundle_build_version)"
+ipa_name="$app_name-V$bundle_version($bundle_build_version)"
 #ipa最终路径
 path_ipa=$export_path_ipa/$ipa_name.ipa
 
@@ -318,37 +321,23 @@ fi
 
 #上传 Bugly
 if [ "$parameter_bugly" == "2" ]
-        echo "\n\033[32m****************\n开始上传 bugly\n****************\033[0m\n"
-        bugly_id="fc42b13a1b"
-        bugly_key="b1fca7f9-29cf-4e64-ab1f-444391c25cfc"
-        
-        curl -k "https://api.bugly.qq.com/openapi/file/upload/symbol?app_key=${bugly_key}&app_id=${bugly_id}" --form "api_version=1"
-        --form "app_id=xxxxxx"
-        --form "app_key=xxxxxx"
-         --form "symbolType=2"
-          --form "bundleId=com.demo.test"
-          --form "productVersion=1.0"
-          --form "channel=xxx"
-          --form "fileName=app.dSYM.zip"
-          --form "file=@app.dSYM.zip"
-          --verbose
+then
+    echo "\033[32m****************\n开始上传bugly\n****************\033[0m\n"
+    bugly_app_id="fc42b13a1b"
+    bugly_app_key="b1fca7f9-29cf-4e64-ab1f-444391c25cfc"
 
-        #验证APP
-        altoolPath="/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
-        "${altoolPath}" --validate-app \
-        -f "$path_ipa" \
-        -u "$parameter_username" \
-        -p "$parameter_password" \
-        --output-format xml
-        #上传APP
-        "${altoolPath}" --upload-app \
-        -f "$path_ipa" \
-        -u "$parameter_username" \
-        -p "$parameter_password" \
-        --output-format xml
-        
-        echo "\n\033[32m****************\n上传AppStore完毕\n****************\033[0m\n"
-    fi
+    #dsym 路径
+    dsymfile_path="${export_path_archive}/dSYMs/${app_name}.app.dSYM"
+
+    zip_path="${export_path_ipa}"
+
+    java -jar buglySymboliOS.jar \
+    -i "${dsymfile_path}" \
+    -u -id "${bugly_app_id}" \
+    -key "${bugly_app_key}" \
+    -version "${bundle_version}" \
+    -o "${zip_path}"
+    echo "\033[32m****************\n上传bugly完成\n****************\033[0m\n"
 fi
 
 

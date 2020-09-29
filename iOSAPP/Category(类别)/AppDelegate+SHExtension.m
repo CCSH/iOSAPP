@@ -103,8 +103,6 @@
 #pragma mark 配置通知
 - (void)configNotification
 {
-    UIApplication *application = [UIApplication sharedApplication];
-
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     //必须写代理，不然无法监听通知的接收与点击事件
     center.delegate = self;
@@ -116,8 +114,10 @@
                                 //用户点击允许
                                 SHLog(@"注册成功");
 
-                                //注册远端消息通知
-                                [application registerForRemoteNotifications];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    //注册远端消息通知
+                                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                                });
                             }
                             else
                             {
