@@ -32,7 +32,16 @@
 - (void)configOther
 {
     //bugly配置
-    [Bugly startWithAppId:kBuglyID];
+    BuglyConfig * config = [[BuglyConfig alloc] init];
+    //卡顿监听
+    config.blockMonitorEnable = YES;
+    config.blockMonitorTimeout = 0.5;
+
+    [Bugly startWithAppId:kBuglyID config:config];
+    
+    //埋点
+//    [[MTAConfig getInstance] setDebugEnable:YES];
+//    [MTA startWithAppkey:@"I2E3KXDU1E2W"];
 }
 
 #pragma mark 配置界面逻辑

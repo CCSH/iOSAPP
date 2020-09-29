@@ -20,6 +20,9 @@ PODS:
   - FMDB/standard (2.7.5)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.5.0)
+  - QQ_MTA (2.7.0):
+    - QQ_MTA/BasicAnalysis (= 2.7.0)
+  - QQ_MTA/BasicAnalysis (2.7.0)
   - SDWebImage (5.9.1):
     - SDWebImage/Core (= 5.9.1)
   - SDWebImage/Core (5.9.1)
@@ -55,6 +58,7 @@ DEPENDENCIES:
   - FMDB
   - MBProgressHUD
   - MJRefresh
+  - QQ_MTA
   - SDWebImage
   - SHActionSheetView
   - SHAlertView
@@ -72,6 +76,7 @@ SPEC REPOS:
     - FMDB
     - MBProgressHUD
     - MJRefresh
+    - QQ_MTA
     - SDWebImage
     - SHActionSheetView
     - SHAlertView
@@ -89,6 +94,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  QQ_MTA: cf80cb9de50717bd3fa19bf681808def9c221496
   SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SHActionSheetView: 00d2d81dd9c4cb03ebb2683705840d50a203f474
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
@@ -100,6 +106,6 @@ SPEC CHECKSUMS:
   SHToast: 54be86c2d5d95160cd8028a59e2cfe99f38655f6
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 0bd606c45bab02603b6edb0a7d9df38d17848f2d
+PODFILE CHECKSUM: 8e90dd8681917673c54ab989eeb80cfa71fe7bb1
 
 COCOAPODS: 1.10.0.rc.1

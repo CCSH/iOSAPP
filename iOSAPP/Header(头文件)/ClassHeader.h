@@ -24,6 +24,7 @@
 #import <SHToast.h>
 #import <YYModel.h>
 #import <Bugly/Bugly.h>
+#import <MTAConfig.h>
 
 #import "AppDelegate.h"
 #import "SHFileHelper.h"
