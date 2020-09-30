@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param url 地址
  @param param 参数
  @param fileType 文件类型
- @param file 文件绝对路径
+ @param data 文件
  @param tag 请求标记
  @param retry 重试次数
  @param progress 进度
@@ -90,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                  fileType:(NSString *)fileType
-                     file:(NSString *)file
+                     data:(NSString *)data
                       tag:(NSString *)tag
                     retry:(NSInteger)retry
                  progress:(void (^)(NSProgress *progress))progress
@@ -103,9 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param url 地址
  @param param 参数
  @param fileType 文件类型
- @param files 文件路径集合(文件绝对路径)
- @param tag 请求标记
- @param retry 重试次数
+ @param datas 文件集合
  @param progress 进度
  @param success 成功
  @param failure 失败
@@ -113,9 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
                   fileType:(NSString *)fileType
-                     files:(NSArray<NSString *> *)files
-                       tag:(NSString *)tag
-                     retry:(NSInteger)retry
+                     datas:(NSArray< NSData * > *)datas
                   progress:(void (^)(NSProgress *progress))progress
                    success:(void (^)(id responseObj))success
                    failure:(void (^)(NSError *error))failure;

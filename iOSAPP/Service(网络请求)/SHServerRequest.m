@@ -28,6 +28,9 @@
     {
         //网络错误 提示用户
         [SHToast showWithText:request_error];
+        if (error.code == -1001) {
+            //网络请求超时
+        }
     }
     else if (![model.result isEqualToString:success_code])
     {
