@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AppDelegate (SHExtension)
+@interface AppDelegate (SHExtension)<UNUserNotificationCenterDelegate>
 
 typedef enum : NSUInteger
 {
@@ -23,7 +23,7 @@ typedef enum : NSUInteger
 } RootVCType;
 
 #pragma mark - 配置
-- (void)config;
+- (void)configApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
 - (void)configVC:(RootVCType)type;
 

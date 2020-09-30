@@ -9,7 +9,7 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -25,11 +25,9 @@
     [self.window makeKeyAndVisible];
     
     //配置界面
-    [self config];
+    [self configApplication:application didFinishLaunchingWithOptions:launchOptions];
     
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    //必须写代理，不然无法监听通知的接收与点击事件
-    center.delegate = self;
+
 
     return YES;
 }

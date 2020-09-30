@@ -18,7 +18,7 @@
 @implementation AppDelegate (SHExtension)
 
 #pragma mark - 配置
-- (void)config
+- (void)configApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //配置其他
     [self configOther];
@@ -53,7 +53,7 @@
     //判断版本号(为空或者不为当前版本)
     if (kSHUserDefGet(kAppVersion) == nil || ![kSHUserDefGet(kAppVersion) isEqualToString:currentVersion])
     {
-        SHLog(@"出现启动图");
+        SHLog(@"出现欢迎页");
         //保存版本号
         [kSHUserDef setValue:currentVersion forKey:kAppVersion];
         [kSHUserDef synchronize];
@@ -62,7 +62,7 @@
     }
     else
     {
-        SHLog(@"不出现启动图");
+        SHLog(@"不出现欢迎页");
 
         //判断是否登录过
         if ([SHSQLite getLoginInfoWithUid:@"1"][@"user_id"])
