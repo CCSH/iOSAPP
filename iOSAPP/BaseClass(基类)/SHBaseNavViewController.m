@@ -8,36 +8,45 @@
 
 #import "SHBaseNavViewController.h"
 
-@interface SHBaseNavViewController ()<UINavigationControllerDelegate>
+@interface SHBaseNavViewController () < UINavigationControllerDelegate >
 
 @end
 
 @implementation SHBaseNavViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [[UINavigationBar appearance] setTintColor:kColorMain];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    
+
+
     self.delegate = self;
 }
 
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if (self.viewControllers.count) {
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.viewControllers.count)
+    {
         viewController.hidesBottomBarWhenPushed = YES;
     }
+
+    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                           initWithTitle:nil
+                           style:UIBarButtonItemStylePlain
+                           target:self
+                           action:nil];
     [super pushViewController:viewController animated:animated];
 }
 
 #pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-
-    if ([[viewController class] conformsToProtocol:@protocol(HideNav)]) {
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([[viewController class] conformsToProtocol:@protocol(HideNav)])
+    {
         [viewController.navigationController setNavigationBarHidden:YES animated:YES];
     }
-    
 }
 
 @end

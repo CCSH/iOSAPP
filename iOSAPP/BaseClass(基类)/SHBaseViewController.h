@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIWindow *window;
 
+#pragma mark - 返回
+- (void)backAction;
+
 #pragma mark - 获取堆栈中的某个控制器
 - (UIViewController *)getStackVCWithPageVC:(Class)pageVC;
 

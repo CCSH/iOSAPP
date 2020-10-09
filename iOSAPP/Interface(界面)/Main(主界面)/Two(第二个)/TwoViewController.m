@@ -8,7 +8,7 @@
 //
 
 #import "TwoViewController.h"
-#import "LoginViewController.h"
+#import "OneViewController.h"
 
 @interface TwoViewController ()
 
@@ -28,7 +28,9 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-
+    OneViewController *vc = [[OneViewController alloc]init];
+//    SHBaseNavViewController *nav = [[SHBaseNavViewController alloc]initWithRootViewController:vc];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

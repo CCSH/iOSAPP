@@ -18,6 +18,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.=
+    self.view.backgroundColor = kRGB(245, 245, 245, 1);
+}
+
+#pragma mark - 返回
+- (void)backAction
+{
+    if (self.navigationController.viewControllers.count > 1)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 获取堆栈中的某个控制器
@@ -92,6 +106,10 @@
     }
 
     [super presentViewController:viewControllerToPresent animated:flag completion:completion];
+}
+
+- (UIModalPresentationStyle)swiz_modalPresentationStyle {
+    return UIModalPresentationFullScreen;
 }
 
 #pragma mark 蓝加载

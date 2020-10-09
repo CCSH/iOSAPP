@@ -19,14 +19,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"登录";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
+
 }
 
 - (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
 {
     [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
 
-    AppDelegate *app = kAppDelegate;
-    [app configVC:RootVCType_home];
+    [self backAction];
 }
 
 - (void)didReceiveMemoryWarning

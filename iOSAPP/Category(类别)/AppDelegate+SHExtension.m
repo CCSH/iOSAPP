@@ -64,17 +64,8 @@
     {
         SHLog(@"不出现欢迎页");
 
-        //判断是否登录过
-        if ([SHSQLite getLoginInfoWithUid:@"1"][@"user_id"])
-        {
-            //进入主界面
-            [self configVC:RootVCType_home];
-        }
-        else
-        {
-            //进入登录界面
-            [self configVC:RootVCType_login];
-        }
+        //进入主界面
+        [self configVC:RootVCType_home];
     }
 }
 
@@ -100,7 +91,7 @@
         {
             LoginViewController *vc = [[LoginViewController alloc] init];
             SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
-            self.window.rootViewController = nav;
+            [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
         }
         break;
 
