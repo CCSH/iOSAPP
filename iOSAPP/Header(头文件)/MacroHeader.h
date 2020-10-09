@@ -14,8 +14,8 @@
 //宏定义
 
 //设备物理WH
-#define kSHWidth ([UIScreen mainScreen].bounds.size.width)
-#define kSHHeight ([UIScreen mainScreen].bounds.size.height)
+//#define kSHWidth ([UIScreen mainScreen].bounds.size.width)
+//#define kSHHeight ([UIScreen mainScreen].bounds.size.height)
 
 //界面宽高
 #define kSHViewWidth (self.view.frame.size.width)
@@ -49,8 +49,7 @@
 #define IOS(V) [[[UIDevice currentDevice] systemVersion] floatValue] >= V
 
 //RGB颜色
-#define kRGBA(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-#define kRGB(R,G,B) kRGBA(R,G,B,1)
+#define kRGB(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
 //系统delegate
 #define kAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
@@ -137,9 +136,9 @@
 
 #pragma mark 颜色
 //主题色
-#define kColorMain kRGB(252, 89, 78)
+#define kColorMain kRGB(252, 89, 78, 1)
 //背景色
-#define kColorBG kRGB(245, 245, 245)
+#define kColorBG kRGB(245, 245, 245, 1)
 //状态颜色
 #define kColorStatus_primary [UIColor colorWithHexString:@"#409eff"]
 #define kColorStatus_success [UIColor colorWithHexString:@"#67c23a"]

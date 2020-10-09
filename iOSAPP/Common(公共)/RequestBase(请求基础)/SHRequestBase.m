@@ -85,8 +85,10 @@ static NSInteger timeOut = 10;
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
 
     // 开始请求
-    NSURLSessionDataTask *task = [mgr GET:url
+    NSURLSessionDataTask *task = [mgr
+        GET:url
         parameters:param
+        headers:nil
         progress:progress
         success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
           //移除队列
@@ -142,6 +144,7 @@ static NSInteger timeOut = 10;
     // 开始请求
     NSURLSessionDataTask *task = [mgr POST:url
         parameters:param
+        headers:nil
         progress:nil
         success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
           //移除队列
@@ -184,13 +187,13 @@ static NSInteger timeOut = 10;
 }
 #pragma mark FORM
 + (void)formWithUrl:(NSString *)url
-                     param:(id)param
-                 formParam:(id)formParam
-                       tag:(NSString *__nullable)tag
-                     retry:(NSInteger)retry
-                  progress:(void (^__nullable)(NSProgress *progress))progress
-                   success:(void (^__nullable)(id responseObj))success
-                   failure:(void (^__nullable)(NSError *error))failure
+              param:(id)param
+          formParam:(id)formParam
+                tag:(NSString *__nullable)tag
+              retry:(NSInteger)retry
+           progress:(void (^__nullable)(NSProgress *progress))progress
+            success:(void (^__nullable)(id responseObj))success
+            failure:(void (^__nullable)(NSError *error))failure
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -198,6 +201,7 @@ static NSInteger timeOut = 10;
     // 开始请求
     NSURLSessionDataTask *task = [mgr POST:url
         parameters:param
+        headers:nil
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           NSError *error = nil;
           NSData *data = [NSJSONSerialization dataWithJSONObject:formParam options:NSJSONWritingPrettyPrinted error:&error];
@@ -272,6 +276,7 @@ static NSInteger timeOut = 10;
     // 开始请求
     NSURLSessionDataTask *task = [mgr POST:url
         parameters:param
+        headers:nil
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           if (data)
           {
@@ -333,6 +338,7 @@ static NSInteger timeOut = 10;
       // 开始请求
       [mgr POST:url
           parameters:param
+          headers:nil
           constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
             if (obj)
             {
