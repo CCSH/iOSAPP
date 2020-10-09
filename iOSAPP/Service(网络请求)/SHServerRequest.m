@@ -28,7 +28,8 @@
     {
         //网络错误 提示用户
         [SHToast showWithText:request_error];
-        if (error.code == -1001) {
+        if (error.code == -1001)
+        {
             //网络请求超时
         }
     }
@@ -45,10 +46,9 @@
 }
 
 #pragma mark - 网络请求
-+ (void)requestLoginWithTag:(NSString *)tag
-                     mobile:(NSString *)mobile
-                   password:(NSString *)password
-                     result:(RequestBlock)result
++ (void)requestLoginWithMobile:(NSString *)mobile
+                      password:(NSString *)password
+                        result:(RequestBlock)result
 {
     //网址
     NSString *url = [NSString stringWithFormat:@"%@%@", kHostUrl, kLogin];
@@ -66,9 +66,9 @@
     //处理参数
     param = [self handleParameterWithDic:param];
     //请求
-    [SHRequestBase postRequestWithUrl:url
+    [SHRequestBase postWithUrl:url
         param:param
-        tag:tag
+        tag:@"1"
         retry:0
         progress:nil
         success:^(id responseObj) {

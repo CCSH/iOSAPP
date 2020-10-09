@@ -8,7 +8,7 @@
 
 #import "SHBaseNavViewController.h"
 
-@interface SHBaseNavViewController ()
+@interface SHBaseNavViewController ()<UINavigationControllerDelegate>
 
 @end
 
@@ -20,6 +20,8 @@
     
     [[UINavigationBar appearance] setTintColor:kColorMain];
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    self.delegate = self;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -27,6 +29,15 @@
         viewController.hidesBottomBarWhenPushed = YES;
     }
     [super pushViewController:viewController animated:animated];
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+
+    if ([[viewController class] conformsToProtocol:@protocol(HideNav)]) {
+        [viewController.navigationController setNavigationBarHidden:YES animated:YES];
+    }
+    
 }
 
 @end

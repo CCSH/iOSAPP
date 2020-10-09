@@ -17,10 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SHServerRequest : NSObject
 
 #pragma mark 登录请求
-+ (void)requestLoginWithTag:(NSString *)tag
-                     mobile:(NSString *)mobile
-                   password:(NSString *)password
-                     result:(RequestBlock)result;
++ (void)requestLoginWithMobile:(NSString *)mobile
+                      password:(NSString *)password
+                        result:(RequestBlock)result;
 
 @end
 

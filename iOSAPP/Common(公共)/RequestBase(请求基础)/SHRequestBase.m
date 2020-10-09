@@ -1,3 +1,5 @@
+
+
 //
 //  SHRequestBase.m
 //  SHNetworkRequest
@@ -71,13 +73,13 @@ static NSInteger timeOut = 10;
 }
 
 #pragma mark GET
-+ (void)getRequestWithUrl:(NSString *)url
-                    param:(id)param
-                      tag:(NSString *)tag
-                    retry:(NSInteger)retry
-                 progress:(void (^)(NSProgress *progress))progress
-                  success:(void (^)(id responseObj))success
-                  failure:(void (^)(NSError *error))failure
++ (void)getWithUrl:(NSString *)url
+             param:(id)param
+               tag:(NSString *)tag
+             retry:(NSInteger)retry
+          progress:(void (^__nullable)(NSProgress *_Nullable))progress
+           success:(void (^__nullable)(id _Nullable))success
+           failure:(void (^__nullable)(NSError *_Nullable))failure
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -102,7 +104,13 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self getRequestWithUrl:url param:param tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self getWithUrl:url
+                         param:param
+                           tag:tag
+                         retry:(retry - 1)
+                      progress:progress
+                       success:success
+                       failure:failure];
           }
           else
           {
@@ -120,13 +128,13 @@ static NSInteger timeOut = 10;
 }
 
 #pragma mark POST
-+ (void)postRequestWithUrl:(NSString *)url
-                     param:(id)param
-                       tag:(NSString *)tag
-                     retry:(NSInteger)retry
-                  progress:(void (^)(NSProgress *progress))progress
-                   success:(void (^)(id responseObj))success
-                   failure:(void (^)(NSError *error))failure
++ (void)postWithUrl:(NSString *)url
+              param:(id)param
+                tag:(NSString *__nullable)tag
+              retry:(NSInteger)retry
+           progress:(void (^__nullable)(NSProgress *progress))progress
+            success:(void (^__nullable)(id responseObj))success
+            failure:(void (^__nullable)(NSError *error))failure
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -151,7 +159,13 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self postRequestWithUrl:url param:param tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self postWithUrl:url
+                          param:param
+                            tag:tag
+                          retry:(retry - 1)
+                       progress:progress
+                        success:success
+                        failure:failure];
           }
           else
           {
@@ -169,14 +183,14 @@ static NSInteger timeOut = 10;
     }
 }
 #pragma mark FORM
-+ (void)formRequestWithUrl:(NSString *)url
++ (void)formWithUrl:(NSString *)url
                      param:(id)param
                  formParam:(id)formParam
-                       tag:(NSString *)tag
+                       tag:(NSString *__nullable)tag
                      retry:(NSInteger)retry
-                  progress:(void (^)(NSProgress *progress))progress
-                   success:(void (^)(id responseObj))success
-                   failure:(void (^)(NSError *error))failure
+                  progress:(void (^__nullable)(NSProgress *progress))progress
+                   success:(void (^__nullable)(id responseObj))success
+                   failure:(void (^__nullable)(NSError *error))failure
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -217,7 +231,14 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self formRequestWithUrl:url param:param formParam:formParam tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self formWithUrl:url
+                          param:param
+                      formParam:formParam
+                            tag:tag
+                          retry:(retry - 1)
+                       progress:progress
+                        success:success
+                        failure:failure];
           }
           else
           {
@@ -238,12 +259,12 @@ static NSInteger timeOut = 10;
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                  fileType:(NSString *)fileType
-                     data:(NSString *)data
-                      tag:(NSString *)tag
+                     data:(NSData *)data
+                      tag:(NSString *__nullable)tag
                     retry:(NSInteger)retry
-                 progress:(void (^)(NSProgress *progress))progress
-                  success:(void (^)(id responseObj))success
-                  failure:(void (^)(NSError *error))failure;
+                 progress:(void (^__nullable)(NSProgress *progress))progress
+                  success:(void (^__nullable)(id responseObj))success
+                  failure:(void (^__nullable)(NSError *error))failure;
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -296,9 +317,9 @@ static NSInteger timeOut = 10;
                      param:(id)param
                   fileType:(NSString *)fileType
                      datas:(NSArray< NSData * > *)datas
-                  progress:(void (^)(NSProgress *progress))progress
-                   success:(void (^)(id responseObj))success
-                   failure:(void (^)(NSError *error))failure
+                  progress:(void (^__nullable)(NSProgress *_Nullable))progress
+                   success:(void (^__nullable)(id _Nullable))success
+                   failure:(void (^__nullable)(NSError *_Nullable))failure
 {
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -345,11 +366,11 @@ static NSInteger timeOut = 10;
 #pragma mark 文件下载
 + (void)downLoadFlieWithUrl:(NSURL *)url
                        flie:(NSString *)file
-                        tag:(NSString *)tag
+                        tag:(NSString *__nullable)tag
                       retry:(NSInteger)retry
-                   progress:(void (^)(NSProgress *progress))progress
-                    success:(void (^)(id responseObj))success
-                    failure:(void (^)(NSError *error))failure
+                   progress:(void (^__nullable)(NSProgress *progress))progress
+                    success:(void (^__nullable)(id responseObj))success
+                    failure:(void (^__nullable)(NSError *error))failure
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
@@ -416,15 +437,18 @@ static NSInteger timeOut = 10;
 }
 
 #pragma mark 取消某个网络请求
-+ (void)cancelOperationsWithTag:(NSString *)tag
++ (void)cancelOperationsWithTag:(NSString *__nullable)tag
 {
-    //取消请求
-    NSURLSessionTask *task = netQueueDic[tag];
-    if (task)
+    if (tag)
     {
-        [task cancel];
-        //移除队列
-        [netQueueDic removeObjectForKey:tag];
+        //取消请求
+        NSURLSessionTask *task = netQueueDic[tag];
+        if (task)
+        {
+            [task cancel];
+            //移除队列
+            [netQueueDic removeObjectForKey:tag];
+        }
     }
 }
 
