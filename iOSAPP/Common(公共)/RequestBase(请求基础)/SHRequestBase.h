@@ -28,11 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)getWithUrl:(NSString *)url
              param:(id)param
-               tag:(NSString *__nullable)tag
+               tag:(NSString *_Nullable)tag
              retry:(NSInteger)retry
-          progress:(void (^__nullable)(NSProgress *progress))progress
-           success:(void (^__nullable)(id responseObj))success
-           failure:(void (^__nullable)(NSError *error))failure;
+          progress:(void (^_Nullable)(NSProgress *progress))progress
+           success:(void (^_Nullable)(id responseObj))success
+           failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  POST
@@ -47,11 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)postWithUrl:(NSString *)url
               param:(id)param
-                tag:(NSString *__nullable)tag
+                tag:(NSString *_Nullable)tag
               retry:(NSInteger)retry
-           progress:(void (^__nullable)(NSProgress *progress))progress
-            success:(void (^__nullable)(id responseObj))success
-            failure:(void (^__nullable)(NSError *error))failure;
+           progress:(void (^_Nullable)(NSProgress *progress))progress
+            success:(void (^_Nullable)(id responseObj))success
+            failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  FORM
@@ -68,11 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)formWithUrl:(NSString *)url
               param:(id)param
           formParam:(id)formParam
-                tag:(NSString *__nullable)tag
+                tag:(NSString *_Nullable)tag
               retry:(NSInteger)retry
-           progress:(void (^__nullable)(NSProgress *progress))progress
-            success:(void (^__nullable)(id responseObj))success
-            failure:(void (^__nullable)(NSError *error))failure;
+           progress:(void (^_Nullable)(NSProgress *progress))progress
+            success:(void (^_Nullable)(id responseObj))success
+            failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  POST文件上传
@@ -91,11 +91,11 @@ NS_ASSUME_NONNULL_BEGIN
                     param:(id)param
                  fileType:(NSString *)fileType
                      data:(NSData *)data
-                      tag:(NSString *__nullable)tag
+                      tag:(NSString *_Nullable)tag
                     retry:(NSInteger)retry
-                 progress:(void (^__nullable)(NSProgress *progress))progress
-                  success:(void (^__nullable)(id responseObj))success
-                  failure:(void (^__nullable)(NSError *error))failure;
+                 progress:(void (^_Nullable)(NSProgress *progress))progress
+                  success:(void (^_Nullable)(id responseObj))success
+                  failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  POST文件上传(批量)
@@ -112,9 +112,9 @@ NS_ASSUME_NONNULL_BEGIN
                      param:(id)param
                   fileType:(NSString *)fileType
                      datas:(NSArray< NSData * > *)datas
-                  progress:(void (^__nullable)(NSProgress *progress))progress
-                   success:(void (^__nullable)(id responseObj))success
-                   failure:(void (^__nullable)(NSError *error))failure;
+                  progress:(void (^_Nullable)(NSProgress *progress))progress
+                   success:(void (^_Nullable)(id responseObj))success
+                   failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  文件下载
@@ -129,11 +129,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)downLoadFlieWithUrl:(NSURL *)url
                        flie:(NSString *)file
-                        tag:(NSString *__nullable)tag
+                        tag:(NSString *_Nullable)tag
                       retry:(NSInteger)retry
-                   progress:(void (^__nullable)(NSProgress *progress))progress
-                    success:(void (^__nullable)(id responseObj))success
-                    failure:(void (^__nullable)(NSError *error))failure;
+                   progress:(void (^_Nullable)(NSProgress *progress))progress
+                    success:(void (^_Nullable)(id responseObj))success
+                    failure:(void (^_Nullable)(NSError *error))failure;
 
 //获取请求队列
 + (NSDictionary *)getRequestQueue;
@@ -142,7 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)cancelAllOperations;
 
 //取消某个网络请求
-+ (void)cancelOperationsWithTag:(NSString *__nullable)tag;
++ (void)cancelOperationsWithTag:(NSString *_Nullable)tag;
 
 @end
 
