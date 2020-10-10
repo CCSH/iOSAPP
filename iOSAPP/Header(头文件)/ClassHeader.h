@@ -33,5 +33,6 @@
 #import "SHBaseTableViewCell.h"
 #import "SHBaseNavViewController.h"
 #import "SHSQLite.h"
+#import "UIScrollView+SHExtension.h"
 
 //#import <EaseUI/EaseUI.h>

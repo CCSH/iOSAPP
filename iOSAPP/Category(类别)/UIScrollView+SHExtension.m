@@ -1,13 +1,13 @@
 //
-//  UITableView+SHExtension.m
+//  UIScrollView+SHExtension.m
 //  
 //
 //  Created by jxdwinter on 2020/7/24.
 //
 
-#import "UITableView+SHExtension.h"
+#import "UIScrollView+SHExtension.h"
 
-@implementation UITableView (SHExtension)
+@implementation UIScrollView (SHExtension)
 
 - (void)refreshHeaderBlock:(RefreshHeaderCallback)block
 {

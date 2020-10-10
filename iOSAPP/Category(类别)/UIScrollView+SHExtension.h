@@ -1,5 +1,5 @@
 //
-//  UITableView+SHExtension.h
+//  UIScrollView+SHExtension.h
 //  
 //
 //  Created by jxdwinter on 2020/7/24.
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^RefreshHeaderCallback)(void);
 typedef void (^RefreshFooterCallback)(void);
 
-@interface UITableView (SHExtension)
+@interface UIScrollView (SHExtension)
 
 // 添加刷新UI
 - (void)refreshHeaderBlock:(RefreshHeaderCallback)block;

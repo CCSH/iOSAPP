@@ -29,7 +29,7 @@
 		5C8BECC724C69E0300412B3B /* SHBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC624C69E0300412B3B /* SHBaseTableViewCell.m */; };
 		5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */; };
 		5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */; };
-		83B4BAF424CADD6800F8E27B /* UITableView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UITableView+SHExtension.m */; };
+		83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */; };
 		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
 /* End PBXBuildFile section */
@@ -80,8 +80,8 @@
 		5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseNavViewController.m; sourceTree = "<group>"; };
 		5C8BECCB24C6AD2300412B3B /* SHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseViewController.h; sourceTree = "<group>"; };
 		5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseViewController.m; sourceTree = "<group>"; };
-		83B4BAF224CADD6800F8E27B /* UITableView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UITableView+SHExtension.m"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UITableView+SHExtension.m"; sourceTree = "<absolute>"; };
-		83B4BAF324CADD6800F8E27B /* UITableView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITableView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UITableView+SHExtension.h"; sourceTree = "<absolute>"; };
+		83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SHExtension.m"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.m"; sourceTree = "<absolute>"; };
+		83B4BAF324CADD6800F8E27B /* UIScrollView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.h"; sourceTree = "<absolute>"; };
 		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
 		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
 		83FE1025251D8C2E006E727A /* ClassHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHeader.h; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 		5C8BEC8C24C696D300412B3B /* Category(类别) */ = {
 			isa = PBXGroup;
 			children = (
-				83B4BAF324CADD6800F8E27B /* UITableView+SHExtension.h */,
-				83B4BAF224CADD6800F8E27B /* UITableView+SHExtension.m */,
+				83B4BAF324CADD6800F8E27B /* UIScrollView+SHExtension.h */,
+				83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */,
 				5C8BECC224C69C7200412B3B /* AppDelegate+SHExtension.h */,
 				5C8BECC124C69C7200412B3B /* AppDelegate+SHExtension.m */,
 			);
@@ -494,7 +494,7 @@
 			files = (
 				5C8BECAE24C696D300412B3B /* IUesrModel.m in Sources */,
 				5C8BECC724C69E0300412B3B /* SHBaseTableViewCell.m in Sources */,
-				83B4BAF424CADD6800F8E27B /* UITableView+SHExtension.m in Sources */,
+				83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */,
 				5C8BECBB24C6988200412B3B /* SHRequestBase.m in Sources */,
 				5C8BECAC24C696D300412B3B /* SHFileHelper.m in Sources */,
 				5C8BECA024C696D300412B3B /* FourViewController.m in Sources */,
