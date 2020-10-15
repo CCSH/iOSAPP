@@ -21,6 +21,37 @@
     self.view.backgroundColor = kRGB(245, 245, 245, 1);
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //根据需求进行管理
+    if (self.isNavHide) {
+        self.isNavHide = NO;
+    }
+    if (self.isNavTransparent) {
+        self.isNavTransparent = NO;
+    }
+}
+
+#pragma mark - 属性
+- (void)setIsNavTransparent:(BOOL)isNavTransparent{
+    _isNavTransparent = isNavTransparent;
+    if (isNavTransparent) {
+          [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+          [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+          self.navigationController.navigationBar.translucent = YES;
+    }else{
+          [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+          [self.navigationController.navigationBar setShadowImage:nil];
+          self.navigationController.navigationBar.translucent = NO;
+    }
+}
+
+- (void)setIsNavHide:(BOOL)isNavHide{
+    _isNavHide = isNavHide;
+    [self.navigationController setNavigationBarHidden:isNavHide animated:NO];
+}
+
+
 #pragma mark - 返回
 - (void)backAction
 {

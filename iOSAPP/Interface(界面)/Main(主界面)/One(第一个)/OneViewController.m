@@ -19,6 +19,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColorTable_1;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    self.isNavTransparent = YES;
+    self.isNavHide = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +34,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

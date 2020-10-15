@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIWindow *window;
 
+//导航栏透明
+@property (nonatomic, assign) BOOL isNavTransparent;
+
+//导航栏隐藏
+@property (nonatomic, assign) BOOL isNavHide;
+
 #pragma mark - 返回
 - (void)backAction;
 

@@ -22,6 +22,8 @@
     self.view.backgroundColor = kColorTable_2;
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -29,7 +31,6 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     OneViewController *vc = [[OneViewController alloc]init];
-//    SHBaseNavViewController *nav = [[SHBaseNavViewController alloc]initWithRootViewController:vc];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
