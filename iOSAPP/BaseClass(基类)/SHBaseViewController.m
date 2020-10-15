@@ -51,7 +51,6 @@
     [self.navigationController setNavigationBarHidden:isNavHide animated:NO];
 }
 
-
 #pragma mark - 返回
 - (void)backAction
 {
