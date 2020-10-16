@@ -17,18 +17,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.=
+    // Do any additional setup after loading the view.
     self.view.backgroundColor = kRGB(245, 245, 245, 1);
+    
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
     //根据需求进行管理
     if (self.isNavHide) {
         self.isNavHide = NO;
     }
     if (self.isNavTransparent) {
         self.isNavTransparent = NO;
+    }
+    if (self.isStatusBarHide) {
+        self.isStatusBarHide = NO;
     }
 }
 
@@ -51,7 +57,29 @@
     [self.navigationController setNavigationBarHidden:isNavHide animated:NO];
 }
 
-#pragma mark - 返回
+- (void)setIsStatusBarHide:(BOOL)isStatusBarHide{
+    _isStatusBarHide = isStatusBarHide;
+    [UIApplication sharedApplication].statusBarHidden = isStatusBarHide;
+}
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle{
+    _statusBarStyle = statusBarStyle;
+    [UIApplication sharedApplication].statusBarStyle = statusBarStyle;
+}
+
+#pragma mark - 方法
+#pragma mark 关闭自动布局
+- (void)automaticallyWithScroll:(UIScrollView *)scroll{
+    if (@available(iOS 11.0, *)) {
+        if (scroll) {
+            scroll.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+}
+
+#pragma mark 返回
 - (void)backAction
 {
     if (self.navigationController.viewControllers.count > 1)
@@ -64,7 +92,7 @@
     }
 }
 
-#pragma mark - 获取堆栈中的某个控制器
+#pragma mark 获取堆栈中的某个控制器
 - (UIViewController *)getStackVCWithPageVC:(Class)pageVC
 {
     NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
@@ -81,7 +109,7 @@
     return vc;
 }
 
-#pragma mark - 获取堆栈中的指定位置的控制器
+#pragma mark 获取堆栈中的指定位置的控制器
 - (UIViewController *)getStackVCWithIndex:(int)index
 {
     NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
@@ -101,7 +129,7 @@
     return nil;
 }
 
-#pragma mark - 替换某个控制器到堆栈中
+#pragma mark 替换某个控制器到堆栈中
 - (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at
 {
     NSMutableArray< UIViewController * > *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
@@ -138,11 +166,7 @@
     [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
-- (UIModalPresentationStyle)swiz_modalPresentationStyle {
-    return UIModalPresentationFullScreen;
-}
-
-#pragma mark 蓝加载
+#pragma mark 懒加载
 - (UIWindow *)window
 {
     if (!_window)
@@ -151,4 +175,5 @@
     }
     return _window;
 }
+
 @end

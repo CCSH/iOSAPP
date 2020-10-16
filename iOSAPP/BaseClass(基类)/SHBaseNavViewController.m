@@ -18,10 +18,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[UINavigationBar appearance] setTintColor:kColorMain];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
 
-    self.modalPresentationStyle = UIModalPresentationFullScreen;
+    //主题颜色
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    //标题颜色
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
+                                                           NSFontAttributeName : kFont(15)}];
+    //item 文字颜色 (图标颜色按照主题颜色)
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :[UINavigationBar appearance].tintColor,
+                                                           NSFontAttributeName : kFont(14)}
+                                                forState:UIControlStateNormal];
+    //背景颜色
+    [[UINavigationBar appearance] setBarTintColor:kColorStatus_primary];
+
     self.delegate = self;
 }
 
@@ -33,10 +42,10 @@
     }
 
     viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-                           initWithTitle:nil
-                           style:UIBarButtonItemStylePlain
-                           target:self
-                           action:nil];
+        initWithTitle:nil
+                style:UIBarButtonItemStylePlain
+               target:self
+               action:nil];
     [super pushViewController:viewController animated:animated];
 }
 

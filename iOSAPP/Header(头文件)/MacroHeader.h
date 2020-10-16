@@ -136,9 +136,12 @@
 
 #pragma mark 颜色
 //主题色
-#define kColorMain kRGB(252, 89, 78, 1)
+#define kColorMain kRGB(201, 58, 45, 1)
+//主辅色
+#define kColorMain2 kRGB(225, 178, 43, 1)
 //背景色
 #define kColorBG kRGB(245, 245, 245, 1)
+
 //状态颜色
 #define kColorStatus_primary [UIColor colorWithHexString:@"#409eff"]
 #define kColorStatus_success [UIColor colorWithHexString:@"#67c23a"]

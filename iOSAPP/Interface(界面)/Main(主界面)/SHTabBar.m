@@ -36,7 +36,7 @@
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = self.minView.bounds;
     img.contentMode = UIViewContentModeScaleAspectFit;
-    img.backgroundColor = [UIColor orangeColor];
+    img.backgroundColor = kColorMain;
     [self.minView addSubview:img];
 }
 

@@ -22,10 +22,15 @@ typedef enum : NSUInteger
     RootVCType_login,  //登录
 } RootVCType;
 
+
+
 #pragma mark - 配置
 - (void)configApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
 - (void)configVC:(RootVCType)type;
+
+#pragma mark 界面旋转
+- (void)handleRotation;
 
 @end
 

@@ -20,6 +20,7 @@
 #pragma mark - 配置
 - (void)configApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UIApplication sharedApplication].statusBarHidden = NO;
     //配置其他
     [self configOther];
     //配置界面逻辑
@@ -125,6 +126,37 @@
                                 SHLog(@"注册失败");
                             }
                           }];
+}
+
+#pragma mark 界面旋转
+- (void)handleRotation
+{
+    //强制转换
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        UIInterfaceOrientationMask val = kAppDelegate.interfaceOrientation;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+
+    }
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+            return UIInterfaceOrientationMaskLandscapeLeft;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            return UIInterfaceOrientationMaskLandscapeRight;
+            break;
+        default:
+            break;
+    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

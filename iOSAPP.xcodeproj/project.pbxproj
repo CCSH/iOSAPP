@@ -388,6 +388,7 @@
 				TargetAttributes = {
 					5C25FEA01F68D72600F080A4 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = G94X5Y9CST;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -648,11 +649,12 @@
 			baseConfigurationReference = E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G94X5Y9CST;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;
@@ -667,11 +669,12 @@
 			baseConfigurationReference = 16B3274A940011F3C0A1CAD0 /* Pods-iOSAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G94X5Y9CST;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.csh.iOSAPP;

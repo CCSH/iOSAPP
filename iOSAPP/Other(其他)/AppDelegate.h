@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+//是否旋转
+@property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 
 @end
 

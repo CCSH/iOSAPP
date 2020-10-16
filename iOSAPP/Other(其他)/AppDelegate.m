@@ -163,4 +163,12 @@
     return YES;
 }
 
+- (void)setInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    if (_interfaceOrientation == interfaceOrientation) {
+        return;
+    }
+    _interfaceOrientation = interfaceOrientation;
+    [self handleRotation];
+}
+
 @end

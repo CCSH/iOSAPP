@@ -23,8 +23,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    LoginViewController *view = [[LoginViewController alloc]init];
-    [self.navigationController pushViewController:view animated:YES];
+    [kAppDelegate configVC:RootVCType_home];
     
 }
 
