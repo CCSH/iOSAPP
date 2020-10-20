@@ -152,6 +152,57 @@
     return false;
 }
 
+#pragma mark 显示加载框
+- (void)showHub{
+    
+    [self showHubWithView:nil];
+}
+
+- (void)showHubWithView:(UIView * _Nullable)view{
+
+    if (!view) {
+        view = self.view;
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+    hud.customView = [self hubView];
+}
+
+#pragma mark 隐藏加载框
+- (void)hideHub{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
+}
+
+- (void)hideHubWithView:(UIView *_Nullable)view{
+    if (!view) {
+        view = self.view;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:view animated:YES];
+    });
+}
+
+- (UIImageView *)hubView{
+    UIImageView *hubView = [[UIImageView alloc] init];
+    hubView.image = [UIImage imageNamed:@"loading"];
+    hubView.size = CGSizeMake(20, 20);
+    
+    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = 1.0;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    [hubView.layer addAnimation:rotationAnimation forKey:@"hubView"];
+    
+    return hubView;
+}
+
 #pragma mark 模态跳转
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {

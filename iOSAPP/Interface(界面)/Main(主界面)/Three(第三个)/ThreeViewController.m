@@ -24,6 +24,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self showHub];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,13 +49,9 @@
         app.interfaceOrientation = UIInterfaceOrientationLandscapeRight;
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIApplication sharedApplication].statusBarHidden = NO;
+          [UIApplication sharedApplication].statusBarHidden = NO;
         });
     }
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return NO;
 }
 
 @end

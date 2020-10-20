@@ -62,6 +62,7 @@
 {
     if (index == 2)
     {
+
         [SHToast showWithText:@"点击了中间！！！"];
     }
 }

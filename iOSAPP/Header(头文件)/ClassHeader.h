@@ -34,5 +34,6 @@
 #import "SHBaseNavViewController.h"
 #import "SHSQLite.h"
 #import "UIScrollView+SHExtension.h"
+#import <MBProgressHUD.h>
 
 //#import <EaseUI/EaseUI.h>

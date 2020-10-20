@@ -31,6 +31,7 @@
     //背景颜色
     [[UINavigationBar appearance] setBarTintColor:kColorStatus_primary];
 
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;
 }
 

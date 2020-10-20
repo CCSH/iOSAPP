@@ -41,6 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 替换某个控制器到堆栈中
 - (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at;
 
+#pragma mark 显示加载框
+- (void)showHub;
+- (void)showHubWithView:(UIView *_Nullable)view;
+#pragma mark 隐藏加载框
+- (void)hideHub;
+- (void)hideHubWithView:(UIView *_Nullable)view;
+
 @end
 
 NS_ASSUME_NONNULL_END
