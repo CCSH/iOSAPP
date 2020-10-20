@@ -33,11 +33,11 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain} forState:UIControlStateSelected];
 
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)} forState:UIControlStateNormal];
-    
+
     //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];
-    
+
     self.delegate = self;
 
     //添加子控制器
@@ -46,7 +46,7 @@
 
     TwoViewController *telView = [[TwoViewController alloc] init];
     [self addOneChlildVC:telView title:@"第二个" img:@"image" selectedImg:@"image"];
-    
+
     [self addOneChlildVC:nil title:nil img:nil selectedImg:nil];
 
     ThreeViewController *addressView = [[ThreeViewController alloc] init];
@@ -72,11 +72,11 @@
                    img:(NSString *)img
            selectedImg:(NSString *)selectedImg
 {
-    
-    if (!childVC) {
-        childVC = [[SHBaseViewController alloc]init];
+    if (!childVC)
+    {
+        childVC = [[SHBaseViewController alloc] init];
     }
-    
+
     childVC.title = title;
 
     //设置点击图片
@@ -90,16 +90,18 @@
 }
 
 #pragma mark - UITabBarControllerDelegate
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    
-    if (viewController.view.tag == 3) {
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if (viewController.view.tag == 3)
+    {
         [self.shTabBar didSelectItem:2];
         return NO;
     }
     return YES;
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
     [self.shTabBar didSelectItem:self.selectedIndex];
 }
 

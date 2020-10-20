@@ -24,6 +24,23 @@
 
 }
 
+- (void)requestData{
+    [SHServerRequest requestLoginWithMobile:@"1" password:@"1" result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
+       
+        if (!error) {
+            //成功
+        }else{
+            if ([error.domain isEqualToString:error_domain]) {
+                //服务器错误
+//                baseModel.result
+//                baseModel.msg
+            }else{
+                //网络错误
+            }
+        }
+    }];
+}
+
 - (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
 {
     [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];

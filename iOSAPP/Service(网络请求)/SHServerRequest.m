@@ -26,7 +26,7 @@
 {
     if (error)
     {
-        //网络错误 提示用户
+        //网络错误
         [SHToast showWithText:request_error];
         if (error.code == -1001)
         {
@@ -35,8 +35,8 @@
     }
     else if (![model.result isEqualToString:success_code])
     {
-        //服务器错误 提示用户
-        error = [NSError errorWithDomain:@"domain" code:[model.result integerValue] userInfo:@{@"msg" : model.msg}];
+        //服务器错误
+        error = [NSError errorWithDomain:error_domain code:0 userInfo:nil];
     }
 
     if (block)

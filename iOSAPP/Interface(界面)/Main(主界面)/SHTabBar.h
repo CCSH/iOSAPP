@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray *dataArr;
 
-#pragma mark  - tabbar点击
+#pragma mark - tabbar点击
 - (void)didSelectItem:(NSInteger)index;
 
 @end

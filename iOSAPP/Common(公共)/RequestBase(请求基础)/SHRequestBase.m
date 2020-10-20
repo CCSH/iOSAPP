@@ -262,7 +262,8 @@ static NSInteger timeOut = 10;
 #pragma mark POST文件上传
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
-                 fileType:(NSString *)fileType
+                     name:(NSString *_Nullable)name
+                 mimeType:(NSString *_Nullable)mimeType
                      data:(NSData *)data
                       tag:(NSString *_Nullable)tag
                     retry:(NSInteger)retry
@@ -270,6 +271,9 @@ static NSInteger timeOut = 10;
                   success:(void (^_Nullable)(id responseObj))success
                   failure:(void (^_Nullable)(NSError *error))failure;
 {
+    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
+    name = name ?: @"file";
+
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
 
@@ -280,13 +284,16 @@ static NSInteger timeOut = 10;
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           if (data)
           {
-              [formData appendPartWithFileData:data name:@"filename" fileName:@"filename" mimeType:fileType];
+              NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
+              NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
+
+              [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
           }
         }
         progress:progress
         success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
           //移除队列
-          [netQueueDic removeObjectForKey:tag];
+          [self cancelOperationsWithTag:tag];
 
           if (success)
           {
@@ -295,12 +302,12 @@ static NSInteger timeOut = 10;
         }
         failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
           //移除队列
-          [netQueueDic removeObjectForKey:tag];
+          [self cancelOperationsWithTag:tag];
 
           if (retry > 0)
           {
               //重新请求
-              [self uploadFileWithUrl:url param:param fileType:fileType data:data tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self uploadFileWithUrl:url param:param name:name mimeType:mimeType data:data tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
           }
           else
           {
@@ -317,15 +324,83 @@ static NSInteger timeOut = 10;
     }
 }
 
-#pragma mark POST文件批量上传
+#pragma mark POST文件批量上传(一次)
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
-                  fileType:(NSString *)fileType
+                      name:(NSString *_Nullable)name
+                  mimeType:(NSString *_Nullable)mimeType
                      datas:(NSArray< NSData * > *)datas
-                  progress:(void (^_Nullable)(NSProgress *_Nullable))progress
-                   success:(void (^_Nullable)(id _Nullable))success
-                   failure:(void (^_Nullable)(NSError *_Nullable))failure
+                       tag:(NSString *_Nullable)tag
+                     retry:(NSInteger)retry
+                  progress:(void (^_Nullable)(NSProgress *progress))progress
+                   success:(void (^_Nullable)(id responseObj))success
+                   failure:(void (^_Nullable)(NSError *error))failure
 {
+    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
+    name = name ?: @"file";
+
+    // 获取对象
+    AFHTTPSessionManager *mgr = [SHRequestBase manager];
+
+    // 开始请求
+    NSURLSessionDataTask *task = [mgr POST:url
+        parameters:param
+        headers:nil
+        constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
+          [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+            NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
+            NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
+
+            [formData appendPartWithFileData:obj name:name fileName:fileName mimeType:mimeType];
+          }];
+        }
+        progress:progress
+        success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
+          //移除队列
+          [self cancelOperationsWithTag:tag];
+
+          if (success)
+          {
+              success(responseObject);
+          }
+        }
+        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
+          //移除队列
+          [self cancelOperationsWithTag:tag];
+
+          if (retry > 0)
+          {
+              //重新请求
+              [self uploadFilesWithUrl:url param:param name:name mimeType:mimeType datas:datas tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+          }
+          else
+          {
+              if (failure)
+              {
+                  failure(error);
+              }
+          }
+        }];
+    if (tag.length)
+    {
+        //添加队列
+        netQueueDic[tag] = task;
+    }
+}
+
+#pragma mark POST文件批量上传(多次)
++ (void)uploadFilesManyWithUrl:(NSString *)url
+                         param:(id)param
+                          name:(NSString *_Nullable)name
+                      mimeType:(NSString *_Nullable)mimeType
+                         datas:(NSArray< NSData * > *)datas
+                      progress:(void (^_Nullable)(NSProgress *_Nullable))progress
+                       success:(void (^_Nullable)(id _Nullable))success
+                       failure:(void (^_Nullable)(NSError *_Nullable))failure
+{
+    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
+    name = name ?: @"file";
+
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     __block NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
@@ -340,10 +415,10 @@ static NSInteger timeOut = 10;
           parameters:param
           headers:nil
           constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
-            if (obj)
-            {
-                [formData appendPartWithFileData:obj name:@"filename" fileName:@"filename" mimeType:fileType];
-            }
+            NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
+            NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
+
+            [formData appendPartWithFileData:obj name:name fileName:fileName mimeType:mimeType];
           }
           progress:progress
           success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {

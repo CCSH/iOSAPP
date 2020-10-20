@@ -57,12 +57,11 @@
     return [super hitTest:point withEvent:event];
 }
 
-#pragma mark  - tabbar点击
+#pragma mark - tabbar点击
 - (void)didSelectItem:(NSInteger)index
 {
     if (index == 2)
     {
-
         [SHToast showWithText:@"点击了中间！！！"];
     }
 }

@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param url 地址
  @param param 参数
- @param fileType 文件类型
+ @param mimeType 文件类型
  @param data 文件
  @param tag 请求标记
  @param retry 重试次数
@@ -89,7 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
-                 fileType:(NSString *)fileType
+                     name:(NSString *_Nullable)name
+                 mimeType:(NSString *_Nullable)mimeType
                      data:(NSData *)data
                       tag:(NSString *_Nullable)tag
                     retry:(NSInteger)retry
@@ -98,11 +99,11 @@ NS_ASSUME_NONNULL_BEGIN
                   failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
- POST文件上传(批量)
+ POST文件上传(批量 一次)
  
  @param url 地址
  @param param 参数
- @param fileType 文件类型
+ @param mimeType 文件类型
  @param datas 文件集合
  @param progress 进度
  @param success 成功
@@ -110,11 +111,34 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
-                  fileType:(NSString *)fileType
+                      name:(NSString *_Nullable)name
+                  mimeType:(NSString *_Nullable)mimeType
                      datas:(NSArray< NSData * > *)datas
+                       tag:(NSString *_Nullable)tag
+                     retry:(NSInteger)retry
                   progress:(void (^_Nullable)(NSProgress *progress))progress
                    success:(void (^_Nullable)(id responseObj))success
                    failure:(void (^_Nullable)(NSError *error))failure;
+
+/**
+ POST文件上传(批量 多次)
+ 
+ @param url 地址
+ @param param 参数
+ @param mimeType 文件类型
+ @param datas 文件集合
+ @param progress 进度
+ @param success 成功
+ @param failure 失败
+ */
++ (void)uploadFilesManyWithUrl:(NSString *)url
+                         param:(id)param
+                          name:(NSString *_Nullable)name
+                      mimeType:(NSString *_Nullable)mimeType
+                         datas:(NSArray< NSData * > *)datas
+                      progress:(void (^_Nullable)(NSProgress *progress))progress
+                       success:(void (^_Nullable)(id responseObj))success
+                       failure:(void (^_Nullable)(NSError *error))failure;
 
 /**
  文件下载

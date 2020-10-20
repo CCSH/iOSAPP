@@ -14,6 +14,7 @@
 //网络请求接口
 
 static NSString *request_error = @"网络异常，请检查网络";
+static NSString *error_domain = @"iosapp_domain";
 static NSString *success_code = @"200";
 
 #pragma mark - 三方
