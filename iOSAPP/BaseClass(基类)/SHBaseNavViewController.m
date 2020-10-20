@@ -25,9 +25,10 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
                                                            NSFontAttributeName : kFont(15)}];
     //item 文字颜色 (图标颜色按照主题颜色)
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName :[UINavigationBar appearance].tintColor,
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
                                                            NSFontAttributeName : kFont(14)}
                                                 forState:UIControlStateNormal];
+    
     //背景颜色
     [[UINavigationBar appearance] setBarTintColor:kColorStatus_primary];
 
@@ -42,11 +43,10 @@
         viewController.hidesBottomBarWhenPushed = YES;
     }
 
-    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-        initWithTitle:nil
-                style:UIBarButtonItemStylePlain
-               target:self
-               action:nil];
+    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
+                                                                                       style:UIBarButtonItemStylePlain
+                                                                                      target:self
+                                                                                      action:nil];
     [super pushViewController:viewController animated:animated];
 }
 

@@ -11,42 +11,42 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>Bugly.xcscheme</key>
+		<key>BaiduMobStatCodeless.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>FMDB.xcscheme</key>
+		<key>Bugly.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>MBProgressHUD.xcscheme</key>
+		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>MJRefresh.xcscheme</key>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>Pods-iOSAPP.xcscheme</key>
+		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>QQ_MTA.xcscheme</key>
+		<key>Pods-iOSAPP.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

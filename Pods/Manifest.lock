@@ -14,15 +14,13 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - BaiduMobStatCodeless (5.2.7)
   - Bugly (2.5.71)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - MBProgressHUD (1.2.0)
   - MJRefresh (3.5.0)
-  - QQ_MTA (2.7.0):
-    - QQ_MTA/BasicAnalysis (= 2.7.0)
-  - QQ_MTA/BasicAnalysis (2.7.0)
   - SDWebImage (5.9.2):
     - SDWebImage/Core (= 5.9.2)
   - SDWebImage/Core (5.9.2)
@@ -54,11 +52,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - BaiduMobStatCodeless
   - Bugly
   - FMDB
   - MBProgressHUD
   - MJRefresh
-  - QQ_MTA
   - SDWebImage
   - SHActionSheetView
   - SHAlertView
@@ -72,11 +70,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - BaiduMobStatCodeless
     - Bugly
     - FMDB
     - MBProgressHUD
     - MJRefresh
-    - QQ_MTA
     - SDWebImage
     - SHActionSheetView
     - SHAlertView
@@ -90,11 +88,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  BaiduMobStatCodeless: 09c3738fd435a6c13c248f39aa0f15d3f5ee7daa
   Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  QQ_MTA: cf80cb9de50717bd3fa19bf681808def9c221496
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   SHActionSheetView: 00d2d81dd9c4cb03ebb2683705840d50a203f474
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
@@ -106,6 +104,6 @@ SPEC CHECKSUMS:
   SHToast: 54be86c2d5d95160cd8028a59e2cfe99f38655f6
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: e229fee534b7323ba035d049e6e75e1dd304bb05
+PODFILE CHECKSUM: 591d653efc35cdf61ca2f7224752253bd9bc2b21
 
 COCOAPODS: 1.10.0.rc.1

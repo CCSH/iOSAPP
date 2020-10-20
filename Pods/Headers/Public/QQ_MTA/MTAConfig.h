@@ -1,1 +1,0 @@
-../../../QQ_MTA/MTA/MTAConfig.h
