@@ -45,7 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
             failure:(void (^_Nullable)(NSError *error))failure;
 
 #pragma mark POST文件上传
-
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                      name:(NSString *_Nullable)name

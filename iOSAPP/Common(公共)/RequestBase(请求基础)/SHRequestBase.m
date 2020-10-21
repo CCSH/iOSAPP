@@ -9,7 +9,7 @@
 //
 
 #import "SHRequestBase.h"
-#import "AFNetworking.h"
+#import "AFHTTPSessionManager.h"
 
 @implementation SHRequestBase
 
@@ -36,10 +36,8 @@ static NSInteger timeOut = 10;
       mgr.securityPolicy.validatesDomainName = NO;
       mgr.requestSerializer.timeoutInterval = timeOut;
 
-      //入参格式
-      mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-      //回参格式
       mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+      mgr.responseSerializer = [AFJSONResponseSerializer serializer];
 
       [mgr.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 
@@ -271,8 +269,7 @@ static NSInteger timeOut = 10;
                   success:(void (^_Nullable)(id responseObj))success
                   failure:(void (^_Nullable)(NSError *error))failure;
 {
-
-    name = name ? : @"file";
+    name = name ?: @"file";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
 
@@ -284,10 +281,11 @@ static NSInteger timeOut = 10;
           if (data)
           {
               NSArray *temp = [name componentsSeparatedByString:@"."];
-              if (temp.count != 2) {
-                  temp = @[name, @"fileName"];
+              if (temp.count != 2)
+              {
+                  temp = @[ name, @"jpg" ];
               }
-              [formData appendPartWithFileData:data name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
+              [formData appendPartWithFileData:data name:temp[0] fileName:[NSString stringWithFormat:@"file.%@",temp[1]] mimeType:@"application/octet-stream"];
           }
         }
         progress:progress
@@ -307,7 +305,15 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self uploadFileWithUrl:url param:param name:name data:data tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self uploadFileWithUrl:url
+                                param:param
+                                 name:name
+                                 data:data
+                                  tag:tag
+                                retry:(retry - 1)
+                             progress:progress
+                              success:success
+                              failure:failure];
           }
           else
           {
@@ -335,7 +341,7 @@ static NSInteger timeOut = 10;
                    success:(void (^_Nullable)(id responseObj))success
                    failure:(void (^_Nullable)(NSError *error))failure
 {
-    name = name ?: @"file";
+    name = name ?: @"file[]";
 
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -347,10 +353,11 @@ static NSInteger timeOut = 10;
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
               NSArray *temp = [name componentsSeparatedByString:@"."];
-              if (temp.count != 2) {
-                  temp = @[name, @"fileName"];
+              if (temp.count != 2)
+              {
+                  temp = @[ name, @"jpg" ];
               }
-              [formData appendPartWithFileData:obj name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
+              [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@",temp[1]] mimeType:@"application/octet-stream"];
           }];
         }
         progress:progress
@@ -370,7 +377,15 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self uploadFilesWithUrl:url param:param name:name datas:datas tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self uploadFilesWithUrl:url
+                                 param:param
+                                  name:name
+                                 datas:datas
+                                   tag:tag
+                                 retry:(retry - 1)
+                              progress:progress
+                               success:success
+                               failure:failure];
           }
           else
           {
@@ -413,10 +428,11 @@ static NSInteger timeOut = 10;
           headers:nil
           constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           NSArray *temp = [name componentsSeparatedByString:@"."];
-          if (temp.count != 2) {
-              temp = @[name, @"fileName"];
+          if (temp.count != 2)
+          {
+              temp = @[ name, @"jpg" ];
           }
-          [formData appendPartWithFileData:obj name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
+          [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@",temp[1]] mimeType:@"application/octet-stream"];
           }
           progress:progress
           success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
@@ -471,7 +487,13 @@ static NSInteger timeOut = 10;
               if (retry > 0)
               {
                   //重新请求
-                  [self downLoadFlieWithUrl:url flie:file tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+                  [self downLoadFlieWithUrl:url
+                                       flie:file
+                                        tag:tag
+                                      retry:(retry - 1)
+                                   progress:progress
+                                    success:success
+                                    failure:failure];
               }
               else
               {
