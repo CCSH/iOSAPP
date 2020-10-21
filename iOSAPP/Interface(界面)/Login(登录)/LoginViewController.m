@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SHWebViewController.h"
 
 @interface LoginViewController ()
 
@@ -21,7 +22,8 @@
     self.title = @"登录";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
-
+    
+    [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
 }
 
 - (void)requestData{
@@ -43,9 +45,11 @@
 
 - (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
 {
-    [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
-
-    [self backAction];
+   
+    SHWebViewController *vc = [[SHWebViewController alloc]init];
+    vc.url = @"https://github.com/CCSH";
+    vc.shareModel = [IShareModel new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

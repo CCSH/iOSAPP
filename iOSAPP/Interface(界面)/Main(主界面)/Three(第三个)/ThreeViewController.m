@@ -35,8 +35,6 @@
 
 - (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"旋转");
-
     //支持旋转
     AppDelegate *app = kAppDelegate;
 

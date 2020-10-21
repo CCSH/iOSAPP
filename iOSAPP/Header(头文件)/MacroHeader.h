@@ -36,7 +36,7 @@
 //Tabbar安全H
 #define kTabBarSafeH (kTabBarH + kSafeBottomH)
 //有导航栏内容安全H
-#define kNavContentAreaH (kkSHHeight - kNavAndStatusH)
+#define kNavContentAreaH (kSHHeight - kNavAndStatusH)
 #define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
 //无导航栏内容安全H
 #define kContentAreaH (kkSHHeight - kStatusBarH)

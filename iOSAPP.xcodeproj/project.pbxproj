@@ -29,6 +29,9 @@
 		5C8BECC724C69E0300412B3B /* SHBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC624C69E0300412B3B /* SHBaseTableViewCell.m */; };
 		5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */; };
 		5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */; };
+		834CBC84253FCB2F005214EC /* SHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC83253FCB2F005214EC /* SHWebViewController.m */; };
+		834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC87253FCB73005214EC /* SHBaseModel.m */; };
+		834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC8B253FCB9E005214EC /* IShareModel.m */; };
 		83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */; };
 		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
@@ -80,6 +83,12 @@
 		5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseNavViewController.m; sourceTree = "<group>"; };
 		5C8BECCB24C6AD2300412B3B /* SHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseViewController.h; sourceTree = "<group>"; };
 		5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseViewController.m; sourceTree = "<group>"; };
+		834CBC82253FCB2F005214EC /* SHWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHWebViewController.h; sourceTree = "<group>"; };
+		834CBC83253FCB2F005214EC /* SHWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHWebViewController.m; sourceTree = "<group>"; };
+		834CBC86253FCB73005214EC /* SHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseModel.h; sourceTree = "<group>"; };
+		834CBC87253FCB73005214EC /* SHBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseModel.m; sourceTree = "<group>"; };
+		834CBC8A253FCB9E005214EC /* IShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShareModel.h; sourceTree = "<group>"; };
+		834CBC8B253FCB9E005214EC /* IShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IShareModel.m; sourceTree = "<group>"; };
 		83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SHExtension.m"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.m"; sourceTree = "<absolute>"; };
 		83B4BAF324CADD6800F8E27B /* UIScrollView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.h"; sourceTree = "<absolute>"; };
 		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
@@ -288,6 +297,8 @@
 			children = (
 				5C8BEC8A24C696D300412B3B /* IUesrModel.h */,
 				5C8BEC8B24C696D300412B3B /* IUesrModel.m */,
+				834CBC8A253FCB9E005214EC /* IShareModel.h */,
+				834CBC8B253FCB9E005214EC /* IShareModel.m */,
 			);
 			path = "Model(模型)";
 			sourceTree = "<group>";
@@ -323,6 +334,10 @@
 				5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */,
 				5C8BECCB24C6AD2300412B3B /* SHBaseViewController.h */,
 				5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */,
+				834CBC82253FCB2F005214EC /* SHWebViewController.h */,
+				834CBC83253FCB2F005214EC /* SHWebViewController.m */,
+				834CBC86253FCB73005214EC /* SHBaseModel.h */,
+				834CBC87253FCB73005214EC /* SHBaseModel.m */,
 			);
 			path = "BaseClass(基类)";
 			sourceTree = "<group>";
@@ -500,6 +515,7 @@
 				5C8BECAC24C696D300412B3B /* SHFileHelper.m in Sources */,
 				5C8BECA024C696D300412B3B /* FourViewController.m in Sources */,
 				5C25FEA61F68D72600F080A4 /* main.m in Sources */,
+				834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */,
 				5C8BECA124C696D300412B3B /* MainTabBarController.m in Sources */,
 				5C8BECC324C69C7300412B3B /* AppDelegate+SHExtension.m in Sources */,
 				5C8BECA424C696D300412B3B /* ThreeViewController.m in Sources */,
@@ -512,9 +528,11 @@
 				5C8BECA524C696D300412B3B /* LoginViewController.m in Sources */,
 				5C8BECA624C696D300412B3B /* WelcomeViewController.m in Sources */,
 				5C8BECA324C696D300412B3B /* TwoViewController.m in Sources */,
+				834CBC84253FCB2F005214EC /* SHWebViewController.m in Sources */,
 				5C8BECA224C696D300412B3B /* OneViewController.m in Sources */,
 				5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */,
 				5C8BECAD24C696D300412B3B /* AppDelegate.m in Sources */,
+				834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

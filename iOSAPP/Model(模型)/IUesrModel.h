@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+/// 用户
 @interface IUesrModel : NSObject
 
 @end

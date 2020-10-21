@@ -29,6 +29,13 @@
                                                            NSFontAttributeName : kFont(14)}
                                                 forState:UIControlStateNormal];
     
+
+    // 系统返回按钮
+    UIImage *image = [UIImage imageNamed:@"nav_back"];
+    // 修改navigationBar上的返回按钮的图片，注意：这两个属性要同时设置
+    [UINavigationBar appearance].backIndicatorImage = image;
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = image;
+    
     //背景颜色
     [[UINavigationBar appearance] setBarTintColor:kColorStatus_primary];
 
@@ -41,8 +48,12 @@
     if (self.viewControllers.count)
     {
         viewController.hidesBottomBarWhenPushed = YES;
+        
     }
 
+    if (viewController.navigationItem.backBarButtonItem) {
+        
+    }
     viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
                                                                                        style:UIBarButtonItemStylePlain
                                                                                       target:self
