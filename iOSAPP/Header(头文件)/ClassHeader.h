@@ -22,7 +22,7 @@
 #import <MJRefresh.h>
 #import <FMDB/FMDB.h>
 #import <SHToast.h>
-#import <YYModel.h>
+#import <MJExtension.h>
 #import <Bugly/Bugly.h>
 
 #import "AppDelegate.h"

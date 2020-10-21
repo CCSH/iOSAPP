@@ -72,6 +72,7 @@ static NSInteger timeOut = 10;
     return mgr;
 }
 
+#pragma mark - 请求方法
 #pragma mark GET
 + (void)getWithUrl:(NSString *)url
              param:(id)param
@@ -263,7 +264,6 @@ static NSInteger timeOut = 10;
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                      name:(NSString *_Nullable)name
-                 mimeType:(NSString *_Nullable)mimeType
                      data:(NSData *)data
                       tag:(NSString *_Nullable)tag
                     retry:(NSInteger)retry
@@ -271,9 +271,8 @@ static NSInteger timeOut = 10;
                   success:(void (^_Nullable)(id responseObj))success
                   failure:(void (^_Nullable)(NSError *error))failure;
 {
-    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
-    name = name ?: @"file";
 
+    name = name ? : @"file";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
 
@@ -284,10 +283,11 @@ static NSInteger timeOut = 10;
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           if (data)
           {
-              NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
-              NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
-
-              [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
+              NSArray *temp = [name componentsSeparatedByString:@"."];
+              if (temp.count != 2) {
+                  temp = @[name, @"fileName"];
+              }
+              [formData appendPartWithFileData:data name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
           }
         }
         progress:progress
@@ -307,7 +307,7 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self uploadFileWithUrl:url param:param name:name mimeType:mimeType data:data tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self uploadFileWithUrl:url param:param name:name data:data tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
           }
           else
           {
@@ -328,7 +328,6 @@ static NSInteger timeOut = 10;
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
                       name:(NSString *_Nullable)name
-                  mimeType:(NSString *_Nullable)mimeType
                      datas:(NSArray< NSData * > *)datas
                        tag:(NSString *_Nullable)tag
                      retry:(NSInteger)retry
@@ -336,7 +335,6 @@ static NSInteger timeOut = 10;
                    success:(void (^_Nullable)(id responseObj))success
                    failure:(void (^_Nullable)(NSError *error))failure
 {
-    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
     name = name ?: @"file";
 
     // 获取对象
@@ -348,10 +346,11 @@ static NSInteger timeOut = 10;
         headers:nil
         constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-            NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
-            NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
-
-            [formData appendPartWithFileData:obj name:name fileName:fileName mimeType:mimeType];
+              NSArray *temp = [name componentsSeparatedByString:@"."];
+              if (temp.count != 2) {
+                  temp = @[name, @"fileName"];
+              }
+              [formData appendPartWithFileData:obj name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
           }];
         }
         progress:progress
@@ -371,7 +370,7 @@ static NSInteger timeOut = 10;
           if (retry > 0)
           {
               //重新请求
-              [self uploadFilesWithUrl:url param:param name:name mimeType:mimeType datas:datas tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
+              [self uploadFilesWithUrl:url param:param name:name datas:datas tag:tag retry:(retry - 1) progress:progress success:success failure:failure];
           }
           else
           {
@@ -392,13 +391,11 @@ static NSInteger timeOut = 10;
 + (void)uploadFilesManyWithUrl:(NSString *)url
                          param:(id)param
                           name:(NSString *_Nullable)name
-                      mimeType:(NSString *_Nullable)mimeType
                          datas:(NSArray< NSData * > *)datas
                       progress:(void (^_Nullable)(NSProgress *_Nullable))progress
                        success:(void (^_Nullable)(id _Nullable))success
                        failure:(void (^_Nullable)(NSError *_Nullable))failure
 {
-    mimeType = mimeType.lowercaseString ?: @"image/jpeg";
     name = name ?: @"file";
 
     // 获取对象
@@ -415,10 +412,11 @@ static NSInteger timeOut = 10;
           parameters:param
           headers:nil
           constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
-            NSString *type = [mimeType componentsSeparatedByString:@"/"].lastObject;
-            NSString *fileName = [NSString stringWithFormat:@"file.%@", type];
-
-            [formData appendPartWithFileData:obj name:name fileName:fileName mimeType:mimeType];
+          NSArray *temp = [name componentsSeparatedByString:@"."];
+          if (temp.count != 2) {
+              temp = @[name, @"fileName"];
+          }
+          [formData appendPartWithFileData:obj name:temp[0] fileName:temp[1] mimeType:@"application/octet-stream"];
           }
           progress:progress
           success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {

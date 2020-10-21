@@ -73,7 +73,7 @@
         progress:nil
         success:^(id responseObj) {
           //处理数据
-          SHRequestBaseModel *model = [SHRequestBaseModel yy_modelWithJSON:responseObj];
+          SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];
           [self handleDataWithModel:model error:nil block:result];
         }
         failure:^(NSError *error) {

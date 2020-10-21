@@ -93,6 +93,7 @@ static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
 #pragma mark - 获取某个字符在字符串中出现的次数
 + (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target;
 
+
 @end
 
 NS_ASSUME_NONNULL_END
