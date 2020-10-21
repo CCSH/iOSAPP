@@ -10,7 +10,7 @@
 #import "TwoViewController.h"
 #import "OneViewController.h"
 
-@interface TwoViewController ()
+@interface TwoViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -20,21 +20,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColorStatus_warning;
+    
+    UIScrollView *scroll = [[UIScrollView alloc]init];
+    scroll.frame = CGRectMake(0, 0, kSHWidth, kNavContentSafeAreaH - kTabBarH);
+    scroll.delegate = self;
+    [self.view addSubview:scroll];
+    scroll.contentSize = CGSizeMake(kSHWidth, 10000);
+    
+    self.navBarAlpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.isNavTransparent = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat offsetY = scrollView.contentOffset.y;
+    
+    self.navBarAlpha = offsetY / 100;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    OneViewController *vc = [[OneViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

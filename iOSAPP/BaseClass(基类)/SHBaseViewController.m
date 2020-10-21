@@ -30,27 +30,24 @@
     if (self.isNavHide) {
         self.isNavHide = NO;
     }
-    if (self.isNavTransparent) {
-        self.isNavTransparent = NO;
-    }
     if (self.isStatusBarHide) {
         self.isStatusBarHide = NO;
     }
 }
 
 #pragma mark - 属性
-- (void)setIsNavTransparent:(BOOL)isNavTransparent{
-    _isNavTransparent = isNavTransparent;
-    if (isNavTransparent) {
-          [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-          [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-          self.navigationController.navigationBar.translucent = YES;
-    }else{
-          [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-          [self.navigationController.navigationBar setShadowImage:nil];
-          self.navigationController.navigationBar.translucent = NO;
-    }
+#pragma mark - 属性
+- (void)setNavBarAlpha:(CGFloat)navBarAlpha{
+    _navBarAlpha = navBarAlpha;
+
+    // 导航栏背景透明度设置
+    UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
+    //颜色透明
+    bgView.alpha = navBarAlpha;
+    //整体透明
+//    self.navigationController.navigationBar.alpha = navBarAlpha;
 }
+
 
 - (void)setIsNavHide:(BOOL)isNavHide{
     _isNavHide = isNavHide;
