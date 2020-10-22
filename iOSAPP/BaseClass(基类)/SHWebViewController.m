@@ -293,7 +293,7 @@
         // 导航代理
         _webView.navigationDelegate = self;
         // 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
-        _webView.allowsBackForwardNavigationGestures = NO;
+        _webView.allowsBackForwardNavigationGestures = YES;
         [self.view addSubview:_webView];
     }
     return _webView;
