@@ -10,4 +10,15 @@
 
 @implementation IUesrModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{@"_id" : @"id"};
+}
+
+
++ (NSDictionary *)mj_objectClassInArray{
+    return @{ @"banner_list" : @"BannerModel"};
+}
+
+
 @end
