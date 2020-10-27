@@ -39,13 +39,13 @@
 #pragma mark - 属性
 - (void)setNavBarAlpha:(CGFloat)navBarAlpha{
     _navBarAlpha = navBarAlpha;
-
+    
     // 导航栏背景透明度设置
     UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
     //颜色透明
     bgView.alpha = navBarAlpha;
     //整体透明
-//    self.navigationController.navigationBar.alpha = navBarAlpha;
+    //    self.navigationController.navigationBar.alpha = navBarAlpha;
 }
 
 
@@ -90,62 +90,96 @@
 }
 
 #pragma mark 获取堆栈中的某个控制器
-- (UIViewController *)getStackVCWithPageVC:(Class)pageVC
+- (UIViewController *)getStackVCWithClassName:(NSString *)className
 {
-    NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
-
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
     __block UIViewController *vc = nil;
     [vcs enumerateObjectsUsingBlock:^(UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-      if ([obj isKindOfClass:pageVC])
-      {
-          vc = obj;
-          *stop = YES;
-      }
+        if ([NSStringFromClass([obj class]) isEqualToString:className])
+        {
+            vc = obj;
+            *stop = YES;
+        }
     }];
-
+    
     return vc;
 }
 
 #pragma mark 获取堆栈中的指定位置的控制器
-- (UIViewController *)getStackVCWithIndex:(int)index
+- (UIViewController *)getStackVCWithAt:(int)at
 {
-    NSArray< UIViewController * > *vcs = self.navigationController.viewControllers;
-
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
     if (vcs.count)
     {
-        if (vcs.count > abs(index))
+        int index = at;
+        
+        if (at < 0)
         {
-            return vcs[index];
+            index = vcs.count + at;
         }
-        else
-        {
-            return vcs[vcs.count + index];
-        }
+        return vcs[index];
     }
-
+    
     return nil;
+}
+
+#pragma mark 删除某个控制器
+- (BOOL)removeVCToStackWithClassName:(NSString *_Nonnull)className{
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    __block NSInteger index = -1;
+    [vcs enumerateObjectsUsingBlock:^(UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:className])
+        {
+            index = idx;
+            *stop = YES;
+        }
+    }];
+    if (index >= 0) {
+        [vcs removeObjectAtIndex:index];
+        [self.navigationController setViewControllers:vcs animated:false];
+        return YES;
+    }
+    return NO;;
+}
+
+#pragma mark 删除某个位置的控制器
+- (void)removeVCToStackWithAt:(int)at{
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    int index = at;
+    
+    if (at < 0)
+    {
+        index = vcs.count + at;
+    }
+    [vcs removeObjectAtIndex:index];
+    [self.navigationController setViewControllers:vcs animated:false];
 }
 
 #pragma mark 替换某个控制器到堆栈中
 - (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at
 {
-    NSMutableArray< UIViewController * > *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-
+    NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    
     if (vcs.count > abs(at))
     {
-        if (at > 0)
+        int index = at;
+        if (at < 0)
         {
-            vcs[at] = vc;
+            index = vcs.count + at;
         }
-        else
-        {
-            vcs[vcs.count + at] = vc;
+        if (vc) {
+            vcs[index] = vc;
+        }else{
+            [vcs removeObjectAtIndex:index];
         }
+        
         [self.navigationController setViewControllers:vcs animated:false];
-
+        
         return true;
     }
-
+    
     return false;
 }
 
@@ -156,14 +190,14 @@
 }
 
 - (void)showHubWithView:(UIView * _Nullable)view{
-
+    
     if (!view) {
         view = self.view;
     }
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.mode = MBProgressHUDModeCustomView;
-
+    
     hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
     hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     hud.customView = [self hubView];
@@ -210,7 +244,7 @@
             viewControllerToPresent.modalPresentationStyle = UIModalPresentationFullScreen;
         }
     }
-
+    
     [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
