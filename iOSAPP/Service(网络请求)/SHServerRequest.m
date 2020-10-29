@@ -37,6 +37,9 @@
     {
         //服务器错误
         error = [NSError errorWithDomain:error_domain code:0 userInfo:nil];
+        if (model.msg.length) {
+            [SHToast showWithText:model.msg];
+        }
     }
 
     if (block)
