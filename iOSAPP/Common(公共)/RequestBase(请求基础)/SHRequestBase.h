@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
            failure:(void (^_Nullable)(NSError *error))failure;
 
 #pragma mark POST
-
 + (void)postWithUrl:(NSString *)url
               param:(id)param
                 tag:(NSString *_Nullable)tag
@@ -44,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
             success:(void (^_Nullable)(id responseObj))success
             failure:(void (^_Nullable)(NSError *error))failure;
 
-#pragma mark POST文件上传
+#pragma mark 文件上传(单个)
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                      name:(NSString *_Nullable)name
@@ -55,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
                   success:(void (^_Nullable)(id responseObj))success
                   failure:(void (^_Nullable)(NSError *error))failure;
 
-#pragma mark POST文件上传(批量 一次)
+#pragma mark 文件上传(多个 一次)
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
                       name:(NSString *_Nullable)name
@@ -66,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
                    success:(void (^_Nullable)(id responseObj))success
                    failure:(void (^_Nullable)(NSError *error))failure;
 
-#pragma mark POST文件上传(批量 多次)
+#pragma mark 文件上传(多个 多次)
 + (void)uploadFilesManyWithUrl:(NSString *)url
                          param:(id)param
                           name:(NSString *_Nullable)name

@@ -1,6 +1,5 @@
 
 
-
 //
 //  SHRequestBase.m
 //  SHNetworkRequest
@@ -201,6 +200,7 @@ static bool isLog = YES;
         netQueueDic[tag] = task;
     }
 }
+
 #pragma mark FORM
 + (void)formWithUrl:(NSString *)url
               param:(id)param
@@ -264,10 +264,11 @@ static bool isLog = YES;
                       failure:failure];
         }
         else
-        { if (isLog)
         {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-        }
+            if (isLog)
+            {
+                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
+            }
             if (failure)
             {
                 failure(error);
@@ -281,7 +282,7 @@ static bool isLog = YES;
     }
 }
 
-#pragma mark POST文件上传
+#pragma mark 文件上传(单个)
 + (void)uploadFileWithUrl:(NSString *)url
                     param:(id)param
                      name:(NSString *_Nullable)name
@@ -292,7 +293,7 @@ static bool isLog = YES;
                   success:(void (^_Nullable)(id responseObj))success
                   failure:(void (^_Nullable)(NSError *error))failure;
 {
-    name = name ?: @"file";
+    name = name ?: @"file.jpg";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
@@ -342,10 +343,11 @@ static bool isLog = YES;
                             failure:failure];
         }
         else
-        { if (isLog)
         {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-        }
+            if (isLog)
+            {
+                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
+            }
             if (failure)
             {
                 failure(error);
@@ -359,7 +361,7 @@ static bool isLog = YES;
     }
 }
 
-#pragma mark POST文件批量上传(一次)
+#pragma mark 文件上传(多个 一次)
 + (void)uploadFilesWithUrl:(NSString *)url
                      param:(id)param
                       name:(NSString *_Nullable)name
@@ -370,7 +372,7 @@ static bool isLog = YES;
                    success:(void (^_Nullable)(id responseObj))success
                    failure:(void (^_Nullable)(NSError *error))failure
 {
-    name = name ?: @"file[]";
+    name = name ?: @"file[].jpg";
     
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -420,10 +422,11 @@ static bool isLog = YES;
                              failure:failure];
         }
         else
-        { if (isLog)
         {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-        }
+            if (isLog)
+            {
+                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
+            }
             if (failure)
             {
                 failure(error);
@@ -437,7 +440,7 @@ static bool isLog = YES;
     }
 }
 
-#pragma mark POST文件批量上传(多次)
+#pragma mark 文件上传(多个 多次)
 + (void)uploadFilesManyWithUrl:(NSString *)url
                          param:(id)param
                           name:(NSString *_Nullable)name
@@ -446,7 +449,7 @@ static bool isLog = YES;
                        success:(void (^_Nullable)(id _Nullable))success
                        failure:(void (^_Nullable)(NSError *_Nullable))failure
 {
-    name = name ?: @"file";
+    name = name ?: @"file.jpg";
     
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -546,7 +549,7 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
         {
             if (success)
             {
-                success([filePath path]);
+                success(filePath);
             }
         }
     }];
