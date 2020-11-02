@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SHWebViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -53,6 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 隐藏加载框
 - (void)hideHub;
 - (void)hideHubWithView:(UIView *_Nullable)view;
+
+#pragma mark 进入网页
+- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(void(^_Nullable)(NSString * _Nullable name,NSDictionary * _Nullable param))block;
+
+#pragma mark 拨打电话
+- (void)callPhone:(NSString *_Nonnull)phone;
 
 @end
 

@@ -60,10 +60,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    if (!self.title.length)
-    {
-        self.title = @"详情";
-    }
     [self configUI];
 }
 
@@ -82,17 +78,22 @@
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareAcrion)];
     }
-    self.navigationItem.leftBarButtonItems = @[[self backItem]];
+    self.navigationItem.leftBarButtonItems = @[[self closeItem]];
     //添加监测网页加载进度的观察者
     [self.webView addObserver:self
                    forKeyPath:@"estimatedProgress"
                       options:0
                       context:nil];
-    //添加监测网页标题title的观察者
-    [self.webView addObserver:self
-                   forKeyPath:@"title"
-                      options:NSKeyValueObservingOptionNew
-                      context:nil];
+    
+    if (!self.title.length)
+    {
+        self.title = @"详情";
+        //添加监测网页标题title的观察者
+        [self.webView addObserver:self
+                       forKeyPath:@"title"
+                          options:NSKeyValueObservingOptionNew
+                          context:nil];
+    }
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];
@@ -150,15 +151,14 @@
     [self.progressView setProgress:0.0f animated:NO];
 }
 
-
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    self.navigationItem.leftBarButtonItems = @[[self backItem]];
+    self.navigationItem.leftBarButtonItems = @[[self closeItem]];
     if ([webView canGoBack]) {
-        self.navigationItem.leftBarButtonItems = @[[self backItem],[self webBackItem]];
+        self.navigationItem.leftBarButtonItems = @[[self closeItem],[self webBackItem]];
     }
-    //oc 调用 js
+    //app 调用 js
     NSString *js = [NSString stringWithFormat:@"appTojs('%@','%@')", @"reload", @"1"];
     [_webView evaluateJavaScript:js
                completionHandler:^(id _Nullable data, NSError *_Nullable error) {
@@ -170,8 +170,23 @@
 // 根据WebView对于即将跳转的HTTP请求头信息和相关信息来决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    NSString *url = navigationAction.request.URL.absoluteString;
-    SHLog(@"发送跳转请求：%@", url);
+    NSURL *url = navigationAction.request.URL;
+    SHLog(@"发送跳转请求：%@", url.absoluteString);
+    
+    if ([url.scheme isEqualToString:@"app"]) {
+        NSArray *query = [url.query componentsSeparatedByString:@"&"];
+        NSMutableDictionary *param = [NSMutableDictionary new];
+        for (NSString *obj in query) {
+            NSArray *temp = [obj componentsSeparatedByString:@"="];
+            param[temp[0]] = temp[1];
+        }
+        
+        if (self.block) {
+            self.block(url.host, param);
+        }
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
     decisionHandler(WKNavigationActionPolicyAllow);
     
   
@@ -261,7 +276,7 @@
         config.mediaTypesRequiringUserActionForPlayback = YES;
         //设置是否允许画中画技术 在特定设备上有效
         config.allowsPictureInPictureMediaPlayback = YES;
-
+        
         // 创建设置对象
         WKPreferences *preference = [[WKPreferences alloc] init];
         //最小字体大小 当将javaScriptEnabled属性设置为NO时，可以看到明显的效果
@@ -271,7 +286,7 @@
         // 在iOS上默认为NO，表示是否允许不经过用户交互由javaScript自动打开窗口
         preference.javaScriptCanOpenWindowsAutomatically = YES;
         config.preferences = preference;
-
+        
         //自定义的WKScriptMessageHandler 是为了解决内存不释放的问题
         WeakWebViewScriptMessageDelegate *weakScriptMessageDelegate = [[WeakWebViewScriptMessageDelegate alloc] initWithDelegate:self];
         //这个类主要用来做native与JavaScript的交互管理
@@ -279,21 +294,68 @@
         //注册一个name为jsToOcNoPrams的js方法
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate name:@"jsToOcNoPrams"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate name:@"jsToOcWithPrams"];
-        config.userContentController = wkUController;
-
+        
+        WKUserContentController *userController = [WKUserContentController new];
+        
+        NSMutableString *javascript = [NSMutableString string];
+        
+        //图片自适应
+        NSString *js = @"var script = document.createElement('script');"
+        "script.type = 'text/javascript';"
+        "script.text = \"function ResizeImages() { "
+        "var myimg,oldwidth;"
+        "var maxwidth = %f;"
+        "for(i=0;i"
+        "myimg = document.images[i];"
+        "if(myimg.width > maxwidth){"
+        "oldwidth = myimg.width;"
+        "myimg.width = %f;"
+        "}"
+        "}"
+        "}\";"
+        "document.getElementsByTagName('head')[0].appendChild(script);";
+        js = [NSString stringWithFormat:js, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width - 20];
+        js = [NSString stringWithFormat:@"%@%@", js, @""];
+        [javascript appendString:js];
+        
+        //禁止缩放
+        [javascript appendString:@"var script = document.createElement('meta');"
+         "script.name = 'viewport';"
+         "script.content=\"width=device-width, user-scalable=no\";"
+         "document.getElementsByTagName('head')[0].appendChild(script);"];
+        
+        //禁止长按
+        [javascript appendString:@"document.documentElement.style.webkitTouchCallout='none';"];
+        
+        //禁止选择
+        [javascript appendString:@"document.documentElement.style.webkitUserSelect='none';"];
+        
         //以下代码适配文本大小
-        NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+        [javascript appendString:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"];
+        
         //用于进行JavaScript注入
-        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-        [config.userContentController addUserScript:wkUScript];
-
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, kNavAndStatusH, kSHWidth, kNavContentAreaH) configuration:config];
+        WKUserScript *script = [[WKUserScript alloc] initWithSource:javascript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+       
+        
+        WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+        configuration.preferences = [WKPreferences new];
+        configuration.allowsInlineMediaPlayback = YES;
+        configuration.preferences.minimumFontSize = 10;
+        configuration.preferences.javaScriptEnabled = YES;
+        configuration.preferences.javaScriptCanOpenWindowsAutomatically = YES;
+        
+        [userController addUserScript:script];
+        
+        config.userContentController = wkUController;
+        
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kSHWidth, kNavContentAreaH) configuration:config];
         // UI代理
         _webView.UIDelegate = self;
         // 导航代理
         _webView.navigationDelegate = self;
         // 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
         _webView.allowsBackForwardNavigationGestures = YES;
+        
         [self.view addSubview:_webView];
     }
     return _webView;
@@ -303,7 +365,7 @@
 {
     if (!_progressView)
     {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0.0, kNavAndStatusH, kSHWidth, 1.0)];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, kSHWidth, 1.0)];
         _progressView.progressTintColor = kColorMain;
         _progressView.trackTintColor = [UIColor clearColor];
         [self.view addSubview:_progressView];
@@ -312,12 +374,13 @@
 }
 
 - (UIBarButtonItem *)webBackItem{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(goBack)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UINavigationBar appearance].backIndicatorImage style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     return item;
 }
 
-- (UIBarButtonItem *)backItem{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UINavigationBar appearance].backIndicatorImage style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
+- (UIBarButtonItem *)closeItem{
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
+
     return item;
 }
 

@@ -35,5 +35,6 @@
 #import "UIScrollView+SHExtension.h"
 #import <MBProgressHUD.h>
 #import "SHServerRequest.h"
+#import "SHWebViewController.h"
 
 //#import <EaseUI/EaseUI.h>

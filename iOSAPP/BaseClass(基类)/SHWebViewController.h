@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *url;
 
+@property (nonatomic, assign) BOOL needUid;
+
+@property (nonatomic, copy) void (^block)(NSString *name, NSDictionary *param);
+
 @end
 
 NS_ASSUME_NONNULL_END

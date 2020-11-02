@@ -234,6 +234,34 @@
     return hubView;
 }
 
+#pragma mark 进入网页
+- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(void(^)(NSString *name,NSDictionary *param))block{
+    if (!url.length) {
+        return nil;
+    }
+    SHWebViewController *vc = [[SHWebViewController alloc] init];
+    vc.url = url;
+    vc.block = block;
+    if (self.navigationController) {
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        SHBaseNavViewController *nav = [[SHBaseNavViewController alloc]initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+    
+    return vc;
+}
+
+#pragma mark 拨打电话
+- (void)callPhone:(NSString *)phone{
+    if (!phone.length) {
+        return;
+    }
+    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
+}
+
+
 #pragma mark 模态跳转
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {

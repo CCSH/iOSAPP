@@ -39,7 +39,7 @@
 #define kNavContentAreaH (kSHHeight - kNavAndStatusH)
 #define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
 //无导航栏内容安全H
-#define kContentAreaH (kkSHHeight - kStatusBarH)
+#define kContentAreaH (kSHHeight - kStatusBarH)
 #define kContentSafeAreaH (kContentAreaH - kSafeBottomH)
 
 //字体
