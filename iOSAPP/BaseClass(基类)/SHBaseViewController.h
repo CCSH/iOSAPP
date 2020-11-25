@@ -13,6 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SHBaseViewController : UIViewController
 
+// 路由设置
+//参数
+@property (nonatomic, strong) NSDictionary *param;
+//回调
+@property (nonatomic, strong) void(^callBack)(id,...);
+
+// 其他参数
+//当前windows
 @property (nonatomic, strong) UIWindow *window;
 
 //导航栏透明
@@ -56,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hideHubWithView:(UIView *_Nullable)view;
 
 #pragma mark 进入网页
-- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(void(^_Nullable)(NSString * _Nullable name,NSDictionary * _Nullable param))block;
+- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(void(^_Nullable)(id ,...))block;
 
 #pragma mark 拨打电话
 - (void)callPhone:(NSString *_Nonnull)phone;

@@ -51,6 +51,13 @@
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
 
+//参数
+@property (nonatomic, strong) IShareModel *shareModel;
+
+@property (nonatomic, copy) NSString *url;
+
+@property (nonatomic, assign) BOOL needUid;
+
 @end
 
 @implementation SHWebViewController
@@ -59,6 +66,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.url = self.param[@"url"];
+    self.shareModel = [IShareModel mj_objectWithKeyValues:self.param[@"shareModel"]];
+    self.needUid = self.param[@"needUid"];
 
     [self configUI];
 }
@@ -181,8 +191,8 @@
             param[temp[0]] = temp[1];
         }
         
-        if (self.block) {
-            self.block(url.host, param);
+        if (self.callBack) {
+            self.callBack(url.host, param);
         }
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
@@ -348,7 +358,7 @@
         
         config.userContentController = wkUController;
         
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kSHWidth, kNavContentAreaH) configuration:config];
+        _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
         // UI代理
         _webView.UIDelegate = self;
         // 导航代理

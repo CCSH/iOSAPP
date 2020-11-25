@@ -36,5 +36,6 @@
 #import <MBProgressHUD.h>
 #import "SHServerRequest.h"
 #import "SHWebViewController.h"
+#import "SHRouting.h"
 
 //#import <EaseUI/EaseUI.h>

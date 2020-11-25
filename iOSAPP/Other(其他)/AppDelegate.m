@@ -27,8 +27,8 @@
     //配置界面
     [self configApplication:application didFinishLaunchingWithOptions:launchOptions];
     
-
-
+    
+    
     return YES;
 }
 
@@ -62,6 +62,9 @@
     SHLog(@"程序进入激活");
     [UIApplication sharedApplication].applicationIconBadgeNumber++;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    //处理粘贴板
+    [self handleCopy];
 }
 
 #pragma mark 程序远程推送获取Token
@@ -69,7 +72,7 @@
 {
     NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
-
+    
     SHLog(@"远程推送证书Token：%@", deviceString);
 }
 
@@ -159,7 +162,7 @@
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary< UIApplicationOpenURLOptionsKey, id > *)options
 {
     SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
-
+    
     return YES;
 }
 

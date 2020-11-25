@@ -32,6 +32,10 @@ typedef enum : NSUInteger
 #pragma mark 界面旋转
 - (void)handleRotation;
 
+#pragma mark 处理粘贴板
+- (void)handleCopy;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

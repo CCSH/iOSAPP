@@ -35,6 +35,10 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 #pragma mark - 属性
 #pragma mark - 属性
 - (void)setNavBarAlpha:(CGFloat)navBarAlpha{
@@ -235,19 +239,19 @@
 }
 
 #pragma mark 进入网页
-- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(void(^)(NSString *name,NSDictionary *param))block{
+- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(void (^ _Nullable)(id _Nonnull, ...))block{
     if (!url.length) {
         return nil;
     }
-    SHWebViewController *vc = [[SHWebViewController alloc] init];
-    vc.url = url;
-    vc.block = block;
-    if (self.navigationController) {
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        SHBaseNavViewController *nav = [[SHBaseNavViewController alloc]initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:nil];
+    
+    SHRoutingType type = SHRoutingType_nav;
+    if (!self.navigationController) {
+        type = SHRoutingType_modal;
     }
+    SHWebViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:@{@"url":url}]
+                         type:type
+                        block:block];
+
     
     return vc;
 }

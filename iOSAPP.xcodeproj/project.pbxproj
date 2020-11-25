@@ -34,6 +34,7 @@
 		834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC8B253FCB9E005214EC /* IShareModel.m */; };
 		83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */; };
 		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
+		83CCC7C7256D05D400968720 /* SHRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC7C6256D05D400968720 /* SHRouting.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,8 @@
 		83B4BAF324CADD6800F8E27B /* UIScrollView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.h"; sourceTree = "<absolute>"; };
 		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
 		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
+		83CCC7C5256D05D400968720 /* SHRouting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHRouting.h; sourceTree = "<group>"; };
+		83CCC7C6256D05D400968720 /* SHRouting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHRouting.m; sourceTree = "<group>"; };
 		83FE1025251D8C2E006E727A /* ClassHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHeader.h; sourceTree = "<group>"; };
 		83FE1026251D8C2E006E727A /* InterfaceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
 		83FE1027251D8C2E006E727A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -133,6 +136,7 @@
 		5C25FEA31F68D72600F080A4 /* iOSAPP */ = {
 			isa = PBXGroup;
 			children = (
+				83CCC7C4256D05B000968720 /* SHRouting(路由) */,
 				83FE1024251D8C2E006E727A /* Header(头文件) */,
 				5C8BECC424C69DD900412B3B /* BaseClass(基类) */,
 				5C8BEC8C24C696D300412B3B /* Category(类别) */,
@@ -342,6 +346,15 @@
 			path = "BaseClass(基类)";
 			sourceTree = "<group>";
 		};
+		83CCC7C4256D05B000968720 /* SHRouting(路由) */ = {
+			isa = PBXGroup;
+			children = (
+				83CCC7C5256D05D400968720 /* SHRouting.h */,
+				83CCC7C6256D05D400968720 /* SHRouting.m */,
+			);
+			path = "SHRouting(路由)";
+			sourceTree = "<group>";
+		};
 		83FE1024251D8C2E006E727A /* Header(头文件) */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +536,7 @@
 				5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */,
 				83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */,
 				5C8BECA824C696D300412B3B /* SHSQLite.m in Sources */,
+				83CCC7C7256D05D400968720 /* SHRouting.m in Sources */,
 				5C8BECBC24C6988200412B3B /* SHRequestBaseModel.m in Sources */,
 				5C8BECA724C696D300412B3B /* RegisterViewController.m in Sources */,
 				5C8BECA524C696D300412B3B /* LoginViewController.m in Sources */,

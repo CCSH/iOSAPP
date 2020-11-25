@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate+SHExtension.h"
-#import "WelcomeViewController.h"
 #import "MainTabBarController.h"
-#import "LoginViewController.h"
 
 @interface AppDelegate (SHExtension)
 
@@ -77,22 +75,23 @@
     {
         case RootVCType_home:
         {
-            MainTabBarController *vc = [[MainTabBarController alloc] init];
-            self.window.rootViewController = vc;
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"main" param:nil]
+                                 type:SHRoutingType_root
+                                block:nil];
         }
         break;
         case RootVCType_wecome:
         {
-            WelcomeViewController *vc = [[WelcomeViewController alloc] init];
-            SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
-            self.window.rootViewController = nav;
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"welcome" param:nil]
+                                 type:SHRoutingType_root
+                                block:nil];
         }
         break;
         case RootVCType_login:
         {
-            LoginViewController *vc = [[LoginViewController alloc] init];
-            SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:vc];
-            [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"login" param:nil]
+                                 type:SHRoutingType_modal
+                                block:nil];
         }
         break;
 
@@ -158,5 +157,36 @@
     }
     return UIInterfaceOrientationMaskPortrait;
 }
+
+#pragma mark 处理粘贴板
+- (void)handleCopy{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    
+    if (@available(iOS 14.0, *)) {
+        [board detectPatternsForPatterns:[NSSet setWithObjects:UIPasteboardDetectionPatternProbableWebURL, UIPasteboardDetectionPatternNumber, UIPasteboardDetectionPatternProbableWebSearch, nil]
+                       completionHandler:^(NSSet<UIPasteboardDetectionPattern> * _Nullable set, NSError * _Nullable error) {
+            //判断类型是否可用
+            BOOL hasNumber = NO, hasURL = NO;
+            for (NSString *type in set) {
+                if ([type isEqualToString:UIPasteboardDetectionPatternProbableWebURL]) {
+                    hasURL = YES;
+                } else if ([type isEqualToString:UIPasteboardDetectionPatternNumber]) {
+                    hasNumber = YES;
+                }
+            }
+            
+            if (hasNumber && hasURL) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    SHLog(@"符合标准===%@",board.string);
+                });
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
 
 @end
