@@ -199,12 +199,16 @@
         view = self.view;
     }
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.mode = MBProgressHUDModeCustomView;
+    [self hideHubWithView:view];
     
-    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
-    hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
-    hud.customView = [self hubView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        hud.mode = MBProgressHUDModeCustomView;
+        
+        hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+        hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+        hud.customView = [self hubView];
+    });
 }
 
 #pragma mark 隐藏加载框
@@ -248,12 +252,12 @@
     if (!self.navigationController) {
         type = SHRoutingType_modal;
     }
-    SHWebViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:@{@"url":url}]
+    UIViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:@{@"url":url}]
                          type:type
                         block:block];
 
     
-    return vc;
+    return (SHWebViewController *)vc;
 }
 
 #pragma mark 拨打电话

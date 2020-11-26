@@ -35,6 +35,9 @@ typedef enum : NSUInteger
 #pragma mark 处理粘贴板
 - (void)handleCopy;
 
+#pragma mark 处理通知
+- (void)handleNotificationRequest:(UNNotificationRequest *)request;
+
 
 @end
 

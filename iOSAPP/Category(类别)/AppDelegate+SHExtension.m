@@ -35,12 +35,12 @@
     //卡顿监听
     config.blockMonitorEnable = YES;
     config.blockMonitorTimeout = 0.5;
-
+    
     [Bugly startWithAppId:kBuglyID config:config];
     
     //埋点
-//    [[MTAConfig getInstance] setDebugEnable:YES];
-//    [MTA startWithAppkey:@"I2E3KXDU1E2W"];
+    //    [[MTAConfig getInstance] setDebugEnable:YES];
+    //    [MTA startWithAppkey:@"I2E3KXDU1E2W"];
 }
 
 #pragma mark 配置界面逻辑
@@ -48,7 +48,7 @@
 {
     //当前版本号
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-
+    
     //判断版本号(为空或者不为当前版本)
     if (kSHUserDefGet(kAppVersion) == nil || ![kSHUserDefGet(kAppVersion) isEqualToString:currentVersion])
     {
@@ -62,7 +62,7 @@
     else
     {
         SHLog(@"不出现欢迎页");
-
+        
         //进入主界面
         [self configVC:RootVCType_home];
     }
@@ -79,22 +79,22 @@
                                  type:SHRoutingType_root
                                 block:nil];
         }
-        break;
+            break;
         case RootVCType_wecome:
         {
             [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"welcome" param:nil]
                                  type:SHRoutingType_root
                                 block:nil];
         }
-        break;
+            break;
         case RootVCType_login:
         {
             [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"login" param:nil]
                                  type:SHRoutingType_modal
                                 block:nil];
         }
-        break;
-
+            break;
+            
         default:
             break;
     }
@@ -106,25 +106,25 @@
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     //必须写代理，不然无法监听通知的接收与点击事件
     center.delegate = self;
-
+    
     [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
                           completionHandler:^(BOOL granted, NSError *_Nullable error) {
-                            if (!error && granted)
-                            {
-                                //用户点击允许
-                                SHLog(@"注册成功");
-
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    //注册远端消息通知
-                                    [[UIApplication sharedApplication] registerForRemoteNotifications];
-                                });
-                            }
-                            else
-                            {
-                                //用户点击不允许
-                                SHLog(@"注册失败");
-                            }
-                          }];
+        if (!error && granted)
+        {
+            //用户点击允许
+            SHLog(@"注册成功");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //注册远端消息通知
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            });
+        }
+        else
+        {
+            //用户点击不允许
+            SHLog(@"注册失败");
+        }
+    }];
 }
 
 #pragma mark 界面旋转
@@ -140,7 +140,7 @@
         UIInterfaceOrientationMask val = kAppDelegate.interfaceOrientation;
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
-
+        
     }
 }
 
@@ -185,6 +185,38 @@
         }];
     } else {
         // Fallback on earlier versions
+    }
+}
+
+#pragma mark 处理通知
+- (void)handleNotificationRequest:(UNNotificationRequest *)request{
+    
+    
+    //收到推送的内容
+    UNNotificationContent *content = request.content;
+    //    //收到用户的基本信息
+    //    NSDictionary *userInfo = content.userInfo;
+    //
+    //    //收到推送消息的角标
+    //    NSNumber *badge = content.badge;
+    //
+    //    //收到推送消息body
+    //    NSString *body = content.body;
+    //
+    //    //推送消息的声音
+    //    UNNotificationSound *sound = content.sound;
+    //
+    //    // 推送消息的副标题
+    //    NSString *subtitle = content.subtitle;
+    //
+    //    // 推送消息的标题
+    //    NSString *title = content.title;
+    
+    if([request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        SHLog(@"远程通知 = %@",content.userInfo);
+    }else {
+        // 判断为本地通知
+        SHLog(@"本地通知 = {\n消息Body:%@\n标题:%@\n副标题:%@\n消息个数:%@\n声音：%@\n传值：%@}",content.body,content.title,content.subtitle,content.badge,content.sound,content.userInfo);
     }
 }
 

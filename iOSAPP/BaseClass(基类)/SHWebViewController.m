@@ -375,7 +375,7 @@
 {
     if (!_progressView)
     {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, kSHWidth, 1.0)];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavAndStatusH, kSHWidth, 1.0)];
         _progressView.progressTintColor = kColorMain;
         _progressView.trackTintColor = [UIColor clearColor];
         [self.view addSubview:_progressView];
