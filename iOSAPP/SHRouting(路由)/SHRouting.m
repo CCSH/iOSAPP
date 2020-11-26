@@ -8,10 +8,7 @@
 
 #import "SHRouting.h"
 
-#define kScheme @"ccsh"
-
 @implementation SHRouting
-
 
 #pragma mark 获取路由页面
 + (UIViewController *)routingWithUrl:(NSString *)url

@@ -183,7 +183,7 @@
     NSURL *url = navigationAction.request.URL;
     SHLog(@"发送跳转请求：%@", url.absoluteString);
     
-    if ([url.scheme isEqualToString:@"app"]) {
+    if ([url.scheme isEqualToString:kScheme]) {
         NSArray *query = [url.query componentsSeparatedByString:@"&"];
         NSMutableDictionary *param = [NSMutableDictionary new];
         for (NSString *obj in query) {

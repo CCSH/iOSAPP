@@ -133,6 +133,9 @@
 //刷新界面
 #define kNotReload @"not-reload"
 
+#pragma mark 链接
+#define kScheme @"ccsh"
+
 #pragma mark 颜色
 //主题色
 #define kColorMain kRGB(201, 58, 45, 1)
