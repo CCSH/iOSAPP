@@ -66,9 +66,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //获取路由中的参数
     self.url = self.param[@"url"];
     self.shareModel = [IShareModel mj_objectWithKeyValues:self.param[@"shareModel"]];
     self.needUid = self.param[@"needUid"];
+    
+    self.title = @"详情";
 
     [self configUI];
 }
@@ -94,16 +97,11 @@
                    forKeyPath:@"estimatedProgress"
                       options:0
                       context:nil];
-    
-    if (!self.title.length)
-    {
-        self.title = @"详情";
-        //添加监测网页标题title的观察者
-        [self.webView addObserver:self
-                       forKeyPath:@"title"
-                          options:NSKeyValueObservingOptionNew
-                          context:nil];
-    }
+    //添加监测网页标题title的观察者
+    [self.webView addObserver:self
+                   forKeyPath:@"title"
+                      options:NSKeyValueObservingOptionNew
+                      context:nil];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];
@@ -190,16 +188,11 @@
             NSArray *temp = [obj componentsSeparatedByString:@"="];
             param[temp[0]] = temp[1];
         }
-        
-        if (self.callBack) {
-            self.callBack(url.host, param);
-        }
+        [self handleJSWithName:url.host param:param];
         decisionHandler(WKNavigationActionPolicyCancel);
         return;
     }
     decisionHandler(WKNavigationActionPolicyAllow);
-    
-  
 }
 
 // 根据客户端受到的服务器响应头以及response相关信息来决定是否可以跳转
@@ -230,7 +223,22 @@
     return nil;
 }
 
-//解决 页面内跳转（a标签等）还是取不到cookie的问题
+//js 调用 oc
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    NSLog(@"方法名:%@\n内容:%@", message.name, message.body);
+    [self handleJSWithName:message.name param:message.body];
+}
+
+#pragma mark - 自定义方法
+#pragma mark 处理js调用
+- (void)handleJSWithName:(NSString *)name param:(NSDictionary *)param{
+    if (self.callBack) {
+        self.callBack(name, param);
+    }
+}
+
+#pragma mark 解决 页面内跳转（a标签等）还是取不到cookie的问题
 - (void)getCookie
 {
     //取出cookie
@@ -265,12 +273,6 @@
     }
     //app 调用 js
     [_webView evaluateJavaScript:JSCookieString completionHandler:nil];
-}
-
-//js 调用 oc
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-{
-    NSLog(@"方法名:%@\n内容:%@", message.name, message.body);
 }
 
 #pragma mark - 懒加载
