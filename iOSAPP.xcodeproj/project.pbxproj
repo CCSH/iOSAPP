@@ -96,6 +96,7 @@
 		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
 		83CCC7C5256D05D400968720 /* SHRouting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHRouting.h; sourceTree = "<group>"; };
 		83CCC7C6256D05D400968720 /* SHRouting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHRouting.m; sourceTree = "<group>"; };
+		83D1E4682570D041003D2674 /* iOSAPP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSAPP.entitlements; sourceTree = "<group>"; };
 		83FE1025251D8C2E006E727A /* ClassHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHeader.h; sourceTree = "<group>"; };
 		83FE1026251D8C2E006E727A /* InterfaceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
 		83FE1027251D8C2E006E727A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		5C25FEA31F68D72600F080A4 /* iOSAPP */ = {
 			isa = PBXGroup;
 			children = (
+				83D1E4682570D041003D2674 /* iOSAPP.entitlements */,
 				83CCC7C4256D05B000968720 /* SHRouting(路由) */,
 				83FE1024251D8C2E006E727A /* Header(头文件) */,
 				5C8BECC424C69DD900412B3B /* BaseClass(基类) */,
@@ -681,6 +683,7 @@
 			baseConfigurationReference = E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOSAPP/iOSAPP.entitlements;
 				DEVELOPMENT_TEAM = G94X5Y9CST;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -701,6 +704,7 @@
 			baseConfigurationReference = 16B3274A940011F3C0A1CAD0 /* Pods-iOSAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOSAPP/iOSAPP.entitlements;
 				DEVELOPMENT_TEAM = G94X5Y9CST;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
