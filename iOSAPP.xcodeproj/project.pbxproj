@@ -96,6 +96,7 @@
 		83C8913C250B56D3001AE9D1 /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
 		83CCC7C5256D05D400968720 /* SHRouting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHRouting.h; sourceTree = "<group>"; };
 		83CCC7C6256D05D400968720 /* SHRouting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHRouting.m; sourceTree = "<group>"; };
+		83CEFDCA2575D64100BC9EC4 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		83D1E4682570D041003D2674 /* iOSAPP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSAPP.entitlements; sourceTree = "<group>"; };
 		83FE1025251D8C2E006E727A /* ClassHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHeader.h; sourceTree = "<group>"; };
 		83FE1026251D8C2E006E727A /* InterfaceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
@@ -380,6 +381,7 @@
 		B98DA3A33A21CC1FD9E21B80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83CEFDCA2575D64100BC9EC4 /* XcodeKit.framework */,
 				20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */,
 			);
 			name = Frameworks;
@@ -413,7 +415,7 @@
 		5C25FE991F68D72600F080A4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = CSH;
 				TargetAttributes = {
 					5C25FEA01F68D72600F080A4 = {
@@ -617,7 +619,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -670,7 +672,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -689,7 +691,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;
@@ -710,7 +712,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;

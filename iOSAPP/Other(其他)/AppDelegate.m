@@ -91,6 +91,8 @@
 {
     //收到推送的请求
     UNNotificationRequest *request = notification.request;
+    
+    
     //处理通知
     [self handleNotificationRequest:request];
     

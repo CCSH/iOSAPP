@@ -302,15 +302,17 @@ then
         echo "\n\033[32m****************\n开始上传AppStore\n****************\033[0m\n"
         
         #验证APP
-        altoolPath="/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
-        "${altoolPath}" --validate-app \
+        xcrun altool --validate-app \
         -f "$path_ipa" \
+        -t iOS \
         -u "$parameter_username" \
         -p "$parameter_password" \
         --output-format xml
+        
         #上传APP
-        "${altoolPath}" --upload-app \
+        xcrun altool --upload-app \
         -f "$path_ipa" \
+        -t iOS \
         -u "$parameter_username" \
         -p "$parameter_password" \
         --output-format xml
