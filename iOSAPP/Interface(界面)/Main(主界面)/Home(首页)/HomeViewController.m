@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-
+#import <Speech/Speech.h>
 
 @interface HomeViewController ()
 
@@ -33,7 +33,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 /*

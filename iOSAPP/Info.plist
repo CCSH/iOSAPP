@@ -74,5 +74,12 @@
 	<string>5407054a38</string>
 	<key>mtj_deubglog</key>
 	<string>0</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>该权限用于语音识别</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
