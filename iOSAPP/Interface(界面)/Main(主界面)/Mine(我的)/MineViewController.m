@@ -1,19 +1,19 @@
 //
-//  FourViewController.m
+//  MineViewController.m
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
 //  Copyright © 2017年 CSH. All rights reserved.
 //
 
-#import "FourViewController.h"
+#import "MineViewController.h"
 #import "WelcomeViewController.h"
 
-@interface FourViewController ()
+@interface MineViewController ()
 
 @end
 
-@implementation FourViewController
+@implementation MineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

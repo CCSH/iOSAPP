@@ -1,20 +1,20 @@
 
 //
-//  TwoViewController.m
+//  ClassViewController.m
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
 //  Copyright © 2017年 CSH. All rights reserved.
 //
 
-#import "TwoViewController.h"
-#import "OneViewController.h"
+#import "ClassViewController.h"
+#import "HomeViewController.h"
 
-@interface TwoViewController ()<UIScrollViewDelegate>
+@interface ClassViewController ()<UIScrollViewDelegate>
 
 @end
 
-@implementation TwoViewController
+@implementation ClassViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

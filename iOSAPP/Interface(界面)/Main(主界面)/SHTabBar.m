@@ -28,16 +28,17 @@
 
     // 0是背景横条
     self.minView = (UIView *)[self viewWithTag:3];
-
-    self.minView.height = 80;
-    self.minView.y = 49 - self.minView.height;
-
     [self.minView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     UIImageView *img = [[UIImageView alloc] init];
-    img.frame = self.minView.bounds;
+    img.frame = CGRectMake(0, 0, 50, 50);
+    img.image = [UIImage imageNamed:self.dataArr[0]];
     img.contentMode = UIViewContentModeScaleAspectFit;
-    img.backgroundColor = kColorMain;
+    img.centerX = self.minView.width/2;
     [self.minView addSubview:img];
+
+    self.minView.height = kTabBarH + img.height/2;
+    self.minView.y = kTabBarH - self.minView.height;
 }
 
 #pragma mark - 超出响应

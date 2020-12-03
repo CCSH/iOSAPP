@@ -1,18 +1,18 @@
 //
-//  ThreeViewController.m
+//  MessageViewController.m
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
 //  Copyright © 2017年 CSH. All rights reserved.
 //
 
-#import "ThreeViewController.h"
+#import "MessageViewController.h"
 
-@interface ThreeViewController ()
+@interface MessageViewController ()
 
 @end
 
-@implementation ThreeViewController
+@implementation MessageViewController
 
 - (void)viewDidLoad
 {

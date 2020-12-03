@@ -1,5 +1,5 @@
 //
-//  FourViewController.h
+//  MineViewController.h
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FourViewController : SHBaseViewController
+@interface MineViewController : SHBaseViewController
 
 @end

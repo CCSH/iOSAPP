@@ -7,10 +7,10 @@
 //
 
 #import "MainTabBarController.h"
-#import "OneViewController.h"
-#import "TwoViewController.h"
-#import "ThreeViewController.h"
-#import "FourViewController.h"
+#import "HomeViewController.h"
+#import "ClassViewController.h"
+#import "MessageViewController.h"
+#import "MineViewController.h"
 #import "SHBaseNavViewController.h"
 #import "SHBaseViewController.h"
 #import "SHTabBar.h"
@@ -26,35 +26,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_2}
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_5}
                                                 forState:UIControlStateNormal];
-
+    
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain} forState:UIControlStateSelected];
-
+    
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)} forState:UIControlStateNormal];
-
+    
     //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];
-
+    
     self.delegate = self;
-
+    
     //添加子控制器
-    OneViewController *oneVC = [[OneViewController alloc] init];
-    [self addOneChlildVC:oneVC title:@"第一个" img:@"image" selectedImg:@"image"];
-
-    TwoViewController *telView = [[TwoViewController alloc] init];
-    [self addOneChlildVC:telView title:@"第二个" img:@"image" selectedImg:@"image"];
-
+    HomeViewController *oneVC = [[HomeViewController alloc] init];
+    [self addOneChlildVC:oneVC title:@"首页" img:@"tabbar_home" selectedImg:@"tabbar_home_h"];
+    
+    ClassViewController *telView = [[ClassViewController alloc] init];
+    [self addOneChlildVC:telView title:@"分类" img:@"tabbar_class" selectedImg:@"tabbar_class_h"];
+    
     [self addOneChlildVC:nil title:nil img:nil selectedImg:nil];
-
-    ThreeViewController *addressView = [[ThreeViewController alloc] init];
-    [self addOneChlildVC:addressView title:@"第三个" img:@"image" selectedImg:@"image"];
-
-    FourViewController *settingView = [[FourViewController alloc] init];
-    [self addOneChlildVC:settingView title:@"第四个" img:@"image" selectedImg:@"image"];
-
+    
+    MessageViewController *addressView = [[MessageViewController alloc] init];
+    [self addOneChlildVC:addressView title:@"消息" img:@"tabbar_message" selectedImg:@"tabbar_message_h"];
+    
+    MineViewController *settingView = [[MineViewController alloc] init];
+    [self addOneChlildVC:settingView title:@"我的" img:@"tabbar_me" selectedImg:@"tabbar_me_h"];
+    
+    self.shTabBar.dataArr = @[@"tabbar_min"];
+    
     //设置展示
     self.selectedIndex = 0;
 }
@@ -76,23 +78,23 @@
     {
         childVC = [[SHBaseViewController alloc] init];
     }
-
+    
     childVC.title = title;
-
+    
     //设置点击图片
     childVC.tabBarItem.image = [[UIImage imageNamed:img] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImg] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
+    
     // 添加为tabbar控制器的子控制器
     SHBaseNavViewController *nav = [[SHBaseNavViewController alloc] initWithRootViewController:childVC];
-    nav.view.tag = 1 + self.viewControllers.count;
+    nav.view.tag = self.viewControllers.count;
     [self addChildViewController:nav];
 }
 
 #pragma mark - UITabBarControllerDelegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if (viewController.view.tag == 3)
+    if (viewController.view.tag == 2)
     {
         [self.shTabBar didSelectItem:2];
         return NO;

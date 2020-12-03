@@ -1,19 +1,19 @@
 //
-//  OneViewController.m
+//  HomeViewController.m
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
 //  Copyright © 2017年 CSH. All rights reserved.
 //
 
-#import "OneViewController.h"
+#import "HomeViewController.h"
 
 
-@interface OneViewController ()
+@interface HomeViewController ()
 
 @end
 
-@implementation OneViewController
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

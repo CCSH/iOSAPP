@@ -1,5 +1,5 @@
 //
-//  TwoViewController.h
+//  MessageViewController.h
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TwoViewController : SHBaseViewController
+@interface MessageViewController : SHBaseViewController
 
 @end

@@ -10,11 +10,11 @@
 		5C25FEA61F68D72600F080A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25FEA51F68D72600F080A4 /* main.m */; };
 		5C25FEB11F68D72600F080A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB01F68D72600F080A4 /* Assets.xcassets */; };
 		5C25FEB41F68D72600F080A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */; };
-		5C8BECA024C696D300412B3B /* FourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6124C696D300412B3B /* FourViewController.m */; };
+		5C8BECA024C696D300412B3B /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6124C696D300412B3B /* MineViewController.m */; };
 		5C8BECA124C696D300412B3B /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6324C696D300412B3B /* MainTabBarController.m */; };
-		5C8BECA224C696D300412B3B /* OneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6524C696D300412B3B /* OneViewController.m */; };
-		5C8BECA324C696D300412B3B /* TwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6824C696D300412B3B /* TwoViewController.m */; };
-		5C8BECA424C696D300412B3B /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6C24C696D300412B3B /* ThreeViewController.m */; };
+		5C8BECA224C696D300412B3B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6524C696D300412B3B /* HomeViewController.m */; };
+		5C8BECA324C696D300412B3B /* ClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6824C696D300412B3B /* ClassViewController.m */; };
+		5C8BECA424C696D300412B3B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6C24C696D300412B3B /* MessageViewController.m */; };
 		5C8BECA524C696D300412B3B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC6F24C696D300412B3B /* LoginViewController.m */; };
 		5C8BECA624C696D300412B3B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC7324C696D300412B3B /* WelcomeViewController.m */; };
 		5C8BECA724C696D300412B3B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BEC7524C696D300412B3B /* RegisterViewController.m */; };
@@ -46,16 +46,16 @@
 		5C25FEB01F68D72600F080A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C25FEB31F68D72600F080A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C25FEB51F68D72600F080A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C8BEC6124C696D300412B3B /* FourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourViewController.m; sourceTree = "<group>"; };
-		5C8BEC6224C696D300412B3B /* FourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourViewController.h; sourceTree = "<group>"; };
+		5C8BEC6124C696D300412B3B /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		5C8BEC6224C696D300412B3B /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		5C8BEC6324C696D300412B3B /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		5C8BEC6524C696D300412B3B /* OneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneViewController.m; sourceTree = "<group>"; };
-		5C8BEC6624C696D300412B3B /* OneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneViewController.h; sourceTree = "<group>"; };
-		5C8BEC6824C696D300412B3B /* TwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoViewController.m; sourceTree = "<group>"; };
-		5C8BEC6924C696D300412B3B /* TwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoViewController.h; sourceTree = "<group>"; };
+		5C8BEC6524C696D300412B3B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		5C8BEC6624C696D300412B3B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		5C8BEC6824C696D300412B3B /* ClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassViewController.m; sourceTree = "<group>"; };
+		5C8BEC6924C696D300412B3B /* ClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassViewController.h; sourceTree = "<group>"; };
 		5C8BEC6A24C696D300412B3B /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
-		5C8BEC6C24C696D300412B3B /* ThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeViewController.m; sourceTree = "<group>"; };
-		5C8BEC6D24C696D300412B3B /* ThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeViewController.h; sourceTree = "<group>"; };
+		5C8BEC6C24C696D300412B3B /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		5C8BEC6D24C696D300412B3B /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		5C8BEC6F24C696D300412B3B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		5C8BEC7024C696D300412B3B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		5C8BEC7224C696D300412B3B /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
@@ -183,48 +183,48 @@
 				83C8913C250B56D3001AE9D1 /* SHTabBar.m */,
 				5C8BEC6A24C696D300412B3B /* MainTabBarController.h */,
 				5C8BEC6324C696D300412B3B /* MainTabBarController.m */,
-				5C8BEC6424C696D300412B3B /* One(第一个) */,
-				5C8BEC6724C696D300412B3B /* Two(第二个) */,
-				5C8BEC6B24C696D300412B3B /* Three(第三个) */,
-				5C8BEC6024C696D300412B3B /* Four(第四个) */,
+				5C8BEC6424C696D300412B3B /* Home(首页) */,
+				5C8BEC6724C696D300412B3B /* Class(分类) */,
+				5C8BEC6B24C696D300412B3B /* Message(消息) */,
+				5C8BEC6024C696D300412B3B /* Mine(我的) */,
 			);
 			path = "Main(主界面)";
 			sourceTree = "<group>";
 		};
-		5C8BEC6024C696D300412B3B /* Four(第四个) */ = {
+		5C8BEC6024C696D300412B3B /* Mine(我的) */ = {
 			isa = PBXGroup;
 			children = (
-				5C8BEC6224C696D300412B3B /* FourViewController.h */,
-				5C8BEC6124C696D300412B3B /* FourViewController.m */,
+				5C8BEC6224C696D300412B3B /* MineViewController.h */,
+				5C8BEC6124C696D300412B3B /* MineViewController.m */,
 			);
-			path = "Four(第四个)";
+			path = "Mine(我的)";
 			sourceTree = "<group>";
 		};
-		5C8BEC6424C696D300412B3B /* One(第一个) */ = {
+		5C8BEC6424C696D300412B3B /* Home(首页) */ = {
 			isa = PBXGroup;
 			children = (
-				5C8BEC6624C696D300412B3B /* OneViewController.h */,
-				5C8BEC6524C696D300412B3B /* OneViewController.m */,
+				5C8BEC6624C696D300412B3B /* HomeViewController.h */,
+				5C8BEC6524C696D300412B3B /* HomeViewController.m */,
 			);
-			path = "One(第一个)";
+			path = "Home(首页)";
 			sourceTree = "<group>";
 		};
-		5C8BEC6724C696D300412B3B /* Two(第二个) */ = {
+		5C8BEC6724C696D300412B3B /* Class(分类) */ = {
 			isa = PBXGroup;
 			children = (
-				5C8BEC6924C696D300412B3B /* TwoViewController.h */,
-				5C8BEC6824C696D300412B3B /* TwoViewController.m */,
+				5C8BEC6924C696D300412B3B /* ClassViewController.h */,
+				5C8BEC6824C696D300412B3B /* ClassViewController.m */,
 			);
-			path = "Two(第二个)";
+			path = "Class(分类)";
 			sourceTree = "<group>";
 		};
-		5C8BEC6B24C696D300412B3B /* Three(第三个) */ = {
+		5C8BEC6B24C696D300412B3B /* Message(消息) */ = {
 			isa = PBXGroup;
 			children = (
-				5C8BEC6D24C696D300412B3B /* ThreeViewController.h */,
-				5C8BEC6C24C696D300412B3B /* ThreeViewController.m */,
+				5C8BEC6D24C696D300412B3B /* MessageViewController.h */,
+				5C8BEC6C24C696D300412B3B /* MessageViewController.m */,
 			);
-			path = "Three(第三个)";
+			path = "Message(消息)";
 			sourceTree = "<group>";
 		};
 		5C8BEC6E24C696D300412B3B /* Login(登录) */ = {
@@ -530,12 +530,12 @@
 				83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */,
 				5C8BECBB24C6988200412B3B /* SHRequestBase.m in Sources */,
 				5C8BECAC24C696D300412B3B /* SHFileHelper.m in Sources */,
-				5C8BECA024C696D300412B3B /* FourViewController.m in Sources */,
+				5C8BECA024C696D300412B3B /* MineViewController.m in Sources */,
 				5C25FEA61F68D72600F080A4 /* main.m in Sources */,
 				834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */,
 				5C8BECA124C696D300412B3B /* MainTabBarController.m in Sources */,
 				5C8BECC324C69C7300412B3B /* AppDelegate+SHExtension.m in Sources */,
-				5C8BECA424C696D300412B3B /* ThreeViewController.m in Sources */,
+				5C8BECA424C696D300412B3B /* MessageViewController.m in Sources */,
 				5C8BECC024C69A7E00412B3B /* SHServerRequest.m in Sources */,
 				5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */,
 				83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */,
@@ -545,9 +545,9 @@
 				5C8BECA724C696D300412B3B /* RegisterViewController.m in Sources */,
 				5C8BECA524C696D300412B3B /* LoginViewController.m in Sources */,
 				5C8BECA624C696D300412B3B /* WelcomeViewController.m in Sources */,
-				5C8BECA324C696D300412B3B /* TwoViewController.m in Sources */,
+				5C8BECA324C696D300412B3B /* ClassViewController.m in Sources */,
 				834CBC84253FCB2F005214EC /* SHWebViewController.m in Sources */,
-				5C8BECA224C696D300412B3B /* OneViewController.m in Sources */,
+				5C8BECA224C696D300412B3B /* HomeViewController.m in Sources */,
 				5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */,
 				5C8BECAD24C696D300412B3B /* AppDelegate.m in Sources */,
 				834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */,
@@ -691,7 +691,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;
@@ -712,7 +712,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;

@@ -1,5 +1,5 @@
 //
-//  ThreeViewController.h
+//  HomeViewController.h
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThreeViewController : SHBaseViewController
+@interface HomeViewController : SHBaseViewController
 
 @end

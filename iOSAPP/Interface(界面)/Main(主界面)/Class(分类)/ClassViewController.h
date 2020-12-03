@@ -1,5 +1,5 @@
 //
-//  OneViewController.h
+//  ClassViewController.h
 //  iOSAPP
 //
 //  Created by CSH on 2017/12/8.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OneViewController : SHBaseViewController
+@interface ClassViewController : SHBaseViewController
 
 @end
