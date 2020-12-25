@@ -21,7 +21,7 @@
 		<key>BaiduMobStatCodeless.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>17</integer>
 		</dict>
 		<key>Bugly.xcscheme</key>
 		<dict>
@@ -59,7 +59,7 @@
 		<key>MJExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>16</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
