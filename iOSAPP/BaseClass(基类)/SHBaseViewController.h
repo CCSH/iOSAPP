@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 @class SHWebViewController;
 
+//回调
+typedef void(^CallBack)(id _Nullable , ...);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SHBaseViewController : UIViewController
@@ -17,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 //参数
 @property (nonatomic, strong) NSDictionary *param;
 //回调
-@property (nonatomic, strong) void(^callBack)(id,...);
+@property (nonatomic, strong) CallBack callBack;
 
 // 其他参数
 //当前windows
@@ -64,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hideHubWithView:(UIView *_Nullable)view;
 
 #pragma mark 进入网页
-- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(void(^_Nullable)(id ,...))block;
+- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(CallBack _Nonnull)block;
 
 #pragma mark 拨打电话
 - (void)callPhone:(NSString *_Nonnull)phone;

@@ -28,14 +28,14 @@
 
 - (void)requestData{
     [SHServerRequest requestLoginWithMobile:@"1" password:@"1" result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
-       
+        
         if (!error) {
             //成功
         }else{
             if ([error.domain isEqualToString:error_domain]) {
                 //服务器错误
-//                baseModel.result
-//                baseModel.msg
+                //                baseModel.result
+                //                baseModel.msg
             }else{
                 //网络错误
             }
@@ -48,10 +48,10 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     param[@"url"] = @"https://github.com/CCSH";
     
-   UIViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:param]
-                                                   type:SHRoutingType_nav
-                                                  block:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
+    UIViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:param]
+                                                type:SHRoutingType_nav
+                                               block:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,13 +61,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

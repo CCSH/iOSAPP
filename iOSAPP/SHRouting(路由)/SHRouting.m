@@ -13,7 +13,7 @@
 #pragma mark 获取路由页面
 + (UIViewController *)routingWithUrl:(NSString *)url
                                 type:(SHRoutingType)type
-                               block:(void (^ _Nullable)(id _Nullable, ...))block{
+                               block:(CallBack)block{
     NSURL *temp = [NSURL URLWithString:url];
     
     //获取scheme

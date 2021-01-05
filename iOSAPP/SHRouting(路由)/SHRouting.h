@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 获取路由页面
 + (UIViewController *)routingWithUrl:(NSString *)url
                                 type:(SHRoutingType)type
-                               block:(void(^ _Nullable)(id _Nullable ,...))block;
+                               block:(CallBack _Nullable)block;
 
 #pragma mark 路由url生成
 + (NSString *)getUrlWithName:(NSString *)name

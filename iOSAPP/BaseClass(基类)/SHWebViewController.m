@@ -44,9 +44,9 @@
 @end
 
 @interface SHWebViewController () <
-    WKNavigationDelegate,
-    WKUIDelegate,
-    WKScriptMessageHandler >
+WKNavigationDelegate,
+WKUIDelegate,
+WKScriptMessageHandler >
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -72,7 +72,7 @@
     self.needUid = self.param[@"needUid"];
     
     self.title = @"详情";
-
+    
     [self configUI];
 }
 
@@ -102,7 +102,7 @@
                    forKeyPath:@"title"
                       options:NSKeyValueObservingOptionNew
                       context:nil];
-
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];
 }
@@ -129,7 +129,7 @@
         if (_webView.estimatedProgress >= 1.0f)
         {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-              self.progressView.progress = 0;
+                self.progressView.progress = 0;
             });
         }
     }
@@ -170,9 +170,9 @@
     NSString *js = [NSString stringWithFormat:@"appTojs('%@','%@')", @"reload", @"1"];
     [_webView evaluateJavaScript:js
                completionHandler:^(id _Nullable data, NSError *_Nullable error) {
-                 NSLog(@"刷新");
-               }];
-
+        NSLog(@"刷新");
+    }];
+    
 }
 
 // 根据WebView对于即将跳转的HTTP请求头信息和相关信息来决定是否跳转
@@ -245,7 +245,7 @@
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     //js函数
     NSString *JSFuncString =
-        @"function setCookie(name,value,expires)\
+    @"function setCookie(name,value,expires)\
     {\
     var oDate=new Date();\
     oDate.setDate(oDate.getDate()+expires);\
@@ -263,7 +263,7 @@
     var cval=getCookie(name);\
     if(cval!=null) document.cookie= name + '='+cval+';expires='+exp.toGMTString();\
     }";
-
+    
     //拼凑js字符串
     NSMutableString *JSCookieString = JSFuncString.mutableCopy;
     for (NSHTTPCookie *cookie in cookieStorage.cookies)
@@ -347,7 +347,7 @@
         
         //用于进行JavaScript注入
         WKUserScript *script = [[WKUserScript alloc] initWithSource:javascript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-       
+        
         
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         configuration.preferences = [WKPreferences new];
@@ -386,14 +386,11 @@
 }
 
 - (UIBarButtonItem *)webBackItem{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UINavigationBar appearance].backIndicatorImage style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-    return item;
+    return [[UIBarButtonItem alloc]initWithImage:[UINavigationBar appearance].backIndicatorImage style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
 }
 
 - (UIBarButtonItem *)closeItem{
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
-
-    return item;
+    return [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
 }
 
 

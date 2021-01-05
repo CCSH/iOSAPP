@@ -117,7 +117,7 @@
     
     if (vcs.count)
     {
-        int index = at;
+        NSUInteger index = at;
         
         if (at < 0)
         {
@@ -151,7 +151,7 @@
 #pragma mark 删除某个位置的控制器
 - (void)removeVCToStackWithAt:(int)at{
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-    int index = at;
+    NSUInteger index = at;
     
     if (at < 0)
     {
@@ -168,7 +168,7 @@
     
     if (vcs.count > abs(at))
     {
-        int index = at;
+        NSUInteger index = at;
         if (at < 0)
         {
             index = vcs.count + at;
@@ -243,7 +243,7 @@
 }
 
 #pragma mark 进入网页
-- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(void (^ _Nullable)(id _Nonnull, ...))block{
+- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(CallBack)block{
     if (!url.length) {
         return nil;
     }
