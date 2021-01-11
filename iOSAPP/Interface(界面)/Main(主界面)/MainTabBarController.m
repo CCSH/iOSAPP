@@ -27,13 +27,11 @@
 {
     [super viewDidLoad];
     
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_5}
-                                                forState:UIControlStateNormal];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain} forState:UIControlStateSelected];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)} forState:UIControlStateNormal];
-    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(10)}
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
+                                             forState:UIControlStateSelected];
+
     //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];
