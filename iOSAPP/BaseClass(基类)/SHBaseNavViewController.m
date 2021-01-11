@@ -48,16 +48,14 @@
     if (self.viewControllers.count)
     {
         viewController.hidesBottomBarWhenPushed = YES;
-        
     }
 
     if (viewController.navigationItem.backBarButtonItem) {
-        
+        viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
+                                                                                           style:UIBarButtonItemStylePlain
+                                                                                          target:self
+                                                                                          action:nil];
     }
-    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
-                                                                                       style:UIBarButtonItemStylePlain
-                                                                                      target:self
-                                                                                      action:nil];
     [super pushViewController:viewController animated:animated];
 }
 

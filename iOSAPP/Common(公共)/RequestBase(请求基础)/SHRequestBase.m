@@ -73,151 +73,79 @@ static bool isLog = YES;
 }
 
 #pragma mark - 请求方法
+
 #pragma mark GET
-+ (void)getWithUrl:(NSString *)url
-             param:(id)param
-               tag:(NSString *)tag
-             retry:(NSInteger)retry
-          progress:(void (^_Nullable)(NSProgress *_Nullable))progress
-           success:(void (^_Nullable)(id _Nullable))success
-           failure:(void (^_Nullable)(NSError *_Nullable))failure
-{
+- (void)requestGet{
+    
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     // 开始请求
-    NSURLSessionDataTask *task = [mgr
-                                  GET:url
-                                  parameters:param
-                                  headers:nil
-                                  progress:progress
+    NSURLSessionDataTask *task = [mgr GET:self.url
+                               parameters:self.param
+                                  headers:self.headers
+                                 progress:self.progress
                                   success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, responseObject);
-        }
-        if (success)
-        {
-            success(responseObject);
-        }
+        //处理
+        [self handleSuccess:responseObject];
+        
     }
                                   failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        
-        if (retry > 0)
+        if (self.retry > 0)
         {
             //重新请求
-            [self getWithUrl:url
-                       param:param
-                         tag:tag
-                       retry:(retry - 1)
-                    progress:progress
-                     success:success
-                     failure:failure];
+            self.retry--;
+            [self requestGet];
         }
         else
         {
-            if (isLog)
-            {
-                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-            }
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }];
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    
+    [self handleTag:task];
 }
 
 #pragma mark POST
-+ (void)postWithUrl:(NSString *)url
-              param:(id)param
-                tag:(NSString *_Nullable)tag
-              retry:(NSInteger)retry
-           progress:(void (^_Nullable)(NSProgress *progress))progress
-            success:(void (^_Nullable)(id responseObj))success
-            failure:(void (^_Nullable)(NSError *error))failure
-{
+- (void)requestPost{
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     // 开始请求
-    NSURLSessionDataTask *task = [mgr POST:url
-                                parameters:param
-                                   headers:nil
-                                  progress:nil
+    NSURLSessionDataTask *task = [mgr POST:self.url
+                                parameters:self.param
+                                   headers:self.headers
+                                  progress:self.progress
                                    success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, responseObject);
-        }
-        if (success)
-        {
-            success(responseObject);
-        }
+        //处理
+        [self handleSuccess:responseObject];
+        
     }
                                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        
-        if (retry > 0)
+        if (self.retry > 0)
         {
             //重新请求
-            [self postWithUrl:url
-                        param:param
-                          tag:tag
-                        retry:(retry - 1)
-                     progress:progress
-                      success:success
-                      failure:failure];
+            self.retry--;
+            [self requestGet];
         }
         else
         {
-            if (isLog)
-            {
-                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-            }
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }];
     
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    [self handleTag:task];
 }
 
 #pragma mark FORM
-+ (void)formWithUrl:(NSString *)url
-              param:(id)param
-          formParam:(id)formParam
-                tag:(NSString *_Nullable)tag
-              retry:(NSInteger)retry
-           progress:(void (^_Nullable)(NSProgress *progress))progress
-            success:(void (^_Nullable)(id responseObj))success
-            failure:(void (^_Nullable)(NSError *error))failure
-{
+- (void)requestFormWithFormParam:(id)formParam{
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     // 开始请求
-    NSURLSessionDataTask *task = [mgr POST:url
-                                parameters:param
-                                   headers:nil
+    NSURLSessionDataTask *task = [mgr POST:self.url
+                                parameters:self.param
+                                   headers:self.headers
                  constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
         NSError *error = nil;
         NSData *data = [NSJSONSerialization dataWithJSONObject:formParam options:NSJSONWritingPrettyPrinted error:&error];
@@ -228,79 +156,41 @@ static bool isLog = YES;
         }
         else
         {
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }
-                                  progress:progress
+                                  progress:self.progress
                                    success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, responseObject);
-        }
-        if (success)
-        {
-            success(responseObject);
-        }
+        [self handleSuccess:responseObject];
     }
                                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
         
-        if (retry > 0)
+        if (self.retry > 0)
         {
             //重新请求
-            [self formWithUrl:url
-                        param:param
-                    formParam:formParam
-                          tag:tag
-                        retry:(retry - 1)
-                     progress:progress
-                      success:success
-                      failure:failure];
+            self.retry--;
+            [self requestFormWithFormParam:formParam];
+            
         }
         else
         {
-            if (isLog)
-            {
-                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-            }
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }];
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    [self handleTag:task];
 }
 
 #pragma mark 文件上传(单个)
-+ (void)uploadFileWithUrl:(NSString *)url
-                    param:(id)param
-                     name:(NSString *_Nullable)name
-                     data:(NSData *)data
-                      tag:(NSString *_Nullable)tag
-                    retry:(NSInteger)retry
-                 progress:(void (^_Nullable)(NSProgress *progress))progress
-                  success:(void (^_Nullable)(id responseObj))success
-                  failure:(void (^_Nullable)(NSError *error))failure;
-{
+- (void)requestUploadFileWithName:(NSString *_Nullable)name
+                             data:(NSData *)data{
     name = name ?: @"file.jpg";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     // 开始请求
-    NSURLSessionDataTask *task = [mgr POST:url
-                                parameters:param
-                                   headers:nil
+    NSURLSessionDataTask *task = [mgr POST:self.url
+                                parameters:self.param
+                                   headers:self.headers
                  constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
         if (data)
         {
@@ -312,75 +202,38 @@ static bool isLog = YES;
             [formData appendPartWithFileData:data name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
         }
     }
-                                  progress:progress
+                                  progress:self.progress
                                    success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, responseObject);
-        }
-        if (success)
-        {
-            success(responseObject);
-        }
+        [self handleSuccess:responseObject];
     }
                                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
         
-        if (retry > 0)
+        if (self.retry > 0)
         {
             //重新请求
-            [self uploadFileWithUrl:url
-                              param:param
-                               name:name
-                               data:data
-                                tag:tag
-                              retry:(retry - 1)
-                           progress:progress
-                            success:success
-                            failure:failure];
+            self.retry--;
+            [self requestUploadFileWithName:name data:data];
+            
         }
         else
         {
-            if (isLog)
-            {
-                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-            }
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }];
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    [self handleTag:task];
 }
 
 #pragma mark 文件上传(多个 一次)
-+ (void)uploadFilesWithUrl:(NSString *)url
-                     param:(id)param
-                      name:(NSString *_Nullable)name
-                     datas:(NSArray< NSData * > *)datas
-                       tag:(NSString *_Nullable)tag
-                     retry:(NSInteger)retry
-                  progress:(void (^_Nullable)(NSProgress *progress))progress
-                   success:(void (^_Nullable)(id responseObj))success
-                   failure:(void (^_Nullable)(NSError *error))failure
-{
-    name = name ?: @"file[].jpg";
-    
+- (void)requestUploadFilesWithName:(NSString *_Nullable)name
+                             datas:(NSArray< NSData * > *)datas{
+    name = name ?: @"file.jpg";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     // 开始请求
-    NSURLSessionDataTask *task = [mgr POST:url
-                                parameters:param
-                                   headers:nil
+    NSURLSessionDataTask *task = [mgr POST:self.url
+                                parameters:self.param
+                                   headers:self.headers
                  constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
         [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             NSArray *temp = [name componentsSeparatedByString:@"."];
@@ -391,64 +244,30 @@ static bool isLog = YES;
             [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
         }];
     }
-                                  progress:progress
+                                  progress:self.progress
                                    success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, responseObject);
-        }
-        if (success)
-        {
-            success(responseObject);
-        }
+        [self handleSuccess:responseObject];
     }
                                    failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
         
-        if (retry > 0)
+        if (self.retry > 0)
         {
             //重新请求
-            [self uploadFilesWithUrl:url
-                               param:param
-                                name:name
-                               datas:datas
-                                 tag:tag
-                               retry:(retry - 1)
-                            progress:progress
-                             success:success
-                             failure:failure];
+            self.retry--;
+            [self requestUploadFilesWithName:name datas:datas];
+            
         }
         else
         {
-            if (isLog)
-            {
-                SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, error.description);
-            }
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }
     }];
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    [self handleTag:task];
 }
 
 #pragma mark 文件上传(多个 多次)
-+ (void)uploadFilesManyWithUrl:(NSString *)url
-                         param:(id)param
-                          name:(NSString *_Nullable)name
-                         datas:(NSArray< NSData * > *)datas
-                      progress:(void (^_Nullable)(NSProgress *_Nullable))progress
-                       success:(void (^_Nullable)(id _Nullable))success
-                       failure:(void (^_Nullable)(NSError *_Nullable))failure
-{
+- (void)requestUploadFilesManyWithName:(NSString *_Nullable)name
+                                 datas:(NSArray< NSData * > *)datas{
     name = name ?: @"file.jpg";
     
     // 获取对象
@@ -461,9 +280,9 @@ static bool isLog = YES;
     [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         dispatch_group_enter(group);
         // 开始请求
-        [mgr POST:url
-       parameters:param
-          headers:nil
+        [mgr POST:self.url
+       parameters:self.param
+          headers:self.headers
 constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
             NSArray *temp = [name componentsSeparatedByString:@"."];
             if (temp.count != 2)
@@ -472,7 +291,7 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
             }
             [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
         }
-         progress:progress
+         progress:self.progress
           success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
             dispatch_group_leave(group);
             //存起来
@@ -481,96 +300,63 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
           failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
             *stop = YES;
             dispatch_group_leave(group);
-            if (failure)
-            {
-                failure(error);
-            }
+            [self handleFailure:error];
         }];
     }];
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        if (isLog)
-        {
-            SHLog(@"地址：%@\n入参：%@\n回参：%@", url, param, temp);
-        }
-        if (success)
-        {
-            success(temp);
-        }
+        
+        [self handleSuccess:temp];
     });
 }
 
 #pragma mark 文件下载
-+ (void)downLoadFlieWithUrl:(NSURL *)url
-                       flie:(NSString *)file
-                        tag:(NSString *_Nullable)tag
-                      retry:(NSInteger)retry
-                   progress:(void (^_Nullable)(NSProgress *progress))progress
-                    success:(void (^_Nullable)(id responseObj))success
-                    failure:(void (^_Nullable)(NSError *error))failure
-{
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+- (void)requestDownLoadFlieWithFlie:(NSString *)file{
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
     
     //开始请求
     NSURLSessionDownloadTask *task = [mgr downloadTaskWithRequest:request
-                                                         progress:progress
+                                                         progress:self.progress
                                                       destination:^NSURL *_Nullable(NSURL *_Nullable targetPath, NSURLResponse *_Nullable response) {
         return [NSURL fileURLWithPath:file];
     }
                                                 completionHandler:^(NSURLResponse *_Nullable response, NSURL *_Nullable filePath, NSError *_Nullable error) {
-        //移除队列
-        [self cancelOperationsWithTag:tag];
         
         if (error)
         {
-            if (retry > 0)
+            if (self.retry > 0)
             {
                 //重新请求
-                [self downLoadFlieWithUrl:url
-                                     flie:file
-                                      tag:tag
-                                    retry:(retry - 1)
-                                 progress:progress
-                                  success:success
-                                  failure:failure];
+                self.retry--;
+                [self requestDownLoadFlieWithFlie:file];
+                
             }
             else
             {
-                if (failure)
-                {
-                    failure(error);
-                }
+                [self handleFailure:error];
             }
         }
         else
         {
-            if (success)
-            {
-                success(filePath);
-            }
+            [self handleSuccess:filePath];
         }
     }];
     //启动
     [task resume];
-    if (tag.length)
-    {
-        //添加队列
-        netQueueDic[tag] = task;
-    }
+    [self handleTag:task];
 }
 
 #pragma mark 获取请求队列
-+ (NSDictionary *)getRequestQueue
-{
+- (NSDictionary *)getRequestQueue{
     return netQueueDic;
 }
 
 #pragma mark 取消所有网络请求
-+ (void)cancelAllOperations
-{
+- (void)cancelAllOperations{
     NSDictionary *temp = [NSDictionary dictionaryWithDictionary:netQueueDic];
     
     [temp enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
@@ -580,8 +366,7 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
 }
 
 #pragma mark 取消某个网络请求
-+ (void)cancelOperationsWithTag:(NSString *_Nullable)tag
-{
+- (void)cancelOperationsWithTag:(NSString *)tag{
     if (tag)
     {
         //取消请求
@@ -592,6 +377,44 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
             //移除队列
             [netQueueDic removeObjectForKey:tag];
         }
+    }
+}
+
+#pragma mark - 私有方法
+#pragma mark 处理成功
+- (void)handleSuccess:(id)responseObject{
+    //移除队列
+    [self cancelOperationsWithTag:self.tag];
+    //打印
+    if (isLog) {
+        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, self.param, responseObject);
+    }
+    //回调
+    if (self.success) {
+        self.success(responseObject);
+    }
+}
+
+#pragma mark 处理失败
+- (void)handleFailure:(NSError *)error{
+    //移除队列
+    [self cancelOperationsWithTag:self.tag];
+    //打印
+    if (isLog) {
+        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, self.param, error.description);
+    }
+    //回调
+    if (self.success) {
+        self.failure(error);
+    }
+}
+
+#pragma mark 处理tag
+- (void)handleTag:(NSURLSessionTask *)task{
+    if (self.tag.length)
+    {
+        //添加队列
+        netQueueDic[self.tag] = task;
     }
 }
 

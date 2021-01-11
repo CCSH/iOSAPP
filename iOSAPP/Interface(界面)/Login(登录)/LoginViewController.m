@@ -43,16 +43,6 @@
     }];
 }
 
-- (void)touchesBegan:(NSSet< UITouch * > *)touches withEvent:(UIEvent *)event
-{
-    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    param[@"url"] = @"https://github.com/CCSH";
-    
-    UIViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:param]
-                                                type:SHRoutingType_nav
-                                               block:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 - (void)didReceiveMemoryWarning
 {

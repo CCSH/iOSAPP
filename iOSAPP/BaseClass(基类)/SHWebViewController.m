@@ -91,7 +91,7 @@ WKScriptMessageHandler >
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareAcrion)];
     }
-    self.navigationItem.leftBarButtonItems = @[[self closeItem]];
+    self.navigationItem.leftBarButtonItems = @[[self webBackItem]];
     //添加监测网页加载进度的观察者
     [self.webView addObserver:self
                    forKeyPath:@"estimatedProgress"
@@ -114,7 +114,11 @@ WKScriptMessageHandler >
 }
 
 - (void)goBack{
-    [self.webView goBack];
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    }else{
+        [self backAction];
+    }
 }
 
 //kvo 监听进度 必须实现此方法
@@ -162,9 +166,9 @@ WKScriptMessageHandler >
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    self.navigationItem.leftBarButtonItems = @[[self closeItem]];
+    self.navigationItem.leftBarButtonItems = @[[self webBackItem]];
     if ([webView canGoBack]) {
-        self.navigationItem.leftBarButtonItems = @[[self closeItem],[self webBackItem]];
+        self.navigationItem.leftBarButtonItems = @[[self webBackItem],[self closeItem]];
     }
     //app 调用 js
     NSString *js = [NSString stringWithFormat:@"appTojs('%@','%@')", @"reload", @"1"];
@@ -180,7 +184,7 @@ WKScriptMessageHandler >
 {
     NSURL *url = navigationAction.request.URL;
     SHLog(@"发送跳转请求：%@", url.absoluteString);
-    
+
     if ([url.scheme isEqualToString:kScheme]) {
         NSArray *query = [url.query componentsSeparatedByString:@"&"];
         NSMutableDictionary *param = [NSMutableDictionary new];
@@ -203,6 +207,7 @@ WKScriptMessageHandler >
     //允许跳转
     decisionHandler(WKNavigationResponsePolicyAllow);
 }
+
 //需要响应身份验证时调用 同样在block中需要传入用户身份凭证
 - (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *_Nullable credential))completionHandler
 {

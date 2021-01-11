@@ -15,82 +15,60 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SHRequestBase : NSObject
 
+// 必填
+//地址
+@property (nonatomic, copy) NSString *url;
+
+// 选填
+//进度
+@property (nonatomic, copy) void(^progress)(NSProgress *progress);
+//成功
+@property (nonatomic, copy) void (^success)(id responseObj);
+//失败
+@property (nonatomic, copy) void (^failure)(NSError *error);
+
+//公共参数
+//参数
+@property (nonatomic, copy) id param;
+//请求头
+@property (nonatomic, copy) NSDictionary <NSString *, NSString *> *headers;
+//请求标记
+@property (nonatomic, copy) NSString *tag;
+//重试次数
+@property (nonatomic, assign) NSInteger retry;
+
 #pragma mark GET
-+ (void)getWithUrl:(NSString *)url
-             param:(id)param
-               tag:(NSString *_Nullable)tag
-             retry:(NSInteger)retry
-          progress:(void (^_Nullable)(NSProgress *progress))progress
-           success:(void (^_Nullable)(id responseObj))success
-           failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestGet;
 
 #pragma mark POST
-+ (void)postWithUrl:(NSString *)url
-              param:(id)param
-                tag:(NSString *_Nullable)tag
-              retry:(NSInteger)retry
-           progress:(void (^_Nullable)(NSProgress *progress))progress
-            success:(void (^_Nullable)(id responseObj))success
-            failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestPost;
 
 #pragma mark FORM
-+ (void)formWithUrl:(NSString *)url
-              param:(id)param
-          formParam:(id)formParam
-                tag:(NSString *_Nullable)tag
-              retry:(NSInteger)retry
-           progress:(void (^_Nullable)(NSProgress *progress))progress
-            success:(void (^_Nullable)(id responseObj))success
-            failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestFormWithFormParam:(id)formParam;
 
 #pragma mark 文件上传(单个)
-+ (void)uploadFileWithUrl:(NSString *)url
-                    param:(id)param
-                     name:(NSString *_Nullable)name
-                     data:(NSData *)data
-                      tag:(NSString *_Nullable)tag
-                    retry:(NSInteger)retry
-                 progress:(void (^_Nullable)(NSProgress *progress))progress
-                  success:(void (^_Nullable)(id responseObj))success
-                  failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestUploadFileWithName:(NSString *_Nullable)name
+                             data:(NSData *)data;
 
 #pragma mark 文件上传(多个 一次)
-+ (void)uploadFilesWithUrl:(NSString *)url
-                     param:(id)param
-                      name:(NSString *_Nullable)name
-                     datas:(NSArray< NSData * > *)datas
-                       tag:(NSString *_Nullable)tag
-                     retry:(NSInteger)retry
-                  progress:(void (^_Nullable)(NSProgress *progress))progress
-                   success:(void (^_Nullable)(id responseObj))success
-                   failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestUploadFilesWithName:(NSString *_Nullable)name
+                             datas:(NSArray< NSData * > *)datas;
 
 #pragma mark 文件上传(多个 多次)
-+ (void)uploadFilesManyWithUrl:(NSString *)url
-                         param:(id)param
-                          name:(NSString *_Nullable)name
-                         datas:(NSArray< NSData * > *)datas
-                      progress:(void (^_Nullable)(NSProgress *progress))progress
-                       success:(void (^_Nullable)(id responseObj))success
-                       failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestUploadFilesManyWithName:(NSString *_Nullable)name
+                                 datas:(NSArray< NSData * > *)datas;
 
 #pragma mark 文件下载
-+ (void)downLoadFlieWithUrl:(NSURL *)url
-                       flie:(NSString *)file
-                        tag:(NSString *_Nullable)tag
-                      retry:(NSInteger)retry
-                   progress:(void (^_Nullable)(NSProgress *progress))progress
-                    success:(void (^_Nullable)(id responseObj))success
-                    failure:(void (^_Nullable)(NSError *error))failure;
+- (void)requestDownLoadFlieWithFlie:(NSString *)file;
 
 #pragma mark 获取请求队列
-+ (NSDictionary *)getRequestQueue;
+- (NSDictionary *)getRequestQueue;
 
 #pragma mark 取消所有网络请求
-+ (void)cancelAllOperations;
+- (void)cancelAllOperations;
 
 #pragma mark 取消某个网络请求
-+ (void)cancelOperationsWithTag:(NSString *_Nullable)tag;
+- (void)cancelOperationsWithTag:(NSString *)tag;
 
 @end
 

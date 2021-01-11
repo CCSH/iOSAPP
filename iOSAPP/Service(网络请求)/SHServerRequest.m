@@ -68,21 +68,22 @@
     }
     //处理参数
     param = [self handleParameterWithDic:param];
+    
     //请求
-    [SHRequestBase postWithUrl:url
-        param:param
-        tag:@"1"
-        retry:0
-        progress:nil
-        success:^(id responseObj) {
-          //处理数据
-          SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];
-          [self handleDataWithModel:model error:nil block:result];
-        }
-        failure:^(NSError *error) {
-          //处理数据
-          [self handleDataWithModel:nil error:error block:result];
-        }];
+    SHRequestBase *request = [SHRequestBase new];
+    request.url = url;
+    request.param = param;
+    weakify(self);
+    request.success = ^(id  _Nonnull responseObj) {
+        //处理数据
+        SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];
+        [weak_self handleDataWithModel:model error:nil block:result];
+    };
+    request.failure = ^(NSError * _Nonnull error) {
+        //处理数据
+        [weak_self handleDataWithModel:nil error:error block:result];
+    };
+    [request requestGet];
 }
 
 @end

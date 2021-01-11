@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import <Speech/Speech.h>
+#import "ClassViewController.h"
 
 @interface HomeViewController ()
 
@@ -57,7 +58,12 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    param[@"url"] = @"https://github.com/CCSH";
     
+    [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:param]
+                                                type:SHRoutingType_nav
+                                               block:nil];
 }
 
 /*

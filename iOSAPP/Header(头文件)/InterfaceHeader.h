@@ -25,7 +25,7 @@ static NSString *success_code = @"200";
 
 
 #pragma mark - 登录接口
-#define kLogin @"user/test/user_login"
+#define kLogin @"user/login"
 
 
 
