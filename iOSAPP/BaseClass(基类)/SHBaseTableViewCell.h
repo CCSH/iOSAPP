@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SHBaseTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIView *customView;
+
 @end
 
 NS_ASSUME_NONNULL_END
