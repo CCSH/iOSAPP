@@ -8,49 +8,45 @@
 
 #import "SHBaseNavViewController.h"
 
-@interface SHBaseNavViewController () < UINavigationControllerDelegate >
+@interface SHBaseNavViewController () <UINavigationControllerDelegate>
 
 @end
 
 @implementation SHBaseNavViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
     [navBar setTintColor:[UIColor redColor]];
     //标题颜色
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                                           NSFontAttributeName : kFont(15)}];
+                                     NSFontAttributeName : kFont(15)}];
     //item 文字颜色 (图标颜色按照主题颜色)
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
                                                            NSFontAttributeName : kFont(14)}
                                                 forState:UIControlStateNormal];
-    
-    
+
     // 系统返回按钮
     UIImage *image = [UIImage imageNamed:@"nav_back"];
     // 修改navigationBar上的返回按钮的图片，注意：这两个属性要同时设置
     navBar.backIndicatorImage = image;
     navBar.backIndicatorTransitionMaskImage = image;
-    
+
     //背景颜色
     [navBar setBarTintColor:kColorStatus_primary];
-    
+
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;
 }
 
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (self.viewControllers.count)
-    {
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (self.viewControllers.count) {
         viewController.hidesBottomBarWhenPushed = YES;
     }
-    
+
     if (viewController.navigationItem.backBarButtonItem) {
         viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:nil
                                                                                            style:UIBarButtonItemStylePlain
@@ -61,10 +57,8 @@
 }
 
 #pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if ([[viewController class] conformsToProtocol:@protocol(HideNav)])
-    {
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([[viewController class] conformsToProtocol:@protocol(HideNav)]) {
         [viewController.navigationController setNavigationBarHidden:YES animated:YES];
     }
 }

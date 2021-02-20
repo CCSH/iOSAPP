@@ -10,7 +10,7 @@
 @class SHWebViewController;
 
 //回调
-typedef void(^CallBack)(id _Nullable , ...);
+typedef void(^CallBack)();
 
 NS_ASSUME_NONNULL_BEGIN
 
