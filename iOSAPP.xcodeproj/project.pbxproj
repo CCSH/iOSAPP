@@ -35,6 +35,7 @@
 		83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */; };
 		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
 		83CCC7C7256D05D400968720 /* SHRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC7C6256D05D400968720 /* SHRouting.m */; };
+		83FF4C5925EC733800E9D568 /* SHCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF4C5725EC733800E9D568 /* SHCollectionViewLayout.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,8 @@
 		83FE1026251D8C2E006E727A /* InterfaceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceHeader.h; sourceTree = "<group>"; };
 		83FE1027251D8C2E006E727A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		83FE1028251D8C2E006E727A /* MacroHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroHeader.h; sourceTree = "<group>"; };
+		83FF4C5725EC733800E9D568 /* SHCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCollectionViewLayout.m; sourceTree = "<group>"; };
+		83FF4C5825EC733800E9D568 /* SHCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCollectionViewLayout.h; sourceTree = "<group>"; };
 		E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAPP/Pods-iOSAPP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +278,7 @@
 		5C8BEC7F24C696D300412B3B /* Common(公共) */ = {
 			isa = PBXGroup;
 			children = (
+				83FF4C5625EC733800E9D568 /* SHCollectionViewLayout */,
 				5C8BECB624C6988200412B3B /* RequestBase(请求基础) */,
 				5C8BEC8324C696D300412B3B /* SHFileHelper */,
 			);
@@ -367,6 +371,15 @@
 				83FE1028251D8C2E006E727A /* MacroHeader.h */,
 			);
 			path = "Header(头文件)";
+			sourceTree = "<group>";
+		};
+		83FF4C5625EC733800E9D568 /* SHCollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				83FF4C5825EC733800E9D568 /* SHCollectionViewLayout.h */,
+				83FF4C5725EC733800E9D568 /* SHCollectionViewLayout.m */,
+			);
+			path = SHCollectionViewLayout;
 			sourceTree = "<group>";
 		};
 		8CCAE27E56201EEE836CD64C /* Pods */ = {
@@ -525,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83FF4C5925EC733800E9D568 /* SHCollectionViewLayout.m in Sources */,
 				5C8BECAE24C696D300412B3B /* IUesrModel.m in Sources */,
 				5C8BECC724C69E0300412B3B /* SHBaseTableViewCell.m in Sources */,
 				83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */,
