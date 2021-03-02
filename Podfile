@@ -36,5 +36,7 @@ target 'iOSAPP' do
  pod 'Bugly'
  #统计
  pod 'BaiduMobStatCodeless'
+ #布局
+ pod 'Masonry'
 
 end

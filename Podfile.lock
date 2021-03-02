@@ -19,6 +19,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.2.2)
   - MJRefresh (3.5.0)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - BaiduMobStatCodeless
   - Bugly
   - FMDB
+  - Masonry
   - MBProgressHUD
   - MJExtension
   - MJRefresh
@@ -73,6 +75,7 @@ SPEC REPOS:
     - BaiduMobStatCodeless
     - Bugly
     - FMDB
+    - Masonry
     - MBProgressHUD
     - MJExtension
     - MJRefresh
@@ -91,6 +94,7 @@ SPEC CHECKSUMS:
   BaiduMobStatCodeless: 09c3738fd435a6c13c248f39aa0f15d3f5ee7daa
   Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
@@ -104,6 +108,6 @@ SPEC CHECKSUMS:
   SHScrollView: 245df8c848dabec12c76e144b6c7f1d75f85854a
   SHToast: 54be86c2d5d95160cd8028a59e2cfe99f38655f6
 
-PODFILE CHECKSUM: e3ffa4190073913efdbe4e1fd62701f8cb381e5d
+PODFILE CHECKSUM: bce6e18e6ea9b2895c3d1bd853962a3b2f16b26f
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.0

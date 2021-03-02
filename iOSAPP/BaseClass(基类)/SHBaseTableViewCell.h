@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SHBaseTableViewCell : UITableViewCell
 
+//自定义视图
 @property (nonatomic, strong) UIView *customView;
+//分割线
+@property (nonatomic, strong) UIView *divider;
 
 @end
 

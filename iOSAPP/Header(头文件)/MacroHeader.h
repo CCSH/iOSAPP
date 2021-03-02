@@ -143,6 +143,8 @@
 #define kColorMain2 kRGB(225, 178, 43, 1)
 //背景色
 #define kColorBG kRGB(245, 245, 245, 1)
+//分割线
+#define kColorDivider kRGB(209, 209, 209, 1)
 
 //状态颜色
 #define kColorStatus_primary [UIColor colorWithHexString:@"#409eff"]

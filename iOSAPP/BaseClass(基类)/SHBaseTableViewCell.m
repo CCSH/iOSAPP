@@ -40,4 +40,21 @@
     }
 }
 
+#pragma mark - 懒加载
+- (UIView *)divider{
+    if (!_divider) {
+        _divider = [[UIView alloc]init];
+        [self.contentView addSubview:_divider];
+        _divider.backgroundColor = kColorDivider;
+        _divider.hidden = YES;
+        [_divider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0.5);
+            make.bottom.equalTo(self.contentView);
+            make.left.equalTo(self.contentView);
+            make.right.equalTo(self.contentView);
+        }];
+    }
+    return _divider;
+}
+
 @end
