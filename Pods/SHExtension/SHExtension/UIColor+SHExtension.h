@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (SHExtension)
 
+//获取颜色RGB
+@property (nonatomic, assign, readonly) NSArray *rgbArr;
+
 #pragma mark 16进制颜色
 + (UIColor *)colorWithHexString:(NSString *)hexString;
-
-#pragma mark 获取颜色RGB
-+ (NSArray *)getRGBWithColor:(UIColor *)color;
 
 #pragma mark 获取两种颜色的过渡色
 + (UIColor *)getTransitionColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor scale:(CGFloat)scale;

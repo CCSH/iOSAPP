@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface SHToast : NSObject
+@interface SHToast : UIView
 
 #pragma mark - Toast (text 可以是 NSString、NSAttributedString)
 //中间位置显示
@@ -26,45 +26,31 @@
 
 @end
 
-
+// toast样式
 @interface SHToastStyle : NSObject
 
-//弹框内部间隔
+//弹框内部间隔(默认 上左下右 10)
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
-//弹框整体间隔
+//弹框整体间隔(默认 10)
 @property (nonatomic, assign) CGFloat margin;
-//默认显示时间
+//默认显示时间(默认 2)
 @property (nonatomic, assign) CGFloat time;
-//背景颜色
+//背景颜色(默认 黑色 0.7)
 @property (nonatomic, strong) UIColor *color;
-//字体颜色
+//字体颜色(默认 白色)
 @property (nonatomic, strong) UIColor *textColor;
-//字体大小
+//字体大小(默认 14)
 @property (nonatomic, strong) UIFont *font;
+//圆角(默认 5 针对toast形式)
+@property (nonatomic, assign) CGFloat cornerRadius;
 
-+ (instancetype)shareSHToastStyle;
-
-@end
-
-@interface SHPushStyle : NSObject
-
-//推送弹框内部间隔
-@property (nonatomic, assign) UIEdgeInsets edgeInsets;
-//默认显示时间
-@property (nonatomic, assign) CGFloat time;
-//推送图片大小
+//推送图片大小(默认 50)
 @property (nonatomic, assign) CGSize imageSize;
-//推送背景颜色
-@property (nonatomic, strong) UIColor *color;
-//推送标题颜色
-@property (nonatomic, strong) UIColor *titleColor;
-//推送标题字体
-@property (nonatomic, strong) UIFont *titleFont;
-//推送内容颜色
+//推送内容颜色(默认 白色)
 @property (nonatomic, strong) UIColor *contentColor;
-//推送内容字体
+//推送内容字体(默认 12)
 @property (nonatomic, strong) UIFont *contentFont;
 
-+ (instancetype)shareSHPushStyle;
++ (instancetype)share;
 
 @end

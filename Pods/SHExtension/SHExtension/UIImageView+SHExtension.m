@@ -11,7 +11,7 @@
 @implementation UIImageView (SHExtension)
 
 //获取图片在视图的frame
-- (CGRect)getImageFrame{
+- (CGRect)imageF{
     
     UIImage *image = self.image;
     

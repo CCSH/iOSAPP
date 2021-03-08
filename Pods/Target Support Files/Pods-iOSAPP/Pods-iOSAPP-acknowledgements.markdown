@@ -26,7 +26,7 @@ THE SOFTWARE.
 
 ## BaiduMobStatCodeless
 
-Copyright 2020 Baidu. All rights reserved.
+Copyright 2021 Baidu. All rights reserved.
 
 ## Bugly
 

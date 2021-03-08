@@ -1,57 +1,55 @@
 //
 //  UIButton+SHExtension.m
-//  SHExtension
+//  SHExtensionExample
 //
-//  Created by CSH on 2018/9/19.
-//  Copyright © 2018年 CSH. All rights reserved.
+//  Created by CCSH on 2020/11/17.
+//  Copyright © 2020 CSH. All rights reserved.
 //
 
 #import "UIButton+SHExtension.h"
-#import "objc/runtime.h"
-
-static char topEdgeKey;
-static char leftEdgeKey;
-static char bottomEdgeKey;
-static char rightEdgeKey;
 
 @implementation UIButton (SHExtension)
 
-- (void)setEnlargedEdge:(CGFloat)enlargedEdge {
-    [self setEnlargedEdgeWithEdgeInsets:UIEdgeInsetsMake(enlargedEdge, enlargedEdge, enlargedEdge, enlargedEdge)];
-}
-
-- (void)setEnlargedEdgeWithEdgeInsets:(UIEdgeInsets)edgeInsets {
-    objc_setAssociatedObject(self, &topEdgeKey, [NSNumber numberWithFloat:edgeInsets.top], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, &leftEdgeKey, [NSNumber numberWithFloat:edgeInsets.left], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, &bottomEdgeKey, [NSNumber numberWithFloat:edgeInsets.bottom], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, &rightEdgeKey, [NSNumber numberWithFloat:edgeInsets.right], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (CGFloat)enlargedEdge {
-    return [(NSNumber *)objc_getAssociatedObject(self, &topEdgeKey) floatValue];
-}
-
-- (CGRect)enlargedRect {
-    NSNumber *topEdge = objc_getAssociatedObject(self, &topEdgeKey);
-    NSNumber *leftEdge = objc_getAssociatedObject(self, &leftEdgeKey);
-    NSNumber *bottomEdge = objc_getAssociatedObject(self, &bottomEdgeKey);
-    NSNumber *rightEdge = objc_getAssociatedObject(self, &rightEdgeKey);
-
-    if (topEdge && leftEdge && bottomEdge && rightEdge) {
-        CGRect enlargedRect = CGRectMake(self.bounds.origin.x - leftEdge.floatValue, self.bounds.origin.y - topEdge.floatValue, self.bounds.size.width + leftEdge.floatValue + rightEdge.floatValue, self.bounds.size.height + topEdge.floatValue + bottomEdge.floatValue);
-        return enlargedRect;
+- (void)imageDirection:(SHButtonImageDirection)direction space:(CGFloat)space{
+    CGFloat imageWidth, imageHeight, textWidth, textHeight, x, y;
+    imageWidth = self.currentImage.size.width;
+    imageHeight = self.currentImage.size.height;
+    [self.titleLabel sizeToFit];
+    textWidth = self.titleLabel.frame.size.width;
+    textHeight = self.titleLabel.frame.size.height;
+    space = space / 2;
+    switch (direction) {
+        case SHButtonImageDirection_top:{
+            x = textHeight / 2 + space;
+            y = textWidth / 2;
+            self.imageEdgeInsets = UIEdgeInsetsMake(-x, y, x, - y);
+            x = imageHeight / 2 + space;
+            y = imageWidth / 2;
+            self.titleEdgeInsets = UIEdgeInsetsMake(x, - y, - x, y);
+        }
+            break;
+        case SHButtonImageDirection_bottom:{
+            x = textHeight / 2 + space;
+            y = textWidth / 2;
+            self.imageEdgeInsets = UIEdgeInsetsMake(x, y, -x, - y);
+            x = imageHeight / 2 + space;
+            y = imageWidth / 2;
+            self.titleEdgeInsets = UIEdgeInsetsMake(-x, - y, x, y);
+        }
+            break;
+        case SHButtonImageDirection_left:{
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, -space,0, space);
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, space , 0, - space);
+        }
+            break;
+        case SHButtonImageDirection_right:{
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, space + textWidth, 0, - (space + textWidth));
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, -(space + imageWidth), 0, (space + imageWidth));
+        }
+            break;
+        default:
+            break;
     }
-
-    return self.bounds;
-}
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if (!self.alpha || !self.userInteractionEnabled || self.hidden) {
-        return nil;
-    }
-
-    CGRect enlargedRect = [self enlargedRect];
-    return CGRectContainsPoint(enlargedRect, point) ? self : nil;
 }
 
 @end

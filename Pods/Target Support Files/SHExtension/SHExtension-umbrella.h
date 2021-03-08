@@ -11,6 +11,7 @@
 #endif
 
 #import "NSString+SHExtension.h"
+#import "SHButton.h"
 #import "SHTool.h"
 #import "UIButton+SHExtension.h"
 #import "UIColor+SHExtension.h"
@@ -19,6 +20,7 @@
 #import "UIView+SHExtension.h"
 #import "NSString+SHExtension.h"
 #import "SHTool.h"
+#import "SHButton.h"
 #import "UIButton+SHExtension.h"
 #import "UIColor+SHExtension.h"
 #import "UIImage+SHExtension.h"

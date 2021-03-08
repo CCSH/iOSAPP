@@ -31,20 +31,12 @@
     return self.frame.origin.y;
 }
 
-- (void)setMaxX:(CGFloat)maxX {
-    
-}
-
 - (CGFloat)maxX {
-    return self.frame.origin.x + self.frame.size.width;
-}
-
-- (void)setMaxY:(CGFloat)maxY {
-    
+    return CGRectGetMaxX(self.frame);
 }
 
 - (CGFloat)maxY {
-    return self.frame.origin.y + self.frame.size.height;
+    return CGRectGetMaxY(self.frame);
 }
 
 - (void)setCenterX:(CGFloat)centerX {
@@ -66,7 +58,6 @@
 - (CGFloat)centerY {
     return self.center.y;
 }
-
 
 - (void)setWidth:(CGFloat)width {
     CGRect frame = self.frame;
@@ -109,6 +100,7 @@
     return self.frame.origin;
 }
 
+#pragma mark 获取控制器
 - (UIViewController *)sh_vc {
     for (UIView *view = self; view; view = view.superview) {
         UIResponder *nextResponder = [view nextResponder];
@@ -119,6 +111,19 @@
     return nil;
 }
 
+#pragma mark 通过视图获取一张图片
+- (UIImage *)img{
+    
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
+    
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 #pragma mark - 描边
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color{
     
@@ -126,6 +131,15 @@
     [self.layer setCornerRadius:(radius)];
     [self.layer setBorderColor:[color CGColor]];
     [self.layer setMasksToBounds:YES];
+}
+
+- (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners{
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
 }
 
 #pragma mark - 获取一个渐变色的视图
@@ -162,7 +176,32 @@
     return view;
 }
 
+#pragma mark 按照图片裁剪视图
+- (void)makeMaskViewWithImage:(UIImage *)image {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        CALayer *maskLayer = [CALayer layer];
+        maskLayer.frame = self.bounds;
+        //把视图设置成图片的样子
+        [maskLayer setContents:(id)image.CGImage];
+        [maskLayer setContentsScale:image.scale];
+        [maskLayer setContentsCenter:CGRectMake(((image.size.width/2) - 1)/image.size.width,
+                                                ((image.size.height/1.5) - 1)/image.size.height,
+                                                1 / image.size.width,
+                                                1 / image.size.height)];
+        
+        self.layer.mask = maskLayer;
+    });
+}
+
 #pragma mark - xib 属性
+#pragma mark 加载xib
++ (instancetype)loadXib{
+    NSString *className = NSStringFromClass(self);
+    return [[[NSBundle mainBundle] loadNibNamed:className owner:nil options:nil] firstObject];
+}
+
 #pragma mark 设置边框宽度
 - (void)setBorderWidth:(CGFloat)borderWidth {
     

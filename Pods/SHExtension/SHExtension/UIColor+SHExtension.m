@@ -69,10 +69,10 @@
 }
 
 #pragma mark 获取颜色RGB
-+ (NSArray *)getRGBWithColor:(UIColor *)color{
++ (NSArray *)rgbArr{
     
     //获得RGB值描述
-    NSString *RGBValue = [NSString stringWithFormat:@"%@",color];
+    NSString *RGBValue = [NSString stringWithFormat:@"%@",self];
     //将RGB值描述分隔成字符串
     NSArray *RGBArr = [RGBValue componentsSeparatedByString:@" "];
     
@@ -103,8 +103,8 @@
 + (UIColor *)getTransitionColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor scale:(CGFloat)scale{
     
     //获取rgba颜色
-    NSArray *startColorArr = [self getRGBWithColor:startColor];
-    NSArray *endColorArr = [self getRGBWithColor:endColor];
+    NSArray *startColorArr = startColor.rgbArr;
+    NSArray *endColorArr = endColor.rgbArr;
     
     //(x + (y-x)*k)
     CGFloat red = [startColorArr[0] floatValue] + ([endColorArr[0] floatValue] - [startColorArr[0] floatValue])*scale;

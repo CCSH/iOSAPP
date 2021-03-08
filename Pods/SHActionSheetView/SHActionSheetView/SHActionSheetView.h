@@ -12,30 +12,26 @@
 //回调
 typedef void (^SHSelectBlock)(SHActionSheetView *sheetView, NSInteger buttonIndex);
 
-
 /**
  Model
  */
 @interface SHActionSheetModel : NSObject
-//标题头
-@property (nonatomic, copy) NSString *title;
-//取消按钮 默认 取消
-@property (nonatomic, copy) NSString *cancel;
-//特殊按钮
+//标题头(NSString, NSAttributedString)
+@property (nonatomic, copy) id title;
+//取消按钮(NSString, NSAttributedString)
+@property (nonatomic, copy) id cancel;
+//特殊按钮(NSString, NSAttributedString)
 @property (nonatomic, copy) NSArray *specialArr;
-//其他按钮
+//其他按钮(NSString, NSAttributedString)
 @property (nonatomic, copy) NSArray *messageArr;
-
-
 
 @end
 
 typedef enum : NSUInteger {
-    SHActionSheetStyle_custom, //默认
+    SHActionSheetStyle_custom, //自定义
     SHActionSheetStyle_system, //系统
+    SHActionSheetStyle_bottom, //系统
 } SHActionSheetStyle;
-
-#define kRGB(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
 /**
  列表弹框
@@ -46,36 +42,36 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) SHActionSheetModel *model;
 //回调
 @property (nonatomic, copy) SHSelectBlock block;
+//风格(SHActionSheetStyle_system 所有样式失效)
+@property (nonatomic, assign) SHActionSheetStyle style;
 
 //最多内容个数 默认8
 @property (nonatomic, assign) NSInteger maxNum;
-//风格
-@property (nonatomic, assign) SHActionSheetStyle style;
 
-//定制样式配置
-//内容高度 默认 57
-@property (nonatomic, assign) CGFloat contentH;
-//头部高度 默认 57
+// 定制样式配置
+//头部高度 默认 50
 @property (nonatomic, assign) CGFloat headH;
-//取消上方分割高度 默认 10
+//内容高度 默认 50
+@property (nonatomic, assign) CGFloat contentH;
+//取消上方分割高度 默认 3
 @property (nonatomic, assign) CGFloat separatorH;
 
-//标题字体 默认 13
+//标题字体 默认 16
 @property (nonatomic, strong) UIFont *titleFont;
-//内容字体 默认 18
+//内容字体 默认 16
 @property (nonatomic, strong) UIFont *contentFont;
 //取消字体 默认 18 中粗体
 @property (nonatomic, strong) UIFont *cancelFont;
 
-//蒙版颜色 默认 [UIColor colorWithWhite:0 alpha:0.4]
+//蒙版颜色 默认 [[UIColor blackColor] colorWithAlphaComponent:0.3]
 @property (nonatomic, strong) UIColor *maskColor;
-//列表颜色 默认
+//列表颜色 默认 whiteColor
 @property (nonatomic, strong) UIColor *listColor;
 //头部字体颜色 默认 blackColor
 @property (nonatomic, strong) UIColor *headTextColor;
 //特殊按钮字体颜色 默认 redColor
 @property (nonatomic, strong) UIColor *specialTextColor;
-//内容按钮字体颜色 默认 kRGB(54, 90, 247, 1)
+//内容按钮字体颜色 默认 kRGB(65, 139, 243, 1)
 @property (nonatomic, strong) UIColor *contentTextColor;
 //分割线颜色 默认 lightGrayColor
 @property (nonatomic, strong) UIColor *separatorColor;

@@ -12,32 +12,6 @@
 
 @implementation NSString (SHExtension)
 
-#pragma mark SET
-- (void)setPinyin:(NSString *)pinyin{
-    
-}
-- (void)setFileName:(NSString *)fileName{
-    
-}
-- (void)setTextLength:(NSInteger)textLength{
-    
-}
-- (void)setMd5:(NSString *)md5{
-    
-}
-- (void)setBase64:(NSString *)base64{
-    
-}
-- (void)setDecoded64:(NSString *)decoded64{
-    
-}
-- (void)setIsEmail:(BOOL)isEmail{
-    
-}
-- (void)setIsFirstLetter:(BOOL)isFirstLetter{
-    
-}
-
 #pragma mark 获取拼音
 - (NSString *)pinyin{
     
@@ -123,6 +97,45 @@
     NSPredicate *regextestA = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ZIMU];
     
     return [regextestA evaluateWithObject:[self substringToIndex:1]];
+}
+
+#pragma mark 是否包含系统表情
+- (BOOL)isEmoji{
+    // 过滤所有表情。returnValue为NO表示不含有表情，YES表示含有表情
+    __block BOOL returnValue = NO;
+    [self enumerateSubstringsInRange:NSMakeRange(0, self.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+        
+        const unichar hs = [substring characterAtIndex:0];
+        // surrogate pair
+        if (0xd800 <= hs && hs <= 0xdbff) {
+            if (substring.length > 1) {
+                const unichar ls = [substring characterAtIndex:1];
+                const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                if (0x1d000 <= uc && uc <= 0x1f77f) {
+                    returnValue = YES;
+                }
+            }
+        } else if (substring.length > 1) {
+            const unichar ls = [substring characterAtIndex:1];
+            if (ls == 0x20e3) {
+                returnValue = YES;
+            }
+        } else {
+            // non surrogate
+            if (0x2100 <= hs && hs <= 0x27ff) {
+                returnValue = YES;
+            } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                returnValue = YES;
+            } else if (0x2934 <= hs && hs <= 0x2935) {
+                returnValue = YES;
+            } else if (0x3297 <= hs && hs <= 0x3299) {
+                returnValue = YES;
+            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
+                returnValue = YES;
+            }
+        }
+    }];
+    return returnValue;
 }
 
 @end

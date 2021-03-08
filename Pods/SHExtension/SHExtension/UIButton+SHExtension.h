@@ -1,22 +1,25 @@
 //
 //  UIButton+SHExtension.h
-//  SHExtension
+//  SHExtensionExample
 //
-//  Created by CSH on 2018/9/19.
-//  Copyright © 2018年 CSH. All rights reserved.
+//  Created by CCSH on 2020/11/17.
+//  Copyright © 2020 CSH. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    SHButtonImageDirection_top,
+    SHButtonImageDirection_left,
+    SHButtonImageDirection_right,
+    SHButtonImageDirection_bottom,
+} SHButtonImageDirection;
+
 @interface UIButton (SHExtension)
 
-//扩大button点击区域(4边扩大相同值)
-@property (nonatomic, assign) CGFloat enlargedEdge;
-
-//扩大button点击区域(上左下右)
-- (void)setEnlargedEdgeWithEdgeInsets:(UIEdgeInsets)edgeInsets;
+- (void)imageDirection:(SHButtonImageDirection)direction space:(CGFloat)space;
 
 @end
 

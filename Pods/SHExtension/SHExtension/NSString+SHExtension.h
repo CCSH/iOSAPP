@@ -13,23 +13,25 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (SHExtension)
 
 //获取拼音
-@property (nonatomic, copy) NSString *pinyin;
+@property (nonatomic, copy, readonly) NSString *pinyin;
 //获取文件名字
-@property (nonatomic, copy) NSString *fileName;
+@property (nonatomic, copy, readonly) NSString *fileName;
 //获取字符串长度(中文：2 其他：1）
-@property (nonatomic, assign) NSInteger textLength;
+@property (nonatomic, assign, readonly) NSInteger textLength;
 
 //是否为邮箱
-@property (nonatomic, assign) BOOL isEmail;
+@property (nonatomic, assign, readonly) BOOL isEmail;
 //是否首字母开头
-@property (nonatomic, assign) BOOL isFirstLetter;
+@property (nonatomic, assign, readonly) BOOL isFirstLetter;
+//是否包含系统表情
+@property (nonatomic, assign, readonly) BOOL isEmoji;
 
 //获取MD5加密
-@property (nonatomic, copy) NSString *md5;
+@property (nonatomic, copy, readonly) NSString *md5;
 //64编码
-@property (nonatomic, copy) NSString *base64;
+@property (nonatomic, copy, readonly) NSString *base64;
 //64解码
-@property (nonatomic, copy) NSString *decoded64;
+@property (nonatomic, copy, readonly) NSString *decoded64;
 
 @end
 

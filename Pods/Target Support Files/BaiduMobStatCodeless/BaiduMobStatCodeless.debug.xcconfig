@@ -1,5 +1,7 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/BaiduMobStatCodeless
+EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/BaiduMobStatCodeless/BaiduMobStatCodeless"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/BaiduMobStatCodeless" "${PODS_ROOT}/Headers/Public"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/BaiduMobStatCodeless/BaiduMobStatCodeless"

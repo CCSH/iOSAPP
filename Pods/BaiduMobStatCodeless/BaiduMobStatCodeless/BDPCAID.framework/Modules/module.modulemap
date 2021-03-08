@@ -1,0 +1,6 @@
+framework module BDPCAID {
+  umbrella header "BDPCAID.h"
+
+  export *
+  module * { export * }
+}

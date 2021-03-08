@@ -60,7 +60,7 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 
 /**
  百度移动应用统计接口
- 当前版本 5.2.7_18
+ 当前版本 5.3.1_18
  */
 @interface BaiduMobStat : NSObject
 /**
@@ -191,6 +191,24 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
  长度限制256字节，超出截断
  */
 @property (nonatomic, copy, nullable) NSString *crashExtraInfo;
+
+/**
+ 设置是否显允许 sdk使用baidu caid库功能
+ 默认YES，允许，sdk将会设置baidu caid库配置，并通过baidu caid库发起请求获取caid
+ 若设置为NO，不允许，sdk将不会使用caid库任何功能，需要开发者通过属性接口 caidInfo 自行传入baidu caid信息到 sdk中
+ 
+ @param enableSdkUseCaid 是否显允许 sdk使用baidu caid库功能，默认YES
+ */
+@property (nonatomic, assign) BOOL enableSdkUseCaid;
+
+/**
+  主动设置baidu caid信息到 sdk中， sdk不缓存通过该接口设置的caid，需要每次启动都设置，设置点见下方介绍
+  当enableSdkUseCaid设置为YES时：不需要调用此接口
+  当enableSdkUseCaid设置为NO时：需要调用此接口传入caid信息。需要在两处调用：1. startWithAppId函数之前调用设置 2. caid库获取到最新caid时调用一次
+  
+  @param cachedCAIDs 通过baidu caid库 [BDPCAIDGenerator cachedCAIDs] 接口获取到的原始caid信息数组
+ */
+@property (nonatomic, strong) NSArray *caidInfo;
 
 /**
  获取统计对象的实例
@@ -396,6 +414,7 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 #ifdef __IPHONE_13_0
 - (void)mtjOpenURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts;
 #endif
+
 @end
 
 /**

@@ -11,6 +11,14 @@
 
 @implementation UIImage (SHExtension)
 
+- (UIEdgeInsets)edgeInsets{
+    return UIEdgeInsetsZero;
+}
+
+- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets{
+    [self resizableImageWithCapInsets:edgeInsets];
+}
+
 #pragma mark 获取指定大小的图片
 - (UIImage *)imageWithSize:(CGSize)size{
     
@@ -63,10 +71,6 @@
 
 #pragma mark 设置图片颜色(整体)
 - (UIImage *)imageWithColor:(UIColor *)color{
-    
-    //也可以使用
-    //    [self imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    //    imageview.tintColor = color;
     
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
     
@@ -138,7 +142,7 @@
 }
 
 #pragma mark 获取图片颜色
-- (void)getImageColorWithBlock:(ColorBlock)block{
+- (void)imageColorWithBlock:(ColorBlock)block{
     
     Palette *palette = [[Palette alloc]init];
     palette.image = self;
@@ -146,9 +150,9 @@
 }
 
 #pragma mark 保存图片到手机
-+ (void)saveImageWithImage:(UIImage *)image block:(nonnull void (^)(NSURL *))block{
+- (void)imageSaveBlock:(nonnull void (^)(NSURL *))block{
     
-    [[ALAssetsLibrary new] writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
+    [[ALAssetsLibrary new] writeImageToSavedPhotosAlbum:self.CGImage orientation:(ALAssetOrientation)self.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
         NSLog(@"%@",[NSThread currentThread]);
         //回调
         if (block) {
@@ -161,30 +165,49 @@
     }];
 }
 
-#pragma mark 保存视图到手机
-+ (void)saveImageWithView:(UIView *)view block:(nonnull void (^)(NSURL *))block{
+#pragma mark 压缩图片
+- (UIImage *)imageCompressionWithByte:(NSInteger)length{
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(self, compression);
+    if (data.length < length)
+    {
+        return self;
+    }
     
-    UIImage *image = [UIImage getImageWithView:view];
-    [UIImage saveImageWithImage:image block:block];
-}
-
-#pragma mark 通过视图获取一张图片
-+ (UIImage *)getImageWithView:(UIView *)view{
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(self, compression);
+        if (data.length < length * 0.9) {
+            min = compression;
+        } else if (data.length > length) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    UIImage *resultImage = [UIImage imageWithData:data];
+    if (data.length < length)
+    {
+        return resultImage;
+    }
     
-    return [UIImage getImageWithLayer:view.layer];
-}
-
-#pragma mark 通过layer获取一张图片
-+ (UIImage *)getImageWithLayer:(CALayer *)layer{
+    // Compress by size
+    NSUInteger lastDataLength = 0;
+    while (data.length > length && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)length / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)),
+                                 (NSUInteger)(resultImage.size.height * sqrtf(ratio))); // Use NSUInteger to prevent white blank
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+    }
     
-    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0);
-    
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return image;
+    return resultImage;
 }
 
 #pragma mark 通过颜色获取一张图片
@@ -201,6 +224,19 @@
     CGContextFillRect(context, rect);
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     //结束
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark 通过layer获取一张图片
++ (UIImage *)getImageWithLayer:(CALayer *)layer{
+    
+    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0);
+    
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     
     return image;
@@ -237,22 +273,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

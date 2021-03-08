@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImageView (SHExtension)
 
 //获取图片在视图的frame
-- (CGRect)getImageFrame;
+@property (nonatomic, assign, readonly) CGRect imageF;
 
 @end
 

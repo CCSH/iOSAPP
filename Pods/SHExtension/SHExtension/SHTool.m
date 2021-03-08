@@ -11,7 +11,7 @@
 @implementation SHTool
 
 #pragma mark - Time方法
-#pragma mark 获取毫秒值
+#pragma mark 获取时间戳
 + (NSString *)getTimeMs{
     NSDate *date = [NSDate date];
     UInt64 recordTime = [date timeIntervalSince1970]*1000;
@@ -23,53 +23,52 @@
     if (!time.length) {
         return @"";
     }
-    //变成毫秒
+    //变成时间戳
     NSString *ms = [self getMsTimeWithTime:time format:currentFormat];
     
     return [self getTimeMsWithMs:ms format:format];
 }
 
 #pragma mark 获取毫秒值(time -> ms)
-#pragma mark 获取当前
+#pragma mark 获取时间戳
 + (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format{
-    if (!time.length) {
-        return @"";
-    }
-    return [self getMsTimeWithTime:time format:format];
-}
-
-#pragma mark 获取指定时区毫秒(8*60*60)
-+ (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT{
     
     if (!time.length) {
         return @"";
     }
-    
-    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:[time longLongValue]/1000];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:format];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:GMT]];
     
-    return [formatter stringFromDate:date];
+    NSDate *date = [formatter dateFromString:time];
+    
+    UInt64 recordTime = [date timeIntervalSince1970]*1000;
+    
+    return [NSString stringWithFormat:@"%llu",recordTime];
 }
 
 #pragma mark 获取时间(ms -> time)
-#pragma mark 获取当前时间
+#pragma mark 获取时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format{
-    if (!ms.length) {
-        return @"";
-    }
-    
-    return [self getTimeMsWithMs:ms format:format];
+
+    return [self getTimeMsWithMs:ms format:format GMT:-1];
 }
 
-#pragma mark 获取指定时区时间(8*60*60)
+#pragma mark 获取指定时区时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT{
     if (!ms.length) {
         return @"";
     }
-    return [self getTimeMsWithMs:ms format:format GMT:GMT];
+    
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:[ms longLongValue]/1000];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:format];
+    if (GMT != -1) {
+        [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:GMT]];
+    }
+    
+    return [formatter stringFromDate:date];
 }
 
 #pragma mark 获取当前时区
@@ -79,17 +78,38 @@
 }
 
 #pragma mark 获取即时时间
-+ (NSString *)getInstantTimeWithTime:(NSString *)time{
-    
-    if (!time) {
++ (NSString *)getInstantTimeWithMs:(NSString *)ms{
+    if (ms.length == 10) {
+        ms = [NSString stringWithFormat:@"%@000",ms];
+    }
+    if (ms.length != 13) {
         return @"";
     }
+    //转时间
+    NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
+
+    return  [self getInstantTimeWithTime:time format:sh_fomat_1];
+}
+
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format{
+    if (!time.length) {
+        return @"";
+    }
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    dateFormat.dateFormat = format;
+    //转date
+    NSDate *date = [dateFormat dateFromString:time];
+    
+    return [self getInstantTimeWithDate:date];
+}
+
++ (NSString *)getInstantTimeWithDate:(NSDate *)date{
+    
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
-    format.dateFormat = sh_fomat_1;
-    NSDate *currentDate = [format dateFromString:time];
     
     //当前
-    NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday  fromDate:currentDate];
+    NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday  fromDate:date];
     
     //今天
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
@@ -103,7 +123,7 @@
     if (currentComponents.year == todayComponents.year && currentComponents.month == todayComponents.month && currentComponents.day == todayComponents.day) {//今天
         
         //获取当前时时间戳差
-        NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:currentDate];
+        NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:date];
         
         if (time < 60) {//1分钟内
             
@@ -114,24 +134,20 @@
         }else if(time < 60*60*24){//1天内
             
             return [NSString stringWithFormat:@"%.0f小时前",time/60/60];
-        }else{//保护
-            
-            format.dateFormat = sh_fomat_4;
-            return [format stringFromDate:currentDate];
         }
     }else if (currentComponents.year == yesterdayComponents.year && currentComponents.month == yesterdayComponents.month && currentComponents.day == yesterdayComponents.day) {//昨天
         
-        format.dateFormat = sh_fomat_5;
-        return [NSString stringWithFormat:@"昨天 %@",[format stringFromDate:currentDate]];
+        format.dateFormat = sh_fomat_10;
+        return [NSString stringWithFormat:@"昨天 %@",[format stringFromDate:date]];
     }else if (currentComponents.year == todayComponents.year){//今年
         
-        format.dateFormat = sh_fomat_4;
-        return [format stringFromDate:currentDate];
-    }else{
-        
-        format.dateFormat = sh_fomat_3;
-        return [format stringFromDate:currentDate];
+        format.dateFormat = sh_fomat_9;
+        return [format stringFromDate:date];
     }
+    
+    //其他
+    format.dateFormat = sh_fomat_4;
+    return [format stringFromDate:date];
 }
 
 #pragma mark 比较两个日期大小
@@ -161,21 +177,7 @@
     return 0;
 }
 
-#pragma mark 处理个数
-+ (NSString *)dealCount:(NSString *)count{
-    
-    if (![count intValue]){
-        
-        return @"";
-    }else if ([count intValue] >= 1000 && [count intValue] < 10000){
-        
-        return [NSString stringWithFormat:@"%.1fK",[count doubleValue]/1000];
-    }else if ([count intValue] >= 10000) {
-        return [NSString stringWithFormat:@"%.1fW",[count doubleValue]/10000];
-    }
-    return count;
-}
-
+#pragma mark - 计算方法
 #pragma mark 计算富文本的size
 + (CGSize)getSizeWithAtt:(NSAttributedString *)att
                  maxSize:(CGSize)maxSize{
@@ -214,19 +216,36 @@
     return (attH > ceil(lineH));
 }
 
-#pragma mark 获取行高
-+ (CGFloat)getLineHeightWithLine:(CGFloat)line font:(UIFont *)font{
+#pragma mark 获取真实行间距
++ (CGFloat)lineSpaceWithLine:(CGFloat)line font:(UIFont *)font{
     
     return line - (font.lineHeight - font.pointSize);
 }
 
-#pragma mark 获取行间距
-+ (CGFloat)getLineSpacingWithAtt:(NSMutableAttributedString *)att line:(CGFloat)line font:(UIFont *)font maxW:(CGFloat)maxW{
+#pragma mark 获取属性字符串真实行间距
++ (CGFloat)lineSpaceWithLineWithAtt:(NSAttributedString *)att line:(CGFloat)line font:(UIFont *)font maxW:(CGFloat)maxW{
     
-    BOOL isLine = [self isLineWithAtt:att lineH:font.lineHeight maxW:maxW];
-    CGFloat space = [self getLineHeightWithLine:line font:font];
+    if ([self isLineWithAtt:att lineH:font.lineHeight maxW:maxW]) {
+        return [self lineSpaceWithLine:line font:font];
+    }
+    //只有一行行间距为0
+    return 0;
+}
+
+#pragma mark - 其他方法
+#pragma mark 处理个数
++ (NSString *)dealCount:(NSString *)count{
     
-    return isLine?space:0;
+    if (![count intValue]){
+        
+        return @"";
+    }else if ([count intValue] >= 1000 && [count intValue] < 10000){
+        
+        return [NSString stringWithFormat:@"%.1fK",[count doubleValue]/1000];
+    }else if ([count intValue] >= 10000) {
+        return [NSString stringWithFormat:@"%.1fW",[count doubleValue]/10000];
+    }
+    return count;
 }
 
 #pragma mark 处理金额
@@ -250,7 +269,7 @@
     return [NSString stringWithFormat:@"%.2f",[str floatValue]];
 }
 
-#pragma mark - 获取一个渐变色的视图
+#pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr{
     return [self getGradientViewWithSize:size startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colorArr:colorArr];
 }
@@ -288,7 +307,7 @@
     return view;
 }
 
-#pragma mark - 格式化TextField字符串
+#pragma mark 格式化TextField字符串
 + (void)handleTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string rule:(NSArray *)rule{
     
     NSString *text = textField.text;
@@ -337,7 +356,7 @@
     textField.selectedTextRange = textRange;
 }
 
-#pragma mark - 格式化字符串
+#pragma mark 格式化字符串
 + (NSString *)handleStrWithText:(NSString *)text rule:(NSArray *)rule{
     
     __block NSString *tempStr = @"";
@@ -371,12 +390,45 @@
     return tempStr;
 }
 
-#pragma mark - 获取某个字符在字符串中出现的次数
+#pragma mark 获取某个字符在字符串中出现的次数
 + (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target{
     
     NSArray *temp = [str componentsSeparatedByString:target];
     
     return temp.count - 1;
+}
+
+#pragma mark 获取最上方控制器
++ (UIViewController *)getCurrentVC{
+    
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    if (window.windowLevel != UIWindowLevelNormal) {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for (UIWindow * tmpWin in windows) {
+            if (tmpWin.windowLevel == UIWindowLevelNormal) {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIViewController *rootVC = window.rootViewController;
+    UIViewController *activeVC = nil;
+    
+    while (true) {
+        if ([rootVC isKindOfClass:[UINavigationController class]]) {
+            activeVC = [(UINavigationController *)rootVC visibleViewController];
+        } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+            activeVC = [(UITabBarController *)rootVC selectedViewController];
+        } else if (rootVC.presentedViewController) {
+            activeVC = rootVC.presentedViewController;
+        } else if (rootVC.childViewControllers.count > 0) {
+            activeVC = [rootVC.childViewControllers lastObject];
+        } else {
+            break;
+        }
+        rootVC = activeVC;
+    }
+    return activeVC;
 }
 
 
