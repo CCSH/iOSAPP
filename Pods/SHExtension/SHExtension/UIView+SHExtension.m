@@ -10,6 +10,8 @@
 
 @implementation UIView (SHExtension)
 
+static UIEdgeInsets _dragEdge;
+
 #pragma mark - frame
 - (void)setX:(CGFloat)x {
     CGRect frame = self.frame;
@@ -112,7 +114,7 @@
 }
 
 #pragma mark 通过视图获取一张图片
-- (UIImage *)img{
+- (UIImage *)sh_img{
     
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
     
@@ -122,6 +124,52 @@
     UIGraphicsEndImageContext();
     
     return image;
+}
+
+- (void)setDragEdge:(UIEdgeInsets)dragEdge{
+    _dragEdge = dragEdge;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
+    [self addGestureRecognizer:pan];
+}
+
+#pragma mark - 拖拽
+- (void)panAction:(UIPanGestureRecognizer *)pan{
+
+    switch (pan.state) {
+        case UIGestureRecognizerStateChanged:
+        {
+            CGPoint point = [pan locationInView:self.superview];
+            pan.view.center = point;
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            CGFloat x = self.x;
+            CGFloat y = self.y;
+            //X轴
+            if (self.x < _dragEdge.left) {
+                x = _dragEdge.left;
+            }
+            if (self.maxX > self.superview.maxX - _dragEdge.right) {
+                x = self.superview.maxX - _dragEdge.right - self.width;
+            }
+
+            //Y轴
+            if (self.y < _dragEdge.top) {
+                y = _dragEdge.top;
+            }
+            if (self.maxY > self.superview.maxY - _dragEdge.bottom) {
+                y = self.superview.maxY - _dragEdge.bottom - self.height;
+            }
+
+            [UIView animateWithDuration:0.1 animations:^{
+                self.origin = CGPointMake(x, y);
+            }];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - 描边

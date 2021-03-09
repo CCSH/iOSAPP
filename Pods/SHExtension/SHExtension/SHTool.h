@@ -19,9 +19,8 @@ static NSString *sh_fomat_5 = @"YYYY-MM-dd HH:mm";
 static NSString *sh_fomat_6 = @"YYYY-MM-dd";
 static NSString *sh_fomat_7 = @"YYYY-MM-dd HH:mm:ss:SSS";
 static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
-static NSString *sh_fomat_9 = @"MM/dd";
+static NSString *sh_fomat_9 = @"MM-dd";
 static NSString *sh_fomat_10 = @"HH:mm";
-static NSString *sh_fomat_11 = @"MM-dd";
 
 @interface SHTool : NSObject
 
@@ -74,13 +73,16 @@ static NSString *sh_fomat_11 = @"MM-dd";
 
 #pragma mark - 其他方法
 #pragma mark 处理个数
-+ (NSString *)dealCount:(NSString *)count;
++ (NSString *)handleCount:(NSString *)count;
 
 #pragma mark 处理金额(千分符 小数点后两位)
 + (NSString *)handleMoneyWithStr:(NSString *)str;
 
 #pragma mark 处理价格(小数点后两位)
 + (NSString *)handlePriceWithStr:(NSString *)str;
+
+#pragma mark 处理视频时间
++ (NSString *)handleVideoTime:(NSString *)str;
 
 #pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr;

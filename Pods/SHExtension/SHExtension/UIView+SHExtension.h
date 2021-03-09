@@ -42,7 +42,10 @@ IBInspectable
 //获取控制器
 @property (nonatomic, strong, readonly) UIViewController *sh_vc;
 //视图生成图片
-@property (nonatomic, strong, readonly) UIImage *img;
+@property (nonatomic, strong, readonly) UIImage *sh_img;
+//拖拽
+@property (nonatomic, assign) UIEdgeInsets dragEdge;
+
 
 #pragma mark - 描边
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;

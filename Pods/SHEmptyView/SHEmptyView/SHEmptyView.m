@@ -7,13 +7,6 @@
 
 #import "SHEmptyView.h"
 
-
-@interface SHEmptyView ()
-
-
-
-@end
-
 @implementation SHEmptyView
 
 - (void)reloadView{
