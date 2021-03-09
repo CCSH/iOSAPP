@@ -1,0 +1,6 @@
+framework module SHEmptyView {
+  umbrella header "SHEmptyView-umbrella.h"
+
+  export *
+  module * { export * }
+}

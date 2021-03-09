@@ -32,6 +32,8 @@ PODS:
     - SHClickTextView
   - SHAVPlayer (1.6.4)
   - SHClickTextView (2.0.1)
+  - SHEmptyView (1.0.0):
+    - SHExtension/UIView
   - SHExtension (1.2.0):
     - SHExtension/NSString (= 1.2.0)
     - SHExtension/Tool (= 1.2.0)
@@ -66,6 +68,7 @@ DEPENDENCIES:
   - SHActionSheetView
   - SHAlertView
   - SHAVPlayer
+  - SHEmptyView
   - SHExtension
   - SHPopView
   - SHScrollLayout
@@ -87,6 +90,7 @@ SPEC REPOS:
     - SHAlertView
     - SHAVPlayer
     - SHClickTextView
+    - SHEmptyView
     - SHExtension
     - SHPopView
     - SHScrollLayout
@@ -107,12 +111,13 @@ SPEC CHECKSUMS:
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
   SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
   SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
+  SHEmptyView: 0ee76f449b3e62f490e0feb9c7736b370f83039b
   SHExtension: 55174fa3c44000138ff60445122a1640e31d58db
   SHPopView: 90c94dbb51ad9b4fc431f97fb63c2e9d9b825a8f
   SHScrollLayout: a78de4d0522b951a7473d7df82527909bf51a4ee
   SHScrollView: 3aebed64e93063b8dca36aeac0a81e6c6452e1cd
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
 
-PODFILE CHECKSUM: 3b91b69323fd70645168d2e684ceb52a27e0bd75
+PODFILE CHECKSUM: 8b73ab2f90bde1d1476e135d4a1419d8be0bb778
 
 COCOAPODS: 1.10.1
