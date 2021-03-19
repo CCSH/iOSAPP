@@ -9,7 +9,6 @@
 #ifndef ClassHeader_h
 #define ClassHeader_h
 
-#endif /* ClassHeader_h */
 //类
 #import "AppDelegate+SHExtension.h"
 #import "AppDelegate.h"
@@ -37,3 +36,5 @@
 #import <UIView+SHExtension.h>
 
 //#import <EaseUI/EaseUI.h>
+
+#endif /* ClassHeader_h */

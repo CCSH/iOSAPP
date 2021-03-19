@@ -84,6 +84,7 @@
 		5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseNavViewController.m; sourceTree = "<group>"; };
 		5C8BECCB24C6AD2300412B3B /* SHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseViewController.h; sourceTree = "<group>"; };
 		5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseViewController.m; sourceTree = "<group>"; };
+		834C0433260476A10012A10A /* EnumHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		834CBC82253FCB2F005214EC /* SHWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHWebViewController.h; sourceTree = "<group>"; };
 		834CBC83253FCB2F005214EC /* SHWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHWebViewController.m; sourceTree = "<group>"; };
 		834CBC86253FCB73005214EC /* SHBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseModel.h; sourceTree = "<group>"; };
@@ -362,9 +363,10 @@
 			isa = PBXGroup;
 			children = (
 				83FE1027251D8C2E006E727A /* PrefixHeader.pch */,
-				83FE1025251D8C2E006E727A /* ClassHeader.h */,
 				83FE1026251D8C2E006E727A /* InterfaceHeader.h */,
+				83FE1025251D8C2E006E727A /* ClassHeader.h */,
 				83FE1028251D8C2E006E727A /* MacroHeader.h */,
+				834C0433260476A10012A10A /* EnumHeader.h */,
 			);
 			path = "Header(头文件)";
 			sourceTree = "<group>";
@@ -415,7 +417,7 @@
 		5C25FE991F68D72600F080A4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = CSH;
 				TargetAttributes = {
 					5C25FEA01F68D72600F080A4 = {
@@ -699,7 +701,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;
@@ -720,7 +722,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;

@@ -9,8 +9,6 @@
 #ifndef MacroHeader_h
 #define MacroHeader_h
 
-
-#endif /* MacroHeader_h */
 //宏定义
 
 //设备物理WH
@@ -178,3 +176,6 @@
 #define kColorBorder_3 [UIColor colorWithHexString:@"#c2e7b0"]
 #define kColorBorder_4 [UIColor colorWithHexString:@"#d3d4d6"]
 #define kColorBorder_5 [UIColor colorWithHexString:@"#f5dab1"]
+
+
+#endif /* MacroHeader_h */

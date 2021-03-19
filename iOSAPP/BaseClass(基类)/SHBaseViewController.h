@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 @class SHWebViewController;
 
+NS_ASSUME_NONNULL_BEGIN
+
 //回调
 typedef void(^CallBack)();
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface SHBaseViewController : UIViewController
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 //参数
 @property (nonatomic, strong) NSDictionary *param;
 //回调
-@property (nonatomic, strong) CallBack callBack;
+@property (nonatomic, copy) CallBack callBack;
 
 // 其他参数
 //当前windows
