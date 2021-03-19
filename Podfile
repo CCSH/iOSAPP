@@ -5,19 +5,6 @@ target 'iOSAPP' do
   use_frameworks!
   # 去掉由pod引入的第三方库的警告，需要更新命令才生效
   inhibit_all_warnings!
-  
-  #数据请求
-  pod 'AFNetworking'
-  #刷新
-  pod 'MJRefresh'
-  #数据处理
-  pod 'MJExtension'
-  #图片加载
-  pod 'SDWebImage'
-  #数据库
-  pod 'FMDB'
-  #加载框
-  pod 'MBProgressHUD'
   #Toast
   pod 'SHToast'
   #复杂滚动布局
@@ -34,6 +21,22 @@ target 'iOSAPP' do
   pod 'SHAVPlayer'
   #弹窗
   pod 'SHPopView'
+  #弹窗
+  pod 'SHPopView'
+  #空状态
+  pod 'SHEmptyView'
+  #数据请求
+  pod 'AFNetworking'
+  #刷新
+  pod 'MJRefresh'
+  #数据处理
+  pod 'MJExtension'
+  #图片加载
+  pod 'SDWebImage'
+  #数据库
+  pod 'FMDB'
+  #加载框
+  pod 'MBProgressHUD'
   #环信ui
   #pod 'EaseUI', :git => 'https://github.com/easemob/easeui-ios-hyphenate-cocoapods.git', :tag => '3.3.7'
   #bug收集
@@ -42,9 +45,7 @@ target 'iOSAPP' do
   pod 'BaiduMobStatCodeless'
   #布局
   pod 'Masonry'
-  #弹窗
-  pod 'SHPopView'
-  #空状态
-  pod 'SHEmptyView'
+  #瀑布流
+  pod 'CHTCollectionViewWaterfallLayout'
   
 end

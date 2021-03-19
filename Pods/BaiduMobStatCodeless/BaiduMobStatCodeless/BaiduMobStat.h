@@ -60,7 +60,7 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 
 /**
  百度移动应用统计接口
- 当前版本 5.3.1_18
+ 当前版本 5.3.2_18
  */
 @interface BaiduMobStat : NSObject
 /**
