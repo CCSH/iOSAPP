@@ -26,6 +26,7 @@
     
     //配置界面
     [self configApplication:application didFinishLaunchingWithOptions:launchOptions];
+
     return YES;
 }
 
@@ -34,7 +35,7 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    SHLog(@"程序将要进入非激活");
+    SHLog(@"程序将要进入后台");
 }
 
 #pragma mark - 程序进入后台
@@ -56,7 +57,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    SHLog(@"程序进入激活");
+    SHLog(@"程序进入前台");
     [UIApplication sharedApplication].applicationIconBadgeNumber++;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
@@ -85,13 +86,12 @@
     SHLog(@"远程推送证书Token：%@", token);
 }
 
-#pragma mark - iOS10 收到通知（本地和远端） UNUserNotificationCenterDelegate
-#pragma mark App处于前台接收通知时(下面这个代理方法，只会是app处于前台状态 前台状态 and 前台状态下才会走，后台模式下是不会走这里的)
+#pragma mark - iOS10 收到通知（本地和远端）UNUserNotificationCenterDelegate
+#pragma mark App处于前台接收通知时(下面这个代理方法，只会是app处于前台或者前台状态下才会走，后台模式下是不会走这里的)
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(nonnull UNNotification *)notification withCompletionHandler:(nonnull void (^)(UNNotificationPresentationOptions))completionHandler
 {
     //收到推送的请求
     UNNotificationRequest *request = notification.request;
-    
     
     //处理通知
     [self handleNotificationRequest:request];
@@ -102,15 +102,25 @@
                       UNNotificationPresentationOptionAlert);
 }
 
-#pragma mark App通知的点击事件(下面这个代理方法，只会是用户点击消息才会触发，如果使用户长按（3DTouch）、Action等并不会触发。)
+#pragma mark App通知的点击事件 (下面这个代理方法，只会是用户点击消息才会触发，如果使用户长按（3DTouch）、Action等并不会触发。 前后台点击都会走此方法)
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(nonnull void (^)(void))completionHandler
 {
     //收到推送的请求
-    UNNotificationRequest *request = response.notification.request;
-    //处理通知
-    [self handleNotificationRequest:request];
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    //点击通知
+    if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        [self handleClickNotification:userInfo];
+    }else{
+        self.userInfo = userInfo;
+    }
     
     completionHandler(); // 系统要求执行这个方法
+}
+
+#pragma mark - iOS10之前 点击通知
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    //点击了通知
+    [self handleClickNotification:userInfo];
 }
 
 #pragma mark - 处理外部唤起

@@ -62,6 +62,13 @@
     
     //设置展示
     self.selectedIndex = 0;
+    
+    //处理通知点击
+    NSDictionary *userInfo = kAppDelegate.userInfo;
+    if (userInfo) {
+        [kAppDelegate handleClickNotification:userInfo];
+        kAppDelegate.userInfo = nil;
+    }
 }
 
 /**

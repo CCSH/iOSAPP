@@ -38,6 +38,9 @@ typedef enum : NSUInteger
 #pragma mark 处理通知
 - (void)handleNotificationRequest:(UNNotificationRequest *)request;
 
+#pragma mark 处理点击通知
+- (void)handleClickNotification:(NSDictionary *)userInfo;
+
 
 @end
 

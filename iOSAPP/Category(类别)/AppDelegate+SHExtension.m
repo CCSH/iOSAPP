@@ -194,23 +194,23 @@
     
     //收到推送的内容
     UNNotificationContent *content = request.content;
-    //    //收到用户的基本信息
-    //    NSDictionary *userInfo = content.userInfo;
-    //
-    //    //收到推送消息的角标
-    //    NSNumber *badge = content.badge;
-    //
-    //    //收到推送消息body
-    //    NSString *body = content.body;
-    //
-    //    //推送消息的声音
-    //    UNNotificationSound *sound = content.sound;
-    //
-    //    // 推送消息的副标题
-    //    NSString *subtitle = content.subtitle;
-    //
-    //    // 推送消息的标题
-    //    NSString *title = content.title;
+//    //收到用户的基本信息
+//    NSDictionary *userInfo = content.userInfo;
+//
+//    //收到推送消息的角标
+//    NSNumber *badge = content.badge;
+//
+//    //收到推送消息body
+//    NSString *body = content.body;
+//
+//    //推送消息的声音
+//    UNNotificationSound *sound = content.sound;
+//
+//    // 推送消息的副标题
+//    NSString *subtitle = content.subtitle;
+//
+//    // 推送消息的标题
+//    NSString *title = content.title;
     
     if([request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         SHLog(@"远程通知 = %@",content.userInfo);
@@ -218,6 +218,11 @@
         // 判断为本地通知
         SHLog(@"本地通知 = {\n消息Body:%@\n标题:%@\n副标题:%@\n消息个数:%@\n声音：%@\n传值：%@}",content.body,content.title,content.subtitle,content.badge,content.sound,content.userInfo);
     }
+}
+
+#pragma mark 处理点击通知
+- (void)handleClickNotification:(NSDictionary *)userInfo{
+    SHLog(@"点击了通知 = %@",userInfo.mj_JSONString);
 }
 
 
