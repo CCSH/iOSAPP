@@ -78,6 +78,8 @@
             [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"main" param:nil]
                                  type:SHRoutingType_root
                                 block:nil];
+            //界面加载完毕、处理通知点击
+            [self handleClickNotification:self.userInfo];
         }
             break;
         case RootVCType_wecome:
@@ -226,7 +228,10 @@
         return;
     }
     
+    //处理逻辑
     if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        //默认界面加载完毕
+        self.userInfo = nil;
         SHLog(@"点击了通知 = %@",userInfo);
         
         NSDictionary *info = userInfo.mj_JSONObject;
