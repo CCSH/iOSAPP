@@ -117,12 +117,6 @@
     completionHandler(); // 系统要求执行这个方法
 }
 
-#pragma mark - iOS10之前 点击通知
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    //点击了通知
-    [self handleClickNotification:userInfo];
-}
-
 #pragma mark - 处理外部唤起
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary< UIApplicationOpenURLOptionsKey, id > *)options
 {
