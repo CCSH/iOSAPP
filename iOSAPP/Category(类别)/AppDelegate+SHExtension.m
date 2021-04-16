@@ -221,8 +221,25 @@
 }
 
 #pragma mark 处理点击通知
-- (void)handleClickNotification:(NSDictionary *)userInfo{
-    SHLog(@"点击了通知 = %@",userInfo.mj_JSONString);
+- (void)handleClickNotification:(NSString *)userInfo{
+    if (!userInfo) {
+        return;
+    }
+    
+    if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        SHLog(@"点击了通知 = %@",userInfo);
+        
+        NSDictionary *info = userInfo.mj_JSONObject;
+        if (!info) {
+            return;
+        }
+        //处理通知内容
+        
+        
+    }else{
+        //界面没加载完存起来
+        self.userInfo = userInfo;
+    }
 }
 
 

@@ -108,11 +108,7 @@
     //收到推送的请求
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     //点击通知
-    if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
-        [self handleClickNotification:userInfo];
-    }else{
-        self.userInfo = userInfo;
-    }
+    [self handleClickNotification:userInfo[@"payload"]];
     
     completionHandler(); // 系统要求执行这个方法
 }

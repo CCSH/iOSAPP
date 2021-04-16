@@ -39,7 +39,7 @@ typedef enum : NSUInteger
 - (void)handleNotificationRequest:(UNNotificationRequest *)request;
 
 #pragma mark 处理点击通知
-- (void)handleClickNotification:(NSDictionary *)userInfo;
+- (void)handleClickNotification:(NSString *)userInfo;
 
 
 @end

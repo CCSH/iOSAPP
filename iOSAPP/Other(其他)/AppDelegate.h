@@ -15,7 +15,7 @@
 //是否旋转
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 //通知处理
-@property (nonatomic, copy) NSDictionary *userInfo;
+@property (nonatomic, copy) NSString *userInfo;
 
 @end
 
