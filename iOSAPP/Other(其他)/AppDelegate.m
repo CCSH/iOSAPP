@@ -116,7 +116,7 @@
 #pragma mark - 处理外部唤起
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary< UIApplicationOpenURLOptionsKey, id > *)options
 {
-    SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
+    [self handleOpenURL:url];
     return YES;
 }
 

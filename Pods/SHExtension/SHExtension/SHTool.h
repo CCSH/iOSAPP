@@ -103,6 +103,9 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 获取最上方控制器
 + (UIViewController *)getCurrentVC;
 
+#pragma mark 获取url的参数
++ (NSDictionary *)getUrlParam:(NSString *)str;
+
 @end
 
 NS_ASSUME_NONNULL_END

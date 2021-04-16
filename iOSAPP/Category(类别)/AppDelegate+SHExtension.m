@@ -247,5 +247,13 @@
     }
 }
 
+#pragma mark 处理外部链接唤起
+- (void)handleOpenURL:(NSURL *)url{
+    if (!url) {
+        return;
+    }
+    SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
+}
+
 
 @end

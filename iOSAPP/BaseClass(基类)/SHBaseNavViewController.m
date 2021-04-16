@@ -20,7 +20,7 @@
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
-    [navBar setTintColor:[UIColor redColor]];
+    [navBar setTintColor:[UIColor whiteColor]];
     //标题颜色
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
                                      NSFontAttributeName : kFont(15)}];

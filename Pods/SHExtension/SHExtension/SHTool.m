@@ -428,4 +428,16 @@
     return activeVC;
 }
 
+#pragma mark 获取url的参数
++ (NSDictionary *)getUrlParam:(NSString *)str{
+    //获取参数
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    NSArray *query = [str componentsSeparatedByString:@"&"];
+    for (NSString *obj in query) {
+        NSArray *temp = [obj componentsSeparatedByString:@"="];
+        [param setValue:temp[1] forKey:temp[0]];
+    }
+    return param;
+}
+
 @end

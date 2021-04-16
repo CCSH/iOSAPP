@@ -41,6 +41,9 @@ typedef enum : NSUInteger
 #pragma mark 处理点击通知
 - (void)handleClickNotification:(NSString *)userInfo;
 
+#pragma mark 处理外部链接唤起
+- (void)handleOpenURL:(NSURL *)url;
+
 
 @end
 

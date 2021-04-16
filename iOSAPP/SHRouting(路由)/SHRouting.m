@@ -28,12 +28,7 @@
         
         if (vc) {
             //获取参数
-            NSMutableDictionary *param = [NSMutableDictionary new];
-            NSArray *query = [temp.query componentsSeparatedByString:@"&"];
-            for (NSString *obj in query) {
-                NSArray *temp = [obj componentsSeparatedByString:@"="];
-                [param setValue:temp[1] forKey:temp[0]];
-            }
+            NSDictionary *param = [SHTool getUrlParam:temp.query];
             //设置参数
             if ([vc isKindOfClass:[SHBaseViewController class]]) {
                 SHBaseViewController *temp = (SHBaseViewController *)vc;

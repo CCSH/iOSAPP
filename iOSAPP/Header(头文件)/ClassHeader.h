@@ -34,6 +34,7 @@
 #import <UIColor+SHExtension.h>
 #import <UIImage+SHExtension.h>
 #import <UIView+SHExtension.h>
+#import <SHTool.h>
 
 //#import <EaseUI/EaseUI.h>
 
