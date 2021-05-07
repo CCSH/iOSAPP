@@ -124,12 +124,16 @@
 + (NSString *)getVCWithName:(NSString *)name{
     name = name.lowercaseString;
     if ([name isEqualToString:@"login"]) {
+        //登陆
         return @"LoginViewController";
     }else if ([name isEqualToString:@"welcome"]){
+        //欢迎页
         return @"WelcomeViewController";
     }else if ([name isEqualToString:@"main"]){
+        //主页
         return @"MainTabBarController";
     }else if ([name isEqualToString:@"web"]){
+        //网页
         return @"SHWebViewController";
     }
     return @"";

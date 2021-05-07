@@ -26,24 +26,6 @@
     view.frame = CGRectMake(100, 100, 100, 100);
     view.backgroundColor = [UIColor redColor];
     [self.view addSubview:view];
-    
-    [self makeMaskView:view withImage:[UIImage imageNamed:@"tabbar_min"]];
-
-}
-
-#pragma mark 剪切视图
-- (void)makeMaskView:(UIView *)view withImage:(UIImage *)image {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        CALayer *maskLayer = [CALayer layer];
-        maskLayer.frame = view.bounds;
-
-        [maskLayer setContents:(id)image.CGImage];
-        [maskLayer setContentsScale:image.scale];
-
-        view.layer.mask = maskLayer;
-    });
 }
 
 - (void)viewWillAppear:(BOOL)animated{

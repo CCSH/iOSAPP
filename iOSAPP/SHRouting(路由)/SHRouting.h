@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+//路由跳转类型
 typedef enum : NSUInteger {
     SHRoutingType_none,//不处理
     SHRoutingType_root,//跟视图
     SHRoutingType_nav,//导航调转
     SHRoutingType_modal,//模态跳转
 } SHRoutingType;
+
 
 NS_ASSUME_NONNULL_BEGIN
 

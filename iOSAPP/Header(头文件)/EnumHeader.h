@@ -11,11 +11,12 @@
 
 //结构体头文件
 
-//任务类型
 typedef enum : NSUInteger {
-    TaskType_send,
-    TaskType_receive,
-} TaskType;
+    qwer2,
+    qwre3,
+    qwerf,
+} qwer;
 
 #endif /* EnumHeader_h */
+
 
