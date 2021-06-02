@@ -17,7 +17,12 @@
 + (NSMutableDictionary *)handleParameterWithDic:(NSDictionary *)dic
 {
     NSMutableDictionary *para = [[NSMutableDictionary alloc] initWithDictionary:dic];
-
+    if (!para[@"user_id"]) {
+        NSString *uid = [SHToolHelper getUserId];
+        if (uid.length) {
+            para[@"user_id"] = uid;
+        }
+    }
     return para;
 }
 
@@ -73,7 +78,7 @@
     SHRequestBase *request = [SHRequestBase new];
     request.url = url;
     request.param = param;
-    weakify(self);
+    @weakify(self);
     request.success = ^(id  _Nonnull responseObj) {
         //处理数据
         SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];

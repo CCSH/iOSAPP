@@ -32,6 +32,7 @@
 		834CBC84253FCB2F005214EC /* SHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC83253FCB2F005214EC /* SHWebViewController.m */; };
 		834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC87253FCB73005214EC /* SHBaseModel.m */; };
 		834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC8B253FCB9E005214EC /* IShareModel.m */; };
+		838C50F72665C75F00C87CD3 /* SHToolHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 838C50F62665C75F00C87CD3 /* SHToolHelper.m */; };
 		83B4BAF424CADD6800F8E27B /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */; };
 		83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C8913C250B56D3001AE9D1 /* SHTabBar.m */; };
 		83CCC7C7256D05D400968720 /* SHRouting.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC7C6256D05D400968720 /* SHRouting.m */; };
@@ -91,6 +92,8 @@
 		834CBC87253FCB73005214EC /* SHBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseModel.m; sourceTree = "<group>"; };
 		834CBC8A253FCB9E005214EC /* IShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShareModel.h; sourceTree = "<group>"; };
 		834CBC8B253FCB9E005214EC /* IShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IShareModel.m; sourceTree = "<group>"; };
+		838C50F52665C75F00C87CD3 /* SHToolHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHToolHelper.h; sourceTree = "<group>"; };
+		838C50F62665C75F00C87CD3 /* SHToolHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHToolHelper.m; sourceTree = "<group>"; };
 		83B4BAF224CADD6800F8E27B /* UIScrollView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SHExtension.m"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.m"; sourceTree = "<absolute>"; };
 		83B4BAF324CADD6800F8E27B /* UIScrollView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SHExtension.h"; path = "/Users/jxdwinter/Desktop/项目/iOSAPP/iOSAPP/Category(类别)/UIScrollView+SHExtension.h"; sourceTree = "<absolute>"; };
 		83C8913B250B56D3001AE9D1 /* SHTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTabBar.h; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 		5C8BEC7F24C696D300412B3B /* Common(公共) */ = {
 			isa = PBXGroup;
 			children = (
+				838C50F52665C75F00C87CD3 /* SHToolHelper.h */,
+				838C50F62665C75F00C87CD3 /* SHToolHelper.m */,
 				5C8BECB624C6988200412B3B /* RequestBase(请求基础) */,
 				5C8BEC8324C696D300412B3B /* SHFileHelper */,
 			);
@@ -544,6 +549,7 @@
 				5C25FEA61F68D72600F080A4 /* main.m in Sources */,
 				834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */,
 				5C8BECA124C696D300412B3B /* MainTabBarController.m in Sources */,
+				838C50F72665C75F00C87CD3 /* SHToolHelper.m in Sources */,
 				5C8BECC324C69C7300412B3B /* AppDelegate+SHExtension.m in Sources */,
 				5C8BECA424C696D300412B3B /* MessageViewController.m in Sources */,
 				5C8BECC024C69A7E00412B3B /* SHServerRequest.m in Sources */,

@@ -18,7 +18,7 @@ typedef void(^CallBack)();
 
 // 路由设置
 //参数
-@property (nonatomic, strong) NSDictionary *param;
+@property (nonatomic, strong) id param;
 //回调
 @property (nonatomic, copy) CallBack callBack;
 

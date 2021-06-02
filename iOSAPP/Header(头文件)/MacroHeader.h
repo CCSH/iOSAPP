@@ -12,77 +12,91 @@
 //宏定义
 
 //设备物理WH
-//#define kSHWidth ([UIScreen mainScreen].bounds.size.width)
-//#define kSHHeight ([UIScreen mainScreen].bounds.size.height)
-
+#define kSHWidth ([UIScreen mainScreen].bounds.size.width)
+#define kSHHeight ([UIScreen mainScreen].bounds.size.height)
 //界面宽高
 #define kSHViewWidth (self.view.frame.size.width)
 #define kSHViewHeight (self.view.frame.size.height)
-
 //状态栏H
 #define kStatusBarH (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
-//导航栏H
-#define kNavBarH 44.0
 //状态栏 + 导航栏
 #define kNavAndStatusH (kStatusBarH + kNavBarH)
 //全面屏判断
-#define kIsFullScreen (kStatusBarH != 20)
+#define kIsFullScreen (kSafeBottomH > 0)
+//导航栏H
+#define kNavBarH (44.0)
 //底部安全H
-#define kSafeBottomH (kIsFullScreen ? 34 : 0)
+#define kSafeBottomH ([SHToolHelper getSafeBottomH])
+//顶部安全H
+#define kSafeTopH ([SHToolHelper getSafeTopH])
 //tabbarH
 #define kTabBarH (49.0)
 //Tabbar安全H
 #define kTabBarSafeH (kTabBarH + kSafeBottomH)
-//有导航栏内容安全H
-#define kNavContentAreaH (kSHHeight - kNavAndStatusH)
-#define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
-//无导航栏内容安全H
+//无导航栏内容H
 #define kContentAreaH (kSHHeight - kStatusBarH)
+//无导航栏内容安全H
 #define kContentSafeAreaH (kContentAreaH - kSafeBottomH)
+//有导航栏内容H
+#define kNavContentAreaH (kSHHeight - kNavAndStatusH)
+//有导航栏内容安全H
+#define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
+
+//空插画高度
+#define kEmptyH (260)
+//默认间距
+#define kSpaceW (15)
+//组头部高度
+#define kHeadH 40
 
 //字体
 #define kFont(A) [UIFont systemFontOfSize:A]
+//加粗字体
+#define kBoldFont(A) [UIFont boldSystemFontOfSize:A]
+//等宽字体
+#define kWidthFont(A) [UIFont fontWithName:@"Helvetica Neue" size:A]
 
 //是否为V以上系统
-#define IOS(V) [[[UIDevice currentDevice] systemVersion] floatValue] >= V
+#define IOS(V) @available(iOS V, *)
 
 //RGB颜色
-#define kRGB(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+#define kRGBA(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+#define kRGB(R,G,B) kRGBA(R,G,B,1)
 
 //系统delegate
 #define kAppDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 //引用
 #ifndef weakify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define weakify(object) @autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) @autoreleasepool{} __block __typeof__(object) block##_##object = object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define weakify(object) @try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) @try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-#endif
-#endif
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+        #else
+            #define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+        #else
+            #define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+        #endif
+    #endif
 #endif
 
 #ifndef strongify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define strongify(object) @autoreleasepool{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) @autoreleasepool{} __typeof__(object) object = block##_##object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define strongify(object) @try{} @finally{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) @try{} @finally{} __typeof__(object) object = block##_##object;
-#endif
-#endif
+    #if DEBUG
+        #if __has_feature(objc_arc)
+            #define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+        #else
+            #define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+        #endif
+    #else
+        #if __has_feature(objc_arc)
+            #define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+        #else
+            #define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
+        #endif
+    #endif
 #endif
 
 //描边
@@ -95,7 +109,7 @@
 
 //控制日志输出
 #ifdef DEBUG
-#   define SHLog(log, ...) NSLog((@"\n%s\n[Line %d]\n"  log), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#   define SHLog(log, ...) printf("%s \nline (%d) \n%s\n", __PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:(log), ##__VA_ARGS__] UTF8String])
 #else
 #   define SHLog(...)
 #endif
@@ -108,42 +122,40 @@
 #pragma mark - 文件路径
 //Document目录
 #define DocumentPatch [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
-
 //Caches目录
 #define CachesPatch NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
-
 //Temp目录
 #define TempPatch NSTemporaryDirectory()
-
 //数据库路径
 #define kSHDBPath [SHFileHelper getCreateFilePath:[NSString stringWithFormat:@"%@/APPData/DataBase",CachesPatch]]
 
 #pragma mark - NSUserDefaults使用的键值
-
 #define kSHUserDef [NSUserDefaults standardUserDefaults]
 #define kSHUserDefGet(KEY) [[NSUserDefaults standardUserDefaults] objectForKey:(KEY)]
 
 #pragma mark UserDefKey
 //APP版本
-#define kAppVersion @"app_version"
+#define kAppVersion @"kAppVersion"
+//登录用户信息
+#define kLoginInfo @"kLoginInfo"
 
-#pragma mark 通知
+#pragma mark - 通知
 //刷新界面
-#define kNotReload @"not-reload"
+#define kNotReload @"kNotReload"
+//退出登录
+#define kNotLoginOut @"kNotLoginOut"
+//登录成功
+#define kNotLoginSuccess @"kNotLoginSuccess"
 
+#pragma mark - 路由
 #pragma mark 链接
 #define kScheme @"ccsh"
 
-#pragma mark 颜色
+#pragma mark - 颜色
 //主题色
-#define kColorMain kRGB(214, 113, 74, 1)
-//主辅色
-#define kColorMain2 kRGB(225, 178, 43, 1)
-//背景色
-#define kColorBG kRGB(245, 245, 245, 1)
-//分割线
-#define kColorDivider kRGB(209, 209, 209, 1)
-
+#define kColorMain [UIColor colorWithHexString:@"#5FD0ED"]
+//背景色、分割线
+#define kColor245 kRGB(245, 245, 245)
 //状态颜色
 #define kColorStatus_primary [UIColor colorWithHexString:@"#409eff"]
 #define kColorStatus_success [UIColor colorWithHexString:@"#67c23a"]
@@ -176,6 +188,5 @@
 #define kColorBorder_3 [UIColor colorWithHexString:@"#c2e7b0"]
 #define kColorBorder_4 [UIColor colorWithHexString:@"#d3d4d6"]
 #define kColorBorder_5 [UIColor colorWithHexString:@"#f5dab1"]
-
 
 #endif /* MacroHeader_h */

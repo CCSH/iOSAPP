@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IUesrModel.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,7 +16,9 @@
 //是否旋转
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 //通知处理
-@property (nonatomic, copy) NSString *userInfo;
+@property (nonatomic, copy) NSString *notInfo;
+//登录用户
+@property (nonatomic, strong) IUesrModel *userInfo;
 
 @end
 

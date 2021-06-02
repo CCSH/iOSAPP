@@ -37,15 +37,14 @@
     config.blockMonitorTimeout = 0.5;
     
     [Bugly startWithAppId:kBuglyID config:config];
-    
-    //埋点
-    //    [[MTAConfig getInstance] setDebugEnable:YES];
-    //    [MTA startWithAppkey:@"I2E3KXDU1E2W"];
 }
 
 #pragma mark 配置界面逻辑
 - (void)configInterface
 {
+    //配置登录信息
+    self.userInfo = [IUesrModel mj_objectWithKeyValues:kSHUserDefGet(kLoginInfo)];
+    
     //当前版本号
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
@@ -56,13 +55,13 @@
         //保存版本号
         [kSHUserDef setValue:currentVersion forKey:kAppVersion];
         [kSHUserDef synchronize];
+        
         //进入欢迎页
         [self configVC:RootVCType_wecome];
     }
     else
     {
         SHLog(@"不出现欢迎页");
-        
         //进入主界面
         [self configVC:RootVCType_home];
     }
@@ -75,23 +74,23 @@
     {
         case RootVCType_home:
         {
-            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"main" param:nil]
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_main]
                                  type:SHRoutingType_root
                                 block:nil];
             //界面加载完毕、处理通知点击
-            [self handleClickNotification:self.userInfo];
+            [self handleClickNotification:self.notInfo];
         }
             break;
         case RootVCType_wecome:
         {
-            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"welcome" param:nil]
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_welcome]
                                  type:SHRoutingType_root
                                 block:nil];
         }
             break;
         case RootVCType_login:
         {
-            [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"login" param:nil]
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_login]
                                  type:SHRoutingType_modal
                                 block:nil];
         }
@@ -130,8 +129,7 @@
 }
 
 #pragma mark 界面旋转
-- (void)handleRotation
-{
+- (void)handleRotation {
     //强制转换
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         
@@ -142,7 +140,6 @@
         UIInterfaceOrientationMask val = kAppDelegate.interfaceOrientation;
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
-        
     }
 }
 
@@ -163,8 +160,8 @@
 #pragma mark 处理粘贴板
 - (void)handleCopy{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
-    
-    if (@available(iOS 14.0, *)) {
+
+    if (IOS(14)) {
         [board detectPatternsForPatterns:[NSSet setWithObjects:UIPasteboardDetectionPatternProbableWebURL, UIPasteboardDetectionPatternNumber, UIPasteboardDetectionPatternProbableWebSearch, nil]
                        completionHandler:^(NSSet<UIPasteboardDetectionPattern> * _Nullable set, NSError * _Nullable error) {
             //判断类型是否可用
@@ -192,7 +189,6 @@
 
 #pragma mark 处理通知
 - (void)handleNotificationRequest:(UNNotificationRequest *)request{
-    
     
     //收到推送的内容
     UNNotificationContent *content = request.content;
@@ -224,14 +220,14 @@
 
 #pragma mark 处理点击通知
 - (void)handleClickNotification:(NSString *)userInfo{
-    if (!userInfo) {
+    if (!userInfo.length) {
         return;
     }
     
     //处理逻辑
     if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
         //默认界面加载完毕
-        self.userInfo = nil;
+        self.notInfo = nil;
         SHLog(@"点击了通知 = %@",userInfo);
         
         NSDictionary *info = userInfo.mj_JSONObject;
@@ -243,7 +239,7 @@
         
     }else{
         //界面没加载完存起来
-        self.userInfo = userInfo;
+        self.notInfo = userInfo;
     }
 }
 
@@ -254,6 +250,5 @@
     }
     SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
 }
-
 
 @end

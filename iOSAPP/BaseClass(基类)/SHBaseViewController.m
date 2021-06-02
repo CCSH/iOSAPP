@@ -18,8 +18,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = kRGB(245, 245, 245, 1);
-    
+    self.view.backgroundColor = kColor245;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
 }
 
@@ -33,10 +32,13 @@
     if (self.isStatusBarHide) {
         self.isStatusBarHide = NO;
     }
+    if (self.navBarAlpha < 1){
+        self.navBarAlpha = 1;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 属性
@@ -51,7 +53,6 @@
     //整体透明
     //    self.navigationController.navigationBar.alpha = navBarAlpha;
 }
-
 
 - (void)setIsNavHide:(BOOL)isNavHide{
     _isNavHide = isNavHide;
@@ -71,7 +72,7 @@
 #pragma mark - 方法
 #pragma mark 关闭自动布局
 - (void)automaticallyWithScroll:(UIScrollView *)scroll{
-    if (@available(iOS 11.0, *)) {
+    if (IOS(11)) {
         if (scroll) {
             scroll.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }

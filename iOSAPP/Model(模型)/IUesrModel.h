@@ -11,4 +11,6 @@
 /// 用户
 @interface IUesrModel : NSObject
 
+@property (nonatomic, copy) NSString *user_id;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "EnumHeader.h"
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -14,15 +15,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AppDelegate (SHExtension)<UNUserNotificationCenterDelegate>
-
-typedef enum : NSUInteger
-{
-    RootVCType_home,   //首页
-    RootVCType_wecome, //欢迎页
-    RootVCType_login,  //登录
-} RootVCType;
-
-
 
 #pragma mark - 配置
 - (void)configApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;

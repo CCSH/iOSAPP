@@ -7,15 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-//路由跳转类型
-typedef enum : NSUInteger {
-    SHRoutingType_none,//不处理
-    SHRoutingType_root,//跟视图
-    SHRoutingType_nav,//导航调转
-    SHRoutingType_modal,//模态跳转
-} SHRoutingType;
-
+#import "EnumHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
                                 type:(SHRoutingType)type
                                block:(CallBack _Nullable)block;
 
+#pragma mark 获取路由页面(param 优先级最高)
++ (UIViewController *)routingWithUrl:(NSString *)url
+                               param:(id _Nullable)param
+                                type:(SHRoutingType)type
+                               block:(CallBack _Nullable)block;
+
 #pragma mark 路由url生成
++ (NSString *)getUrlWithName:(NSString *)name;
 + (NSString *)getUrlWithName:(NSString *)name
                        param:(NSDictionary *_Nullable)param;
 

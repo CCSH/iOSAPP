@@ -14,6 +14,13 @@
 + (UIViewController *)routingWithUrl:(NSString *)url
                                 type:(SHRoutingType)type
                                block:(CallBack)block{
+    return [self routingWithUrl:url param:nil type:type block:block];
+}
+
++ (UIViewController *)routingWithUrl:(NSString *)url
+                               param:(id)param
+                                type:(SHRoutingType)type
+                               block:(CallBack _Nullable)block{
     NSURL *temp = [NSURL URLWithString:url];
     
     //获取scheme
@@ -28,7 +35,7 @@
         
         if (vc) {
             //获取参数
-            NSDictionary *param = [SHTool getUrlParam:temp.query];
+            NSDictionary *param = [self getUrlParam:temp.query];
             //设置参数
             if ([vc isKindOfClass:[SHBaseViewController class]]) {
                 SHBaseViewController *temp = (SHBaseViewController *)vc;
@@ -42,6 +49,9 @@
     if (!vc) {
         //未找到页面 返回一个错误页面提示
         vc = [self getErrorVC];
+    }
+    if (param) {
+        [vc setValue:param forKey:@"param"];
     }
     
     UIViewController *root = [self getCurrentVC];
@@ -68,6 +78,18 @@
             break;
     }
     return vc;
+}
+
+#pragma mark 获取url的参数
++ (NSDictionary *)getUrlParam:(NSString *)str{
+    //获取参数
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    NSArray *query = [str componentsSeparatedByString:@"&"];
+    for (NSString *obj in query) {
+        NSArray *temp = [obj componentsSeparatedByString:@"="];
+        [param setValue:temp[1] forKey:temp[0]];
+    }
+    return param;
 }
 
 #pragma mark 获取最上方控制器
@@ -104,6 +126,10 @@
 }
 
 #pragma mark 路由url生成
++ (NSString *)getUrlWithName:(NSString *)name{
+    return [self getUrlWithName:name param:nil];
+}
+
 + (NSString *)getUrlWithName:(NSString *)name
                        param:(NSDictionary *)param{
     NSString *url =[NSString stringWithFormat:@"%@://",kScheme];
@@ -122,26 +148,46 @@
 
 #pragma mark 获取name对应的vc
 + (NSString *)getVCWithName:(NSString *)name{
-    name = name.lowercaseString;
-    if ([name isEqualToString:@"login"]) {
-        //登陆
+
+    if ([name isEqualToString:RoutingName_login]) {
         return @"LoginViewController";
-    }else if ([name isEqualToString:@"welcome"]){
-        //欢迎页
+    }else if ([name isEqualToString:RoutingName_welcome]){
         return @"WelcomeViewController";
-    }else if ([name isEqualToString:@"main"]){
-        //主页
+    }else if ([name isEqualToString:RoutingName_main]){
         return @"MainTabBarController";
-    }else if ([name isEqualToString:@"web"]){
-        //网页
+    }else if ([name isEqualToString:RoutingName_web]){
         return @"SHWebViewController";
+    }else if ([name isEqualToString:RoutingName_search]){
+        return @"ShopSearchViewController";
+    }else if ([name isEqualToString:RoutingName_goodDetail]){
+        return @"GoodsDetailViewController";
+    }else if ([name isEqualToString:RoutingName_orderConfirm]){
+        return @"OrderConfirmViewController";
+    }else if ([name isEqualToString:RoutingName_addressList]){
+        return @"AddressListViewController";
+    }else if ([name isEqualToString:RoutingName_goodsSearch]){
+        return @"GoodsSearchViewController";
+    }else if ([name isEqualToString:RoutingName_specifications]){
+        return @"CommoditySpecificationsViewController";
+    }else if ([name isEqualToString:RoutingName_addressAdd]){
+        return @"AddressAddViewController";
+    }else if ([name isEqualToString:RoutingName_addressRegionSelect]){
+        return @"AddressRegionSelectViewController";
+    }else if ([name isEqualToString:RoutingName_publish]){
+        return @"PublishViewController";
+    }else if ([name isEqualToString:RoutingName_center]){
+        return @"PersonalCenterViewController";
+    }else if ([name isEqualToString:RoutingName_orderList]){
+        return @"OrderListViewController";
+    }else if ([name isEqualToString:RoutingName_order]){
+        return @"OrderViewController";
     }
     return @"";
 }
 
 #pragma mark 错误界面
 + (UIViewController *)getErrorVC{
-    SHBaseViewController *vc = [NSClassFromString([self getVCWithName:@"web"]) new];
+    SHBaseViewController *vc = [NSClassFromString([self getVCWithName:RoutingName_web]) new];
     vc.param = @{@"url":@"http://qzonestyle.gtimg.cn/qzone/hybrid/app/404"};
     return vc;
 }

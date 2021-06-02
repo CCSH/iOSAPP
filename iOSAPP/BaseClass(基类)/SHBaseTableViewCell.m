@@ -14,6 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.accessoryType = UITableViewCellAccessoryNone;
     }
     return self;
 }
@@ -44,14 +45,13 @@
 - (UIView *)divider{
     if (!_divider) {
         _divider = [[UIView alloc]init];
-        [self.contentView addSubview:_divider];
-        _divider.backgroundColor = kColorDivider;
+        _divider.backgroundColor = kColor245;
         _divider.hidden = YES;
+        [self.contentView addSubview:_divider];
+        
         [_divider mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0.5);
-            make.bottom.equalTo(self.contentView);
-            make.left.equalTo(self.contentView);
-            make.right.equalTo(self.contentView);
+            make.bottom.left.right.equalTo(self.contentView);
         }];
     }
     return _divider;
