@@ -11,9 +11,9 @@
 @interface SHCollectionViewLayout ()
 
 //存放所有cell 的布局属性
-@property (nonatomic, strong) NSMutableArray * attrsArray;
+@property (nonatomic, strong) NSMutableArray *attrsArray;
 //缩放所有列的高度
-@property (nonatomic, strong) NSMutableArray * columnHeights;
+@property (nonatomic, strong) NSMutableArray *columnHeights;
 
 @end
 
@@ -39,9 +39,7 @@
     //重写此方法一定要记得super
     [super prepareLayout];
     
-    //在实际操作中我们的数据并不会固定不变的，因此我们每次布局前最好要清空之前存储的属性
-    //清空存放所有列的高度
-    //清空存放所有cell的不去属性
+    //初始化
     [self.columnHeights removeAllObjects];
     [self.attrsArray removeAllObjects];
     //首先为第一行的cell附高度
@@ -80,8 +78,7 @@
     CGFloat Y;
     //获取width
     width = (collectionViewWidth - self.defaultEdgeInsets.left - self.defaultEdgeInsets.right - (self.columnCount - 1) * self.columnMagin) / self.columnCount;
-    //获取height
-    //在实际开发中heigh并不是真正的随机 而是根据数据来决定height 在这里展示初步的介绍其原理 因此采用大于100小于150的随机数
+    //获取size
     if ([self.delegate respondsToSelector:@selector(layout:itemWidth:atIndexPath:)]){
         CGSize size = [self.delegate layout:self itemWidth:width atIndexPath:indexPath];
         width = size.width?:width;
