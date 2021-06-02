@@ -29,6 +29,7 @@
 		5C8BECC724C69E0300412B3B /* SHBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC624C69E0300412B3B /* SHBaseTableViewCell.m */; };
 		5C8BECCA24C6A0C700412B3B /* SHBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */; };
 		5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */; };
+		8345DA3A26676395007BB0AC /* SHCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8345DA3826676395007BB0AC /* SHCollectionViewLayout.m */; };
 		834CBC84253FCB2F005214EC /* SHWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC83253FCB2F005214EC /* SHWebViewController.m */; };
 		834CBC88253FCB73005214EC /* SHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC87253FCB73005214EC /* SHBaseModel.m */; };
 		834CBC8C253FCB9E005214EC /* IShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 834CBC8B253FCB9E005214EC /* IShareModel.m */; };
@@ -85,6 +86,8 @@
 		5C8BECC924C6A0C700412B3B /* SHBaseNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseNavViewController.m; sourceTree = "<group>"; };
 		5C8BECCB24C6AD2300412B3B /* SHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHBaseViewController.h; sourceTree = "<group>"; };
 		5C8BECCC24C6AD2300412B3B /* SHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHBaseViewController.m; sourceTree = "<group>"; };
+		8345DA3826676395007BB0AC /* SHCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCollectionViewLayout.m; sourceTree = "<group>"; };
+		8345DA3926676395007BB0AC /* SHCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCollectionViewLayout.h; sourceTree = "<group>"; };
 		834C0433260476A10012A10A /* EnumHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		834CBC82253FCB2F005214EC /* SHWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHWebViewController.h; sourceTree = "<group>"; };
 		834CBC83253FCB2F005214EC /* SHWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHWebViewController.m; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 			children = (
 				838C50F52665C75F00C87CD3 /* SHToolHelper.h */,
 				838C50F62665C75F00C87CD3 /* SHToolHelper.m */,
+				8345DA3926676395007BB0AC /* SHCollectionViewLayout.h */,
+				8345DA3826676395007BB0AC /* SHCollectionViewLayout.m */,
 				5C8BECB624C6988200412B3B /* RequestBase(请求基础) */,
 				5C8BEC8324C696D300412B3B /* SHFileHelper */,
 			);
@@ -555,6 +560,7 @@
 				5C8BECC024C69A7E00412B3B /* SHServerRequest.m in Sources */,
 				5C8BECCD24C6AD2300412B3B /* SHBaseViewController.m in Sources */,
 				83C8913D250B56D3001AE9D1 /* SHTabBar.m in Sources */,
+				8345DA3A26676395007BB0AC /* SHCollectionViewLayout.m in Sources */,
 				5C8BECA824C696D300412B3B /* SHSQLite.m in Sources */,
 				83CCC7C7256D05D400968720 /* SHRouting.m in Sources */,
 				5C8BECBC24C6988200412B3B /* SHRequestBaseModel.m in Sources */,

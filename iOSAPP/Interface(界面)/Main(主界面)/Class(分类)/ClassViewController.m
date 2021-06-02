@@ -26,12 +26,11 @@
     scroll.delegate = self;
     [self.view addSubview:scroll];
     scroll.contentSize = CGSizeMake(kSHWidth, 10000);
-    
-    self.navBarAlpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navBarAlpha = 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
