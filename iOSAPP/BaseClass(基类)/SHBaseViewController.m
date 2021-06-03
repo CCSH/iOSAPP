@@ -210,7 +210,7 @@
         hud.mode = MBProgressHUDModeCustomView;
         
         hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
-        hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+        hud.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         hud.customView = [self hubView];
     });
 }
