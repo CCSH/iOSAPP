@@ -7,8 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import <Speech/Speech.h>
-#import "ClassViewController.h"
 
 @interface HomeViewController ()
 
@@ -20,12 +18,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColorTable_1;
-    
-    
-    UIView *view = [[UIView alloc]init];
-    view.frame = CGRectMake(100, 100, 100, 100);
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -43,7 +35,7 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     param[@"url"] = @"https://github.com/CCSH";
     
-    [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:param]
+    [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_web param:param]
                                                 type:SHRoutingType_nav
                                                block:nil];
 }

@@ -35,6 +35,9 @@
     if (self.navBarAlpha < 1){
         self.navBarAlpha = 1;
     }
+    if (self.statusBarStyle != UIStatusBarStyleDefault) {
+        self.statusBarStyle = UIStatusBarStyleDefault;
+    }
 }
 
 - (void) dealloc {

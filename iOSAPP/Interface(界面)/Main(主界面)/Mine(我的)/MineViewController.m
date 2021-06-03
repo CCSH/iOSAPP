@@ -26,11 +26,6 @@
     self.statusBarStyle = UIStatusBarStyleLightContent;
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.statusBarStyle = UIStatusBarStyleDefault;
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [SHSQLite deleteLoginInfoWithUid:@"1"];
