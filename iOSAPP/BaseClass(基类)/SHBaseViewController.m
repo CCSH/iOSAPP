@@ -246,34 +246,6 @@
     return hubView;
 }
 
-#pragma mark 进入网页
-- (SHWebViewController *)gotoWebWithUrl:(NSString *)url block:(CallBack)block{
-    if (!url.length) {
-        return nil;
-    }
-    
-    SHRoutingType type = SHRoutingType_nav;
-    if (!self.navigationController) {
-        type = SHRoutingType_modal;
-    }
-    UIViewController *vc = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"web" param:@{@"url":url}]
-                         type:type
-                        block:block];
-
-    
-    return (SHWebViewController *)vc;
-}
-
-#pragma mark 拨打电话
-- (void)callPhone:(NSString *)phone{
-    if (!phone.length) {
-        return;
-    }
-    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
-}
-
-
 #pragma mark 模态跳转
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {

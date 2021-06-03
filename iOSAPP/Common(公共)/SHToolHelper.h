@@ -42,6 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark app名字
 + (NSString *)appName;
 
+#pragma mark 拨打电话
++ (void)callPhone:(NSString *_Nonnull)phone;
+
 @end
 
 NS_ASSUME_NONNULL_END

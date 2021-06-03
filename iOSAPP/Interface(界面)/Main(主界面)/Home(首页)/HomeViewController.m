@@ -32,9 +32,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
-    param[@"url"] = @"https://github.com/CCSH";
-    
+    NSDictionary *param = @{@"url":@"https://github.com/CCSH"};
     [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_web param:param]
                                                 type:SHRoutingType_nav
                                                block:nil];

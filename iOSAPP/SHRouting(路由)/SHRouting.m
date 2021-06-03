@@ -21,28 +21,29 @@
                                param:(id)param
                                 type:(SHRoutingType)type
                                block:(CallBack _Nullable)block{
-    NSURL *temp = [NSURL URLWithString:url];
+    NSURL *routing = [NSURL URLWithString:url];
     
     //获取scheme
-    NSString *scheme = temp.scheme;
-    NSString *host = temp.host;
+    NSString *scheme = routing.scheme;
+    NSString *host = routing.host;
     
     UIViewController *vc;
     
+    //符合自定义的路由规则
     if ([scheme isEqualToString:kScheme]) {
         //找到界面数据
         vc = [NSClassFromString([self getVCWithName:host]) new];
-        
-        if (vc) {
-            //获取参数
-            NSDictionary *para = [self getUrlParam:temp.query];
+        //设置内容
+        if ([vc isKindOfClass:[SHBaseViewController class]]) {
+            SHBaseViewController *temp = (SHBaseViewController *)vc;
+            //设置回调
+            temp.callBack = block;
             //设置参数
-            if ([vc isKindOfClass:[SHBaseViewController class]]) {
-                SHBaseViewController *temp = (SHBaseViewController *)vc;
-                temp.callBack = block;
-                temp.param = para;
+            if (param) {
+                temp.param = param;
+            }else{
+                temp.param = [self getUrlParam:routing.query];
             }
-            
         }
     }
     
@@ -50,9 +51,6 @@
     if (!vc) {
         //未找到页面 返回一个错误页面提示
         vc = [self getErrorVC];
-    }
-    if (param) {
-        [vc setValue:param forKey:@"param"];
     }
     
     UIViewController *root = [self getCurrentVC];

@@ -150,4 +150,14 @@
     return [infoDictionary objectForKey:@"CFBundleName"];
 }
 
+#pragma mark 拨打电话
+- (void)callPhone:(NSString *)phone{
+    if (!phone.length) {
+        return;
+    }
+    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
+}
+
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SHWebViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,11 +65,6 @@ typedef void(^CallBack)();
 - (void)hideHub;
 - (void)hideHubWithView:(UIView *_Nullable)view;
 
-#pragma mark 进入网页
-- (SHWebViewController *_Nullable)gotoWebWithUrl:(NSString *_Nonnull)url block:(CallBack _Nonnull)block;
-
-#pragma mark 拨打电话
-- (void)callPhone:(NSString *_Nonnull)phone;
 
 @end
 
