@@ -35,13 +35,14 @@
         
         if (vc) {
             //获取参数
-            NSDictionary *param = [self getUrlParam:temp.query];
+            NSDictionary *para = [self getUrlParam:temp.query];
             //设置参数
             if ([vc isKindOfClass:[SHBaseViewController class]]) {
                 SHBaseViewController *temp = (SHBaseViewController *)vc;
                 temp.callBack = block;
-                temp.param = param;
+                temp.param = para;
             }
+            
         }
     }
     
