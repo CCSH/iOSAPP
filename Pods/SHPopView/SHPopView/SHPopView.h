@@ -22,10 +22,8 @@ typedef enum : NSUInteger {
     SHPopViewAnimation_rotationZ,//旋转、中心点方向
 } SHPopViewAnimation;
 
-@interface SHPopView : NSObject
+@interface SHPopView : UIView
 
-//蒙板颜色(默认 [[UIColor blackColor] colorWithAlphaComponent:0.3])
-@property (nonatomic, strong) UIColor *maskColor;
 //内容视图
 @property (nonatomic, strong) UIView *contentView;
 //显示动画
@@ -36,6 +34,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGFloat duration;
 //是否抖动
 @property (nonatomic, assign) BOOL isJitter;
+//内容是否显示中
+@property (nonatomic, assign, readonly) BOOL isShowing;
+//点击背景消失
+@property (nonatomic, assign) BOOL isClickDisappear;
 
 #pragma mark 显示
 - (void)show;

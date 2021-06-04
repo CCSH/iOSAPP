@@ -27,6 +27,8 @@
 @property (nonatomic, assign) BOOL isZoom;
 //是否可以点击
 @property (nonatomic, assign) BOOL isClick;
+//是否禁止拖拽
+@property (nonatomic, assign) BOOL isDisableDrag;
 
 //自动轮播时间间隔 (默认是0）
 // < 0 不自动 不界面循环
@@ -64,8 +66,5 @@
 
 //刷新视图
 - (void)reloadView;
-
-//禁止拖动
-- (void)disableDrag;
 
 @end

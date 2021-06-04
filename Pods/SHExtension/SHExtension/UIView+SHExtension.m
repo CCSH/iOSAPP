@@ -11,6 +11,8 @@
 @implementation UIView (SHExtension)
 
 static UIEdgeInsets _dragEdge;
+static DragBlock _dragBlock;
+static UIPanGestureRecognizer *_panGesture;
 
 #pragma mark - frame
 - (void)setX:(CGFloat)x {
@@ -128,9 +130,21 @@ static UIEdgeInsets _dragEdge;
 
 - (void)setDragEdge:(UIEdgeInsets)dragEdge{
     _dragEdge = dragEdge;
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
-    [self addGestureRecognizer:pan];
+    [self configPan];
 }
+
+- (void)setDragBlock:(DragBlock)dragBlock{
+    _dragBlock = dragBlock;
+    [self configPan];
+}
+
+- (void)configPan{
+    if (!_panGesture) {
+        _panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
+        [self addGestureRecognizer:_panGesture];
+    }
+}
+
 
 #pragma mark - 拖拽
 - (void)panAction:(UIPanGestureRecognizer *)pan{
@@ -144,27 +158,31 @@ static UIEdgeInsets _dragEdge;
             break;
         case UIGestureRecognizerStateEnded:
         {
-            CGFloat x = self.x;
-            CGFloat y = self.y;
-            //X轴
-            if (self.x < _dragEdge.left) {
-                x = _dragEdge.left;
-            }
-            if (self.maxX > self.superview.maxX - _dragEdge.right) {
-                x = self.superview.maxX - _dragEdge.right - self.width;
-            }
+            if (_dragBlock) {
+                _dragBlock(pan.view);
+            }else{
+                CGFloat x = self.x;
+                CGFloat y = self.y;
+                //X轴
+                if (self.x < _dragEdge.left) {
+                    x = _dragEdge.left;
+                }
+                if (self.maxX > self.superview.maxX - _dragEdge.right) {
+                    x = self.superview.maxX - _dragEdge.right - self.width;
+                }
 
-            //Y轴
-            if (self.y < _dragEdge.top) {
-                y = _dragEdge.top;
-            }
-            if (self.maxY > self.superview.maxY - _dragEdge.bottom) {
-                y = self.superview.maxY - _dragEdge.bottom - self.height;
-            }
+                //Y轴
+                if (self.y < _dragEdge.top) {
+                    y = _dragEdge.top;
+                }
+                if (self.maxY > self.superview.maxY - _dragEdge.bottom) {
+                    y = self.superview.maxY - _dragEdge.bottom - self.height;
+                }
 
-            [UIView animateWithDuration:0.1 animations:^{
-                self.origin = CGPointMake(x, y);
-            }];
+                [UIView animateWithDuration:0.1 animations:^{
+                    self.origin = CGPointMake(x, y);
+                }];
+            }
         }
             break;
         default:
@@ -172,7 +190,30 @@ static UIEdgeInsets _dragEdge;
     }
 }
 
+#pragma mark 按照图片剪裁视图
+- (void)setClippingImage:(UIImage *)clippingImage{
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        CALayer *maskLayer = [CALayer layer];
+        maskLayer.frame = self.bounds;
+
+        [maskLayer setContents:(id)clippingImage.CGImage];
+        [maskLayer setContentsScale:clippingImage.scale];
+
+        self.layer.mask = maskLayer;
+    });
+}
+
+#pragma mark 关闭拖拽
+- (void)closeDrag{
+    [self removeGestureRecognizer:_panGesture];
+}
+
 #pragma mark - 描边
+- (void)borderRadius:(CGFloat)radius{
+    [self borderRadius:radius width:0 color:[UIColor clearColor]];
+}
+
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color{
     
     [self.layer setBorderWidth:(width)];

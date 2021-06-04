@@ -32,6 +32,7 @@ static NSString *cellId = @"SHScrollView";
         self.labBGColor = [UIColor clearColor];
         self.isClick = YES;
         self.isFull = YES;
+        self.currentIndex = -1;
     }
     return self;
 }
@@ -398,12 +399,17 @@ static NSString *cellId = @"SHScrollView";
 
 #pragma mark - SET
 - (void)setCurrentIndex:(NSInteger)currentIndex {
-    //超过数组限制，不进行处理
-    if (currentIndex >= self.contentArr.count) {
+    //相同 不处理
+    if (_currentIndex == currentIndex) {
         return;
     }
     
     _currentIndex = currentIndex;
+    
+    //超过数组限制，不进行处理
+    if (currentIndex >= self.contentArr.count) {
+        return;
+    }
     
     //刷新内容
     [self.mainView reloadData];
@@ -462,8 +468,17 @@ static NSString *cellId = @"SHScrollView";
 #pragma mark - 刷新视图
 - (void)reloadView {
     //数组为空
-    if (!self.contentArr.count) {
+    if (!self.contentArr.count){
         return;
+    }
+    
+    //拖拽处理
+    if (self.isDisableDrag) {
+        [self disableDrag];
+    }else{
+        if (!self.mainView.canCancelContentTouches) {
+            self.mainView = nil;
+        }
     }
     
     //设置内容大小
@@ -497,11 +512,13 @@ static NSString *cellId = @"SHScrollView";
         self.mainView.bounces = NO;
     }
     
+    [self.mainView reloadData];
+    
     //超出数组则重置
-    if (!self.currentIndex || self.currentIndex >= self.contentArr.count) {
+    if (self.currentIndex == -1 || self.currentIndex >= self.contentArr.count) {
         self.currentIndex = 0;
     }
-    
+
     //处理时间
     [self dealTime];
 }

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 #define kSHWidth ([UIScreen mainScreen].bounds.size.width)
 #define kSHHeight ([UIScreen mainScreen].bounds.size.height)
 
+//回调 拖拽结束
+typedef void(^DragBlock)(UIView *dragView);
+
 IBInspectable
 
 @interface UIView (SHExtension)
@@ -43,11 +46,21 @@ IBInspectable
 @property (nonatomic, strong, readonly) UIViewController *sh_vc;
 //视图生成图片
 @property (nonatomic, strong, readonly) UIImage *sh_img;
-//拖拽
-@property (nonatomic, assign) UIEdgeInsets dragEdge;
 
+//拖拽 使用下方一个就好
+//设置拖拽边距
+@property (nonatomic, assign) UIEdgeInsets dragEdge;
+//拖拽结束回调（优先级最高）
+@property (nonatomic, copy) DragBlock dragBlock;
+
+//按照图片剪裁视图
+@property (nonatomic, strong) UIImage *clippingImage;
+
+#pragma mark - 关闭拖拽
+- (void)closeDrag;
 
 #pragma mark - 描边
+- (void)borderRadius:(CGFloat)radius;
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
 - (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners;
 

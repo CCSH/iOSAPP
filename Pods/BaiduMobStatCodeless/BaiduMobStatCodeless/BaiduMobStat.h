@@ -60,7 +60,7 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 
 /**
  百度移动应用统计接口
- 当前版本 5.3.2_18
+ 当前版本 5.3.5_18
  */
 @interface BaiduMobStat : NSObject
 /**
@@ -193,22 +193,45 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 @property (nonatomic, copy, nullable) NSString *crashExtraInfo;
 
 /**
- 设置是否显允许 sdk使用baidu caid库功能
- 默认YES，允许，sdk将会设置baidu caid库配置，并通过baidu caid库发起请求获取caid
- 若设置为NO，不允许，sdk将不会使用caid库任何功能，需要开发者通过属性接口 caidInfo 自行传入baidu caid信息到 sdk中
- 
- @param enableSdkUseCaid 是否显允许 sdk使用baidu caid库功能，默认YES
+ 设置app是否为仅浏览模式，该模式下所有行为打点采集无效，包括手动埋点与全埋点数据
+ 默认为NO，请谨慎设置。如需要设置建议在startwithappid之前调用
  */
-@property (nonatomic, assign) BOOL enableSdkUseCaid;
+@property (nonatomic, assign) BOOL browseMode;
 
 /**
-  主动设置baidu caid信息到 sdk中， sdk不缓存通过该接口设置的caid，需要每次启动都设置，设置点见下方介绍
-  当enableSdkUseCaid设置为YES时：不需要调用此接口
-  当enableSdkUseCaid设置为NO时：需要调用此接口传入caid信息。需要在两处调用：1. startWithAppId函数之前调用设置 2. caid库获取到最新caid时调用一次
-  
-  @param cachedCAIDs 通过baidu caid库 [BDPCAIDGenerator cachedCAIDs] 接口获取到的原始caid信息数组
+ 设置用户是否给予app隐私授权，如果没有给予隐私授权，则不会采集部分设备信息
+ 默认为YES，请谨慎设置。如需要设置建议在startwithappid之前调用
  */
-@property (nonatomic, strong) NSArray *caidInfo;
+@property (nonatomic, assign) BOOL authorizedState;
+
+/**
+ 设置是否显允许 sdk使用baidu 新一套设备 I D 库功能
+ 默认YES，允许，sdk将会并通过baidu 新一套设设备 I D 库发起请求获取设备 I D
+ 若设置为NO，不允许，sdk将不会使用 新一套设设备 I D库任何功能，开发者可通过属性接口 cachedInfo 自行传入信息到 sdk中
+ 
+ @param enableSdkUseNewId 是否显允许 sdk使用baidu 新一套设备 I D 库功能，默认YES
+ */
+@property (nonatomic, assign) BOOL enableSdkUseNewId;
+
+/**
+  主动设置baidu 新一套设备 I D 信息到 sdk中， sdk不缓存通过该接口设置的信息，需要每次启动都设置，设置点见下方介绍
+  当enableSdkUseNewId设置为YES时：不需要调用此接口
+  当enableSdkUseNewId设置为NO时：需要调用此接口传入新一套设备 I D 信息。需要在两处调用：1. startWithAppId函数之前调用设置 2. baidu 新一套设备 I D 库获取到最新 I D 时调用一次
+  
+  @param cachedInfo 通过baidu 新一套设备 I D 库 [UserFeedBackLog historyLogs] 接口获取到的原始信息数组
+ */
+@property (nonatomic, strong) NSArray *cachedInfo;
+
+/**
+ 设置app类型，从以下类型中选择
+ 0：标准app
+ 1：ReactNative
+ 2：flutter
+ 3: cordova
+ 4: apicloud
+ 默认为0，sdk内部使用，开发者可不设置
+ */
+@property (nonatomic, assign) NSInteger platformType;
 
 /**
  获取统计对象的实例

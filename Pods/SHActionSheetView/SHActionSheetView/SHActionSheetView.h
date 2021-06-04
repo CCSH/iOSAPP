@@ -30,7 +30,6 @@ typedef void (^SHSelectBlock)(SHActionSheetView *sheetView, NSInteger buttonInde
 typedef enum : NSUInteger {
     SHActionSheetStyle_custom, //自定义
     SHActionSheetStyle_system, //系统
-    SHActionSheetStyle_bottom, //系统
 } SHActionSheetStyle;
 
 /**

@@ -16,6 +16,8 @@ static char rightEdgeKey;
 
 @implementation SHButton
 
+static BtnBlock _callBack;
+
 - (void)setEnlargedEdge:(CGFloat)enlargedEdge {
     [self setEnlargedEdgeWithEdgeInsets:UIEdgeInsetsMake(enlargedEdge, enlargedEdge, enlargedEdge, enlargedEdge)];
 }
@@ -52,6 +54,32 @@ static char rightEdgeKey;
 
     CGRect enlargedRect = [self enlargedRect];
     return CGRectContainsPoint(enlargedRect, point) ? self : nil;
+}
+
+#pragma mark - 添加点击
+- (void)addClickBlock:(BtnBlock)block{
+    [self addAction:UIControlEventTouchUpInside block:block];
+}
+
+#pragma mark - 添加事件
+- (void)addAction:(UIControlEvents)events block:(BtnBlock)block{
+    [self setCallBack:block];
+    [self addTarget:self action:@selector(btnAction:) forControlEvents:events];
+}
+
+- (void)setCallBack:(BtnBlock)callBack {
+    objc_setAssociatedObject(self, &_callBack, callBack, OBJC_ASSOCIATION_COPY);
+}
+
+- (BtnBlock)callBack {
+    return objc_getAssociatedObject(self, &_callBack);
+}
+
+
+- (void)btnAction:(UIButton *)btn{
+    if (self.callBack) {
+        self.callBack(btn);
+    }
 }
 
 @end

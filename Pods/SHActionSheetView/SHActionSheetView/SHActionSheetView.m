@@ -11,7 +11,7 @@
 #import "SHActionSheetView.h"
 #import "UIView+SHExtension.h"
 
-#define kRGB(R, G, B, A) [UIColor colorWithRed:R / 255.0 green:G / 255.0 blue:B / 255.0 alpha:A]
+#define kRGB(R, G, B) [UIColor colorWithRed:R / 255.0 green:G / 255.0 blue:B / 255.0 alpha:1]
 
 @interface SHActionSheetView () < UITableViewDelegate, UITableViewDataSource >
 //内容
@@ -56,17 +56,13 @@ static NSString *const reuseIdentifier = @"Cell";
     self.separatorColor = [UIColor lightGrayColor];
     self.headTextColor = [UIColor blackColor];
     self.specialTextColor = [UIColor redColor];
-    self.contentTextColor = kRGB(65, 139, 243, 1);
+    self.contentTextColor = kRGB(65, 139, 243);
     self.cancelSeparatorColor = [UIColor clearColor];
     
     self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelAction)];
-    [self addGestureRecognizer:tap];
 }
 
 #pragma mark - 懒加载
-
 - (UITableView *)listView
 {
     if (!_listView)
@@ -201,7 +197,7 @@ static NSString *const reuseIdentifier = @"Cell";
     //回调
     if (self.block)
     {
-        self.block(self, indexPath.section);
+        self.block(self, indexPath.row);
     }
 
     [self dismiss];

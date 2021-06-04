@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 typedef enum : NSUInteger {
     SHButtonImageDirection_top,
     SHButtonImageDirection_left,
@@ -20,6 +21,7 @@ typedef enum : NSUInteger {
 @interface UIButton (SHExtension)
 
 - (void)imageDirection:(SHButtonImageDirection)direction space:(CGFloat)space;
+
 
 @end
 

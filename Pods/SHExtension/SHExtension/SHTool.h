@@ -24,33 +24,51 @@ static NSString *sh_fomat_10 = @"HH:mm";
 
 @interface SHTool : NSObject
 
-#pragma mark - Time方法
-#pragma mark 获取时间戳
+#pragma mark - 当前时间处理
+#pragma mark 获取当前时间戳
 + (NSString *)getTimeMs;
 
-#pragma mark 获取指定格式时间
-+ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format;
-
-#pragma mark 获取毫秒值(time -> ms)
-#pragma mark 获取时间戳
-+ (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format;
-
-#pragma mark 获取时间(ms -> time)
-#pragma mark 获取时间
-+ (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format;
-#pragma mark 获取指定时区时间
-+ (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT;
+#pragma mark 获取当前格式时间
++ (NSString *)getTimeWithformat:(NSString *)format;
++ (NSString *)getTimeWithformat:(NSString *)format GMT:(NSInteger)GMT;
 
 #pragma mark 获取当前时区
 + (NSInteger)getCurrentGMT;
 
+#pragma mark - 时间格式化
+#pragma mark 获取指定格式时间
++ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format;
+
+#pragma mark - 时间处理
+#pragma mark 获取时间戳
++ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format;
++ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
++ (NSString *)getMsWithDate:(NSDate *)date;
+
+#pragma mark 获取time
++ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format;
++ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT;
++ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format;
++ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format GMT:(NSInteger)GMT;
+
+#pragma mark 获取date
++ (NSDate *)getDateWithMs:(NSString *)ms;
++ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format;
++ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
+
+
 #pragma mark 获取即时时间
 + (NSString *)getInstantTimeWithMs:(NSString *)ms;
-+ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format;
 + (NSString *)getInstantTimeWithDate:(NSDate *)date;
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format;
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
 
+#pragma mark - 时间其他方法
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate;
+
+#pragma mark 处理时间戳
++ (NSString *)handleMs:(NSString *)str;
 
 #pragma mark - 计算方法
 #pragma mark 计算富文本的size

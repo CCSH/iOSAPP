@@ -14,8 +14,8 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - BaiduMobStatCodeless (5.3.2)
-  - Bugly (2.5.71)
+  - BaiduMobStatCodeless (5.3.5)
+  - Bugly (2.5.90)
   - CHTCollectionViewWaterfallLayout (0.9.8):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
   - CHTCollectionViewWaterfallLayout/ObjC (0.9.8)
@@ -25,11 +25,11 @@ PODS:
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.2.4)
-  - MJRefresh (3.5.0)
-  - SDWebImage (5.10.4):
-    - SDWebImage/Core (= 5.10.4)
-  - SDWebImage/Core (5.10.4)
-  - SHActionSheetView (1.3.0):
+  - MJRefresh (3.6.1)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SHActionSheetView (1.3.1):
     - SHExtension/UIView
   - SHAlertView (2.0.5):
     - SHClickTextView
@@ -37,24 +37,24 @@ PODS:
   - SHClickTextView (2.0.1)
   - SHEmptyView (1.0.1):
     - SHExtension/UIView
-  - SHExtension (1.3.0):
-    - SHExtension/NSString (= 1.3.0)
-    - SHExtension/Tool (= 1.3.0)
-    - SHExtension/UIButton (= 1.3.0)
-    - SHExtension/UIColor (= 1.3.0)
-    - SHExtension/UIImage (= 1.3.0)
-    - SHExtension/UIImageView (= 1.3.0)
-    - SHExtension/UIView (= 1.3.0)
-  - SHExtension/NSString (1.3.0)
-  - SHExtension/Tool (1.3.0)
-  - SHExtension/UIButton (1.3.0)
-  - SHExtension/UIColor (1.3.0)
-  - SHExtension/UIImage (1.3.0)
-  - SHExtension/UIImageView (1.3.0)
-  - SHExtension/UIView (1.3.0)
-  - SHPopView (1.0.0)
-  - SHScrollLayout (2.0.2)
-  - SHScrollView (2.7.1):
+  - SHExtension (1.3.4):
+    - SHExtension/NSString (= 1.3.4)
+    - SHExtension/Tool (= 1.3.4)
+    - SHExtension/UIButton (= 1.3.4)
+    - SHExtension/UIColor (= 1.3.4)
+    - SHExtension/UIImage (= 1.3.4)
+    - SHExtension/UIImageView (= 1.3.4)
+    - SHExtension/UIView (= 1.3.4)
+  - SHExtension/NSString (1.3.4)
+  - SHExtension/Tool (1.3.4)
+  - SHExtension/UIButton (1.3.4)
+  - SHExtension/UIColor (1.3.4)
+  - SHExtension/UIImage (1.3.4)
+  - SHExtension/UIImageView (1.3.4)
+  - SHExtension/UIView (1.3.4)
+  - SHPopView (1.0.2)
+  - SHScrollLayout (2.1.2)
+  - SHScrollView (2.7.4):
     - SDWebImage
   - SHToast (1.2.1)
 
@@ -104,24 +104,24 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  BaiduMobStatCodeless: 46c511fd4a699b50c90e892356db10dfa00aba0a
-  Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
+  BaiduMobStatCodeless: b3c73335cc1a5d464540111ff08857fc33cae656
+  Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
-  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
-  SHActionSheetView: b631953bc7f90377a376dd7f27f2b3be17292642
+  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SHActionSheetView: 37647fb36d3f83b6f6302c84d6f98cf84ea2fe4a
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
   SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
   SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
   SHEmptyView: 60520227e16d3a45b3c2844c2c9e70909b460394
-  SHExtension: bb00490dd6c97d3b5d9fd72b9b4f9fe0f2a94254
-  SHPopView: 90c94dbb51ad9b4fc431f97fb63c2e9d9b825a8f
-  SHScrollLayout: a78de4d0522b951a7473d7df82527909bf51a4ee
-  SHScrollView: 3aebed64e93063b8dca36aeac0a81e6c6452e1cd
+  SHExtension: eddc61cae3b5663680bb0325558a20f08e661d6d
+  SHPopView: 35b3032b2ac237cc99f380c2b2ccf6f4cf2d55ac
+  SHScrollLayout: 6a04462996b4ed030af55581879c3efde21cf45b
+  SHScrollView: 4489388eb33c6be255776c7ab8821608e3cbd7ea
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
 
 PODFILE CHECKSUM: 3f51e05bd9aa0931eb423f7dfb63ca717a35cfe2

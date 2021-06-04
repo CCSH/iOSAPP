@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^BtnBlock)(UIButton *btn);
+
 @interface SHButton : UIButton
 
 //扩大button点击区域(4边扩大相同值)
@@ -17,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 //扩大button点击区域(上左下右)
 - (void)setEnlargedEdgeWithEdgeInsets:(UIEdgeInsets)edgeInsets;
+
+#pragma mark - 添加点击
+- (void)addClickBlock:(BtnBlock)block;
+
+#pragma mark - 添加事件
+- (void)addAction:(UIControlEvents)events block:(BtnBlock)block;
 
 @end
 
