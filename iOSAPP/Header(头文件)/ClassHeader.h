@@ -24,7 +24,7 @@
 #import "IUesrModel.h"
 #import "SHToolHelper.h"
 
-#import <Bugly/Bugly.h>
+//#import <Bugly/Bugly.h>
 #import <FMDB.h>
 #import <MBProgressHUD.h>
 #import <MJExtension.h>
@@ -38,5 +38,8 @@
 #import <UIColor+SHExtension.h>
 #import <UIImage+SHExtension.h>
 #import <UIView+SHExtension.h>
+#import <SHScrollView.h>
+#import <UIImageView+WebCache.h>
+#import <SHButton.h>
 
 #endif /* ClassHeader_h */

@@ -18,13 +18,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"欢迎";
+    [self configUI];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    [kAppDelegate configVC:RootVCType_home];
-    
+#pragma mark - 配置
+- (void)configUI{
+    SHScrollView *scroll = [[SHScrollView alloc]init];
+    scroll.frame = self.view.bounds;
+    scroll.contentArr = @[@"欢迎页1",@"欢迎页2",@"欢迎页3"];
+    scroll.textAlignment = NSTextAlignmentCenter;
+    scroll.timeInterval = -1;
+    scroll.endRollingBlock = ^(BOOL isClick, NSInteger currentIndex) {
+        if (isClick && currentIndex == scroll.contentArr.count - 1) {
+            [kAppDelegate configVC:RootVCType_ad];
+        }
+    };
+    [scroll reloadView];
+    [self.view addSubview:scroll];
 }
 
 - (void)didReceiveMemoryWarning {

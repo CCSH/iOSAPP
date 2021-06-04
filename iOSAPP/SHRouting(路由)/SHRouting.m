@@ -180,6 +180,8 @@
         return @"OrderListViewController";
     }else if ([name isEqualToString:RoutingName_order]){
         return @"OrderViewController";
+    }else if ([name isEqualToString:RoutingName_ad]){
+        return @"AdViewController";
     }
     return @"";
 }

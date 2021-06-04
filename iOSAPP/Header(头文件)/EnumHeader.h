@@ -14,8 +14,9 @@
 //跟视图类型
 typedef enum : NSUInteger
 {
-    RootVCType_home,   //首页
+    RootVCType_main,   //首页
     RootVCType_wecome, //欢迎页
+    RootVCType_ad,     //广告
     RootVCType_login,  //登录
 } RootVCType;
 
@@ -34,6 +35,7 @@ typedef enum : NSUInteger {
 #define RoutingName_search @"search"
 #define RoutingName_main @"main"
 #define RoutingName_login @"login"
+#define RoutingName_ad @"ad"
 #define RoutingName_goodDetail @"goodDetail"
 #define RoutingName_orderConfirm @"orderConfirm"
 #define RoutingName_addressList @"addressList"

@@ -30,13 +30,13 @@
 #pragma mark 配置其他
 - (void)configOther
 {
-    //bugly配置
-    BuglyConfig * config = [[BuglyConfig alloc] init];
-    //卡顿监听
-    config.blockMonitorEnable = YES;
-    config.blockMonitorTimeout = 0.5;
-    
-    [Bugly startWithAppId:kBuglyID config:config];
+//    //bugly配置
+//    BuglyConfig * config = [[BuglyConfig alloc] init];
+//    //卡顿监听
+//    config.blockMonitorEnable = YES;
+//    config.blockMonitorTimeout = 0.5;
+//
+//    [Bugly startWithAppId:kBuglyID config:config];
 }
 
 #pragma mark 配置界面逻辑
@@ -63,7 +63,7 @@
     {
         SHLog(@"不出现欢迎页");
         //进入主界面
-        [self configVC:RootVCType_home];
+        [self configVC:RootVCType_ad];
     }
 }
 
@@ -72,7 +72,7 @@
 {
     switch (type)
     {
-        case RootVCType_home:
+        case RootVCType_main:
         {
             [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_main]
                                  type:SHRoutingType_root
@@ -95,7 +95,13 @@
                                 block:nil];
         }
             break;
-            
+        case RootVCType_ad:
+        {
+            [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_ad]
+                                 type:SHRoutingType_root
+                                block:nil];
+        }
+            break;
         default:
             break;
     }

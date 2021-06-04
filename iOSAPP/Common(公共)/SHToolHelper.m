@@ -111,7 +111,7 @@
 
 #pragma mark 去登录
 + (void)gotoLogin{
-    [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_login] type:SHRoutingType_modal block:nil];
+    [kAppDelegate configVC:RootVCType_login];
 }
 
 #pragma mark 退出登录
@@ -151,7 +151,7 @@
 }
 
 #pragma mark 拨打电话
-- (void)callPhone:(NSString *)phone{
++ (void)callPhone:(NSString *)phone{
     if (!phone.length) {
         return;
     }
