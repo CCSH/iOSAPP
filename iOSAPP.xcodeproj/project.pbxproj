@@ -196,8 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				8331AF61266A25ED00180DDA /* SHToolHelper.h */,
-				8331AF62266A25ED00180DDA /* SHFileHelper */,
 				8331AF65266A25ED00180DDA /* SHToolHelper.m */,
+				8331AF62266A25ED00180DDA /* SHFileHelper */,
 				8331AF66266A25ED00180DDA /* RequestBase(请求基础) */,
 			);
 			path = "Common(公共)";
