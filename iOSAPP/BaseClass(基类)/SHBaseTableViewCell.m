@@ -51,7 +51,7 @@
         
         [_divider mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(0.5);
-            make.bottom.left.right.equalTo(self.contentView);
+            make.bottom.left.right.mas_offset(0);
         }];
     }
     return _divider;

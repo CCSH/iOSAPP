@@ -45,7 +45,7 @@
 }
 
 #pragma mark - 属性
-#pragma mark - 属性
+#pragma mark 属性
 - (void)setNavBarAlpha:(CGFloat)navBarAlpha{
     _navBarAlpha = navBarAlpha;
     

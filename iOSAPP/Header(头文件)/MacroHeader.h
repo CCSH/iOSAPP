@@ -153,7 +153,7 @@
 
 #pragma mark - 颜色
 //主题色
-#define kColorMain [UIColor colorWithHexString:@"#5FD0ED"]
+#define kColorMain kColorStatus_primary
 //背景色、分割线
 #define kColor245 kRGB(245, 245, 245)
 //状态颜色

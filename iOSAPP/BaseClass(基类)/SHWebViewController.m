@@ -56,7 +56,7 @@ WKScriptMessageHandler >
 
 @property (nonatomic, copy) NSString *url;
 
-@property (nonatomic, assign) BOOL needUid;
+@property (nonatomic, copy) NSString *uid;
 
 @end
 
@@ -69,7 +69,7 @@ WKScriptMessageHandler >
     //获取路由中的参数
     self.url = self.param[@"url"];
     self.shareModel = [IShareModel mj_objectWithKeyValues:self.param[@"shareModel"]];
-    self.needUid = self.param[@"needUid"];
+    self.uid = self.param[@"uid"];
     
     self.title = @"详情";
     

@@ -20,23 +20,28 @@
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
-    [navBar setTintColor:[UIColor whiteColor]];
+    navBar.tintColor = [UIColor whiteColor];
     //标题颜色
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                     NSFontAttributeName : kFont(15)}];
+                                     NSFontAttributeName : kBoldFont(15)}];
     //item 文字颜色 (图标颜色按照主题颜色)
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
                                                            NSFontAttributeName : kFont(14)}
                                                 forState:UIControlStateNormal];
+    
+    //背景颜色
+    [navBar setBarTintColor:kColorMain];
+    //背景图片
+    [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsCompact];
+    //分割线图片
+//    navBar.shadowImage = [UIImage getImageWithColor:kColorMain];
 
     // 系统返回按钮
     UIImage *image = [UIImage imageNamed:@"nav_back"];
-    // 修改navigationBar上的返回按钮的图片，注意：这两个属性要同时设置
     navBar.backIndicatorImage = image;
     navBar.backIndicatorTransitionMaskImage = image;
 
-    //背景颜色
-    [navBar setBarTintColor:kColorStatus_primary];
+
 
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;
