@@ -21,18 +21,17 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
     navBar.tintColor = [UIColor whiteColor];
-    //标题颜色
-    [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                     NSFontAttributeName : kBoldFont(15)}];
-    //item 文字颜色 (图标颜色按照主题颜色)
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                                           NSFontAttributeName : kFont(14)}
-                                                forState:UIControlStateNormal];
-    
+    //半透明
+    navBar.translucent = NO;
+    //44高度的颜色 最下方
+//    navBar.backgroundColor = kColorMain;
     //背景颜色
-    [navBar setBarTintColor:kColorMain];
+//    navBar.barTintColor = kColorMain;
+    //比barTintColor大
+    [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsDefault];
+
     //背景图片
-    [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsCompact];
+
     //分割线图片
 //    navBar.shadowImage = [UIImage getImageWithColor:kColorMain];
 
@@ -40,8 +39,14 @@
     UIImage *image = [UIImage imageNamed:@"nav_back"];
     navBar.backIndicatorImage = image;
     navBar.backIndicatorTransitionMaskImage = image;
-
-
+    
+    //标题颜色
+    [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
+                                     NSFontAttributeName : kBoldFont(15)}];
+    //item 文字颜色 (图标颜色按照主题颜色)
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
+                                                           NSFontAttributeName : kFont(14)}
+                                                forState:UIControlStateNormal];
 
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;

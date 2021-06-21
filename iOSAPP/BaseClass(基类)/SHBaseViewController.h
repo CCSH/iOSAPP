@@ -38,7 +38,8 @@ typedef void(^CallBack)();
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 #pragma mark 关闭自动布局
-- (void)automaticallyWithScroll:(UIScrollView *)scroll;
+- (void)closeAutomatically;
+
 
 #pragma mark 返回
 - (void)backAction;

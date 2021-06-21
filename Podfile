@@ -37,8 +37,6 @@ target 'iOSAPP' do
   pod 'FMDB'
   #加载框
   pod 'MBProgressHUD'
-  #环信ui
-  #pod 'EaseUI', :git => 'https://github.com/easemob/easeui-ios-hyphenate-cocoapods.git', :tag => '3.3.7'
   #bug收集
   pod 'Bugly'
   #统计

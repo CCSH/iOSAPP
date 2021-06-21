@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self closeAutomatically];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -74,11 +75,9 @@
 
 #pragma mark - 方法
 #pragma mark 关闭自动布局
-- (void)automaticallyWithScroll:(UIScrollView *)scroll{
+- (void)closeAutomatically{
     if (IOS(11)) {
-        if (scroll) {
-            scroll.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
+        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
