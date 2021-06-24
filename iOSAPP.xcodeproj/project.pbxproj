@@ -320,8 +320,8 @@
 		8331AF8C266A25EE00180DDA /* Home(首页) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AF8D266A25EE00180DDA /* HomeViewController.m */,
 				8331AF8E266A25EE00180DDA /* HomeViewController.h */,
+				8331AF8D266A25EE00180DDA /* HomeViewController.m */,
 			);
 			path = "Home(首页)";
 			sourceTree = "<group>";

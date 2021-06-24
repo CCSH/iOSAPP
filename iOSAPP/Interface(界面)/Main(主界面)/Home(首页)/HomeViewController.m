@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColorTable_1;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -32,6 +33,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
     NSDictionary *param = @{@"url":@"https://github.com/CCSH"};
     [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_web param:param]
                                                 type:SHRoutingType_nav
