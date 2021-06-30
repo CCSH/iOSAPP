@@ -21,17 +21,14 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
     navBar.tintColor = [UIColor whiteColor];
-    //半透明
+    //半透明(关闭后 存在导航栏布局为起始点为导航栏下方)
     navBar.translucent = NO;
     //44高度的颜色 最下方
 //    navBar.backgroundColor = kColorMain;
     //背景颜色
-//    navBar.barTintColor = kColorMain;
+    navBar.barTintColor = kColorMain;
     //比barTintColor大
     [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsDefault];
-
-    //背景图片
-
     //分割线图片
 //    navBar.shadowImage = [UIImage getImageWithColor:kColorMain];
 

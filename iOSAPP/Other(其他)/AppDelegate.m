@@ -124,6 +124,14 @@
     if (_interfaceOrientation == interfaceOrientation) {
         return;
     }
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            break;
+        default:
+            interfaceOrientation = UIInterfaceOrientationPortrait;
+            break;
+    }
     _interfaceOrientation = interfaceOrientation;
     [self handleRotation];
 }

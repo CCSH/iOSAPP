@@ -41,8 +41,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) SHActionSheetModel *model;
 //回调
 @property (nonatomic, copy) SHSelectBlock block;
-//风格(SHActionSheetStyle_system 所有样式失效)
+//风格
 @property (nonatomic, assign) SHActionSheetStyle style;
+//点击背景消失
+@property (nonatomic, assign) BOOL isClickDisappear;
 
 //最多内容个数 默认8
 @property (nonatomic, assign) NSInteger maxNum;
@@ -68,14 +70,16 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIColor *listColor;
 //头部字体颜色 默认 blackColor
 @property (nonatomic, strong) UIColor *headTextColor;
-//特殊按钮字体颜色 默认 redColor
+//特殊字体颜色 默认 redColor
 @property (nonatomic, strong) UIColor *specialTextColor;
-//内容按钮字体颜色 默认 kRGB(65, 139, 243, 1)
+//内容字体颜色 默认 grayColor
 @property (nonatomic, strong) UIColor *contentTextColor;
-//分割线颜色 默认 lightGrayColor
+//分割线颜色 默认 [UIColor colorWithWhite:0.7 alpha:1]
 @property (nonatomic, strong) UIColor *separatorColor;
 //取消分割线颜色 默认 clearColor
 @property (nonatomic, strong) UIColor *cancelSeparatorColor;
+//取消字体颜色 默认 lightGrayColor
+@property (nonatomic, strong) UIColor *cancelTextColor;
 
 /**
  显示

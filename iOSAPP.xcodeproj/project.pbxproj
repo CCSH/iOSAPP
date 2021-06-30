@@ -338,8 +338,8 @@
 		8331AF93266A25EE00180DDA /* Message(消息) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AF94266A25EE00180DDA /* MessageViewController.m */,
 				8331AF95266A25EE00180DDA /* MessageViewController.h */,
+				8331AF94266A25EE00180DDA /* MessageViewController.m */,
 			);
 			path = "Message(消息)";
 			sourceTree = "<group>";

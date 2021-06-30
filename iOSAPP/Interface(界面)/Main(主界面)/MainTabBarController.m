@@ -30,32 +30,23 @@
     //tabbar
     self.shTabBar = [[SHTabBar alloc] init];
     [self setValue:self.shTabBar forKey:@"tabBar"];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
-                                             forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
-                                             forState:UIControlStateSelected];
-    [[UITabBar appearance] setUnselectedItemTintColor:kColorText_5];
-  
-    UIImage *img = [UIImage getImageWithColor:[UIColor clearColor]];
-    [[UITabBar appearance] setBackgroundImage:img];
-    [[UITabBar appearance] setShadowImage:img];
     
     self.delegate = self;
     
     //添加子控制器
-    HomeViewController *oneVC = [[HomeViewController alloc] init];
-    [self addOneChlildVC:oneVC title:@"首页" img:@"tabbar_home"];
+    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    [self addOneChlildVC:homeVC title:@"首页" img:@"tabbar_home"];
     
-    ClassViewController *telView = [[ClassViewController alloc] init];
-    [self addOneChlildVC:telView title:@"分类" img:@"tabbar_class"];
+    ClassViewController *classVC = [[ClassViewController alloc] init];
+    [self addOneChlildVC:classVC title:@"分类" img:@"tabbar_class"];
     
     [self addOneChlildVC:nil title:nil img:nil];
     
-    MessageViewController *addressView = [[MessageViewController alloc] init];
-    [self addOneChlildVC:addressView title:@"消息" img:@"tabbar_message"];
+    MessageViewController *messageVC = [[MessageViewController alloc] init];
+    [self addOneChlildVC:messageVC title:@"消息" img:@"tabbar_message"];
     
-    MineViewController *settingView = [[MineViewController alloc] init];
-    [self addOneChlildVC:settingView title:@"我的" img:@"tabbar_me"];
+    MineViewController *mineVC = [[MineViewController alloc] init];
+    [self addOneChlildVC:mineVC title:@"我的" img:@"tabbar_me"];
     
     self.shTabBar.dataArr = @[@"tabbar_min"];
     

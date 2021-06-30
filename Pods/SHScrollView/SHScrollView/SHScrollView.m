@@ -88,20 +88,36 @@ static NSString *cellId = @"SHScrollView";
         
         NSString *str = (NSString *)obj;
         
-        if ([str hasPrefix:@"http"]) { //网络图片
-            //设置默认视图
+    
+        UIImage *image = [UIImage imageNamed:str];
+        if (image) {
+            //资源图片
+            imageView.image = image;
+        }
+        if (!image) {
+            //本地图片
+            image = [UIImage imageWithContentsOfFile:str];
+        }
+        if (image) {
+            imageView.image = image;
+            [baseView addSubview:imageView];
+            return;
+        }
+        
+        if ([str hasPrefix:@"http"]) {
+            //网络图片
             [imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:self.placeholderImage];
             [baseView addSubview:imageView];
             return;
-        } else { //lab
-            
-            if (str.length) {
-                UILabel *lab = [self getLabView];
-                lab.frame = baseView.bounds;
-                lab.text = str;
-                [baseView addSubview:lab];
-                return;
-            }
+        }
+        
+        if (str.length) {
+            //文字展示
+            UILabel *lab = [self getLabView];
+            lab.frame = baseView.bounds;
+            lab.text = str;
+            [baseView addSubview:lab];
+            return;
         }
     } else if ([obj isKindOfClass:[NSAttributedString class]]) { //富文本
         

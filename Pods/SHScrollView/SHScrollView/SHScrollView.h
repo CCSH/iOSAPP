@@ -11,7 +11,7 @@
 @interface SHScrollView : UIView
 
 #pragma mark - 必传
-//内容Arr (http、UIView、UIImage、UIViewController, NSString ,NSAttributedString)
+//内容Arr (http、UIView、UIImage、UIViewController, NSString ,NSAttributedString，本地图片，资源图片)
 @property (nonatomic, copy) NSArray *contentArr;
 
 #pragma mark - 非必传

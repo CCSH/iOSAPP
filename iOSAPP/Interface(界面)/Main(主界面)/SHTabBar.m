@@ -16,6 +16,18 @@
 
 @implementation SHTabBar
 
++(void)initialize{
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
+                                             forState:UIControlStateSelected];
+    [[UITabBar appearance] setUnselectedItemTintColor:kColorText_5];
+  
+    UIImage *img = [UIImage getImageWithColor:[UIColor clearColor]];
+    [[UITabBar appearance] setBackgroundImage:img];
+    [[UITabBar appearance] setShadowImage:img];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

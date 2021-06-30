@@ -24,12 +24,12 @@ PODS:
   - FMDB/standard (2.7.5)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
-  - MJExtension (3.2.4)
+  - MJExtension (3.3.0)
   - MJRefresh (3.6.1)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
-  - SHActionSheetView (1.3.1):
+  - SHActionSheetView (1.3.2):
     - SHExtension/UIView
   - SHAlertView (2.0.5):
     - SHClickTextView
@@ -54,7 +54,7 @@ PODS:
   - SHExtension/UIView (1.3.4)
   - SHPopView (1.0.2)
   - SHScrollLayout (2.1.2)
-  - SHScrollView (2.7.4):
+  - SHScrollView (2.8.0):
     - SDWebImage
   - SHToast (1.2.1)
 
@@ -110,10 +110,10 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
+  MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
   MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
-  SHActionSheetView: 37647fb36d3f83b6f6302c84d6f98cf84ea2fe4a
+  SHActionSheetView: 4a4ae4728a76632b7772428b051971822c5da413
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
   SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
   SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
@@ -121,9 +121,9 @@ SPEC CHECKSUMS:
   SHExtension: eddc61cae3b5663680bb0325558a20f08e661d6d
   SHPopView: 35b3032b2ac237cc99f380c2b2ccf6f4cf2d55ac
   SHScrollLayout: 6a04462996b4ed030af55581879c3efde21cf45b
-  SHScrollView: 4489388eb33c6be255776c7ab8821608e3cbd7ea
+  SHScrollView: b72dcc9ccc125cf64849980d1b949ddc3d86aa14
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
 
-PODFILE CHECKSUM: 3f51e05bd9aa0931eb423f7dfb63ca717a35cfe2
+PODFILE CHECKSUM: 8f52a9a7b5c3d096d9887291e8c8d0c4c46fee4a
 
 COCOAPODS: 1.10.1

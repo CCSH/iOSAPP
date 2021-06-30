@@ -138,12 +138,11 @@
 - (void)handleRotation {
     //强制转换
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        
         SEL selector = NSSelectorFromString(@"setOrientation:");
         NSInvocation * invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
         [invocation setSelector:selector];
         [invocation setTarget:[UIDevice currentDevice]];
-        UIInterfaceOrientationMask val = kAppDelegate.interfaceOrientation;
+        UIInterfaceOrientation val = kAppDelegate.interfaceOrientation;
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
@@ -152,15 +151,13 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     switch (self.interfaceOrientation) {
         case UIInterfaceOrientationLandscapeLeft:
-            return UIInterfaceOrientationMaskLandscapeLeft;
-            break;
         case UIInterfaceOrientationLandscapeRight:
-            return UIInterfaceOrientationMaskLandscapeRight;
+            return UIInterfaceOrientationMaskLandscape;
             break;
         default:
+            return UIInterfaceOrientationMaskPortrait;
             break;
     }
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark 处理粘贴板
