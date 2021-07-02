@@ -91,7 +91,7 @@ WKScriptMessageHandler >
     {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareAcrion)];
     }
-    self.navigationItem.leftBarButtonItems = @[[self webBackItem]];
+    self.navigationItem.leftBarButtonItems = @[[self backItem]];
     //添加监测网页加载进度的观察者
     [self.webView addObserver:self
                    forKeyPath:@"estimatedProgress"
@@ -127,8 +127,7 @@ WKScriptMessageHandler >
                         change:(NSDictionary< NSKeyValueChangeKey, id > *)change
                        context:(void *)context
 {
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))] && object == _webView)
-    {
+    if (object == self.webView) {
         self.progressView.progress = _webView.estimatedProgress;
         if (_webView.estimatedProgress >= 1.0f)
         {
@@ -136,18 +135,18 @@ WKScriptMessageHandler >
                 self.progressView.progress = 0;
             });
         }
+        return;
     }
-    else if ([keyPath isEqualToString:@"title"] && object == self.webView)
+    else if ([keyPath isEqualToString:@"title"] )
     {
         self.navigationItem.title = self.webView.title;
+        return;
     }
-    else
-    {
-        [super observeValueForKeyPath:keyPath
-                             ofObject:object
-                               change:change
-                              context:context];
-    }
+    
+    [super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -166,9 +165,9 @@ WKScriptMessageHandler >
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    self.navigationItem.leftBarButtonItems = @[[self webBackItem]];
+    self.navigationItem.leftBarButtonItems = @[[self backItem]];
     if ([webView canGoBack]) {
-        self.navigationItem.leftBarButtonItems = @[[self webBackItem],[self closeItem]];
+        self.navigationItem.leftBarButtonItems = @[[self backItem],[self closeItem]];
     }
     //app 调用 js
     NSString *js = [NSString stringWithFormat:@"appTojs('%@','%@')", @"reload", @"1"];
@@ -184,7 +183,7 @@ WKScriptMessageHandler >
 {
     NSURL *url = navigationAction.request.URL;
     SHLog(@"发送跳转请求：%@", url.absoluteString);
-
+    
     if ([url.scheme isEqualToString:kScheme]) {
         NSArray *query = [url.query componentsSeparatedByString:@"&"];
         NSMutableDictionary *param = [NSMutableDictionary new];
@@ -390,7 +389,7 @@ WKScriptMessageHandler >
     return _progressView;
 }
 
-- (UIBarButtonItem *)webBackItem{
+- (UIBarButtonItem *)backItem{
     return [[UIBarButtonItem alloc]initWithImage:[UINavigationBar appearance].backIndicatorImage style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
 }
 

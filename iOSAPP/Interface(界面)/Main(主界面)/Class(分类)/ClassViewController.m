@@ -18,24 +18,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = kColorStatus_warning;
     
     UIScrollView *scroll = [[UIScrollView alloc]init];
-    scroll.frame = CGRectMake(0, 0, kSHWidth, kNavContentSafeAreaH - kTabBarH);
+    scroll.frame = CGRectMake(0, -kNavAndStatusH, kSHWidth, kSHHeight);
     scroll.delegate = self;
+    scroll.backgroundColor = kColorStatus_warning;
     [self.view addSubview:scroll];
-    scroll.contentSize = CGSizeMake(kSHWidth, 10000);
+    scroll.contentSize = CGSizeMake(kSHWidth, 1000);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navBarAlpha = 0;
+    self.navBarBGAlpha = 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
     
-    self.navBarAlpha = offsetY / 100;
+    self.navBarBGAlpha = offsetY / 100;
 }
 
 - (void)didReceiveMemoryWarning {

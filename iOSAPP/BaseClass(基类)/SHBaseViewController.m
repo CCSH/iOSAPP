@@ -36,6 +36,9 @@
     if (self.navBarAlpha < 1){
         self.navBarAlpha = 1;
     }
+    if (self.navBarBGAlpha < 1) {
+        self.navBarBGAlpha = 1;
+    }
     if (self.statusBarStyle != UIStatusBarStyleDefault) {
         self.statusBarStyle = UIStatusBarStyleDefault;
     }
@@ -49,13 +52,16 @@
 #pragma mark 属性
 - (void)setNavBarAlpha:(CGFloat)navBarAlpha{
     _navBarAlpha = navBarAlpha;
+    //整体透明
+    self.navigationController.navigationBar.alpha = navBarAlpha;
+}
+
+- (void)setNavBarBGAlpha:(CGFloat)navBarBGAlpha{
+    _navBarBGAlpha = navBarBGAlpha;
     
-    // 导航栏背景透明度设置
     UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
     //颜色透明
-    bgView.alpha = navBarAlpha;
-    //整体透明
-    //    self.navigationController.navigationBar.alpha = navBarAlpha;
+    bgView.alpha = navBarBGAlpha;
 }
 
 - (void)setIsNavHide:(BOOL)isNavHide{
@@ -243,20 +249,6 @@
     [hubView.layer addAnimation:rotationAnimation forKey:@"hubView"];
     
     return hubView;
-}
-
-#pragma mark 模态跳转
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
-{
-    if (IOS(13))
-    {
-        if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationPageSheet)
-        {
-            viewControllerToPresent.modalPresentationStyle = UIModalPresentationFullScreen;
-        }
-    }
-    
-    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 #pragma mark 懒加载

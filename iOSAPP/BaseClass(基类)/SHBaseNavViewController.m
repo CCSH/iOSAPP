@@ -21,14 +21,14 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     //主题颜色
     navBar.tintColor = [UIColor whiteColor];
-    //半透明(关闭后 存在导航栏布局为起始点为导航栏下方)
-    navBar.translucent = NO;
     //44高度的颜色 最下方
 //    navBar.backgroundColor = kColorMain;
     //背景颜色
-    navBar.barTintColor = kColorMain;
-    //比barTintColor大
+//    navBar.barTintColor = kColorMain;
+    //比barTintColor大 (设置了 导航栏布局为起始点为导航栏下方)
     [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsDefault];
+    //半透明(关闭后 存在导航栏布局为起始点为导航栏下方)
+    navBar.translucent = NO;
     //分割线图片
 //    navBar.shadowImage = [UIImage getImageWithColor:kColorMain];
 
@@ -61,13 +61,6 @@
                                                                                           action:nil];
     }
     [super pushViewController:viewController animated:animated];
-}
-
-#pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ([[viewController class] conformsToProtocol:@protocol(HideNav)]) {
-        [viewController.navigationController setNavigationBarHidden:YES animated:YES];
-    }
 }
 
 @end
