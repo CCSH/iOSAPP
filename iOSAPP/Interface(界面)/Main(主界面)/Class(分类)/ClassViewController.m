@@ -8,7 +8,6 @@
 //
 
 #import "ClassViewController.h"
-#import "HomeViewController.h"
 
 @interface ClassViewController ()<UIScrollViewDelegate>
 

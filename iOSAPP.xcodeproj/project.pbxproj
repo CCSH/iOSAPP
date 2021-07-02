@@ -347,8 +347,8 @@
 		8331AF98266A25EE00180DDA /* Class(分类) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AF99266A25EE00180DDA /* ClassViewController.m */,
 				8331AF9A266A25EE00180DDA /* ClassViewController.h */,
+				8331AF99266A25EE00180DDA /* ClassViewController.m */,
 			);
 			path = "Class(分类)";
 			sourceTree = "<group>";
@@ -519,6 +519,7 @@
 				"${BUILT_PRODUCTS_DIR}/SHScrollLayout/SHScrollLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SHScrollView/SHScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SHToast/SHToast.framework",
+				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -540,6 +541,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHScrollLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

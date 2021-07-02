@@ -21,8 +21,6 @@ target 'iOSAPP' do
   pod 'SHAVPlayer'
   #弹窗
   pod 'SHPopView'
-  #弹窗
-  pod 'SHPopView'
   #空状态
   pod 'SHEmptyView'
   #数据请求
@@ -45,5 +43,7 @@ target 'iOSAPP' do
   pod 'Masonry'
   #瀑布流
   pod 'CHTCollectionViewWaterfallLayout'
+  #文字处理
+  pod 'YYText'
   
 end

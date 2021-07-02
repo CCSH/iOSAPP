@@ -57,6 +57,7 @@ PODS:
   - SHScrollView (2.8.0):
     - SDWebImage
   - SHToast (1.2.1)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - SHScrollLayout
   - SHScrollView
   - SHToast
+  - YYText
 
 SPEC REPOS:
   trunk:
@@ -101,6 +103,7 @@ SPEC REPOS:
     - SHScrollLayout
     - SHScrollView
     - SHToast
+    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
@@ -123,7 +126,8 @@ SPEC CHECKSUMS:
   SHScrollLayout: 6a04462996b4ed030af55581879c3efde21cf45b
   SHScrollView: b72dcc9ccc125cf64849980d1b949ddc3d86aa14
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 8f52a9a7b5c3d096d9887291e8c8d0c4c46fee4a
+PODFILE CHECKSUM: 99d651cfda9e6c49a0c7842adfdae881bee80e55
 
 COCOAPODS: 1.10.1
