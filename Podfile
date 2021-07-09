@@ -1,5 +1,7 @@
 platform :ios, '9.0'
 
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'iOSAPP' do
   # 使用frameworks
   use_frameworks!
@@ -45,5 +47,14 @@ target 'iOSAPP' do
   pod 'CHTCollectionViewWaterfallLayout'
   #文字处理
   pod 'YYText'
+  #聊天
+  #  pod 'EaseIMKit'
+  #图片选择
+  pod 'TZImagePickerController'
+  #选择器
+  pod 'BRPickerView'
+  #键盘
+  pod 'IQKeyboardManager'
   
 end
+

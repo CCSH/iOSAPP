@@ -9,7 +9,7 @@
 
 #import "ClassViewController.h"
 
-@interface ClassViewController ()<UIScrollViewDelegate>
+@interface ClassViewController ()<UIScrollViewDelegate> 
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "SHBaseViewController.h"
+#import <IQKeyboardManager.h>
 
 @interface SHBaseViewController ()
 
@@ -20,6 +21,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
     self.modalPresentationStyle = UIModalPresentationFullScreen;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [self closeAutomatically];
 }
 

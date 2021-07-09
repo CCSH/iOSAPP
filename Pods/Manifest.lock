@@ -15,6 +15,18 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - BaiduMobStatCodeless (5.3.5)
+  - BRPickerView (2.7.3):
+    - BRPickerView/AddressPickerView (= 2.7.3)
+    - BRPickerView/Base (= 2.7.3)
+    - BRPickerView/DatePickerView (= 2.7.3)
+    - BRPickerView/StringPickerView (= 2.7.3)
+  - BRPickerView/AddressPickerView (2.7.3):
+    - BRPickerView/Base
+  - BRPickerView/Base (2.7.3)
+  - BRPickerView/DatePickerView (2.7.3):
+    - BRPickerView/Base
+  - BRPickerView/StringPickerView (2.7.3):
+    - BRPickerView/Base
   - Bugly (2.5.90)
   - CHTCollectionViewWaterfallLayout (0.9.8):
     - CHTCollectionViewWaterfallLayout/ObjC (= 0.9.8)
@@ -22,6 +34,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - IQKeyboardManager (6.5.6)
   - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.3.0)
@@ -57,14 +70,17 @@ PODS:
   - SHScrollView (2.8.0):
     - SDWebImage
   - SHToast (1.2.1)
+  - TZImagePickerController (3.6.2)
   - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
   - BaiduMobStatCodeless
+  - BRPickerView
   - Bugly
   - CHTCollectionViewWaterfallLayout
   - FMDB
+  - IQKeyboardManager
   - Masonry
   - MBProgressHUD
   - MJExtension
@@ -79,15 +95,18 @@ DEPENDENCIES:
   - SHScrollLayout
   - SHScrollView
   - SHToast
+  - TZImagePickerController
   - YYText
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - BaiduMobStatCodeless
+    - BRPickerView
     - Bugly
     - CHTCollectionViewWaterfallLayout
     - FMDB
+    - IQKeyboardManager
     - Masonry
     - MBProgressHUD
     - MJExtension
@@ -103,14 +122,17 @@ SPEC REPOS:
     - SHScrollLayout
     - SHScrollView
     - SHToast
+    - TZImagePickerController
     - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   BaiduMobStatCodeless: b3c73335cc1a5d464540111ff08857fc33cae656
+  BRPickerView: 9cc11880ac79c4872d081ccb88f306224c1501d7
   Bugly: 88bc32c0acc6fef7b74d610f0319ee7560d6b9fe
   CHTCollectionViewWaterfallLayout: 5f241d2480ab4939aa0d1ad4981de9eef1fbe60d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
@@ -126,8 +148,9 @@ SPEC CHECKSUMS:
   SHScrollLayout: 6a04462996b4ed030af55581879c3efde21cf45b
   SHScrollView: b72dcc9ccc125cf64849980d1b949ddc3d86aa14
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
+  TZImagePickerController: e1775fedb4058b78000fb00d9f6eeaedb445a1ed
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 99d651cfda9e6c49a0c7842adfdae881bee80e55
+PODFILE CHECKSUM: b7182878830c580cab1c6c9b388d2ef30b5f9ed3
 
 COCOAPODS: 1.10.1

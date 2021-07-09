@@ -30,7 +30,7 @@
     //半透明(关闭后 存在导航栏布局为起始点为导航栏下方)
     navBar.translucent = NO;
     //分割线图片
-//    navBar.shadowImage = [UIImage getImageWithColor:kColorMain];
+    navBar.shadowImage = [UIImage new];
 
     // 系统返回按钮
     UIImage *image = [UIImage imageNamed:@"nav_back"];
