@@ -27,23 +27,30 @@
 //    navBar.barTintColor = kColorMain;
     //比barTintColor大 (设置了 导航栏布局为起始点为导航栏下方)
     [navBar setBackgroundImage:[UIImage getImageWithColor:kColorMain] forBarMetrics:UIBarMetricsDefault];
+
     //半透明(关闭后 存在导航栏布局为起始点为导航栏下方)
     navBar.translucent = NO;
     //分割线图片
     navBar.shadowImage = [UIImage new];
-
+    
+    //标题处理
+    NSMutableDictionary *att = [NSMutableDictionary dictionary];
+    //标题颜色
+    att[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    //标题字体
+    att[NSFontAttributeName] = kBoldFont(15);
+    navBar.titleTextAttributes = att;
+    
+    //按钮处理
+    att = [NSMutableDictionary dictionary];
+    att[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    att[NSFontAttributeName] = kFont(14);
+    [[UIBarButtonItem appearance] setTitleTextAttributes:att forState:UIControlStateNormal];
+    
     // 系统返回按钮
     UIImage *image = [UIImage imageNamed:@"nav_back"];
     navBar.backIndicatorImage = image;
     navBar.backIndicatorTransitionMaskImage = image;
-    
-    //标题颜色
-    [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                     NSFontAttributeName : kBoldFont(15)}];
-    //item 文字颜色 (图标颜色按照主题颜色)
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UINavigationBar appearance].tintColor,
-                                                           NSFontAttributeName : kFont(14)}
-                                                forState:UIControlStateNormal];
 
     self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;

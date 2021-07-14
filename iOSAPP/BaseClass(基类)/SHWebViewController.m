@@ -84,6 +84,10 @@ WKScriptMessageHandler >
     [self.webView setUIDelegate:nil];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - 配置
 - (void)configUI
 {
