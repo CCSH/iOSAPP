@@ -20,8 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
-    self.modalPresentationStyle = UIModalPresentationFullScreen;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
+    self.isOpenKeyboard = YES;
     [self closeAutomatically];
 }
 
@@ -44,10 +45,17 @@
     if (self.statusBarStyle != UIStatusBarStyleDefault) {
         self.statusBarStyle = UIStatusBarStyleDefault;
     }
+    if (!self.isOpenKeyboard) {
+        self.isOpenKeyboard = YES;
+    }
 }
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - 属性
@@ -79,6 +87,11 @@
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle{
     _statusBarStyle = statusBarStyle;
     [UIApplication sharedApplication].statusBarStyle = statusBarStyle;
+}
+
+- (void)setIsOpenKeyboard:(BOOL)isOpenKeyboard{
+    _isOpenKeyboard = isOpenKeyboard;
+    [IQKeyboardManager sharedManager].enable = isOpenKeyboard;
 }
 
 #pragma mark - 方法
@@ -251,6 +264,29 @@
     [hubView.layer addAnimation:rotationAnimation forKey:@"hubView"];
     
     return hubView;
+}
+
+#pragma mark 拨打电话
+- (void)callPhone:(NSString *)phone{
+    if (!phone.length) {
+        return;
+    }
+    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
+}
+
+#pragma mark 模态跳转
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
+{
+    if (IOS(13))
+    {
+        if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationPageSheet)
+        {
+            viewControllerToPresent.modalPresentationStyle = UIModalPresentationFullScreen;
+        }
+    }
+    
+    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 #pragma mark 懒加载

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 //分割线
 @property (nonatomic, strong) UIView *divider;
 
+- (void)initView;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -34,9 +34,14 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>202009291448</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>该权限用于上传图片</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -47,6 +52,8 @@
 	<string>该权限用于发送语音消息和录制视频</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>该权限用于上传图片</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>该权限用于语音识别</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -74,12 +81,5 @@
 	<string>5407054a38</string>
 	<key>mtj_deubglog</key>
 	<string>0</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>该权限用于语音识别</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>
