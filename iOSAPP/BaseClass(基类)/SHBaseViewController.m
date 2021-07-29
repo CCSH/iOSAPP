@@ -58,6 +58,12 @@
     [self.view endEditing:YES];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.isDecelerating || scrollView.isDragging || scrollView.isTracking) {
+        [self.view endEditing:YES];
+    }
+}
+
 #pragma mark - 属性
 #pragma mark 属性
 - (void)setNavBarAlpha:(CGFloat)navBarAlpha{
@@ -98,7 +104,7 @@
 #pragma mark 关闭自动布局
 - (void)closeAutomatically{
     if (IOS(11)) {
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -264,15 +270,6 @@
     [hubView.layer addAnimation:rotationAnimation forKey:@"hubView"];
     
     return hubView;
-}
-
-#pragma mark 拨打电话
-- (void)callPhone:(NSString *)phone{
-    if (!phone.length) {
-        return;
-    }
-    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
 }
 
 #pragma mark 模态跳转

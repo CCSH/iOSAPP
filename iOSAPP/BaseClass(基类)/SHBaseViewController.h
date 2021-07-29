@@ -36,8 +36,6 @@ typedef void(^CallBack)();
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 //开启键盘监听
 @property (nonatomic, assign) BOOL isOpenKeyboard;
-
-//公共参数
 //请求中
 @property (nonatomic, assign) BOOL isRequesting;
 
@@ -69,10 +67,6 @@ typedef void(^CallBack)();
 #pragma mark 隐藏加载框
 - (void)hideHub;
 - (void)hideHubWithView:(UIView *_Nullable)view;
-
-#pragma mark 拨打电话
-- (void)callPhone:(NSString *_Nonnull)phone;
-
 
 @end
 

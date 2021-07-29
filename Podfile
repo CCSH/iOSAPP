@@ -25,6 +25,8 @@ target 'iOSAPP' do
   pod 'SHPopView'
   #空状态
   pod 'SHEmptyView'
+  #标签
+  pod 'SHLabelPageView'
   #数据请求
   pod 'AFNetworking'
   #刷新

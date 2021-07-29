@@ -440,7 +440,7 @@
 				TargetAttributes = {
 					5C25FEA01F68D72600F080A4 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = G94X5Y9CST;
+						DevelopmentTeam = WJM6CYR4CR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -725,7 +725,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iOSAPP/iOSAPP.entitlements;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = G94X5Y9CST;
+				DEVELOPMENT_TEAM = WJM6CYR4CR;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
@@ -747,7 +747,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iOSAPP/iOSAPP.entitlements;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = G94X5Y9CST;
+				DEVELOPMENT_TEAM = WJM6CYR4CR;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
