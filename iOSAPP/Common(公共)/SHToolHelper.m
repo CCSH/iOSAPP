@@ -8,15 +8,16 @@
 
 #import "SHToolHelper.h"
 #import <MapKit/MapKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @implementation SHToolHelper
 
-#pragma mark - 占位图
+#pragma mark 占位图
 + (UIImage *)placeholderImage {
     return [UIImage imageNamed:@"loadfail"];
 }
 
-#pragma mark - 地图导航
+#pragma mark 地图导航
 + (void)mapNavigationWithLon:(CGFloat)lon lat:(CGFloat)lat name:(NSString *)name {
     
     SHActionSheetView *sheet = [[SHActionSheetView alloc] init];
@@ -111,12 +112,24 @@
 
 #pragma mark 去登录
 + (void)gotoLogin{
-    [kAppDelegate configVC:RootVCType_login];
+    [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_login]
+                         type:SHRoutingType_modal
+                        block:nil];
+}
+
+#pragma mark 登录成功
++ (void)loginSuccess:(NSDictionary *)dic{
+    IUserModel *model = [IUserModel mj_objectWithKeyValues:dic];
+    [SHSQLite addLoginInfoWithModel:model];
+    AppDelegate *app = kAppDelegate;
+ 
+    app.userInfo = model;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotLoginSuccess object:nil];
 }
 
 #pragma mark 退出登录
 + (void)loginOut{
-    [kSHUserDef setObject:nil forKey:kLoginInfo];
+    [SHSQLite deleteLoginInfo];
     AppDelegate *app = kAppDelegate;
     app.userInfo = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotLoginOut object:nil];
@@ -159,5 +172,53 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
 }
 
+#pragma mark 相机权限
++ (void)requestCameraPemissionsWithResult:(void (^)(BOOL granted))completion {
+    if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
+        AVAuthorizationStatus permission =
+        [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        switch (permission) {
+            case AVAuthorizationStatusAuthorized:
+                completion(YES);
+                break;
+            case AVAuthorizationStatusDenied:
+            case AVAuthorizationStatusRestricted:
+                completion(NO);
+                break;
+            case AVAuthorizationStatusNotDetermined: {
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                         completionHandler:^(BOOL granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (granted) {
+                            completion(YES);
+                        } else {
+                            completion(NO);
+                        }
+                    });
+                }];
+            } break;
+        }
+    }
+}
+
+#pragma mark 获取推送Token
++ (NSString *)getDeviceToken:(NSData *)deviceToken{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (IOS(13)) {
+        if (![deviceToken isKindOfClass:[NSData class]])
+        {
+            return token;
+        }
+        const unsigned *tokenBytes = [deviceToken bytes];
+        token = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                 ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                 ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                 ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    }
+    return token;
+}
 
 @end

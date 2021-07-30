@@ -11,105 +11,122 @@
 @implementation SHSQLite
 
 //Sql语句
-static NSString *const UPDATE_SQL = @"UPDATE %@ SET ";
-static NSString *const INSERT_SQL = @"INSERT INTO %@ ";
-static NSString *const SELECT_SQL = @"SELECT * FROM %@ WHERE ";
-static NSString *const DELETE_SQL = @"DELETE FROM %@ WHERE ";
+static NSString *const update_sql = @"UPDATE %@ SET ";
+static NSString *const insert_sql = @"INSERT INTO %@ ";
+static NSString *const select_sql = @"SELECT * FROM %@ WHERE ";
+static NSString *const delete_sql = @"DELETE FROM %@ WHERE ";
+static NSString *const create_table = @"CREATE TABLE IF NOT EXISTS `%@` (id INTEGER PRIMARY KEY, %@)";
 
 //数据库表
-static NSString *const loginInfo = @"login_info";
-static NSString *const loginInfoKey = @"user_id TEXT,user_info TEXT";
+//登录信息表
+static NSString *const loginTable = @"login";
+static NSString *const loginTable_info = @"info";
 
 #pragma mark - 实例化
-+ (FMDatabaseQueue *)shareQueue
+
++ (void)initialize
+{
+    if (self == [self class]) {
+        
+        FMDatabaseQueue *queue = [self writeQueue];
+        //表集合
+        NSDictionary *table = @{loginTable : [NSString stringWithFormat:@"%@",[self getText:loginTable_info]]};
+        
+        [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            
+            [table enumerateKeysAndObjectsUsingBlock:^(NSString *table, NSString *key, BOOL *_Nonnull stop) {
+                //sql语句创建表
+                NSString *sql = [NSString stringWithFormat:create_table, table, key];
+                SHLog(@"数据库表创建：%@ %i", table, [db executeUpdate:sql]);
+            }];
+        }];
+    }
+}
+
+#pragma mark 写入队列
++ (FMDatabaseQueue *)writeQueue
 {
     static FMDatabaseQueue *queue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-
-      NSString *path = [NSString stringWithFormat:@"%@/iOSAPP_db.db", kSHDBPath];
-      //获取本地的数据库文件，没有则创建
-      queue = [FMDatabaseQueue databaseQueueWithPath:path];
-
-      //表集合
-      NSDictionary *table = @{loginInfo : loginInfoKey};
-
-      [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-
-        [table enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *_Nonnull stop) {
-          //sql语句创建表
-          NSString *sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@(id INTEGER PRIMARY KEY,%@)", key, obj];
-          [db executeUpdate:sql];
-        }];
-      }];
+        
+        NSString *path = [NSString stringWithFormat:@"%@/iOSAPP_db.db", kSHDBPath];
+        //获取本地的数据库文件，没有则创建
+        queue = [FMDatabaseQueue databaseQueueWithPath:path];
     });
-
+    
     return queue;
 }
 
-//增加、修改
-+ (BOOL)addLoginInfoWithModel:(NSDictionary *)model
+#pragma mark 读取队列
++ (FMDatabaseQueue *)readQueue
+{
+    static FMDatabaseQueue *queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        NSString *path = [NSString stringWithFormat:@"%@/iOSAPP_db.db", kSHDBPath];
+        //获取本地的数据库文件，没有则创建
+        queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    });
+    
+    return queue;
+}
+
+#pragma mark - loginTable
+#pragma mark 增加、修改
++ (BOOL)addLoginInfoWithModel:(IUserModel *)model
 {
     __block BOOL result;
-    [[self shareQueue] inDatabase:^(FMDatabase *_Nonnull db) {
+    //删除之前的
+    [self deleteLoginInfo];
+    [[self writeQueue] inDatabase:^(FMDatabase *_Nonnull db) {
 
-      NSString *sql = [NSString stringWithFormat:SELECT_SQL, loginInfo];
-      sql = [NSString stringWithFormat:@"%@ user_id = ?;", sql];
-      FMResultSet *set = [db executeQuery:sql, model[@"user_id"]];
-
-      if (![set next])
-      {
-          //增加操作
-          sql = [NSString stringWithFormat:INSERT_SQL, loginInfo];
-          sql = [NSString stringWithFormat:@"%@ (user_id, user_info) VALUES (?, ?);", sql];
-          result = [db executeUpdate:sql, model[@"user_id"], model[@"user_info"]];
-      }
-      else
-      {
-          //修改操作
-          sql = [NSString stringWithFormat:UPDATE_SQL, loginInfo];
-          sql = [NSString stringWithFormat:@"%@ user_info = ? WHERE user_id = ?;", sql];
-          result = [db executeUpdate:sql, model[@"user_info"], model[@"user_id"]];
-      }
-      [set close];
+        //添加
+        NSString *sql = [NSString stringWithFormat:insert_sql, loginTable];
+        sql = [NSString stringWithFormat:@"%@ (%@) VALUES (?);",sql, loginTable_info];
+        result = [db executeUpdate:sql, model.mj_JSONString];
     }];
-
+    
     return result;
 }
 
-//获取
-+ (NSDictionary *)getLoginInfoWithUid:(NSString *)uid
+#pragma mark 获取
++ (IUserModel *)getLoginInfo
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-
-    [[self shareQueue] inDatabase:^(FMDatabase *_Nonnull db) {
-
-      NSString *sql = [NSString stringWithFormat:SELECT_SQL, loginInfo];
-      sql = [NSString stringWithFormat:@"%@ user_id = ?;", sql];
-
-      FMResultSet *set = [db executeQuery:sql, uid];
-      if ([set next])
-      {
-          dic[@"user_id"] = [set stringForColumn:@"user_id"];
-          dic[@"user_info"] = [set stringForColumn:@"user_info"];
-      }
-      [set close];
+    __block IUserModel *model = [[IUserModel alloc]init];
+    
+    [[self readQueue] inDatabase:^(FMDatabase *_Nonnull db) {
+        
+        NSString *sql = [NSString stringWithFormat:select_sql, loginTable];
+        sql = [NSString stringWithFormat:@"%@ 1=1", sql];
+        FMResultSet *set = [db executeQuery:sql];
+        if ([set next])
+        {
+            model = [IUserModel mj_objectWithKeyValues:[set stringForColumn:loginTable_info]];
+        }
+        [set close];
     }];
-
-    return dic;
+    
+    return model;
 }
 
-//删除
-+ (BOOL)deleteLoginInfoWithUid:(NSString *)uid
+#pragma mark 删除
++ (BOOL)deleteLoginInfo
 {
     __block BOOL result;
-    [[self shareQueue] inDatabase:^(FMDatabase *_Nonnull db) {
-      NSString *sql = [NSString stringWithFormat:DELETE_SQL, loginInfo];
-      sql = [NSString stringWithFormat:@"%@ user_id = ?;", sql];
-      result = [db executeUpdate:sql, uid];
+    [[self writeQueue] inDatabase:^(FMDatabase *_Nonnull db) {
+        NSString *sql = [NSString stringWithFormat:delete_sql, loginTable];
+        sql = [NSString stringWithFormat:@"%@ 1=1", sql];
+        result = [db executeUpdate:sql];
     }];
-
+    
     return result;
+}
+
+#pragma mark - 获取key属性
++ (NSString *)getText:(NSString *)key{
+    return [NSString stringWithFormat:@"%@ text",key];
 }
 
 @end

@@ -22,12 +22,13 @@
     self.title = @"登录";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
-    
-    [SHSQLite addLoginInfoWithModel:@{@"user_id":@"1"}];
+    [SHToolHelper loginSuccess:@{@"user_id":@"1"}];
 }
 
 - (void)requestData{
-    [SHServerRequest requestLoginWithMobile:@"1" password:@"1" result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
+    [SHServerRequest requestLoginWithMobile:@"1"
+                                   password:@"1"
+                                     result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
         
         if (!error) {
             //成功

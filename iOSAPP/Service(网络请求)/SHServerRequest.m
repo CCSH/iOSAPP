@@ -33,15 +33,16 @@
     {
         //网络错误
         [SHToast showWithText:request_error];
-        if (error.code == -1001)
+        if (error.code == time_out_code)
         {
             //网络请求超时
+            [SHToast showWithText:@"请求超时"];
         }
     }
-    else if (![model.result isEqualToString:success_code])
+    else if (model.code != success_code)
     {
         //服务器错误
-        error = [NSError errorWithDomain:error_domain code:0 userInfo:nil];
+        error = [NSError errorWithDomain:error_domain code:model.code userInfo:nil];
         if (model.msg.length) {
             [SHToast showWithText:model.msg];
         }

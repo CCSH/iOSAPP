@@ -12,8 +12,9 @@
 //网络请求接口
 
 static NSString *request_error = @"网络异常，请检查网络";
-static NSString *error_domain = @"iosapp_domain";
-static NSString *success_code = @"200";
+static NSString *error_domain = @"ccsh_domain";
+static NSInteger success_code = 200;
+static NSInteger time_out_code = -1001;
 
 #pragma mark - 三方
 #define kBuglyID @"fc42b13a1b"

@@ -43,7 +43,7 @@
 - (void)configInterface
 {
     //配置登录信息
-    self.userInfo = [IUesrModel mj_objectWithKeyValues:kSHUserDefGet(kLoginInfo)];
+    self.userInfo = [SHSQLite getLoginInfo];
     
     //当前版本号
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -85,13 +85,6 @@
         {
             [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_welcome]
                                  type:SHRoutingType_root
-                                block:nil];
-        }
-            break;
-        case RootVCType_login:
-        {
-            [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_login]
-                                 type:SHRoutingType_modal
                                 block:nil];
         }
             break;

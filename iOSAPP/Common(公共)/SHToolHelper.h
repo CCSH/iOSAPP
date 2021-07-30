@@ -12,10 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SHToolHelper : NSObject
 
-#pragma mark - 占位图
+#pragma mark 占位图
 + (UIImage *)placeholderImage;
 
-#pragma mark - 地图导航
+#pragma mark 地图导航
 + (void)mapNavigationWithLon:(CGFloat)lon lat:(CGFloat)lat name:(NSString *)name;
 
 #pragma mark 获取头部view
@@ -27,8 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 需要登录
 + (BOOL)needLogin;
 
+#pragma mark 登录成功
++ (void)loginSuccess:(NSDictionary *)dic;
+
 #pragma mark 退出登录
 + (void)loginOut;
+
+#pragma mark 去登录
++ (void)gotoLogin;
 
 #pragma mark 获取用户ID
 + (NSString *)getUserId;
@@ -44,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 拨打电话
 + (void)callPhone:(NSString *_Nonnull)phone;
+
+#pragma mark 相机权限
++ (void)requestCameraPemissionsWithResult:(void(^)( BOOL granted))completion;
+
+#pragma mark 获取推送Token
++ (NSString *)getDeviceToken:(NSData *)deviceToken;
 
 @end
 

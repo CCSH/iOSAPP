@@ -12,6 +12,8 @@
 //类
 #import "AppDelegate+SHExtension.h"
 #import "AppDelegate.h"
+#import "IUserModel.h"
+#import "SHBaseModel.h"
 #import "SHBaseNavViewController.h"
 #import "SHBaseTableViewCell.h"
 #import "SHBaseViewController.h"
@@ -19,12 +21,11 @@
 #import "SHRouting.h"
 #import "SHSQLite.h"
 #import "SHServerRequest.h"
+#import "SHServerRequest.h"
+#import "SHToolHelper.h"
 #import "SHWebViewController.h"
 #import "UIScrollView+SHExtension.h"
-#import "IUesrModel.h"
-#import "SHToolHelper.h"
-
-//#import <Bugly/Bugly.h>
+#import <Bugly/Bugly.h>
 #import <FMDB.h>
 #import <MBProgressHUD.h>
 #import <MJExtension.h>
@@ -32,14 +33,14 @@
 #import <Masonry/Masonry.h>
 #import <SHActionSheetView.h>
 #import <SHAlertView.h>
+#import <SHButton.h>
+#import <SHScrollView.h>
 #import <SHToast.h>
 #import <SHTool.h>
 #import <UIButton+SHExtension.h>
 #import <UIColor+SHExtension.h>
 #import <UIImage+SHExtension.h>
-#import <UIView+SHExtension.h>
-#import <SHScrollView.h>
 #import <UIImageView+WebCache.h>
-#import <SHButton.h>
+#import <UIView+SHExtension.h>
 
 #endif /* ClassHeader_h */

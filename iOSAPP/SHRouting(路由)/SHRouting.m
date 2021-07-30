@@ -158,28 +158,6 @@
         return @"SHWebViewController";
     }else if ([name isEqualToString:RoutingName_search]){
         return @"ShopSearchViewController";
-    }else if ([name isEqualToString:RoutingName_goodDetail]){
-        return @"GoodsDetailViewController";
-    }else if ([name isEqualToString:RoutingName_orderConfirm]){
-        return @"OrderConfirmViewController";
-    }else if ([name isEqualToString:RoutingName_addressList]){
-        return @"AddressListViewController";
-    }else if ([name isEqualToString:RoutingName_goodsSearch]){
-        return @"GoodsSearchViewController";
-    }else if ([name isEqualToString:RoutingName_specifications]){
-        return @"CommoditySpecificationsViewController";
-    }else if ([name isEqualToString:RoutingName_addressAdd]){
-        return @"AddressAddViewController";
-    }else if ([name isEqualToString:RoutingName_addressRegionSelect]){
-        return @"AddressRegionSelectViewController";
-    }else if ([name isEqualToString:RoutingName_publish]){
-        return @"PublishViewController";
-    }else if ([name isEqualToString:RoutingName_center]){
-        return @"PersonalCenterViewController";
-    }else if ([name isEqualToString:RoutingName_orderList]){
-        return @"OrderListViewController";
-    }else if ([name isEqualToString:RoutingName_order]){
-        return @"OrderViewController";
     }else if ([name isEqualToString:RoutingName_ad]){
         return @"AdViewController";
     }

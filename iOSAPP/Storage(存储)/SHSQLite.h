@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IUserModel.h"
 
 @interface SHSQLite : NSObject
 
-//增加、修改
-+ (BOOL)addLoginInfoWithModel:(NSDictionary *)model;
-//获取
-+ (NSDictionary *)getLoginInfoWithUid:(NSString *)uid;
-//删除
-+ (BOOL)deleteLoginInfoWithUid:(NSString *)uid;
+#pragma mark - loginTable
+#pragma mark 增加、修改
++ (BOOL)addLoginInfoWithModel:(IUserModel *)model;
+#pragma mark 获取
++ (IUserModel *)getLoginInfo;
+#pragma mark 删除
++ (BOOL)deleteLoginInfo;
 
 @end

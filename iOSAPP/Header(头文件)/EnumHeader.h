@@ -17,7 +17,6 @@ typedef enum : NSUInteger
     RootVCType_main,   //首页
     RootVCType_wecome, //欢迎页
     RootVCType_ad,     //广告
-    RootVCType_login,  //登录
 } RootVCType;
 
 //路由跳转类型
@@ -36,22 +35,5 @@ typedef enum : NSUInteger {
 #define RoutingName_main @"main"
 #define RoutingName_login @"login"
 #define RoutingName_ad @"ad"
-#define RoutingName_goodDetail @"goodDetail"
-#define RoutingName_orderConfirm @"orderConfirm"
-#define RoutingName_addressList @"addressList"
-#define RoutingName_goodsSearch @"goodsSearch"
-#define RoutingName_specifications @"specifications"
-#define RoutingName_addressAdd @"addressAdd"
-#define RoutingName_addressRegionSelect @"addressRegionSelect"
-#define RoutingName_publish @"publish"
-#define RoutingName_center @"center"
-#define RoutingName_orderList @"orderList"
-#define RoutingName_order @"order"
-
-#pragma mark - 订单
-#define OrderType_pay @"WAITPAY"
-#define OrderType_send @"WAITSEND"
-#define OrderType_receivce @"WAITRECEIVE"
-#define OrderType_cancel @"CANCEL_REFUND"
 
 #endif /* EnumHeader_h */

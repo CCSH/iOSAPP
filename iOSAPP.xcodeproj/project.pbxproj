@@ -26,7 +26,7 @@
 		8331AFB5266A25EE00180DDA /* SHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF7F266A25ED00180DDA /* SHBaseModel.m */; };
 		8331AFB6266A25EE00180DDA /* SHBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF82266A25ED00180DDA /* SHBaseNavViewController.m */; };
 		8331AFB7266A25EE00180DDA /* IShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF86266A25ED00180DDA /* IShareModel.m */; };
-		8331AFB8266A25EE00180DDA /* IUesrModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF89266A25ED00180DDA /* IUesrModel.m */; };
+		8331AFB8266A25EE00180DDA /* IUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF89266A25ED00180DDA /* IUserModel.m */; };
 		8331AFB9266A25EE00180DDA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF8D266A25EE00180DDA /* HomeViewController.m */; };
 		8331AFBA266A25EE00180DDA /* SHTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF8F266A25EE00180DDA /* SHTabBar.m */; };
 		8331AFBB266A25EE00180DDA /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF92266A25EE00180DDA /* MineViewController.m */; };
@@ -84,9 +84,9 @@
 		8331AF83266A25ED00180DDA /* SHWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHWebViewController.h; sourceTree = "<group>"; };
 		8331AF84266A25ED00180DDA /* SHBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBaseModel.h; sourceTree = "<group>"; };
 		8331AF86266A25ED00180DDA /* IShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IShareModel.m; sourceTree = "<group>"; };
-		8331AF87266A25ED00180DDA /* IUesrModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUesrModel.h; sourceTree = "<group>"; };
+		8331AF87266A25ED00180DDA /* IUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserModel.h; sourceTree = "<group>"; };
 		8331AF88266A25ED00180DDA /* IShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IShareModel.h; sourceTree = "<group>"; };
-		8331AF89266A25ED00180DDA /* IUesrModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUesrModel.m; sourceTree = "<group>"; };
+		8331AF89266A25ED00180DDA /* IUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUserModel.m; sourceTree = "<group>"; };
 		8331AF8D266A25EE00180DDA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		8331AF8E266A25EE00180DDA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		8331AF8F266A25EE00180DDA /* SHTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHTabBar.m; sourceTree = "<group>"; };
@@ -235,8 +235,8 @@
 		8331AF6E266A25ED00180DDA /* Storage(存储) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AF6F266A25ED00180DDA /* SHSQLite.m */,
 				8331AF70266A25ED00180DDA /* SHSQLite.h */,
+				8331AF6F266A25ED00180DDA /* SHSQLite.m */,
 			);
 			path = "Storage(存储)";
 			sourceTree = "<group>";
@@ -284,8 +284,8 @@
 			children = (
 				8331AF88266A25ED00180DDA /* IShareModel.h */,
 				8331AF86266A25ED00180DDA /* IShareModel.m */,
-				8331AF87266A25ED00180DDA /* IUesrModel.h */,
-				8331AF89266A25ED00180DDA /* IUesrModel.m */,
+				8331AF87266A25ED00180DDA /* IUserModel.h */,
+				8331AF89266A25ED00180DDA /* IUserModel.m */,
 			);
 			path = "Model(模型)";
 			sourceTree = "<group>";
@@ -569,7 +569,7 @@
 				5C25FEA61F68D72600F080A4 /* main.m in Sources */,
 				8331AFBE266A25EE00180DDA /* ClassViewController.m in Sources */,
 				8331AFB0266A25EE00180DDA /* SHSQLite.m in Sources */,
-				8331AFB8266A25EE00180DDA /* IUesrModel.m in Sources */,
+				8331AFB8266A25EE00180DDA /* IUserModel.m in Sources */,
 				8331AFB3266A25EE00180DDA /* SHBaseTableViewCell.m in Sources */,
 				8331AFBA266A25EE00180DDA /* SHTabBar.m in Sources */,
 				8331AFC2266A25EE00180DDA /* RegisterViewController.m in Sources */,

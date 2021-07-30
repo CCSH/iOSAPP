@@ -47,7 +47,7 @@
 //默认间距
 #define kSpaceW (15)
 //组头部高度
-#define kHeadH 40
+#define kHeadH (40)
 
 //字体
 #define kFont(A) [UIFont systemFontOfSize:A]
@@ -136,8 +136,6 @@
 #pragma mark UserDefKey
 //APP版本
 #define kAppVersion @"kAppVersion"
-//登录用户信息
-#define kLoginInfo @"kLoginInfo"
 
 #pragma mark - 通知
 //刷新界面

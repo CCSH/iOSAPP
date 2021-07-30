@@ -20,7 +20,7 @@ typedef void (^RequestBlock)(SHRequestBaseModel *baseModel, NSError *error);
 @interface SHRequestBaseModel : NSObject
 
 //请求code
-@property (nonatomic, copy) NSString *result;
+@property (nonatomic, assign) NSInteger code;
 //请求文本
 @property (nonatomic, copy) NSString *msg;
 //内容

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IUesrModel.h"
+#import "IUserModel.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,7 +18,7 @@
 //通知处理
 @property (nonatomic, copy) NSString *notInfo;
 //登录用户
-@property (nonatomic, strong) IUesrModel *userInfo;
+@property (nonatomic, strong) IUserModel *userInfo;
 
 @end
 

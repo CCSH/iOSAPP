@@ -48,9 +48,6 @@ static bool isLog = YES;
             switch (status)
             {
                 case AFNetworkReachabilityStatusReachableViaWWAN:
-                    //只加载网络
-                    mgr.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;
-                    break;
                 case AFNetworkReachabilityStatusReachableViaWiFi:
                     //只加载网络
                     mgr.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;

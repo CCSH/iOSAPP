@@ -28,8 +28,8 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    [SHSQLite deleteLoginInfoWithUid:@"1"];
-    [kAppDelegate configVC:RootVCType_login];
+    [SHToolHelper loginOut];
+    [SHToolHelper gotoLogin];
 }
 
 - (void)didReceiveMemoryWarning {
