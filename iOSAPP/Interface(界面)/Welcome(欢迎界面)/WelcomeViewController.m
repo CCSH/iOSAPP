@@ -21,6 +21,11 @@
     [self configUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.isNavHide = YES;
+}
+
 #pragma mark - 配置
 - (void)configUI{
     SHScrollView *scroll = [[SHScrollView alloc]init];

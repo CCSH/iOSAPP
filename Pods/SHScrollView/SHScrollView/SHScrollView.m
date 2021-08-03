@@ -84,30 +84,24 @@ static NSString *cellId = @"SHScrollView";
     imageView.contentMode = self.contentMode;
     imageView.image = self.placeholderImage;
     
-    if ([obj isKindOfClass:[NSString class]]) { //字符串
-        
+    if ([obj isKindOfClass:[NSString class]]) {
+        //字符串
         NSString *str = (NSString *)obj;
-        
-    
+        //资源图片
         UIImage *image = [UIImage imageNamed:str];
-        if (image) {
-            //资源图片
-            imageView.image = image;
-        }
         if (!image) {
             //本地图片
             image = [UIImage imageWithContentsOfFile:str];
         }
         if (image) {
-            imageView.image = image;
-            [baseView addSubview:imageView];
+            //图片
+            [self configView:baseView obj:image];
             return;
         }
         
         if ([str hasPrefix:@"http"]) {
             //网络图片
-            [imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:self.placeholderImage];
-            [baseView addSubview:imageView];
+            [self configView:baseView obj:[NSURL URLWithString:str]];
             return;
         }
         
@@ -119,26 +113,31 @@ static NSString *cellId = @"SHScrollView";
             [baseView addSubview:lab];
             return;
         }
-    } else if ([obj isKindOfClass:[NSAttributedString class]]) { //富文本
-        
+    } else if ([obj isKindOfClass:[NSURL class]]){
+        //网络图片
+        [imageView sd_setImageWithURL:obj placeholderImage:self.placeholderImage];
+        [baseView addSubview:imageView];
+        return;
+    } else if ([obj isKindOfClass:[NSAttributedString class]]) {
+        //富文本
         UILabel *lab = [self getLabView];
         lab.frame = baseView.bounds;
         lab.attributedText = (NSAttributedString *)obj;
         [baseView addSubview:lab];
         return;
-    } else if ([obj isKindOfClass:[UIImage class]]) { //图片
-        
+    } else if ([obj isKindOfClass:[UIImage class]]) {
+        //图片
         imageView.image = (UIImage *)obj;
         [baseView addSubview:imageView];
         return;
-    } else if ([obj isKindOfClass:[UIViewController class]]) { //控制器
-        
+    } else if ([obj isKindOfClass:[UIViewController class]]) {
+        //控制器
         UIViewController *vc = (UIViewController *)obj;
         vc.view.frame = baseView.bounds;
         [baseView addSubview:vc.view];
         return;
-    } else if ([obj isKindOfClass:[UIView class]]) { //视图
-        
+    } else if ([obj isKindOfClass:[UIView class]]) {
+        //视图
         UIView *view = obj;
         [baseView addSubview:view];
         return;
@@ -415,25 +414,27 @@ static NSString *cellId = @"SHScrollView";
 
 #pragma mark - SET
 - (void)setCurrentIndex:(NSInteger)currentIndex {
-    //相同 不处理
-    if (_currentIndex == currentIndex) {
-        return;
-    }
-    
-    _currentIndex = currentIndex;
-    
     //超过数组限制，不进行处理
     if (currentIndex >= self.contentArr.count) {
         return;
     }
     
-    //刷新内容
-    [self.mainView reloadData];
-    
     if (!self.isFull) {
         return;
     }
     
+    //相同 不处理
+    if (_currentIndex != currentIndex) {
+        _currentIndex = currentIndex;
+        //滚动了一页
+        if (self.endRollingBlock) {
+            self.endRollingBlock(NO, currentIndex);
+        }
+    }
+    
+    //刷新内容
+    [self.mainView reloadData];
+     
     NSInteger index = currentIndex;
     if (self.timeInterval >= 0) {
         //界面循环
@@ -441,11 +442,6 @@ static NSString *cellId = @"SHScrollView";
     }
     
     [self.mainView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-    
-    //滚动了一页
-    if (self.endRollingBlock) {
-        self.endRollingBlock(NO, currentIndex);
-    }
 }
 
 #pragma mark - 时间操作
