@@ -138,8 +138,7 @@
 #define kAppVersion @"kAppVersion"
 
 #pragma mark - 通知
-//刷新界面
-#define kNotReload @"kNotReload"
+#define kNotCenter [NSNotificationCenter defaultCenter]
 //退出登录
 #define kNotLoginOut @"kNotLoginOut"
 //登录成功

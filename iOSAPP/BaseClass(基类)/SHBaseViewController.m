@@ -15,8 +15,7 @@
 
 @implementation SHBaseViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
@@ -26,7 +25,7 @@
     [self closeAutomatically];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     //根据需求进行管理
@@ -36,7 +35,7 @@
     if (self.isStatusBarHide) {
         self.isStatusBarHide = NO;
     }
-    if (self.navBarAlpha < 1){
+    if (self.navBarAlpha < 1) {
         self.navBarAlpha = 1;
     }
     if (self.navBarBGAlpha < 1) {
@@ -50,29 +49,29 @@
     }
 }
 
-- (void) dealloc {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.window endEditing:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDecelerating || scrollView.isDragging || scrollView.isTracking) {
-        [self.view endEditing:YES];
+        [self.window endEditing:YES];
     }
 }
 
 #pragma mark - 属性
 #pragma mark 属性
-- (void)setNavBarAlpha:(CGFloat)navBarAlpha{
+- (void)setNavBarAlpha:(CGFloat)navBarAlpha {
     _navBarAlpha = navBarAlpha;
     //整体透明
     self.navigationController.navigationBar.alpha = navBarAlpha;
 }
 
-- (void)setNavBarBGAlpha:(CGFloat)navBarBGAlpha{
+- (void)setNavBarBGAlpha:(CGFloat)navBarBGAlpha {
     _navBarBGAlpha = navBarBGAlpha;
     
     UIView *bgView = self.navigationController.navigationBar.subviews.firstObject;
@@ -80,29 +79,29 @@
     bgView.alpha = navBarBGAlpha;
 }
 
-- (void)setIsNavHide:(BOOL)isNavHide{
+- (void)setIsNavHide:(BOOL)isNavHide {
     _isNavHide = isNavHide;
     [self.navigationController setNavigationBarHidden:isNavHide animated:NO];
 }
 
-- (void)setIsStatusBarHide:(BOOL)isStatusBarHide{
+- (void)setIsStatusBarHide:(BOOL)isStatusBarHide {
     _isStatusBarHide = isStatusBarHide;
     [UIApplication sharedApplication].statusBarHidden = isStatusBarHide;
 }
 
-- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle{
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
     _statusBarStyle = statusBarStyle;
     [UIApplication sharedApplication].statusBarStyle = statusBarStyle;
 }
 
-- (void)setIsOpenKeyboard:(BOOL)isOpenKeyboard{
+- (void)setIsOpenKeyboard:(BOOL)isOpenKeyboard {
     _isOpenKeyboard = isOpenKeyboard;
     [IQKeyboardManager sharedManager].enable = isOpenKeyboard;
 }
 
 #pragma mark - 方法
 #pragma mark 关闭自动布局
-- (void)closeAutomatically{
+- (void)closeAutomatically {
     if (IOS(11)) {
         [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -111,27 +110,21 @@
 }
 
 #pragma mark 返回
-- (void)backAction
-{
-    if (self.navigationController.viewControllers.count > 1)
-    {
+- (void)backAction {
+    if (self.navigationController.viewControllers.count > 1) {
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
+    } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 #pragma mark 获取堆栈中的某个控制器
-- (UIViewController *)getStackVCWithClassName:(NSString *)className
-{
+- (UIViewController *)getStackVCWithClassName:(NSString *)className {
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     
     __block UIViewController *vc = nil;
     [vcs enumerateObjectsUsingBlock:^(UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:className])
-        {
+        if ([NSStringFromClass([obj class]) isEqualToString:className]) {
             vc = obj;
             *stop = YES;
         }
@@ -141,16 +134,13 @@
 }
 
 #pragma mark 获取堆栈中的指定位置的控制器
-- (UIViewController *)getStackVCWithAt:(int)at
-{
+- (UIViewController *)getStackVCWithAt:(int)at {
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     
-    if (vcs.count)
-    {
+    if (vcs.count) {
         NSUInteger index = at;
         
-        if (at < 0)
-        {
+        if (at < 0) {
             index = vcs.count + at;
         }
         return vcs[index];
@@ -160,12 +150,11 @@
 }
 
 #pragma mark 删除某个控制器
-- (BOOL)removeVCToStackWithClassName:(NSString *_Nonnull)className{
+- (BOOL)removeVCToStackWithClassName:(NSString *_Nonnull)className {
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     __block NSInteger index = -1;
     [vcs enumerateObjectsUsingBlock:^(UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:className])
-        {
+        if ([NSStringFromClass([obj class]) isEqualToString:className]) {
             index = idx;
             *stop = YES;
         }
@@ -175,16 +164,16 @@
         [self.navigationController setViewControllers:vcs animated:false];
         return YES;
     }
-    return NO;;
+    return NO;
+    ;
 }
 
 #pragma mark 删除某个位置的控制器
-- (void)removeVCToStackWithAt:(int)at{
+- (void)removeVCToStackWithAt:(int)at {
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     NSUInteger index = at;
     
-    if (at < 0)
-    {
+    if (at < 0) {
         index = vcs.count + at;
     }
     [vcs removeObjectAtIndex:index];
@@ -192,20 +181,17 @@
 }
 
 #pragma mark 替换某个控制器到堆栈中
-- (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at
-{
+- (BOOL)replaceVCToStackVC:(UIViewController *)vc at:(int)at {
     NSMutableArray *vcs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     
-    if (vcs.count > abs(at))
-    {
+    if (vcs.count > abs(at)) {
         NSUInteger index = at;
-        if (at < 0)
-        {
+        if (at < 0) {
             index = vcs.count + at;
         }
         if (vc) {
             vcs[index] = vc;
-        }else{
+        } else {
             [vcs removeObjectAtIndex:index];
         }
         
@@ -218,13 +204,11 @@
 }
 
 #pragma mark 显示加载框
-- (void)showHub{
-    
+- (void)showHub {
     [self showHubWithView:nil];
 }
 
-- (void)showHubWithView:(UIView * _Nullable)view{
-    
+- (void)showHubWithView:(UIView *_Nullable)view {
     if (!view) {
         view = self.view;
     }
@@ -242,13 +226,13 @@
 }
 
 #pragma mark 隐藏加载框
-- (void)hideHub{
+- (void)hideHub {
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     });
 }
 
-- (void)hideHubWithView:(UIView *_Nullable)view{
+- (void)hideHubWithView:(UIView *_Nullable)view {
     if (!view) {
         view = self.view;
     }
@@ -257,13 +241,13 @@
     });
 }
 
-- (UIImageView *)hubView{
+- (UIImageView *)hubView {
     UIImageView *hubView = [[UIImageView alloc] init];
     hubView.image = [UIImage imageNamed:@"loading"];
     hubView.size = CGSizeMake(20, 20);
     
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI * 2.0];
     rotationAnimation.duration = 1.0;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = HUGE_VALF;
@@ -273,12 +257,9 @@
 }
 
 #pragma mark 模态跳转
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
-{
-    if (IOS(13))
-    {
-        if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationPageSheet)
-        {
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
+    if (IOS(13)) {
+        if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationPageSheet) {
             viewControllerToPresent.modalPresentationStyle = UIModalPresentationFullScreen;
         }
     }
@@ -287,10 +268,8 @@
 }
 
 #pragma mark 懒加载
-- (UIWindow *)window
-{
-    if (!_window)
-    {
+- (UIWindow *)window {
+    if (!_window) {
         _window = [[[UIApplication sharedApplication] delegate] window];
     }
     return _window;

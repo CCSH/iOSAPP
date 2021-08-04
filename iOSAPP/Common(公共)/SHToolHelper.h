@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)needLogin;
 
 #pragma mark 登录成功
-+ (void)loginSuccess:(NSDictionary *)dic;
++ (void)loginSuccess:(SHRequestBaseModel *)obj;
 
 #pragma mark 退出登录
 + (void)loginOut;

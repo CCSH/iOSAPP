@@ -10,6 +10,7 @@
 
 #import "SHRequestBase.h"
 #import "AFHTTPSessionManager.h"
+#import "AESenAndDe.h"
 
 @implementation SHRequestBase
 
@@ -28,18 +29,18 @@ static bool isLog = YES;
     dispatch_once(&onceToken, ^{
         mgr = [AFHTTPSessionManager manager];
         mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
-                                                         @"text/json",
+                                                         @"multipart/form-data",
                                                          @"text/javascript",
+                                                         @"text/json",
                                                          @"text/html",
                                                          @"text/plain",
-                                                         @"multipart/form-data",
                                                          nil];
         mgr.securityPolicy.allowInvalidCertificates = YES;
         mgr.securityPolicy.validatesDomainName = NO;
         mgr.requestSerializer.timeoutInterval = timeOut;
         
         mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
-        mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+        mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
         
         [mgr.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         
@@ -62,6 +63,7 @@ static bool isLog = YES;
         //开始监听
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
+        
         //请求队列
         netQueueDic = [[NSMutableDictionary alloc] init];
     });
@@ -70,7 +72,6 @@ static bool isLog = YES;
 }
 
 #pragma mark - 请求方法
-
 #pragma mark GET
 - (void)requestGet{
     
@@ -123,7 +124,7 @@ static bool isLog = YES;
         {
             //重新请求
             self.retry--;
-            [self requestGet];
+            [self requestPost];
         }
         else
         {
@@ -221,8 +222,8 @@ static bool isLog = YES;
 }
 
 #pragma mark 文件上传(多个 一次)
-- (void)requestUploadFilesWithName:(NSString *_Nullable)name
-                             datas:(NSArray< NSData * > *)datas{
+- (void)requestUploadFileWithName:(NSString *_Nullable)name
+                            datas:(NSArray< NSData * > *)datas{
     name = name ?: @"file.jpg";
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager];
@@ -251,7 +252,7 @@ static bool isLog = YES;
         {
             //重新请求
             self.retry--;
-            [self requestUploadFilesWithName:name datas:datas];
+            [self requestUploadFileWithName:name datas:datas];
             
         }
         else
@@ -382,6 +383,9 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
 - (void)handleSuccess:(id)responseObject{
     //移除队列
     [self cancelOperationsWithTag:self.tag];
+    
+    responseObject = [responseObject mj_JSONObject];
+    
     //打印
     if (isLog) {
         SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, self.param, responseObject);

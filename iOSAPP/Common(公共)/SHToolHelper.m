@@ -118,11 +118,11 @@
 }
 
 #pragma mark 登录成功
-+ (void)loginSuccess:(NSDictionary *)dic{
-    IUserModel *model = [IUserModel mj_objectWithKeyValues:dic];
++ (void)loginSuccess:(SHRequestBaseModel *)obj{
+    IUserModel *model = [IUserModel mj_objectWithKeyValues:obj.data];
     [SHSQLite addLoginInfoWithModel:model];
+    
     AppDelegate *app = kAppDelegate;
- 
     app.userInfo = model;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotLoginSuccess object:nil];
 }
@@ -130,6 +130,7 @@
 #pragma mark 退出登录
 + (void)loginOut{
     [SHSQLite deleteLoginInfo];
+    
     AppDelegate *app = kAppDelegate;
     app.userInfo = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotLoginOut object:nil];

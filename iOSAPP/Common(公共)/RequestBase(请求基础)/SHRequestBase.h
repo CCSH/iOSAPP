@@ -51,8 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
                              data:(NSData *)data;
 
 #pragma mark 文件上传(多个 一次)
-- (void)requestUploadFilesWithName:(NSString *_Nullable)name
-                             datas:(NSArray< NSData * > *)datas;
+- (void)requestUploadFileWithName:(NSString *_Nullable)name
+                            datas:(NSArray< NSData * > *)datas;
 
 #pragma mark 文件上传(多个 多次)
 - (void)requestUploadFilesManyWithName:(NSString *_Nullable)name

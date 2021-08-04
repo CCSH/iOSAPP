@@ -216,9 +216,9 @@
 			isa = PBXGroup;
 			children = (
 				8331AF67266A25ED00180DDA /* SHRequestBaseModel.h */,
+				8331AF6A266A25ED00180DDA /* SHRequestBaseModel.m */,
 				8331AF68266A25ED00180DDA /* SHRequestBase.h */,
 				8331AF69266A25ED00180DDA /* SHRequestBase.m */,
-				8331AF6A266A25ED00180DDA /* SHRequestBaseModel.m */,
 			);
 			path = "RequestBase(请求基础)";
 			sourceTree = "<group>";
