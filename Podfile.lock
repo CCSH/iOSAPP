@@ -39,6 +39,9 @@ PODS:
   - MBProgressHUD (1.2.0)
   - MJExtension (3.3.0)
   - MJRefresh (3.7.2)
+  - mob_linksdk_pro (3.3.8):
+    - MOBFoundation
+  - MOBFoundation (3.2.26)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -87,6 +90,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - mob_linksdk_pro
   - SDWebImage
   - SHActionSheetView
   - SHAlertView
@@ -114,6 +118,8 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - mob_linksdk_pro
+    - MOBFoundation
     - SDWebImage
     - SHActionSheetView
     - SHAlertView
@@ -141,6 +147,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 01704cca2b60a214c10761b6491eab74069d68a9
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  mob_linksdk_pro: 0c38c234a1ec4e7fa61907d43bf10b119f331f91
+  MOBFoundation: 2abd23c80c33d1337d30dc4b0018ed914cef8f8e
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SHActionSheetView: eac0c885497abf17d4360237cb90e49be3743d80
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
@@ -156,6 +164,6 @@ SPEC CHECKSUMS:
   TZImagePickerController: 1cc39ec0454d6e94d0397418953164d7aa631719
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 64fff2d96801ef78809604742e6f0e2d73e0d211
+PODFILE CHECKSUM: 6f51506834ed2b960b01db59e852499f44fcf947
 
 COCOAPODS: 1.10.1

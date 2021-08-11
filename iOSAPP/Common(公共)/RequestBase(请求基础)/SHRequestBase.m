@@ -10,7 +10,6 @@
 
 #import "SHRequestBase.h"
 #import "AFHTTPSessionManager.h"
-#import "AESenAndDe.h"
 
 @implementation SHRequestBase
 
@@ -39,8 +38,8 @@ static bool isLog = YES;
         mgr.securityPolicy.validatesDomainName = NO;
         mgr.requestSerializer.timeoutInterval = timeOut;
         
-        mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
-        mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+        mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+        mgr.responseSerializer = [AFJSONResponseSerializer serializer];
         
         [mgr.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         
@@ -62,7 +61,6 @@ static bool isLog = YES;
         
         //开始监听
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-        
         
         //请求队列
         netQueueDic = [[NSMutableDictionary alloc] init];

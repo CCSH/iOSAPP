@@ -99,14 +99,6 @@
     #endif
 #endif
 
-//描边
-#define kSHViewBorder(V, R, W, C)\
-\
-[V.layer setMasksToBounds:YES];\
-[V.layer setBorderWidth:(W)];\
-[V.layer setCornerRadius:(R)];\
-[V.layer setBorderColor:[C CGColor]];
-
 //控制日志输出
 #ifdef DEBUG
 #   define SHLog(log, ...) printf("%s \nline (%d) \n%s\n", __PRETTY_FUNCTION__, __LINE__, [[NSString stringWithFormat:(log), ##__VA_ARGS__] UTF8String])

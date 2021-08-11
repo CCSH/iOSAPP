@@ -8,8 +8,12 @@
 
 #import "AppDelegate+SHExtension.h"
 #import "MainTabBarController.h"
+#import <MOBFoundation/MobSDK+Privacy.h>
+#import <MobLinkPro/IMLSDKRestoreDelegate.h>
+#import <MobLinkPro/MobLink.h>
+#import <MobLinkPro/MLSDKScene.h>
 
-@interface AppDelegate (SHExtension)
+@interface AppDelegate (SHExtension)<IMLSDKRestoreDelegate>
 
 @end
 
@@ -30,13 +34,18 @@
 #pragma mark 配置其他
 - (void)configOther
 {
-//    //bugly配置
-//    BuglyConfig * config = [[BuglyConfig alloc] init];
-//    //卡顿监听
-//    config.blockMonitorEnable = YES;
-//    config.blockMonitorTimeout = 0.5;
-//
-//    [Bugly startWithAppId:kBuglyID config:config];
+    //    //bugly配置
+    //    BuglyConfig * config = [[BuglyConfig alloc] init];
+    //    //卡顿监听
+    //    config.blockMonitorEnable = YES;
+    //    config.blockMonitorTimeout = 0.5;
+    //
+    //    [Bugly startWithAppId:kBuglyID config:config];
+    
+    //协议
+    [MobSDK uploadPrivacyPermissionStatus:YES onResult:nil];
+    // 设置MobLink代理
+    [MobLink setDelegate:self];
 }
 
 #pragma mark 配置界面逻辑
@@ -156,7 +165,7 @@
 #pragma mark 处理粘贴板
 - (void)handleCopy{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
-
+    
     if (IOS(14)) {
         [board detectPatternsForPatterns:[NSSet setWithObjects:UIPasteboardDetectionPatternProbableWebURL, UIPasteboardDetectionPatternNumber, UIPasteboardDetectionPatternProbableWebSearch, nil]
                        completionHandler:^(NSSet<UIPasteboardDetectionPattern> * _Nullable set, NSError * _Nullable error) {
@@ -188,23 +197,23 @@
     
     //收到推送的内容
     UNNotificationContent *content = request.content;
-//    //收到用户的基本信息
-//    NSDictionary *userInfo = content.userInfo;
-//
-//    //收到推送消息的角标
-//    NSNumber *badge = content.badge;
-//
-//    //收到推送消息body
-//    NSString *body = content.body;
-//
-//    //推送消息的声音
-//    UNNotificationSound *sound = content.sound;
-//
-//    // 推送消息的副标题
-//    NSString *subtitle = content.subtitle;
-//
-//    // 推送消息的标题
-//    NSString *title = content.title;
+    //    //收到用户的基本信息
+    //    NSDictionary *userInfo = content.userInfo;
+    //
+    //    //收到推送消息的角标
+    //    NSNumber *badge = content.badge;
+    //
+    //    //收到推送消息body
+    //    NSString *body = content.body;
+    //
+    //    //推送消息的声音
+    //    UNNotificationSound *sound = content.sound;
+    //
+    //    // 推送消息的副标题
+    //    NSString *subtitle = content.subtitle;
+    //
+    //    // 推送消息的标题
+    //    NSString *title = content.title;
     
     if([request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         SHLog(@"远程通知 = %@",content.userInfo);
@@ -245,6 +254,31 @@
         return;
     }
     SHLog(@"内容 --- %@\n主机 --- %@\n参数 --- %@", url.absoluteString, url.host, url.query);
+}
+
+#pragma mark IMLSDKRestoreDelegate
+- (void) IMLSDKWillRestoreScene:(MLSDKScene *)scene Restore:(void (^)(BOOL, RestoreStyle))restoreHandler
+{
+    [self handleOpenURL:[NSURL URLWithString:scene.path]];
+    restoreHandler(YES, MLDefault);
+    
+}
+
+- (void)IMLSDKCompleteRestore:(MLSDKScene *)scene
+{
+    NSLog(@"Complete Restore -Path:%@",scene.path);
+}
+
+- (void)IMLSDKNotFoundScene:(MLSDKScene *)scene
+{
+    NSLog(@"Not Found Scene - Path :%@",scene.path);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有找到路径"
+                                                        message:[NSString stringWithFormat:@"Path:%@",scene.path]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    
 }
 
 @end

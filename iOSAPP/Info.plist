@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>APP</string>
+	<string>CCSH</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -81,5 +81,7 @@
 	<string>5407054a38</string>
 	<key>mtj_deubglog</key>
 	<string>0</string>
+	<key>MOBNetLater</key>
+	<integer>2</integer>
 </dict>
 </plist>

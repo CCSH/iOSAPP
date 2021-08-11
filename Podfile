@@ -57,6 +57,8 @@ target 'iOSAPP' do
   pod 'BRPickerView'
   #键盘
   pod 'IQKeyboardManager'
+  #通用链接
+  pod 'mob_linksdk_pro'
   
 end
 
