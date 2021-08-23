@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TZImagePickerController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,6 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 拨打电话
 + (void)callPhone:(NSString *_Nonnull)phone;
+
+#pragma mark 配置图片选择器
++ (TZImagePickerController *)configImgPicker:(TZImagePickerController *)vc;
 
 #pragma mark 相机权限
 + (void)requestCameraPemissionsWithResult:(void(^)( BOOL granted))completion;

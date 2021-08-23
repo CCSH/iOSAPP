@@ -173,6 +173,20 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
 }
 
+#pragma mark 配置图片选择器
++ (TZImagePickerController *)configImgPicker:(TZImagePickerController *)vc {
+    vc.naviBgColor = kColorMain;
+    vc.naviTitleColor = [UIColor whiteColor];
+    vc.barItemTextColor = [UIColor whiteColor];
+    vc.allowPickingVideo = NO;
+    vc.allowPickingGif = NO;
+    vc.preferredLanguage = @"zh-Hans";
+    vc.oKButtonTitleColorNormal = [UIColor whiteColor];
+    vc.oKButtonTitleColorDisabled = [UIColor whiteColor];
+    vc.iconThemeColor = kColorMain;
+    return vc;
+}
+
 #pragma mark 相机权限
 + (void)requestCameraPemissionsWithResult:(void (^)(BOOL granted))completion {
     if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
