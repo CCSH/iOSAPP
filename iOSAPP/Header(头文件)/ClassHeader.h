@@ -17,7 +17,6 @@
 #import "SHBaseNavViewController.h"
 #import "SHBaseTableViewCell.h"
 #import "SHBaseViewController.h"
-#import "SHFileHelper.h"
 #import "SHRouting.h"
 #import "SHSQLite.h"
 #import "SHServerRequest.h"

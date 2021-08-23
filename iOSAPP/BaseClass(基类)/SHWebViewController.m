@@ -53,10 +53,11 @@ WKScriptMessageHandler >
 
 //参数
 @property (nonatomic, strong) IShareModel *shareModel;
-
 @property (nonatomic, copy) NSString *url;
-
 @property (nonatomic, copy) NSString *uid;
+
+//内部
+@property (nonatomic, assign) BOOL isTitle;
 
 @end
 
@@ -71,15 +72,15 @@ WKScriptMessageHandler >
     self.shareModel = [IShareModel mj_objectWithKeyValues:self.param[@"shareModel"]];
     self.uid = self.param[@"uid"];
     
-    self.title = @"详情";
-    
     [self configUI];
 }
 
 - (void)dealloc
 {
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-    [self.webView removeObserver:self forKeyPath:@"title"];
+    if (self.isTitle) {
+        [self.webView removeObserver:self forKeyPath:@"title"];
+    }
     [self.webView setNavigationDelegate:nil];
     [self.webView setUIDelegate:nil];
 }
@@ -101,11 +102,16 @@ WKScriptMessageHandler >
                    forKeyPath:@"estimatedProgress"
                       options:0
                       context:nil];
-    //添加监测网页标题title的观察者
-    [self.webView addObserver:self
-                   forKeyPath:@"title"
-                      options:NSKeyValueObservingOptionNew
-                      context:nil];
+    
+    if (!self.title) {
+        self.isTitle = YES;
+        self.title = @"详情";
+        //添加监测网页标题title的观察者
+        [self.webView addObserver:self
+                       forKeyPath:@"title"
+                          options:NSKeyValueObservingOptionNew
+                          context:nil];
+    }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];

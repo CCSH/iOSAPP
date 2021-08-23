@@ -55,11 +55,17 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 配置图片选择器
 + (TZImagePickerController *)configImgPicker:(TZImagePickerController *)vc;
 
-#pragma mark 相机权限
-+ (void)requestCameraPemissionsWithResult:(void(^)( BOOL granted))completion;
-
 #pragma mark 获取推送Token
 + (NSString *)getDeviceToken:(NSData *)deviceToken;
+
+#pragma mark 获取文件夹（没有的话创建）
++ (NSString *)getCreateFilePath:(NSString *)path;
+
+#pragma mark 麦克风权限
++ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion;
+
+#pragma mark 相机权限
++ (void)requestCameraPemissionsWithResult:(void(^)( BOOL granted))completion;
 
 @end
 

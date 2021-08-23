@@ -22,7 +22,6 @@
     self.title = @"登录";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(backAction)];
-    [SHToolHelper loginSuccess:@{@"user_id":@"1"}];
 }
 
 - (void)requestData{
@@ -32,14 +31,7 @@
         
         if (!error) {
             //成功
-        }else{
-            if ([error.domain isEqualToString:error_domain]) {
-                //服务器错误
-                //                baseModel.result
-                //                baseModel.msg
-            }else{
-                //网络错误
-            }
+            [SHToolHelper loginSuccess:baseModel];
         }
     }];
 }

@@ -9,6 +9,7 @@
 #import "SHToolHelper.h"
 #import <MapKit/MapKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <Speech/Speech.h>
 
 @implementation SHToolHelper
 
@@ -234,6 +235,45 @@
                  ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     }
     return token;
+}
+
+#pragma mark 获取文件夹（没有的话创建）
++ (NSString *)getCreateFilePath:(NSString *)path {
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return path;
+}
+
+#pragma mark 麦克风权限
++ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion{
+    [SFSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus status) {
+        switch (status) {
+            case SFSpeechRecognizerAuthorizationStatusAuthorized:
+            {
+                completion(YES);
+            }
+                break;
+            case SFSpeechRecognizerAuthorizationStatusNotDetermined:
+            {
+                //还没有经授权
+            }
+            case SFSpeechRecognizerAuthorizationStatusDenied:
+            {
+                //用户拒绝
+            }
+            case SFSpeechRecognizerAuthorizationStatusRestricted:
+            {
+                //不支持此设备
+            }
+            default:
+            {
+                completion(NO);
+            }
+                break;
+        }
+    }];
 }
 
 @end

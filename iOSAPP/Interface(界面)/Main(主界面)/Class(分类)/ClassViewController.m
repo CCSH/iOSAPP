@@ -9,7 +9,7 @@
 
 #import "ClassViewController.h"
 
-@interface ClassViewController ()<UIScrollViewDelegate> 
+@interface ClassViewController () <UIScrollViewDelegate>
 
 @end
 
@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    UIScrollView *scroll = [[UIScrollView alloc]init];
+
+    UIScrollView *scroll = [[UIScrollView alloc] init];
     scroll.frame = CGRectMake(0, -kNavAndStatusH, kSHWidth, kSHHeight);
     scroll.delegate = self;
     scroll.backgroundColor = kColorStatus_warning;
@@ -27,14 +27,14 @@
     scroll.contentSize = CGSizeMake(kSHWidth, 1000);
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navBarBGAlpha = 0;
 }
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+ 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-    
+
     self.navBarBGAlpha = offsetY / 100;
 }
 

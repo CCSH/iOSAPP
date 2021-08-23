@@ -11,8 +11,8 @@
 
 #import "ClassHeader.h"
 #import "InterfaceHeader.h"
-#import "MacroHeader.h"
 #import "EnumHeader.h"
+#import "MacroHeader.h"
 
 #endif /* PrefixHeader_pch */
 
