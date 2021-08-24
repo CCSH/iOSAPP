@@ -34,7 +34,6 @@
  
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-
     self.navBarBGAlpha = offsetY / 100;
 }
 
