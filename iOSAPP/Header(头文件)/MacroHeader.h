@@ -30,7 +30,7 @@
 //顶部安全H
 #define kSafeTopH ([SHToolHelper getSafeTopH])
 //tabbarH
-#define kTabBarH (49.0)
+#define kTabBarH (30.0)
 //Tabbar安全H
 #define kTabBarSafeH (kTabBarH + kSafeBottomH)
 //无导航栏内容H
@@ -43,7 +43,7 @@
 #define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
 
 //空插画高度
-#define kEmptyH (260)
+#define kEmptyH (260.)
 //默认间距
 #define kSpaceW (15)
 //组头部高度

@@ -8,7 +8,7 @@
 
 #import "SHTabBar.h"
 
-@interface SHTabBar () < UITabBarDelegate >
+@interface SHTabBar () <UITabBarDelegate>
 
 @property (nonatomic, strong) UIView *minView;
 
@@ -16,54 +16,51 @@
 
 @implementation SHTabBar
 
-+(void)initialize{
++ (void)initialize {
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
                                              forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
                                              forState:UIControlStateSelected];
     [[UITabBar appearance] setUnselectedItemTintColor:kColorText_5];
-  
+
     UIImage *img = [UIImage getImageWithColor:[UIColor clearColor]];
     [[UITabBar appearance] setBackgroundImage:img];
     [[UITabBar appearance] setShadowImage:img];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-      if (!obj.tag)
-      {
+      if (!obj.tag) {
           obj.tag = idx;
       }
     }];
-
+    self.height = kTabBarH;
+    self.y += (49 - kTabBarH);
+    
     // 0是背景横条
     self.minView = (UIView *)[self viewWithTag:3];
     [self.minView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+
     UIImageView *img = [[UIImageView alloc] init];
     img.frame = CGRectMake(0, 0, 50, 50);
     img.image = [UIImage imageNamed:self.dataArr[0]];
     img.contentMode = UIViewContentModeScaleAspectFit;
-    img.centerX = self.minView.width/2;
+    img.centerX = self.minView.width / 2;
     [self.minView addSubview:img];
 
-    self.minView.height = kTabBarH + img.height/2;
+    self.minView.height = kTabBarH + img.height / 2;
     self.minView.y = kTabBarH - self.minView.height;
 }
 
 #pragma mark - 超出响应
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *view = [super hitTest:point withEvent:event];
-    if (view == nil)
-    {
+    if (view == nil) {
         // 转换坐标系
         CGPoint newPoint = [self.minView convertPoint:point fromView:self];
         // 判断触摸点是否在视图上
-        if (CGRectContainsPoint(self.minView.bounds, newPoint) && !self.isHidden)
-        {
+        if (CGRectContainsPoint(self.minView.bounds, newPoint) && !self.isHidden) {
             return self.minView;
         }
     }
@@ -71,10 +68,8 @@
 }
 
 #pragma mark - tabbar点击
-- (void)didSelectItem:(NSInteger)index
-{
-    if (index == 2)
-    {
+- (void)didSelectItem:(NSInteger)index {
+    if (index == 2) {
         [SHToast showWithText:@"点击了中间！！！"];
     }
 }

@@ -145,6 +145,13 @@
     return url;
 }
 
+#pragma mark 错误界面
++ (UIViewController *)getErrorVC{
+    SHBaseViewController *vc = [NSClassFromString([self getVCWithName:RoutingName_web]) new];
+    vc.param = @{@"url":@"http://qzonestyle.gtimg.cn/qzone/hybrid/app/404"};
+    return vc;
+}
+
 #pragma mark 获取name对应的vc
 + (NSString *)getVCWithName:(NSString *)name{
 
@@ -162,13 +169,6 @@
         return @"AdViewController";
     }
     return @"";
-}
-
-#pragma mark 错误界面
-+ (UIViewController *)getErrorVC{
-    SHBaseViewController *vc = [NSClassFromString([self getVCWithName:RoutingName_web]) new];
-    vc.param = @{@"url":@"http://qzonestyle.gtimg.cn/qzone/hybrid/app/404"};
-    return vc;
 }
 
 @end

@@ -35,18 +35,18 @@
     
     //添加子控制器
     HomeViewController *homeVC = [[HomeViewController alloc] init];
-    [self addOneChlildVC:homeVC title:@"首页" img:@"tabbar_home"];
+    [self addOneChlildVC:homeVC title:@"首页" img:nil];
     
     ClassViewController *classVC = [[ClassViewController alloc] init];
-    [self addOneChlildVC:classVC title:@"分类" img:@"tabbar_class"];
+    [self addOneChlildVC:classVC title:@"分类" img:nil];
     
     [self addOneChlildVC:nil title:nil img:nil];
     
     MessageViewController *messageVC = [[MessageViewController alloc] init];
-    [self addOneChlildVC:messageVC title:@"消息" img:@"tabbar_message"];
+    [self addOneChlildVC:messageVC title:@"消息" img:nil];
     
     MineViewController *mineVC = [[MineViewController alloc] init];
-    [self addOneChlildVC:mineVC title:@"我的" img:@"tabbar_me"];
+    [self addOneChlildVC:mineVC title:@"我的" img:nil];
     
     self.shTabBar.dataArr = @[@"tabbar_min"];
     

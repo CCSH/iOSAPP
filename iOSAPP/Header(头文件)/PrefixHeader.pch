@@ -9,10 +9,11 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "ClassHeader.h"
-#import "InterfaceHeader.h"
+#import <UIKit/UIKit.h>
 #import "EnumHeader.h"
+#import "ClassHeader.h"
 #import "MacroHeader.h"
+#import "InterfaceHeader.h"
 
 #endif /* PrefixHeader_pch */
 
