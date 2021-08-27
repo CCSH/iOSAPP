@@ -11,7 +11,7 @@
 ##打包模式
 #parameter_configuration="1"
 ##打包类型
-#parameter_type="2"
+#parameter_type="1"
 ##上传类型
 #parameter_upload="1"
 #上传bugly
@@ -51,27 +51,23 @@ echo "\033[32m****************\n自动打包选择配置部分\n****************
 # ==========自动打包可选择信息部分========== #
 # 输入是否为工作空间
 archiveRun () {
-    #是否是工作空间
     echo "\033[36;1m是否是工作空间(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. 是 \033[0m"
     echo "\033[33;1m2. 否 \033[0m"
     
-    if [ ${#parameter_workspace} == 0 ]
-    then
+    if [ ${#parameter_workspace} == 0 ]; then
         #读取用户输入
         read parameter_workspace
         sleep 0.5
     fi
 
-    if [ "$parameter_workspace" == "1" ]
-    then
+    if [ "$parameter_workspace" == "1" ]; then
         echo "\n\033[32m****************\n将采用：xcworkspace\n****************\033[0m\n"
-    elif [ "$parameter_workspace" == "2" ]
-    then
+    elif [ "$parameter_workspace" == "2" ]; then
         echo "\n\033[32m****************\n将采用：xcodeproj\n****************\033[0m\n"
     else
-        parameterInvalid
-        parameter_workspace
+        echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
+        parameter_workspace=""
         archiveRun
     fi
 }
@@ -83,18 +79,15 @@ configurationRun () {
     echo "\033[33;1m1. Release \033[0m"
     echo "\033[33;1m2. Debug \033[0m"
     
-    if [ ${#parameter_configuration} == 0 ]
-    then
+    if [ ${#parameter_configuration} == 0 ]; then
         #读取用户输入
         read parameter_configuration
         sleep 0.5
     fi
 
-    if [ "$parameter_configuration" == "1" ];
-    then
+    if [ "$parameter_configuration" == "1" ]; then
         parameter_configuration="Release"
-    elif [ "$parameter_configuration" == "2" ];
-    then
+    elif [ "$parameter_configuration" == "2" ]; then
         parameter_configuration="Debug"
     else
         echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
@@ -106,18 +99,15 @@ configurationRun () {
 }
 configurationRun
 
-
 # 输入打包类型
 methodRun () {
-    # 输入打包类型
     echo "\033[36;1m请选择打包方式(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. AdHoc(预发) \033[0m"
     echo "\033[33;1m2. AppStore(发布) \033[0m"
     echo "\033[33;1m3. Enterprise(企业) \033[0m"
     echo "\033[33;1m4. Development(测试) \033[0m\n"
     
-    if [ ${#parameter_type} == 0 ]
-    then
+    if [ ${#parameter_type} == 0 ]; then
         #读取用户输入
         read parameter_type
         sleep 0.5
@@ -132,6 +122,7 @@ methodRun () {
     elif [ "$parameter_type" == "4" ]; then
         parameter_type="Development"
     else
+        echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
         parameter_type=""
         methodRun
     fi
@@ -142,14 +133,12 @@ methodRun
 
 # 输入上传类型
 publishRun () {
-    # 输入打包类型
     echo "\033[36;1m请选择上传类型(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. 蒲公英 \033[0m"
     echo "\033[33;1m2. AppStore \033[0m"
     echo "\033[33;1m3. 不上传 \033[0m"
     
-    if [ ${#parameter_upload} == 0 ]
-    then
+    if [ ${#parameter_upload} == 0 ]; then
         #读取用户输入
         read parameter_upload
         sleep 0.5
@@ -171,13 +160,11 @@ publishRun
 
 # 输入是否上传bugly
 buglyRun () {
-    # 输入打包类型
     echo "\033[36;1m请选择是否上传bugly(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. 不上传 \033[0m"
     echo "\033[33;1m2. 上传 \033[0m"
     
-    if [ ${#parameter_bugly} == 0 ]
-    then
+    if [ ${#parameter_bugly} == 0 ]; then
         #读取用户输入
         read parameter_bugly
         sleep 0.5
@@ -222,7 +209,7 @@ then
     xcodebuild archive \
     -workspace ${project_name}.xcworkspace \
     -scheme ${project_name} \
-    -configuration ${build_configuration} \
+    -configuration ${parameter_configuration} \
     -destination generic/platform=ios \
     -archivePath ${export_path_archive}
 else
@@ -230,7 +217,7 @@ else
     xcodebuild archive \
     -project ${project_name}.xcodeproj \
     -scheme ${project_name} \
-    -configuration ${build_configuration} \
+    -configuration ${parameter_configuration} \
     -archivePath ${export_path_archive}
 fi
 
@@ -291,7 +278,6 @@ then
 
     echo "\033[32m****************\n上传蒲公英完毕\n****************\033[0m\n"
 fi
-
 
 #上传 AppStore
 if [ "$parameter_upload" == "2" ]
