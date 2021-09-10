@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'iOSAPP' do
@@ -48,8 +48,6 @@ target 'iOSAPP' do
   pod 'CHTCollectionViewWaterfallLayout'
   #文字处理
   pod 'YYText'
-  #聊天
-  #  pod 'EaseIMKit'
   #图片选择
   pod 'TZImagePickerController'
   #选择器
@@ -58,6 +56,18 @@ target 'iOSAPP' do
   pod 'IQKeyboardManager'
   #通用链接
   pod 'mob_linksdk_pro'
+  #菜单
+  pod 'WMZDropDownMenu'
+  #通信
+#  pod 'XMPPFramework'
+#  pod 'MQTTClient'
+#  pod 'CocoaAsyncSocket'
+#  pod 'SocketRocket'
+  #聊天
+#  pod 'EaseIMKit'
+#  pod 'EaseCallKit'
+#  pod 'HyphenateChat'
+  
   
 end
 

@@ -15,7 +15,7 @@
 ##上传类型
 #parameter_upload="1"
 #上传bugly
-#parameter_bugly="1"
+parameter_bugly="2"
 ##上传appstore
 ##账号
 #parameter_username=""

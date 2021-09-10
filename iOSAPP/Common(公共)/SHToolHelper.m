@@ -25,7 +25,7 @@
     SHActionSheetModel *model = [[SHActionSheetModel alloc] init];
     model.title = @"导航";
     NSMutableArray *temp = [[NSMutableArray alloc]init];
-    NSString *appName = [self appName];
+    NSString *appName = [SHTool appName];
     //苹果导航
     [temp addObject:@"Apple导航"];
     //百度
@@ -143,37 +143,6 @@
     return app.userInfo.user_id ?: @"";
 }
 
-#pragma mark 底部安全高度
-+ (CGFloat)getSafeBottomH{
-    if (IOS(11)) {
-        return [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
-    }
-    return 0;
-}
-
-#pragma mark 顶部安全高度
-+ (CGFloat)getSafeTopH{
-    if (IOS(11)) {
-        return [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
-    }
-    return CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-}
-
-#pragma mark app名字
-+ (NSString *)appName{
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    return [infoDictionary objectForKey:@"CFBundleName"];
-}
-
-#pragma mark 拨打电话
-+ (void)callPhone:(NSString *)phone{
-    if (!phone.length) {
-        return;
-    }
-    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
-}
-
 #pragma mark 配置图片选择器
 + (TZImagePickerController *)configImgPicker:(TZImagePickerController *)vc {
     vc.naviBgColor = kColorMain;
@@ -188,92 +157,13 @@
     return vc;
 }
 
-#pragma mark 相机权限
-+ (void)requestCameraPemissionsWithResult:(void (^)(BOOL granted))completion {
-    if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
-        AVAuthorizationStatus permission =
-        [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        
-        switch (permission) {
-            case AVAuthorizationStatusAuthorized:
-                completion(YES);
-                break;
-            case AVAuthorizationStatusDenied:
-            case AVAuthorizationStatusRestricted:
-                completion(NO);
-                break;
-            case AVAuthorizationStatusNotDetermined: {
-                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
-                                         completionHandler:^(BOOL granted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (granted) {
-                            completion(YES);
-                        } else {
-                            completion(NO);
-                        }
-                    });
-                }];
-            } break;
-        }
-    }
+#pragma mark 获取按钮
++ (SHButton *)getBtn{
+    SHButton *btn = [SHButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = kColorMain;
+    [btn borderRadius:8];
+    return btn;
 }
 
-#pragma mark 获取推送Token
-+ (NSString *)getDeviceToken:(NSData *)deviceToken{
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    if (IOS(13)) {
-        if (![deviceToken isKindOfClass:[NSData class]])
-        {
-            return token;
-        }
-        const unsigned *tokenBytes = [deviceToken bytes];
-        token = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
-                 ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
-                 ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
-                 ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
-    }
-    return token;
-}
-
-#pragma mark 获取文件夹（没有的话创建）
-+ (NSString *)getCreateFilePath:(NSString *)path {
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    return path;
-}
-
-#pragma mark 麦克风权限
-+ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion{
-    [SFSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus status) {
-        switch (status) {
-            case SFSpeechRecognizerAuthorizationStatusAuthorized:
-            {
-                completion(YES);
-            }
-                break;
-            case SFSpeechRecognizerAuthorizationStatusNotDetermined:
-            {
-                //还没有经授权
-            }
-            case SFSpeechRecognizerAuthorizationStatusDenied:
-            {
-                //用户拒绝
-            }
-            case SFSpeechRecognizerAuthorizationStatusRestricted:
-            {
-                //不支持此设备
-            }
-            default:
-            {
-                completion(NO);
-            }
-                break;
-        }
-    }];
-}
 
 @end

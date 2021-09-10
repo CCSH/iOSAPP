@@ -7,6 +7,8 @@
 //
 
 #import "SHTool.h"
+#import <AVFoundation/AVFoundation.h>
+#import <Speech/Speech.h>
 
 @implementation SHTool
 
@@ -450,7 +452,6 @@
 #pragma mark 获取某个字符在字符串中出现的次数
 + (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target {
     NSArray *temp = [str componentsSeparatedByString:target];
-    
     return temp.count - 1;
 }
 
@@ -496,6 +497,171 @@
         [param setValue:temp[1] forKey:temp[0]];
     }
     return param;
+}
+
+#pragma mark 底部安全高度
++ (CGFloat)getSafeBottomH{
+    if (@available(iOS 11.0, *)) {
+        return [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+    }
+    return 0;
+}
+
+#pragma mark 顶部安全高度
++ (CGFloat)getSafeTopH{
+    if (@available(iOS 11.0, *)) {
+        return [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+    }
+    return CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+}
+
+#pragma mark app名字
++ (NSString *)appName{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    return [infoDictionary objectForKey:@"CFBundleName"];
+}
+
+#pragma mark 拨打电话
++ (void)callPhone:(NSString *)phone{
+    if (!phone.length) {
+        return;
+    }
+    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
+    if (@available(iOS 10.0, *)) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+}
+
+#pragma mark 获取文件夹（没有的话创建）
++ (NSString *)getCreateFilePath:(NSString *)path {
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return path;
+}
+
+#pragma mark 获取推送Token
++ (NSString *)getDeviceToken:(NSData *)deviceToken{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (@available(iOS 13, *)) {
+        if (![deviceToken isKindOfClass:[NSData class]])
+        {
+            return token;
+        }
+        const unsigned *tokenBytes = [deviceToken bytes];
+        token = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                 ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                 ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                 ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    }
+    return token;
+}
+
+
+#pragma mark - 权限获取
+#pragma mark 麦克风权限
++ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion{
+    if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
+        AVAuthorizationStatus permission =
+        [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        
+        switch (permission) {
+            case AVAuthorizationStatusAuthorized:
+            {
+                //已授权
+                if (completion) {
+                    completion(YES);
+                }
+            }
+                break;
+            case AVAuthorizationStatusNotDetermined:
+            {
+                //未授权
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio
+                                         completionHandler:^(BOOL granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (completion) {
+                            completion(granted);
+                        }
+                    });
+                }];
+            } break;
+            case AVAuthorizationStatusDenied:
+            {
+                //用户拒绝
+            }
+            case AVAuthorizationStatusRestricted:
+            {
+                //不支持此设备
+                if (completion) {
+                    completion(NO);
+                }
+            }
+                break;
+            default:
+            {
+                if (completion) {
+                    completion(NO);
+                }
+            }
+                break;
+        }
+    }
+}
+
+#pragma mark 相机权限
++ (void)requestCameraPemissionsWithResult:(void (^)(BOOL granted))completion {
+    if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
+        AVAuthorizationStatus permission =
+        [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        switch (permission) {
+            case AVAuthorizationStatusAuthorized:
+            {
+                //已授权
+                if (completion) {
+                    completion(YES);
+                }
+            }
+                break;
+            case AVAuthorizationStatusNotDetermined:
+            {
+                //未授权
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                         completionHandler:^(BOOL granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (completion) {
+                            completion(granted);
+                        }
+                    });
+                }];
+            } break;
+            case AVAuthorizationStatusDenied:
+            {
+                //用户拒绝
+            }
+            case AVAuthorizationStatusRestricted:
+            {
+                //不支持此设备
+                if (completion) {
+                    completion(NO);
+                }
+            }
+                break;
+            default:
+            {
+                if (completion) {
+                    completion(NO);
+                }
+            }
+                break;
+        }
+    }
 }
 
 @end

@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = kColorTable_4;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

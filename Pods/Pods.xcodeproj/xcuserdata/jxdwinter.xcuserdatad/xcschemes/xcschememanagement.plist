@@ -186,12 +186,19 @@
 			<key>orderHint</key>
 			<integer>26</integer>
 		</dict>
-		<key>YYText.xcscheme</key>
+		<key>WMZDropDownMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>27</integer>
+		</dict>
+		<key>YYText.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>28</integer>
 		</dict>
 		<key>mob_linksdk_pro.xcscheme</key>
 		<dict>

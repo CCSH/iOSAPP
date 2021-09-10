@@ -124,6 +124,31 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 获取url的参数
 + (NSDictionary *)getUrlParam:(NSString *)str;
 
+#pragma mark 获取推送Token
++ (NSString *)getDeviceToken:(NSData *)deviceToken;
+
+#pragma mark 底部安全高度
++ (CGFloat)getSafeBottomH;
+
+#pragma mark 顶部安全高度
++ (CGFloat)getSafeTopH;
+
+#pragma mark app名字
++ (NSString *)appName;
+
+#pragma mark 拨打电话
++ (void)callPhone:(NSString *_Nonnull)phone;
+
+#pragma mark 获取文件夹（没有的话创建）
++ (NSString *)getCreateFilePath:(NSString *)path;
+
+#pragma mark - 权限获取
+#pragma mark 麦克风权限
++ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion;
+
+#pragma mark 相机权限
++ (void)requestCameraPemissionsWithResult:(void(^)( BOOL granted))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

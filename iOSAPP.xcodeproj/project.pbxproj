@@ -35,7 +35,8 @@
 		8331AFBF266A25EE00180DDA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF9D266A25EE00180DDA /* LoginViewController.m */; };
 		8331AFC0266A25EE00180DDA /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AFA1266A25EE00180DDA /* WelcomeViewController.m */; };
 		8331AFC1266A25EE00180DDA /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AFA3266A25EE00180DDA /* AdViewController.m */; };
-		8331AFC2266A25EE00180DDA /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AFA6266A25EE00180DDA /* RegisterViewController.m */; };
+		83F9374A26EB5154004D5C3C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F9374526EB5154004D5C3C /* RegisterViewController.m */; };
+		83F9374B26EB5154004D5C3C /* RegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F9374826EB5154004D5C3C /* RegisterTableViewCell.m */; };
 		F476C9EF68A374E40415EAE1 /* Pods_iOSAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B7BA484111B8E6CEBE7955 /* Pods_iOSAPP.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,10 +103,12 @@
 		8331AFA1266A25EE00180DDA /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		8331AFA3266A25EE00180DDA /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
 		8331AFA4266A25EE00180DDA /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
-		8331AFA6266A25EE00180DDA /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		8331AFA7266A25EE00180DDA /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		83CEFDCA2575D64100BC9EC4 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		83D1E4682570D041003D2674 /* iOSAPP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSAPP.entitlements; sourceTree = "<group>"; };
+		83F9374526EB5154004D5C3C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		83F9374726EB5154004D5C3C /* RegisterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewCell.h; sourceTree = "<group>"; };
+		83F9374826EB5154004D5C3C /* RegisterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewCell.m; sourceTree = "<group>"; };
+		83F9374926EB5154004D5C3C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		E167D128F7F0D4AB54C8C3FA /* Pods-iOSAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSAPP/Pods-iOSAPP.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,11 +283,11 @@
 		8331AF8A266A25EE00180DDA /* Interface(界面) */ = {
 			isa = PBXGroup;
 			children = (
+				83F9374426EB5154004D5C3C /* Register(注册) */,
 				8331AF8B266A25EE00180DDA /* Main(主界面) */,
 				8331AF9C266A25EE00180DDA /* Login(登录) */,
 				8331AF9F266A25EE00180DDA /* Welcome(欢迎界面) */,
 				8331AFA2266A25EE00180DDA /* Ad(广告) */,
-				8331AFA5266A25EE00180DDA /* Register(注册) */,
 			);
 			path = "Interface(界面)";
 			sourceTree = "<group>";
@@ -343,8 +346,8 @@
 		8331AF9C266A25EE00180DDA /* Login(登录) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AF9D266A25EE00180DDA /* LoginViewController.m */,
 				8331AF9E266A25EE00180DDA /* LoginViewController.h */,
+				8331AF9D266A25EE00180DDA /* LoginViewController.m */,
 			);
 			path = "Login(登录)";
 			sourceTree = "<group>";
@@ -367,13 +370,23 @@
 			path = "Ad(广告)";
 			sourceTree = "<group>";
 		};
-		8331AFA5266A25EE00180DDA /* Register(注册) */ = {
+		83F9374426EB5154004D5C3C /* Register(注册) */ = {
 			isa = PBXGroup;
 			children = (
-				8331AFA6266A25EE00180DDA /* RegisterViewController.m */,
-				8331AFA7266A25EE00180DDA /* RegisterViewController.h */,
+				83F9374926EB5154004D5C3C /* RegisterViewController.h */,
+				83F9374526EB5154004D5C3C /* RegisterViewController.m */,
+				83F9374626EB5154004D5C3C /* View */,
 			);
 			path = "Register(注册)";
+			sourceTree = "<group>";
+		};
+		83F9374626EB5154004D5C3C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				83F9374726EB5154004D5C3C /* RegisterTableViewCell.h */,
+				83F9374826EB5154004D5C3C /* RegisterTableViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8CCAE27E56201EEE836CD64C /* Pods */ = {
@@ -510,6 +523,7 @@
 				"${BUILT_PRODUCTS_DIR}/SHScrollView/SHScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SHToast/SHToast.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
+				"${BUILT_PRODUCTS_DIR}/WMZDropDownMenu/WMZDropDownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -536,6 +550,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SHToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMZDropDownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +569,7 @@
 				8331AFAC266A25EE00180DDA /* SHToolHelper.m in Sources */,
 				8331AFAF266A25EE00180DDA /* SHServerRequest.m in Sources */,
 				8331AFAA266A25EE00180DDA /* AppDelegate.m in Sources */,
+				83F9374A26EB5154004D5C3C /* RegisterViewController.m in Sources */,
 				8331AFBF266A25EE00180DDA /* LoginViewController.m in Sources */,
 				5C25FEA61F68D72600F080A4 /* main.m in Sources */,
 				8331AFBE266A25EE00180DDA /* ClassViewController.m in Sources */,
@@ -561,7 +577,6 @@
 				8331AFB8266A25EE00180DDA /* IUserModel.m in Sources */,
 				8331AFB3266A25EE00180DDA /* SHBaseTableViewCell.m in Sources */,
 				8331AFBA266A25EE00180DDA /* SHTabBar.m in Sources */,
-				8331AFC2266A25EE00180DDA /* RegisterViewController.m in Sources */,
 				8331AFB4266A25EE00180DDA /* SHWebViewController.m in Sources */,
 				8331AFBD266A25EE00180DDA /* MainTabBarController.m in Sources */,
 				8331AFC0266A25EE00180DDA /* WelcomeViewController.m in Sources */,
@@ -576,6 +591,7 @@
 				8331AFB2266A25EE00180DDA /* SHBaseViewController.m in Sources */,
 				8331AFB6266A25EE00180DDA /* SHBaseNavViewController.m in Sources */,
 				8331AFB9266A25EE00180DDA /* HomeViewController.m in Sources */,
+				83F9374B26EB5154004D5C3C /* RegisterTableViewCell.m in Sources */,
 				8331AFAE266A25EE00180DDA /* SHRequestBaseModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,7 +734,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;
@@ -740,7 +756,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
 				INFOPLIST_FILE = iOSAPP/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;

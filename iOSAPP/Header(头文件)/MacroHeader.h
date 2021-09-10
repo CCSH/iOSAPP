@@ -119,7 +119,7 @@
 //Temp目录
 #define TempPatch NSTemporaryDirectory()
 //数据库路径
-#define kSHDBPath [SHToolHelper getCreateFilePath:[NSString stringWithFormat:@"%@/APPData/DataBase",CachesPatch]]
+#define kSHDBPath [SHTool getCreateFilePath:[NSString stringWithFormat:@"%@/APPData/DataBase",CachesPatch]]
 
 #pragma mark - NSUserDefaults使用的键值
 #define kSHUserDef [NSUserDefaults standardUserDefaults]

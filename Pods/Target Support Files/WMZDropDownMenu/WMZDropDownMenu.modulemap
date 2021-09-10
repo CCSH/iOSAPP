@@ -1,0 +1,6 @@
+framework module WMZDropDownMenu {
+  umbrella header "WMZDropDownMenu-umbrella.h"
+
+  export *
+  module * { export * }
+}

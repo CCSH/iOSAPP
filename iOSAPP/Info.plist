@@ -34,9 +34,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>202109061415</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBNetLater</key>
+	<integer>2</integer>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -81,7 +83,5 @@
 	<string>5407054a38</string>
 	<key>mtj_deubglog</key>
 	<string>0</string>
-	<key>MOBNetLater</key>
-	<integer>2</integer>
 </dict>
 </plist>

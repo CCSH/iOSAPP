@@ -41,5 +41,12 @@
 #import <UIImage+SHExtension.h>
 #import <UIImageView+WebCache.h>
 #import <UIView+SHExtension.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <YYText.h>
+
+//#import <EaseIMKit.h>
+//#import <HyphenateChat/HyphenateChat.h>
+//#import <EaseCallKit/EaseCallUIKit.h>
 
 #endif /* ClassHeader_h */

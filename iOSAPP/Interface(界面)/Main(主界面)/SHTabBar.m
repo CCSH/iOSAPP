@@ -17,15 +17,15 @@
 @implementation SHTabBar
 
 + (void)initialize {
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
-                                             forState:UIControlStateNormal];
+//    [[UITabBar appearance] setUnselectedItemTintColor:kColorText_5];
+//    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
+//                                             forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
                                              forState:UIControlStateSelected];
-    [[UITabBar appearance] setUnselectedItemTintColor:kColorText_5];
 
-    UIImage *img = [UIImage getImageWithColor:[UIColor clearColor]];
-    [[UITabBar appearance] setBackgroundImage:img];
-    [[UITabBar appearance] setShadowImage:img];
+    UIImage *img = [UIImage getImageWithColor:[UIColor whiteColor]];
+    [UITabBar appearance].backgroundImage = img;
+    [UITabBar appearance].shadowImage = img;
 }
 
 - (void)layoutSubviews {
@@ -35,22 +35,22 @@
           obj.tag = idx;
       }
     }];
-    self.height = kTabBarH;
-    self.y += (49 - kTabBarH);
-    
-    // 0是背景横条
-    self.minView = (UIView *)[self viewWithTag:3];
-    [self.minView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
-    UIImageView *img = [[UIImageView alloc] init];
-    img.frame = CGRectMake(0, 0, 50, 50);
-    img.image = [UIImage imageNamed:self.dataArr[0]];
-    img.contentMode = UIViewContentModeScaleAspectFit;
-    img.centerX = self.minView.width / 2;
-    [self.minView addSubview:img];
-
-    self.minView.height = kTabBarH + img.height / 2;
-    self.minView.y = kTabBarH - self.minView.height;
+//    self.height = kTabBarH;
+//    self.y += (49 - kTabBarH);
+//
+//    // 0是背景横条
+//    self.minView = (UIView *)[self viewWithTag:3];
+//    [self.minView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//
+//    UIImageView *img = [[UIImageView alloc] init];
+//    img.frame = CGRectMake(0, 0, 50, 50);
+//    img.image = [UIImage imageNamed:self.dataArr[0]];
+//    img.contentMode = UIViewContentModeScaleAspectFit;
+//    img.centerX = self.minView.width / 2;
+//    [self.minView addSubview:img];
+//
+//    self.minView.height = kTabBarH + img.height / 2;
+//    self.minView.y = kTabBarH - self.minView.height;
 }
 
 #pragma mark - 超出响应

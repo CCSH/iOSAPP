@@ -167,6 +167,8 @@
         return @"ShopSearchViewController";
     }else if ([name isEqualToString:RoutingName_ad]){
         return @"AdViewController";
+    }else if ([name isEqualToString:RoutingName_register]){
+        return @"RegisterViewController";
     }
     return @"";
 }
