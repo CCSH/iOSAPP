@@ -27,7 +27,7 @@
     [tabBarItem setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
                               forState:UIControlStateNormal];
     
-    if (IOS(13)) {
+    if (IOS(10)) {
         tabbar.tintColor = kColorMain;
         tabbar.unselectedItemTintColor = kColorText_1;
     }else{

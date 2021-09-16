@@ -52,7 +52,6 @@
     navBar.backIndicatorImage = image;
     navBar.backIndicatorTransitionMaskImage = image;
 
-    self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.delegate = self;
 }
 

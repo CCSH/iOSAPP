@@ -20,7 +20,6 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    self.modalPresentationStyle = UIModalPresentationFullScreen;
     self.isOpenKeyboard = YES;
     [self closeAutomatically];
 }
