@@ -76,7 +76,6 @@ PODS:
     - SDWebImage
   - SHToast (1.2.1)
   - TZImagePickerController (3.6.4)
-  - WMZDropDownMenu (1.1.6)
   - YYText (1.0.7)
 
 DEPENDENCIES:
@@ -104,7 +103,6 @@ DEPENDENCIES:
   - SHScrollView
   - SHToast
   - TZImagePickerController
-  - WMZDropDownMenu
   - YYText
 
 SPEC REPOS:
@@ -135,7 +133,6 @@ SPEC REPOS:
     - SHScrollView
     - SHToast
     - TZImagePickerController
-    - WMZDropDownMenu
     - YYText
 
 SPEC CHECKSUMS:
@@ -165,9 +162,8 @@ SPEC CHECKSUMS:
   SHScrollView: 4ddf2ab5a2ddfa7f57079a05612ce0bdc8f98b83
   SHToast: 34ed309d0e74eed0ce01711a7b0fe2e37b68cba7
   TZImagePickerController: 1cc39ec0454d6e94d0397418953164d7aa631719
-  WMZDropDownMenu: 6d8ec030a4467fb95e285709e525587abceb4960
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 99a0622f6f9c9107572c60663ddc40ecbd661ead
+PODFILE CHECKSUM: c99dd12819bdf8ac418a6f94ef0d3355126f0a53
 
 COCOAPODS: 1.10.1

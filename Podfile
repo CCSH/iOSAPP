@@ -56,8 +56,6 @@ target 'iOSAPP' do
   pod 'IQKeyboardManager'
   #通用链接
   pod 'mob_linksdk_pro'
-  #菜单
-  pod 'WMZDropDownMenu'
   #通信
 #  pod 'XMPPFramework'
 #  pod 'MQTTClient'
