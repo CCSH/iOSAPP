@@ -47,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 获取按钮
 + (SHButton *)getBtn;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

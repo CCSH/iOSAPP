@@ -20,8 +20,18 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        //蒙板颜色
+        self.maskColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        //动画时间
         self.duration = 0.25;
+        //初始速度
+        self.initialVelocity = 0;
+        //阻尼
+        self.damping = 10;
+        //刚度
+        self.stiffness = 1000;
+        //质量
+        self.mass = 1;
     }
     return self;
 }
@@ -34,7 +44,7 @@
     return YES;
 }
 
-#pragma mark 懒加载
+#pragma mark - 私有方法
 - (void)setContentView:(UIView *)contentView {
     [_contentView.layer removeAnimationForKey:kSHPopViewAnimation];
     [_contentView removeFromSuperview];
@@ -50,8 +60,32 @@
     //开始时间
     animation.beginTime = 0;
     //保持动画结束之后的状态
-    animation.fillMode = kCAFillModeBoth;
     animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeBoth;
+
+    return animation;
+}
+
+#pragma mark 获取弹簧动画
+- (CASpringAnimation *)getSpringAnimation{
+    CASpringAnimation *animation = [[CASpringAnimation alloc] init];
+    //开始时间
+    animation.beginTime = 0;
+    
+    //初始速度
+    animation.initialVelocity = self.initialVelocity;
+    //阻尼
+    animation.damping = self.damping;
+    //弹性
+    animation.stiffness = self.stiffness;
+    //质量
+    animation.mass = self.mass;
+
+    //动画执行周期(弹簧可以用 animation.settlingDuration 比较准确，为了封装就用 duration 了)
+    animation.duration = (self.duration >= 0) ? self.duration : animation.settlingDuration;
+    //恢复之前
+    animation.removedOnCompletion = YES;
+    animation.fillMode = kCAFillModeRemoved;
 
     return animation;
 }
@@ -92,7 +126,7 @@
     animation.keyPath = @"position.y";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.fromValue = @(-CGRectGetMaxY(view.frame));
+    animation.fromValue = @(-CGRectGetHeight(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -104,7 +138,7 @@
     animation.keyPath = @"position.y";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.fromValue = @(CGRectGetHeight(self.frame) + CGRectGetMidY(view.frame));
+    animation.fromValue = @(CGRectGetHeight(self.frame) + CGRectGetHeight(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -116,7 +150,7 @@
     animation.keyPath = @"position.x";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.fromValue = @(-CGRectGetMaxX(view.frame));
+    animation.fromValue = @(-CGRectGetWidth(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -128,8 +162,48 @@
     animation.keyPath = @"position.x";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.fromValue = @(CGRectGetWidth(self.frame) + CGRectGetMidX(view.frame));
+    animation.fromValue = @(CGRectGetWidth(self.frame) + CGRectGetWidth(view.frame)/2);
 
+    //视图添加动画
+    [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
+}
+
+- (void)showAnimationSpringTop:(UIView *)view{
+    CASpringAnimation *animation = [self getSpringAnimation];
+    animation.keyPath = @"position.y";
+    //进行改变
+    animation.fromValue = @(-CGRectGetHeight(view.frame)/2);
+    
+    //视图添加动画
+    [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
+}
+
+- (void)showAnimationSpringBottom:(UIView *)view{
+    CASpringAnimation *animation = [self getSpringAnimation];
+    animation.keyPath = @"position.y";
+    //进行改变
+    animation.fromValue = @(CGRectGetHeight(self.frame) + CGRectGetHeight(view.frame)/2);
+    
+    //视图添加动画
+    [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
+}
+
+- (void)showAnimationSpringLeft:(UIView *)view{
+    CASpringAnimation *animation = [self getSpringAnimation];
+    animation.keyPath = @"position.x";
+    //进行改变
+    animation.fromValue = @(-CGRectGetWidth(view.frame)/2);
+    
+    //视图添加动画
+    [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
+}
+
+- (void)showAnimationSpringRight:(UIView *)view{
+    CASpringAnimation *animation = [self getSpringAnimation];
+    animation.keyPath = @"position.x";
+    
+    //进行改变
+    animation.fromValue = @(CGRectGetWidth(self.frame) + CGRectGetWidth(view.frame)/2);
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
 }
@@ -165,7 +239,7 @@
     animation.keyPath = @"position.y";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.toValue = @(-CGRectGetMaxY(view.frame));
+    animation.toValue = @(-CGRectGetHeight(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -177,7 +251,7 @@
     animation.keyPath = @"position.y";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.toValue = @(CGRectGetHeight(self.frame) + CGRectGetMidY(view.frame));
+    animation.toValue = @(CGRectGetHeight(self.frame) + CGRectGetHeight(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -189,7 +263,7 @@
     animation.keyPath = @"position.x";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.toValue = @(-CGRectGetMaxX(view.frame));
+    animation.toValue = @(-CGRectGetWidth(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -201,7 +275,7 @@
     animation.keyPath = @"position.x";
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     //进行改变
-    animation.toValue = @(CGRectGetWidth(self.frame) + CGRectGetMidX(view.frame));
+    animation.toValue = @(CGRectGetWidth(self.frame) + CGRectGetWidth(view.frame)/2);
 
     //视图添加动画
     [view.layer addAnimation:animation forKey:kSHPopViewAnimation];
@@ -228,7 +302,7 @@
 #pragma mark 抖动
 - (void)animationJitter:(UIView *)view {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    ;
+
     //动画效果
     animation.keyPath = @"transform.rotation";
     //进行改变
@@ -253,11 +327,11 @@
 
 - (void)showInView:(UIView *)view {
     if (!view) {
-        view = [[[UIApplication sharedApplication] windows] lastObject];
+        view = [[[UIApplication sharedApplication] windows] firstObject];
     }
 
     NSAssert(self.contentView != nil, @"contentView 不能为空！");
-
+    self.backgroundColor = self.maskColor;
     self.frame = view.bounds;
     [view addSubview:self];
 
@@ -268,8 +342,9 @@
         [self addGestureRecognizer:tap];
     }
     _isShowing = YES;
-
+    //移除之前动画
     [self.contentView.layer removeAnimationForKey:kSHPopViewAnimation];
+    
     //动画
     switch (self.showAnimation) {
         case SHPopViewAnimation_none: {
@@ -298,6 +373,18 @@
         case SHPopViewAnimation_rotationZ: {
             [self animationRotation:self.contentView direction:@"z"];
         } break;
+        case SHPopViewAnimation_spring_top: {
+            [self showAnimationSpringTop:self.contentView];
+        } break;
+        case SHPopViewAnimation_spring_bottom: {
+            [self showAnimationSpringBottom:self.contentView];
+        } break;
+        case SHPopViewAnimation_spring_left: {
+            [self showAnimationSpringLeft:self.contentView];
+        } break;
+        case SHPopViewAnimation_spring_right: {
+            [self showAnimationSpringRight:self.contentView];
+        } break;
         default: {
             [self showAnimationFade:self.contentView];
         } break;
@@ -325,7 +412,6 @@
     //动画
     switch (self.hideAnimation) {
         case SHPopViewAnimation_none: {
-            [self remove];
         } break;
         case SHPopViewAnimation_scale: {
             [self hideAnimationScale:self.contentView];

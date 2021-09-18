@@ -13,7 +13,9 @@
 #import <MobLinkPro/MobLink.h>
 #import <MobLinkPro/MLSDKScene.h>
 
-@interface AppDelegate (SHExtension)<IMLSDKRestoreDelegate>
+@interface AppDelegate (SHExtension)<
+IMLSDKRestoreDelegate,
+UNUserNotificationCenterDelegate>
 
 @end
 
@@ -44,16 +46,16 @@
     
     //协议
     [MobSDK uploadPrivacyPermissionStatus:YES onResult:nil];
-    // 设置MobLink代理
+    //设置MobLink代理
     [MobLink setDelegate:self];
+    
+    //配置登录信息
+    self.userInfo = [SHSQLite getLoginInfo];
 }
 
 #pragma mark 配置界面逻辑
 - (void)configInterface
 {
-    //配置登录信息
-    self.userInfo = [SHSQLite getLoginInfo];
-    
     //当前版本号
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
