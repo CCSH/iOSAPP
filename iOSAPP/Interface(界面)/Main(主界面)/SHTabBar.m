@@ -17,24 +17,59 @@
 @implementation SHTabBar
 
 + (void)initialize {
-  
-    UITabBar *tabbar = [UITabBar appearance];
-    UIImage *img = [UIImage getImageWithColor:[UIColor whiteColor]];
-    tabbar.backgroundImage = img;
-    tabbar.shadowImage = img;
+    if (self == [self class]) {
+        [self tabBGColor:[UIColor whiteColor]];
+        [self tabItem:@{NSFontAttributeName : kFont(12)}
+               select:@{NSFontAttributeName : kFont(12),
+                        NSForegroundColorAttributeName : kColorMain}];
+    }
+}
 
-    UITabBarItem *tabBarItem = [UITabBarItem appearance];
-    [tabBarItem setTitleTextAttributes:@{NSFontAttributeName : kFont(12)}
-                              forState:UIControlStateNormal];
+#pragma mark - tabbar设置
+#pragma mark 获取样式
++ (UITabBarAppearance *)getBar API_AVAILABLE(ios(15.0)){
+    return [UITabBar appearance].scrollEdgeAppearance ? : [UITabBarAppearance new];
+}
+
+#pragma mark 背景颜色
++ (void)tabBGColor:(UIColor *)obj{
+    UITabBar *tabbar = [UITabBar appearance];
+    UIImage *img = [UIImage getImageWithColor:obj];
     
-    if (IOS(10)) {
-        tabbar.tintColor = kColorMain;
-        tabbar.unselectedItemTintColor = kColorText_1;
-    }else{
-        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorMain}
-                                  forState:UIControlStateSelected];
-        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : kColorText_1}
-                                  forState:UIControlStateNormal];
+    tabbar.backgroundImage = img;
+    tabbar.shadowColor = [UIColor clearColor];
+    
+    if (IOS(15)) {
+        UITabBarAppearance *bar = [self getBar];
+        bar.backgroundColor = obj;
+        bar.shadowColor = tabbar.shadowColor;
+        //关闭模糊效果
+        bar.backgroundEffect = nil;
+        
+        tabbar.scrollEdgeAppearance = bar;
+        tabbar.standardAppearance = bar;
+    }
+}
+
+#pragma mark item
++ (void)tabItem:(NSDictionary<NSAttributedStringKey,id> *)obj select:(NSDictionary<NSAttributedStringKey,id> *)obj2{
+    UITabBarItem *tabBarItem = [UITabBarItem appearance];
+    [tabBarItem setTitleTextAttributes:obj forState:UIControlStateNormal];
+    [tabBarItem setTitleTextAttributes:obj2 forState:UIControlStateSelected];
+    if (IOS(15)) {
+        UITabBar *tabbar = [UITabBar appearance];
+        UITabBarAppearance *bar = [self getBar];
+        UITabBarItemAppearance *button = bar.stackedLayoutAppearance;
+        UITabBarItemStateAppearance *state = button.normal;
+        UITabBarItemStateAppearance *state2 = button.selected;
+        
+        state.titleTextAttributes = obj;
+        state2.titleTextAttributes = obj2;
+        
+        bar.stackedLayoutAppearance = button;
+        
+        tabbar.scrollEdgeAppearance = bar;
+        tabbar.standardAppearance = bar;
     }
 }
 
