@@ -49,6 +49,10 @@ UNUserNotificationCenterDelegate>
     //设置MobLink代理
     [MobLink setDelegate:self];
     
+    if (IOS(15)) {
+        [UITableView appearance].sectionHeaderTopPadding = 0;
+    }
+    
     //配置登录信息
     self.userInfo = [SHSQLite getLoginInfo];
 }

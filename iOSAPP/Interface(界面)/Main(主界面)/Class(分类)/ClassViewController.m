@@ -20,11 +20,17 @@
     // Do any additional setup after loading the view.
 
     UIScrollView *scroll = [[UIScrollView alloc] init];
-    scroll.frame = CGRectMake(0, -kNavAndStatusH, kSHWidth, kSHHeight);
+    scroll.frame = self.view.bounds;
+    scroll.y = -kNavAndStatusH;
     scroll.delegate = self;
     scroll.backgroundColor = kColorStatus_warning;
     [self.view addSubview:scroll];
     scroll.contentSize = CGSizeMake(kSHWidth, 1000);
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"哈哈" style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
