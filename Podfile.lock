@@ -51,6 +51,7 @@ PODS:
     - SHClickTextView
   - SHAVPlayer (1.6.4)
   - SHClickTextView (2.0.1)
+  - SHCollectionViewFlowLayout (1.0.0)
   - SHEmptyView (1.0.1):
     - SHExtension/UIView
   - SHExtension (1.3.5):
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - SHActionSheetView
   - SHAlertView
   - SHAVPlayer
+  - SHCollectionViewFlowLayout
   - SHEmptyView
   - SHExtension
   - SHLabelPageView
@@ -125,6 +127,7 @@ SPEC REPOS:
     - SHAlertView
     - SHAVPlayer
     - SHClickTextView
+    - SHCollectionViewFlowLayout
     - SHEmptyView
     - SHExtension
     - SHLabelPageView
@@ -154,6 +157,7 @@ SPEC CHECKSUMS:
   SHAlertView: 67bd23394f1508bb4c90a7d72446b0c4b9108874
   SHAVPlayer: b4c6a87fcdd70de26449cba12a3923e2608487ae
   SHClickTextView: de8c30504eb1a9ea0af3faad978c5c8d5a6d57c3
+  SHCollectionViewFlowLayout: 945685ff1222217d4b811baf548ec68a2bfb2c56
   SHEmptyView: 60520227e16d3a45b3c2844c2c9e70909b460394
   SHExtension: 773719b372d869ad1c62691a62e65bd514732d34
   SHLabelPageView: aa88e0647d937e85a541020e130bbf36a809abc0
@@ -164,6 +168,6 @@ SPEC CHECKSUMS:
   TZImagePickerController: 1cc39ec0454d6e94d0397418953164d7aa631719
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: c99dd12819bdf8ac418a6f94ef0d3355126f0a53
+PODFILE CHECKSUM: ea05e019d3174629ed4456639e50dbcb5bb9dbf5
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

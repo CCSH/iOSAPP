@@ -75,7 +75,6 @@ static BtnBlock _callBack;
     return objc_getAssociatedObject(self, &_callBack);
 }
 
-
 - (void)btnAction:(UIButton *)btn{
     if (self.callBack) {
         self.callBack(btn);

@@ -26,8 +26,9 @@
         
         //标题
         [self navTitle:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        //item
-        [self navItem:@{NSFontAttributeName:kFont(14)}];
+        //navItemText
+        [self navItemText:@{NSFontAttributeName:kFont(14),
+                            NSForegroundColorAttributeName:[UIColor whiteColor]}];
         //背景
         [self navBGColor:kColorMain];
         //返回图片
@@ -101,8 +102,8 @@
     }
 }
 
-#pragma mark item
-+ (void)navItem:(NSDictionary<NSAttributedStringKey,id> *)obj{
+#pragma mark itemText
++ (void)navItemText:(NSDictionary<NSAttributedStringKey,id> *)obj{
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:obj
                                                 forState:UIControlStateNormal];

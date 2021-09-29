@@ -43,7 +43,6 @@ UNUserNotificationCenterDelegate>
     //    config.blockMonitorTimeout = 0.5;
     //
     //    [Bugly startWithAppId:kBuglyID config:config];
-    
     //协议
     [MobSDK uploadPrivacyPermissionStatus:YES onResult:nil];
     //设置MobLink代理

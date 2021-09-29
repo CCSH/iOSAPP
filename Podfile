@@ -26,6 +26,8 @@ target 'iOSAPP' do
   pod 'SHEmptyView'
   #标签
   pod 'SHLabelPageView'
+  #对齐布局
+  pod 'SHCollectionViewFlowLayout'
   #数据请求
   pod 'AFNetworking'
   #刷新
