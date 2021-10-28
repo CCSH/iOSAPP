@@ -440,7 +440,7 @@
 				TargetAttributes = {
 					5C25FEA01F68D72600F080A4 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = JJHLVEX5WC;
+						DevelopmentTeam = G94X5Y9CST;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -729,7 +729,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iOSAPP/iOSAPP.entitlements;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = JJHLVEX5WC;
+				DEVELOPMENT_TEAM = G94X5Y9CST;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOSAPP/Header(头文件)/PrefixHeader.pch";
@@ -737,7 +737,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.coming.community;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccsh.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
