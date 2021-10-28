@@ -56,6 +56,12 @@
     UITabBarItem *tabBarItem = [UITabBarItem appearance];
     [tabBarItem setTitleTextAttributes:obj forState:UIControlStateNormal];
     [tabBarItem setTitleTextAttributes:obj2 forState:UIControlStateSelected];
+    
+    [UITabBar appearance].tintColor = obj2[NSForegroundColorAttributeName];
+    if (IOS(10)) {
+        [UITabBar appearance].unselectedItemTintColor = obj[NSForegroundColorAttributeName];
+    }
+    
     if (IOS(15)) {
         UITabBar *tabbar = [UITabBar appearance];
         UITabBarAppearance *bar = [self getBar];
