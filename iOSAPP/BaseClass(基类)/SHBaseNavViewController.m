@@ -68,19 +68,19 @@
     
     navBar.barTintColor = obj;
     //背景图片(比barTintColor大)
-    [navBar setBackgroundImage:[UIImage getImageWithColor:obj] forBarMetrics:UIBarMetricsDefault];
+//    [navBar setBackgroundImage:[UIImage getImageWithColor:obj] forBarMetrics:UIBarMetricsDefault];
     //背景颜色(44高度的颜色 最下方, 界面模态跳转不是全屏时用得到)
 //    navBar.backgroundColor = color;
     //分割线
     navBar.shadowColor = [UIColor clearColor];
-    
+
     if (IOS(15)) {
         UINavigationBarAppearance *bar = [self getBar];
         bar.backgroundColor = obj;
         bar.shadowColor = navBar.shadowColor;
         //关闭模糊效果
         bar.backgroundEffect = nil;
-        
+
         navBar.scrollEdgeAppearance = bar;
         navBar.standardAppearance = bar;
     }
@@ -105,10 +105,11 @@
 #pragma mark itemText
 + (void)navItemText:(NSDictionary<NSAttributedStringKey,id> *)obj{
     
-    [[UIBarButtonItem appearance] setTitleTextAttributes:obj
-                                                forState:UIControlStateNormal];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:obj
-                                                forState:UIControlStateSelected];
+    UIBarButtonItem *barItem = [UIBarButtonItem appearance];
+//    barItem = 【[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[SHBaseViewController class]]];
+    
+    [barItem setTitleTextAttributes:obj forState:UIControlStateNormal];
+    [barItem setTitleTextAttributes:obj forState:UIControlStateSelected];
     if (IOS(15)) {
         UINavigationBar *navBar = [UINavigationBar appearance];
         UINavigationBarAppearance *bar = [self getBar];

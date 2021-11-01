@@ -28,23 +28,26 @@ echo "\033[32m****************\n开始自动打包\n****************\033[0m\n"
 
 #返回上一级目录,进入项目工程目录
 cd ..
-#获取项目名称
-project_name=`find . -name *.xcodeproj | awk -F "[/.]" '{print $(NF-1)}'`
+configRun () {
+    #获取项目名称
+    project_name=`find . -name *.xcodeproj | awk -F "[/.]" '{print $(NF-1)}'`
 
-#获取工程plist配置文件
-info_plist_path="${project_name}/Info.plist"
+    #获取工程plist配置文件
+    info_plist_path="${project_name}/Info.plist"
 
-#设置build版本号（可以不进行设置）
-date=`date +"%Y%m%d%H%M"`
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $date" "$info_plist_path"
+    #设置build版本号（可以不进行设置）
+    date=`date +"%Y%m%d%H%M"`
+    /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $date" "$info_plist_path"
 
-#获取build版本号
-bundle_build_version=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" ${info_plist_path}`
+    #获取build版本号
+    bundle_build_version=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" ${info_plist_path}`
 
-#指定输出ipa路径
-export_path_ipa=./$project_name-IPA
-#指定输出归档文件地址
-export_path_archive="$export_path_ipa/$project_name.xcarchive"
+    #指定输出ipa路径
+    export_path_ipa=./$project_name-IPA
+    #指定输出归档文件地址
+    export_path_archive="$export_path_ipa/$project_name.xcarchive"
+}
+configRun
 
 echo "\033[32m****************\n自动打包选择配置部分\n****************\033[0m\n"
 
@@ -181,6 +184,29 @@ buglyRun () {
     fi
 }
 buglyRun
+
+# 输入APPStore信息
+appStoreUserNameRun () {
+    echo "\033[36;1m请输入APPStore账号(输入完毕, 按回车即可) \033[0m"
+    if [ ${#parameter_username} == 0 ]; then
+        #读取用户输入
+        read parameter_username
+        sleep 0.5
+    fi
+
+    echo "\033[36;1m请输入APPStore独立密码(输入完毕, 按回车即可) \033[0m"
+    if [ ${#parameter_password} == 0 ]; then
+        #读取用户输入
+        read parameter_password
+        sleep 0.5
+    fi
+}
+
+#选择上传 AppStore
+if [ "$parameter_upload" == "2" ]
+then
+    appStoreUserNameRun
+fi
 
 echo "\n\033[32m****************\n打包信息配置完毕，开始进行打包\n****************\033[0m\n"
 echo "\n\033[32m****************\n开始清理工程\n****************\033[0m\n"
