@@ -32,7 +32,7 @@
         //背景
         [self navBGColor:kColorMain];
         //返回图片
-        [self navBackImage:[UIImage imageNamed:@"nav_back"]];
+        [self navBackImage:[UIImage imageNamed:@"left"]];
     }
 }
 
