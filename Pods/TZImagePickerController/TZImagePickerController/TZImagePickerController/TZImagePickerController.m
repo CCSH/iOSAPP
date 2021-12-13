@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 3.6.4 - 2021.08.02
+//  version 3.6.7 - 2021.11.06
 //  更多信息，请前往项目的github地址：https://github.com/banchichen/TZImagePickerController
 
 #import "TZImagePickerController.h"
@@ -1007,6 +1007,10 @@
     textAttrs[NSForegroundColorAttributeName] = tzImagePickerVc.barItemTextColor;
     textAttrs[NSFontAttributeName] = tzImagePickerVc.barItemTextFont;
     [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+    
+    NSMutableDictionary *textAttrsHighlighted = [NSMutableDictionary dictionary];
+    textAttrsHighlighted[NSFontAttributeName] = tzImagePickerVc.barItemTextFont;
+    [item setTitleTextAttributes:textAttrsHighlighted forState:UIControlStateHighlighted];
 }
 
 + (BOOL)isICloudSyncError:(NSError *)error {
@@ -1017,8 +1021,22 @@
     return NO;
 }
 
++ (BOOL)isAssetNotSelectable:(TZAssetModel *)model tzImagePickerVc:(TZImagePickerController *)tzImagePickerVc {
+    BOOL notSelectable = tzImagePickerVc.selectedModels.count >= tzImagePickerVc.maxImagesCount;
+    if (tzImagePickerVc.selectedModels && tzImagePickerVc.selectedModels.count > 0 && !tzImagePickerVc.allowPickingMultipleVideo) {
+        if (model.asset.mediaType == PHAssetMediaTypeVideo) {
+            notSelectable = true;
+        }
+    }
+    return notSelectable;
+}
+
 @end
 
+
+@interface TZImagePickerConfig ()
+@property (strong, nonatomic) NSSet *supportedLanguages;
+@end
 
 @implementation TZImagePickerConfig
 
@@ -1028,6 +1046,7 @@
     dispatch_once(&onceToken, ^{
         if (config == nil) {
             config = [[TZImagePickerConfig alloc] init];
+            config.supportedLanguages = [NSSet setWithObjects:@"zh-Hans", @"zh-Hant", @"en", @"ar", @"bg", @"cs-CZ", @"de", @"el", @"es", @"fr", @"he", @"it", @"ja", @"ko-KP", @"ko", @"nl", @"pl", @"pt", @"ro", @"ru", @"sk", @"sv", @"th", @"tr", @"uk", @"vi", nil];
             config.preferredLanguage = nil;
             config.gifPreviewMaxImagesCount = 50;
         }
@@ -1041,16 +1060,16 @@
     if (!preferredLanguage || !preferredLanguage.length) {
         preferredLanguage = [NSLocale preferredLanguages].firstObject;
     }
-    if ([preferredLanguage rangeOfString:@"zh-Hans"].location != NSNotFound) {
-        preferredLanguage = @"zh-Hans";
-    } else if ([preferredLanguage rangeOfString:@"zh-Hant"].location != NSNotFound) {
-        preferredLanguage = @"zh-Hant";
-    } else if ([preferredLanguage rangeOfString:@"vi"].location != NSNotFound) {
-        preferredLanguage = @"vi";
-    } else {
-        preferredLanguage = @"en";
+
+    NSString *usedLanguage = @"en";
+    for (NSString *language in self.supportedLanguages) {
+        if ([preferredLanguage hasPrefix:language]) {
+            usedLanguage = language;
+            break;
+        }
     }
-    _languageBundle = [NSBundle bundleWithPath:[[NSBundle tz_imagePickerBundle] pathForResource:preferredLanguage ofType:@"lproj"]];
+    _languageBundle = [NSBundle bundleWithPath:[[NSBundle tz_imagePickerBundle] pathForResource:usedLanguage ofType:@"lproj"]];
+
 }
 
 @end

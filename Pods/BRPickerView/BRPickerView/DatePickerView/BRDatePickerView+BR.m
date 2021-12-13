@@ -432,7 +432,7 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
         
         CGFloat originX = i * labelWidth + labelWidth / 2.0 + labelTextWidth / 2.0 + self.pickerStyle.dateUnitOffsetX;
         CGFloat originY = (pickerView.frame.size.height - self.pickerStyle.rowHeight) / 2 + self.pickerStyle.dateUnitOffsetY;
-        unitLabel.frame = CGRectMake(originX, originY, self.pickerStyle.rowHeight, self.pickerStyle.rowHeight);
+        unitLabel.frame = CGRectMake(originX, originY, MAX(self.pickerStyle.rowHeight, labelTextWidth), self.pickerStyle.rowHeight);
         
         [tempArr addObject:unitLabel];
         
@@ -471,24 +471,36 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
     return [NSString stringWithFormat:@"%@%@", yearString, yearUnit];
 }
 
-- (NSString *)getMonthText:(NSArray *)monthArr row:(NSInteger)row monthNames:(NSArray *)monthNames {
+- (NSString *)getMonthText:(NSArray *)monthArr row:(NSInteger)row {
     NSInteger index = 0;
     if (row >= 0) {
         index = MIN(row, monthArr.count - 1);
     }
     NSString *monthString = [monthArr objectAtIndex:index];
-    if ([self.pickerStyle.language hasPrefix:@"zh"]) {
-        self.monthNameType = BRMonthNameTypeNumber;
-    }
-    if (self.monthNameType != BRMonthNameTypeNumber && (self.pickerMode == BRDatePickerModeYMD || self.pickerMode == BRDatePickerModeYM)) {
-        NSInteger index = [monthString integerValue] - 1;
-        monthString = (index >= 0 && index < monthNames.count) ? monthNames[index] : @"";
-    }
-    if ((self.lastRowContent && [monthString isEqualToString:self.lastRowContent]) || (self.firstRowContent && [monthString isEqualToString:self.firstRowContent])) {
+    // 首行/末行是自定义字符串，直接返回
+    if ((self.firstRowContent && [monthString isEqualToString:self.firstRowContent]) || (self.lastRowContent && [monthString isEqualToString:self.lastRowContent])) {
         return monthString;
     }
-    NSString *monthUnit = self.showUnitType == BRShowUnitTypeAll ? [self getMonthUnit] : @"";
-    return [NSString stringWithFormat:@"%@%@", monthString, monthUnit];
+    
+    // 自定义月份数据源
+    if (self.monthNames && self.monthNames.count > 0) {
+        NSInteger index = [monthString integerValue] - 1;
+        monthString = (index >= 0 && index < self.monthNames.count) ? self.monthNames[index] : @"";
+    } else {
+        if (![self.pickerStyle.language hasPrefix:@"zh"] && (self.pickerMode == BRDatePickerModeYMD || self.pickerMode == BRDatePickerModeYM)) {
+            // 非中文环境：月份显示英文名称
+            // monthNames = @[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Oct", @"Nov", @"Dec"];
+            NSArray *monthNames = @[@"January", @"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December"];
+            NSInteger index = [monthString integerValue] - 1;
+            monthString = (index >= 0 && index < monthNames.count) ? monthNames[index] : @"";
+        } else {
+            // 中文环境：月份显示数字
+            NSString *monthUnit = self.showUnitType == BRShowUnitTypeAll ? [self getMonthUnit] : @"";
+            monthString = [NSString stringWithFormat:@"%@%@", monthString, monthUnit];
+        }
+    }
+    
+    return monthString;
 }
 
 - (NSString *)getDayText:(NSArray *)dayArr row:(NSInteger)row mSelectDate:(NSDate *)mSelectDate {
@@ -552,6 +564,9 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
 }
 
 - (NSString *)getYearUnit {
+    if (self.customUnit) {
+        return self.customUnit[@"year"] ? : @"";
+    }
     if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }
@@ -559,6 +574,9 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
 }
 
 - (NSString *)getMonthUnit {
+    if (self.customUnit) {
+        return self.customUnit[@"month"] ? : @"";
+    }
     if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }
@@ -566,6 +584,9 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
 }
 
 - (NSString *)getDayUnit {
+    if (self.customUnit) {
+        return self.customUnit[@"day"] ? : @"";
+    }
     if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }
@@ -573,16 +594,22 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
 }
 
 - (NSString *)getHourUnit {
-    if (![self.pickerStyle.language hasPrefix:@"zh"]) {
+    if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
         return @"";
     }
-    if (self.pickerMode == BRDatePickerModeYMDH && self.isShowAMAndPM) {
+    if (self.customUnit) {
+        return self.customUnit[@"hour"] ? : @"";
+    }
+    if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }
     return [NSBundle br_localizedStringForKey:@"时" language:self.pickerStyle.language];
 }
 
 - (NSString *)getMinuteUnit {
+    if (self.customUnit) {
+        return self.customUnit[@"minute"] ? : @"";
+    }
     if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }
@@ -590,6 +617,9 @@ BRSYNTH_DUMMY_CLASS(BRDatePickerView_BR)
 }
 
 - (NSString *)getSecondUnit {
+    if (self.customUnit) {
+        return self.customUnit[@"second"] ? : @"";
+    }
     if (![self.pickerStyle.language hasPrefix:@"zh"]) {
         return @"";
     }

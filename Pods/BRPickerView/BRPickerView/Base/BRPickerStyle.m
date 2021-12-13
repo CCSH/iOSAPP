@@ -26,7 +26,7 @@
 
 - (UIColor *)maskColor {
     if (!_maskColor) {
-        _maskColor = [UIColor colorWithWhite:0 alpha:0.2f];
+        _maskColor = [self br_colorWithLightColor:BR_RGB_HEX(0x000000, 0.3f) darkColor:BR_RGB_HEX(0x666666, 0.3f)];
     }
     return _maskColor;
 }
@@ -351,6 +351,12 @@
         for (UIView *subView in pickerView.subviews) {
             if (subView && [subView isKindOfClass:[UIView class]] && subView.frame.size.height <= 1) {
                 subView.backgroundColor = self.separatorColor;
+                // 设置分割线高度
+                if (self.separatorHeight > 0) {
+                    CGRect rect = subView.frame;
+                    rect.size.height = self.separatorHeight;
+                    subView.frame = rect;
+                }
             }
         }
     }
@@ -394,11 +400,13 @@
             id lastView = subviews.lastObject;
             if (lastView && [lastView isKindOfClass:[UIView class]]) {
                 UIView *rectBgView = (UIView *)lastView;
-                rectBgView.backgroundColor = [UIColor clearColor];
+                rectBgView.hidden = YES;
             }
             
             // ②清除iOS14上选择器默认的内边距
-            [self setPickerAllSubViewsStyle:contentView];
+            if (systemVersion.doubleValue < 15.0f) {
+                [self setPickerAllSubViewsStyle:contentView];
+            }
         }
     }
     
@@ -453,11 +461,23 @@
         UIView *topLineView = [[UIView alloc]initWithFrame:CGRectMake(0, pickerView.bounds.size.height / 2 - self.rowHeight / 2, pickerView.bounds.size.width, 0.5f)];
         topLineView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         topLineView.backgroundColor = self.separatorColor;
+        // 设置分割线高度
+        if (self.separatorHeight > 0) {
+            CGRect topRect = topLineView.frame;
+            topRect.size.height = self.separatorHeight;
+            topLineView.frame = topRect;
+        }
         [pickerView addSubview:topLineView];
         
         UIView *bottomLineView = [[UIView alloc]initWithFrame:CGRectMake(0, pickerView.bounds.size.height / 2 + self.rowHeight / 2, pickerView.bounds.size.width, 0.5f)];
         bottomLineView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         bottomLineView.backgroundColor = self.separatorColor;
+        // 设置分割线高度
+        if (self.separatorHeight > 0) {
+            CGRect bottomRect = bottomLineView.frame;
+            bottomRect.size.height = self.separatorHeight;
+            bottomLineView.frame = bottomRect;
+        }
         [pickerView addSubview:bottomLineView];
     }
 }

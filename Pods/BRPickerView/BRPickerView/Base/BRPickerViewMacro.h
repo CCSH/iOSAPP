@@ -39,51 +39,6 @@ safeBottomHeight = BRGetKeyWindow().safeAreaInsets.bottom;\
 #endif
 
 
-/**
- 弱引用/强引用
- 
- Example:
-     @weakify(self)
-     [self doSomething^{
-         @strongify(self)
-         if (!self) return;
-         ...
-     }];
- 
- */
-#ifndef weakify
-    #if DEBUG
-        #if __has_feature(objc_arc)
-            #define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-        #else
-            #define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-        #endif
-    #else
-        #if __has_feature(objc_arc)
-            #define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-        #else
-            #define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-        #endif
-    #endif
-#endif
-
-#ifndef strongify
-    #if DEBUG
-        #if __has_feature(objc_arc)
-            #define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-        #else
-            #define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-        #endif
-    #else
-        #if __has_feature(objc_arc)
-            #define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-        #else
-            #define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-        #endif
-    #endif
-#endif
-
-
 /** RGB颜色(16进制) */
 static inline UIColor *BR_RGB_HEX(uint32_t rgbValue, CGFloat alpha) {
     return [UIColor colorWithRed:((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0
@@ -96,8 +51,8 @@ static inline UIColor *BR_RGB_HEX(uint32_t rgbValue, CGFloat alpha) {
 /** 获取 keyWindow */
 static inline UIWindow *BRGetKeyWindow(void) {
     UIWindow *keyWindow = nil;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000 // 编译时检查SDK版本：Xcode11+编译会调用（iOS SDK 13.0 以后版本的处理）
-    if (@available(iOS 13.0, *)) {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000 // 编译时检查SDK版本（兼容不同版本的Xcode，防止编译报错）
+    if (@available(iOS 13.0, *)) { // 运行时检查系统版本（兼容不同版本的系统，防止运行报错）
         NSSet<UIScene *> *connectedScenes = [UIApplication sharedApplication].connectedScenes;
         for (UIScene *scene in connectedScenes) {
             if (scene.activationState == UISceneActivationStateForegroundActive && [scene isKindOfClass:[UIWindowScene class]]) {

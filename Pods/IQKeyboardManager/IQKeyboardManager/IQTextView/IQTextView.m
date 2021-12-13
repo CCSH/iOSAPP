@@ -70,15 +70,18 @@
 {
     if([[self text] length] || [[self attributedText] length])
     {
-        [self.IQ_PlaceholderLabel setAlpha:0];
+        if (self.IQ_PlaceholderLabel.alpha != 0) {
+            [self.IQ_PlaceholderLabel setAlpha:0];
+            [self setNeedsLayout];
+            [self layoutIfNeeded];
+        }
     }
-    else
+    else if(self.IQ_PlaceholderLabel.alpha != 1)
     {
         [self.IQ_PlaceholderLabel setAlpha:1];
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
     }
-    
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
 }
 
 - (void)setText:(NSString *)text

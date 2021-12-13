@@ -60,7 +60,7 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
 
 /**
  百度移动应用统计接口
- 当前版本 5.3.5_18
+ 当前版本 5.3.6_18
  */
 @interface BaiduMobStat : NSObject
 /**
@@ -126,12 +126,6 @@ typedef enum _BaiduMobStatFeedTrackStrategy {
  默认值 空字符串:@""
  */
 @property (nonatomic, copy) NSString *adid;
-
-/**
- 设置是否获取GPS信息（V4.1.1新增）
- 默认为YES，获取GPS信息
- */
-@property (nonatomic, assign) BOOL enableGps;
 
 /**
  设置是否允许监控webview（V4.6.7新增）

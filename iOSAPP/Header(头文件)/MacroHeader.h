@@ -43,7 +43,7 @@
 #define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
 
 //空插画高度
-#define kEmptyH (260.)
+#define kEmptyH (260)
 //默认间距
 #define kSpaceW (15)
 //组头部高度

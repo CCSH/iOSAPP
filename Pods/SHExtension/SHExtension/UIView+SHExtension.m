@@ -7,11 +7,13 @@
 //
 
 #import "UIView+SHExtension.h"
+#import "objc/runtime.h"
 
 @implementation UIView (SHExtension)
 
 static UIEdgeInsets _dragEdge;
 static DragBlock _dragBlock;
+static DragBlock _dragingBlock;
 static UIPanGestureRecognizer *_panGesture;
 
 #pragma mark - frame
@@ -138,29 +140,42 @@ static UIPanGestureRecognizer *_panGesture;
     [self configPan];
 }
 
-- (void)configPan{
-    if (!_panGesture) {
-        _panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
-        [self addGestureRecognizer:_panGesture];
-    }
+- (void)setDragingBlock:(DragBlock)dragingBlock{
+    _dragingBlock = dragingBlock;
+    [self configPan];
 }
 
+- (UIPanGestureRecognizer *)callBack {
+    return objc_getAssociatedObject(self, &_panGesture);
+}
 
-#pragma mark - 拖拽
-- (void)panAction:(UIPanGestureRecognizer *)pan{
+ - (void)configPan{
+     if (!_panGesture) {
+         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
+         [self addGestureRecognizer:pan];
+         objc_setAssociatedObject(self, &_panGesture, pan, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+     }
+ }
+ 
+ #pragma mark - 拖拽
+ - (void)panAction:(UIPanGestureRecognizer *)pan{
 
-    switch (pan.state) {
-        case UIGestureRecognizerStateChanged:
-        {
-            CGPoint point = [pan locationInView:self.superview];
-            pan.view.center = point;
-        }
-            break;
-        case UIGestureRecognizerStateEnded:
-        {
-            if (_dragBlock) {
+     switch (pan.state) {
+         case UIGestureRecognizerStateChanged:
+         {
+              CGPoint point = [pan locationInView:self.superview];
+              pan.view.center = point;
+            if (_dragingBlock) {
+               _dragingBlock(self);
+            }
+         }
+             break;
+         case UIGestureRecognizerStateEnded:
+         {
+             if (_dragBlock) {
                 _dragBlock(pan.view);
-            }else{
+                _dragBlock(self);
+             }else{
                 CGFloat x = self.x;
                 CGFloat y = self.y;
                 //X轴
@@ -190,6 +205,11 @@ static UIPanGestureRecognizer *_panGesture;
     }
 }
 
+#pragma mark 关闭拖拽
+- (void)closeDrag{
+    [self removeGestureRecognizer:_panGesture];
+}
+
 #pragma mark 按照图片剪裁视图
 - (void)setClippingImage:(UIImage *)clippingImage{
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -202,11 +222,6 @@ static UIPanGestureRecognizer *_panGesture;
 
         self.layer.mask = maskLayer;
     });
-}
-
-#pragma mark 关闭拖拽
-- (void)closeDrag{
-    [self removeGestureRecognizer:_panGesture];
 }
 
 #pragma mark - 描边

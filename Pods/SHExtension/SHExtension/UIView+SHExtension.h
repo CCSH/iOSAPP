@@ -52,6 +52,8 @@ IBInspectable
 @property (nonatomic, assign) UIEdgeInsets dragEdge;
 //拖拽结束回调（优先级最高）
 @property (nonatomic, copy) DragBlock dragBlock;
+//拖拽中回调
+@property (nonatomic, copy) DragBlock dragingBlock;
 
 //按照图片剪裁视图
 @property (nonatomic, strong) UIImage *clippingImage;

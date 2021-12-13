@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
+    self.statusBarStyle = UIStatusBarStyleDefault;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     self.isOpenKeyboard = YES;
     [self closeAutomatically];
@@ -40,8 +41,14 @@
     if (self.navBarBGAlpha < 1) {
         self.navBarBGAlpha = 1;
     }
-    if (self.statusBarStyle != UIStatusBarStyleDefault) {
-        self.statusBarStyle = UIStatusBarStyleDefault;
+    if (IOS(13)) {
+        if (self.statusBarStyle != UIStatusBarStyleDarkContent) {
+            self.statusBarStyle = UIStatusBarStyleDarkContent;
+        }
+    } else {
+        if (self.statusBarStyle != UIStatusBarStyleDefault) {
+            self.statusBarStyle = UIStatusBarStyleDefault;
+        }
     }
     if (!self.isOpenKeyboard) {
         self.isOpenKeyboard = YES;

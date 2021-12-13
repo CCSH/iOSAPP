@@ -59,16 +59,6 @@ typedef NS_ENUM(NSInteger, BRShowUnitType) {
     BRShowUnitTypeNone
 };
 
-/// 月份名称类型
-typedef NS_ENUM(NSInteger, BRMonthNameType) {
-    /** 月份英文全称 */
-    BRMonthNameTypeFullName,
-    /** 月份英文简称 */
-    BRMonthNameTypeShortName,
-    /** 月份数字 */
-    BRMonthNameTypeNumber
-};
-
 typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nullable selectValue);
 
 @interface BRDatePickerView : BRBaseView
@@ -135,14 +125,26 @@ typedef void (^BRDateResultBlock)(NSDate * _Nullable selectDate, NSString * _Nul
 /** 设置倒计时的时长，默认为0（范围：0 ~ 24*60*60-1，单位为秒） for `BRDatePickerModeCountDownTimer`, ignored otherwise. */
 @property (nonatomic, assign) NSTimeInterval countDownDuration;
 
-/** for `BRDatePickerModeYMD` or `BRDatePickerModeYM`, ignored otherwise. */
-@property (nonatomic, assign) BRMonthNameType monthNameType;
+/**
+ *  自定义月份数据源
+ *  如：@[@"1月", @"2月",..., @"12月"]、 @[@"一月", @"二月",..., @"十二月"]、 @[@"Jan", @"Feb",..., @"Dec"] 等
+ */
+@property (nonatomic, copy) NSArray <NSString *> *monthNames;
+
+/**
+ *  自定义日期单位
+ *  字典格式：@{@"year": @"年", @"month": @"月", @"day": @"日", @"hour": @"时", @"minute": @"分", @"second": @"秒"}
+ */
+@property (nonatomic, copy) NSDictionary *customUnit;
 
 /** 显示上午和下午，默认为 NO. for `BRDatePickerModeYMDH`, ignored otherwise. */
 @property (nonatomic, assign, getter=isShowAMAndPM) BOOL showAMAndPM;
 
 /** 设置时区，默认为当前时区 */
 @property (nullable, nonatomic, copy) NSTimeZone *timeZone;
+
+/** default is [NSCalendar currentCalendar]. setting nil returns to default. for `UIDatePicker` */
+@property (nonatomic, copy) NSCalendar *calendar;
 
 /** 指定不允许选择的日期 */
 @property (nullable, nonatomic, copy) NSArray <NSDate *> *nonSelectableDates;
