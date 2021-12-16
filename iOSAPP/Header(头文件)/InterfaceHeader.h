@@ -20,7 +20,7 @@ static NSInteger time_out_code = -1001;
 #define kBuglyID @"fc42b13a1b"
 
 #pragma mark - 主机地址
-#define kHostUrl @"http://www.baidu.com/"
+#define kHostUrl @"https://gg.gg/ccsh-blog"
 
 
 #pragma mark - 登录接口

@@ -148,7 +148,7 @@
 #pragma mark 错误界面
 + (UIViewController *)getErrorVC{
     SHBaseViewController *vc = [NSClassFromString([self getVCWithName:RoutingName_web]) new];
-    vc.param = @{@"url":@"http://qzonestyle.gtimg.cn/qzone/hybrid/app/404"};
+    vc.param = @{@"url":@"https://volunteer.cdn-go.cn/404/latest/404.html"};
     return vc;
 }
 

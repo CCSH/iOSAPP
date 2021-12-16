@@ -13,15 +13,15 @@
 {
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:block];
-    header.stateLabel.font = [UIFont systemFontOfSize:12];
-    header.lastUpdatedTimeLabel.text = @"";
+    header.stateLabel.font = kFont(12);
+    header.lastUpdatedTimeLabel.hidden = YES;
     self.mj_header = header;
 }
 
 - (void)refreshFooterBlock:(RefreshFooterCallback)block
 {
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:block];
-    footer.stateLabel.font = [UIFont systemFontOfSize:12];
+    footer.stateLabel.font = kFont(12);
     self.mj_footer = footer;
 }
 
