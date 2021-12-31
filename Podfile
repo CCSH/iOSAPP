@@ -1,5 +1,5 @@
 platform :ios, '10.0'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'iOSAPP' do
   # 使用frameworks
