@@ -1,6 +1,0 @@
-framework module SHPopView {
-  umbrella header "SHPopView-umbrella.h"
-
-  export *
-  module * { export * }
-}

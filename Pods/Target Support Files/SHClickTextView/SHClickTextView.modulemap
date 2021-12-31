@@ -1,6 +1,0 @@
-framework module SHClickTextView {
-  umbrella header "SHClickTextView-umbrella.h"
-
-  export *
-  module * { export * }
-}

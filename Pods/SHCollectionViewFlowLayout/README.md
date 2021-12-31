@@ -1,2 +1,0 @@
-# SHCollectionViewFlowLayout
-UICollectionView 对齐方式

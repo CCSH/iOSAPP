@@ -1,6 +1,0 @@
-framework module SHAlertView {
-  umbrella header "SHAlertView-umbrella.h"
-
-  export *
-  module * { export * }
-}

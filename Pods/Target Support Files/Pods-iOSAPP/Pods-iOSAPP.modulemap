@@ -1,6 +1,0 @@
-framework module Pods_iOSAPP {
-  umbrella header "Pods-iOSAPP-umbrella.h"
-
-  export *
-  module * { export * }
-}
