@@ -20,11 +20,23 @@ static NSInteger time_out_code = -1001;
 #define kBuglyID @"fc42b13a1b"
 
 #pragma mark - 主机地址
-#define kHostUrl @"https://gg.gg/ccsh-blog"
+#pragma mark 主机地址
+#if kEnvironment_test
+    //测试环境
+    #define kUrl @"https://gg.gg/ccsh-blog/test"
+#elif kEnvironment_pre
+    //预发环境
+    #define kUrl @"https://gg.gg/ccsh-blog/pre/"
+#else
+    //生产环境
+    #define kUrl @"https://gg.gg/ccsh-blog/pro/"
+#endif
 
+#pragma mark - 接口
+#define kHostUrl @""kUrl"api/"
 
-#pragma mark - 登录接口
-#define kLogin @"user/login"
+#pragma mark 新闻列表
+#define kNewsList @"user/newsList"
 
 
 

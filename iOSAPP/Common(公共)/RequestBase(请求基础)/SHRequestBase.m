@@ -403,7 +403,7 @@ constructingBodyWithBlock:^(id< AFMultipartFormData > _Nullable formData) {
         SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, self.param, error.description);
     }
     //回调
-    if (self.success) {
+    if (self.failure) {
         self.failure(error);
     }
 }
