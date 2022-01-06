@@ -21,62 +21,62 @@
 #pragma mark 地图导航
 + (void)mapNavigationWithLon:(CGFloat)lon lat:(CGFloat)lat name:(NSString *)name {
     
-    SHActionSheetView *sheet = [[SHActionSheetView alloc] init];
-    SHActionSheetModel *model = [[SHActionSheetModel alloc] init];
-    model.title = @"导航";
-    NSMutableArray *temp = [[NSMutableArray alloc]init];
-    NSString *appName = [SHTool appName];
-    //苹果导航
-    [temp addObject:@"Apple导航"];
-    //百度
-    NSString *baidu = [NSString stringWithFormat:@"baidumap://map/marker?location=%f,%f&title=%@&content=%@", lat, lon, name,appName];
-    baidu = [baidu stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:baidu]]) {
-        [temp addObject:@"百度导航"];
-    }
-    //高德
-    NSString *gaode = [NSString stringWithFormat:@"iosamap://path?dlat=%f&dlon=%f&dname=%@&dev=0&t=0&sourceApplication=%@",lat, lon,name,appName];
-    gaode = [gaode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:gaode]]) {
-        [temp addObject:@"高德导航"];
-    }
-    //腾讯
-    NSString *tengxun = [NSString stringWithFormat:@"qqmap://map/routeplan?type=drive&tocoord=%f,%f&referer=%@",lat,lon,@"X2OBZ-PZKCO-TCOW5-STPML-CSSE6-FEBQ4"];
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:tengxun]]) {
-        [temp addObject:@"腾讯导航"];
-    }
-    
-    model.messageArr = temp;
-    sheet.model = model;
-    sheet.style = SHActionSheetStyle_system;
-    
-    sheet.block = ^(SHActionSheetView *sheetView, NSInteger buttonIndex) {
-        if (buttonIndex >= 0) {
-            NSString *select = model.messageArr[buttonIndex];
-            if ([select isEqualToString:@"Apple导航"]) {
-                CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(lat, lon);
-                
-                //当前地址
-                MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-                
-                MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:loc addressDictionary:nil]];
-                toLocation.name = name;
-                [MKMapItem openMapsWithItems:@[ currentLocation, toLocation ]
-                               launchOptions:@{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving,
-                                               MKLaunchOptionsShowsTrafficKey : [NSNumber numberWithBool:YES]}];
-            } else if ([select isEqualToString:@"百度导航"]) {
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:baidu] options:@{} completionHandler:nil];
-            } else if ([select isEqualToString:@"高德导航"]) {
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:gaode] options:@{} completionHandler:nil];
-            } else if ([select isEqualToString:@"腾讯导航"]) {
-                
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tengxun] options:@{} completionHandler:nil];
-            }
-        }
-    };
-    [sheet show];
+//    SHActionSheetView *sheet = [[SHActionSheetView alloc] init];
+//    SHActionSheetModel *model = [[SHActionSheetModel alloc] init];
+//    model.title = @"导航";
+//    NSMutableArray *temp = [[NSMutableArray alloc]init];
+//    NSString *appName = [SHTool appName];
+//    //苹果导航
+//    [temp addObject:@"Apple导航"];
+//    //百度
+//    NSString *baidu = [NSString stringWithFormat:@"baidumap://map/marker?location=%f,%f&title=%@&content=%@", lat, lon, name,appName];
+//    baidu = [baidu stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:baidu]]) {
+//        [temp addObject:@"百度导航"];
+//    }
+//    //高德
+//    NSString *gaode = [NSString stringWithFormat:@"iosamap://path?dlat=%f&dlon=%f&dname=%@&dev=0&t=0&sourceApplication=%@",lat, lon,name,appName];
+//    gaode = [gaode stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:gaode]]) {
+//        [temp addObject:@"高德导航"];
+//    }
+//    //腾讯
+//    NSString *tengxun = [NSString stringWithFormat:@"qqmap://map/routeplan?type=drive&tocoord=%f,%f&referer=%@",lat,lon,@"X2OBZ-PZKCO-TCOW5-STPML-CSSE6-FEBQ4"];
+//    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:tengxun]]) {
+//        [temp addObject:@"腾讯导航"];
+//    }
+//
+//    model.messageArr = temp;
+//    sheet.model = model;
+//    sheet.style = SHActionSheetStyle_system;
+//
+//    sheet.block = ^(SHActionSheetView *sheetView, NSInteger buttonIndex) {
+//        if (buttonIndex >= 0) {
+//            NSString *select = model.messageArr[buttonIndex];
+//            if ([select isEqualToString:@"Apple导航"]) {
+//                CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(lat, lon);
+//
+//                //当前地址
+//                MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+//
+//                MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:loc addressDictionary:nil]];
+//                toLocation.name = name;
+//                [MKMapItem openMapsWithItems:@[ currentLocation, toLocation ]
+//                               launchOptions:@{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving,
+//                                               MKLaunchOptionsShowsTrafficKey : [NSNumber numberWithBool:YES]}];
+//            } else if ([select isEqualToString:@"百度导航"]) {
+//
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:baidu] options:@{} completionHandler:nil];
+//            } else if ([select isEqualToString:@"高德导航"]) {
+//
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:gaode] options:@{} completionHandler:nil];
+//            } else if ([select isEqualToString:@"腾讯导航"]) {
+//
+//                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tengxun] options:@{} completionHandler:nil];
+//            }
+//        }
+//    };
+//    [sheet show];
 }
 
 #pragma mark 获取头部view

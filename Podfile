@@ -1,5 +1,5 @@
 platform :ios, '10.0'
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'iOSAPP' do
   # 使用frameworks
@@ -17,9 +17,9 @@ target 'iOSAPP' do
   #Alert弹窗
   pod 'SHAlertView'
   #Sheet弹窗
-  pod 'SHActionSheetView'
+  #pod 'SHActionSheetView'
   #音视频播放
-  pod 'SHAVPlayer'
+  #pod 'SHAVPlayer'
   #弹窗
   pod 'SHPopView'
   #空状态

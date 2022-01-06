@@ -212,18 +212,18 @@
     UITextField *phoneView = [self.view viewWithTag:12];
     UITextField *passwordView = [self.view viewWithTag:10];
     
-    [SHServerRequest requestLoginWithMobile:phoneView.text
-                                   password:passwordView.text
-                                     result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
-        
-        if (!error) {
-            //成功
-        }
-        
+//    [SHServerRequest requestLoginWithMobile:phoneView.text
+//                                   password:passwordView.text
+//                                     result:^(SHRequestBaseModel * _Nonnull baseModel, NSError * _Nonnull error) {
+//
+//        if (!error) {
+//            //成功
+//        }
+        SHRequestBaseModel *baseModel = [[SHRequestBaseModel alloc]init];
         baseModel.data = @{@"user_id":@"1"};
         [SHToolHelper loginSuccess:baseModel];
         [self backAction];
-    }];
+//    }];
 }
 
 #pragma mark - 懒加载

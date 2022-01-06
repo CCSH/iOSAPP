@@ -12,6 +12,7 @@
 //网络请求接口
 
 static NSString *request_error = @"网络异常，请检查网络";
+static NSString *request_error_timeout = @"网络超时，请重试";
 static NSString *error_domain = @"ccsh_domain";
 static NSInteger success_code = 200;
 static NSInteger time_out_code = -1001;

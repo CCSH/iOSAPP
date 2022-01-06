@@ -18,7 +18,7 @@
 + (NSString *)getRequstCacheClean{
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSString *path = [NSDocumentsFolder() stringByAppendingPathComponent:@"request_cache_clean"];
+    NSString *path = [DocumentPatch stringByAppendingPathComponent:@"request_cache_clean"];
     
     if(![fileManager fileExistsAtPath:path]){
         //不存在则创建
@@ -42,7 +42,7 @@
 
 #pragma mark 缓存不清理白名单
 + (NSArray *)getCacheList{
-    return @[kTaglist,kGetlist];
+    return @[];
 }
 
 #pragma mark 缓存大小
@@ -168,10 +168,10 @@
         if ([self requestTimeOut:error.code])
         {
             //网络请求超时
-
+            [SHToast showWithText:request_error_timeout];
         }else{
             //网络错误
-
+            [SHToast showWithText:request_error];
         }
     }
     else if (model.code != success_code)
@@ -180,7 +180,7 @@
         error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
         if (model.msg.length) {
             //服务器错误
-
+            [SHToast showWithText:model.msg];
         }
     }
     

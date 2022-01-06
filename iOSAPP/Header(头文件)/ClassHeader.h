@@ -30,8 +30,6 @@
 #import <MJExtension.h>
 #import <MJRefresh.h>
 #import <Masonry/Masonry.h>
-#import <SHActionSheetView.h>
-#import <SHAlertView.h>
 #import <SHButton.h>
 #import <SHScrollView.h>
 #import <SHToast.h>
@@ -44,6 +42,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <YYText.h>
+#import <NSString+SHExtension.h>
 
 //#import <EaseIMKit.h>
 //#import <HyphenateChat/HyphenateChat.h>
