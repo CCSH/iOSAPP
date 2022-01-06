@@ -168,19 +168,19 @@
         if ([self requestTimeOut:error.code])
         {
             //网络请求超时
-//            [ZWPToast showToastMag:@"请求超时"];
+
         }else{
             //网络错误
-//            [ZWPToast showToastMag:request_error];
+
         }
     }
     else if (model.code != success_code)
     {
-        //现在接口返回数据不统一 暂时写死状态码
         //服务器错误(统一状态码)
         error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
         if (model.msg.length) {
-//            [ZWPToast showToastMag:model.msg];
+            //服务器错误
+
         }
     }
     
