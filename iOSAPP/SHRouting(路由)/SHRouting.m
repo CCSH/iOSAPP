@@ -163,8 +163,6 @@
         return @"MainTabBarController";
     }else if ([name isEqualToString:RoutingName_web]){
         return @"SHWebViewController";
-    }else if ([name isEqualToString:RoutingName_search]){
-        return @"ShopSearchViewController";
     }else if ([name isEqualToString:RoutingName_ad]){
         return @"AdViewController";
     }else if ([name isEqualToString:RoutingName_register]){

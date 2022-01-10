@@ -30,13 +30,11 @@ typedef enum : NSUInteger {
 #pragma mark 内容
 #define RoutingName_web @"web"
 #define RoutingName_welcome @"welcome"
-#define RoutingName_search @"search"
 #define RoutingName_main @"main"
 #define RoutingName_login @"login"
 #define RoutingName_ad @"ad"
 #define RoutingName_register @"register"
 #define RoutingName_home @"home"
 #define RoutingName_mine @"mine"
-#define RoutingName_order @"order"
 
 #endif /* EnumHeader_h */
