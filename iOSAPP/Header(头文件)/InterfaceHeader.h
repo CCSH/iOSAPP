@@ -24,7 +24,7 @@ static NSInteger time_out_code = -1001;
 #pragma mark 主机地址
 #if kEnvironment_test
     //测试环境
-    #define kUrl @"https://gg.gg/ccsh-blog/test"
+    #define kUrl @"https://gg.gg/ccsh-blog/test/"
 #elif kEnvironment_pre
     //预发环境
     #define kUrl @"https://gg.gg/ccsh-blog/pre/"

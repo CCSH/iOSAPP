@@ -170,7 +170,7 @@
     }else if ([name isEqualToString:RoutingName_register]){
         return @"RegisterViewController";
     }
-    return @"";
+    return name;
 }
 
 @end

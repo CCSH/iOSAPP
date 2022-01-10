@@ -12,8 +12,7 @@
 //结构体头文件
 
 //跟视图类型
-typedef enum : NSUInteger
-{
+typedef enum : NSUInteger {
     RootVCType_main,   //首页
     RootVCType_wecome, //欢迎页
     RootVCType_ad,     //广告
@@ -21,10 +20,10 @@ typedef enum : NSUInteger
 
 //路由跳转类型
 typedef enum : NSUInteger {
-    SHRoutingType_none,//不处理
-    SHRoutingType_root,//跟视图
-    SHRoutingType_nav,//导航调转
-    SHRoutingType_modal,//模态跳转
+    SHRoutingType_none, //不处理
+    SHRoutingType_root,  //跟视图
+    SHRoutingType_nav,   //导航调转
+    SHRoutingType_modal, //模态跳转
 } SHRoutingType;
 
 #pragma mark - 路由
