@@ -45,13 +45,29 @@
 
 #pragma mark - 配置
 - (void)configUI{
+    //关闭
+    SHButton *closeBtn = [[SHButton alloc]init];
+    closeBtn.size = CGSizeMake(24, 24);
+    [closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    @weakify(self);
+    [closeBtn addClickBlock:^(UIButton * _Nonnull btn) {
+        @strongify(self);
+        [self backAction];
+    }];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:closeBtn];
+    
     //注册
     SHButton *rightBtn = [[SHButton alloc]init];
     [rightBtn setTitle:@"注册" forState:UIControlStateNormal];
     rightBtn.backgroundColor = kColorMain;
     rightBtn.titleLabel.font = kBoldFont(14);
     rightBtn.size = CGSizeMake(44, 24);
-    [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn addClickBlock:^(UIButton * _Nonnull btn) {
+        [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_register]
+                             type:SHRoutingType_nav
+                            block:nil];
+    }];
     [rightBtn borderRadius:4];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
@@ -111,7 +127,6 @@
     [switchBtn borderRadius:8 width:1 color:kColorMain];
     [switchBtn setTitleColor:kColorMain forState:UIControlStateNormal];
     [self.view addSubview:switchBtn];
-    @weakify(self);
     [switchBtn addClickBlock:^(UIButton * _Nonnull btn) {
         @strongify(self);
         self.switchState = !self.switchState;
@@ -157,12 +172,6 @@
 }
 
 #pragma mark - 事件
-- (void)rightAction{
-    [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_register]
-                         type:SHRoutingType_nav
-                        block:nil];
-}
-
 #pragma mark 切换
 - (void)switchAction{
     //密码
