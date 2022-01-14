@@ -166,7 +166,10 @@
     YYTextHighlight *hight = [[YYTextHighlight alloc]init];
     [att yy_setTextHighlight:hight range:range];
     hight.tapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-    
+    [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_web]
+                        param:@{@"url":@"http://gg.gg/ccsh-blog"}
+                         type:SHRoutingType_modal
+                        block:nil];
     };
     
     YYLabel *lab = [[YYLabel alloc]init];

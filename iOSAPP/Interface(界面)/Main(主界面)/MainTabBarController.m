@@ -6,13 +6,7 @@
 //  Copyright © 2017年 CSH. All rights reserved.
 //
 
-#import "ClassViewController.h"
-#import "HomeViewController.h"
 #import "MainTabBarController.h"
-#import "MessageViewController.h"
-#import "MineViewController.h"
-#import "SHBaseNavViewController.h"
-#import "SHBaseViewController.h"
 #import "SHTabBar.h"
 
 @interface MainTabBarController () <UITabBarControllerDelegate>
@@ -33,18 +27,26 @@
     self.delegate = self;
 
     //添加子控制器
-    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    UIViewController *homeVC = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"HomeViewController"]
+                                                                type:SHRoutingType_none
+                                                               block:nil];
     [self addOneChlildVC:homeVC title:@"首页" img:nil];
 
-    ClassViewController *classVC = [[ClassViewController alloc] init];
+    UIViewController *classVC = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"ClassViewController"]
+                                                                type:SHRoutingType_none
+                                                               block:nil];
     [self addOneChlildVC:classVC title:@"分类" img:nil];
 
     [self addOneChlildVC:nil title:nil img:nil];
 
-    MessageViewController *messageVC = [[MessageViewController alloc] init];
+    UIViewController *messageVC = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"MessageViewController"]
+                                                                type:SHRoutingType_none
+                                                               block:nil];
     [self addOneChlildVC:messageVC title:@"消息" img:nil];
 
-    MineViewController *mineVC = [[MineViewController alloc] init];
+    UIViewController *mineVC = [SHRouting routingWithUrl:[SHRouting getUrlWithName:@"MineViewController"]
+                                                                type:SHRoutingType_none
+                                                               block:nil];
     [self addOneChlildVC:mineVC title:@"我的" img:nil];
 
     self.shTabBar.dataArr = @[ @"tabbar_min" ];
