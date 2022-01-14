@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 获取按钮
 + (SHButton *)getBtn;
 
+#pragma mark 更换图标
++ (void)changeIcon:(NSString *)icon;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
 		5C25FEA61F68D72600F080A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25FEA51F68D72600F080A4 /* main.m */; };
 		5C25FEB11F68D72600F080A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB01F68D72600F080A4 /* Assets.xcassets */; };
 		5C25FEB41F68D72600F080A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */; };
+		5CE0CDDB279175D000417BEC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE0CDDA279175D000417BEC /* icon.png */; };
 		8331AFA8266A25EE00180DDA /* AppDelegate+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF59266A25ED00180DDA /* AppDelegate+SHExtension.m */; };
 		8331AFA9266A25EE00180DDA /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF5A266A25ED00180DDA /* UIScrollView+SHExtension.m */; };
 		8331AFAA266A25EE00180DDA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8331AF5F266A25ED00180DDA /* AppDelegate.m */; };
@@ -48,6 +49,7 @@
 		5C25FEB01F68D72600F080A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C25FEB31F68D72600F080A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C25FEB51F68D72600F080A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CE0CDDA279175D000417BEC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8331AF59266A25ED00180DDA /* AppDelegate+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+SHExtension.m"; sourceTree = "<group>"; };
 		8331AF5A266A25ED00180DDA /* UIScrollView+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SHExtension.m"; sourceTree = "<group>"; };
 		8331AF5B266A25ED00180DDA /* AppDelegate+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+SHExtension.h"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				5C25FEB01F68D72600F080A4 /* Assets.xcassets */,
+				5CE0CDDA279175D000417BEC /* icon.png */,
 				5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */,
 				5C25FEB51F68D72600F080A4 /* Info.plist */,
 				5C25FEA51F68D72600F080A4 /* main.m */,
@@ -470,6 +473,7 @@
 			files = (
 				5C25FEB41F68D72600F080A4 /* LaunchScreen.storyboard in Resources */,
 				5C25FEB11F68D72600F080A4 /* Assets.xcassets in Resources */,
+				5CE0CDDB279175D000417BEC /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -165,5 +165,17 @@
     return btn;
 }
 
+#pragma mark 更换图标
++ (void)changeIcon:(NSString *)icon{
+    
+    if (![[UIApplication sharedApplication] supportsAlternateIcons]) {
+        return;
+    }
+    [[UIApplication sharedApplication] setAlternateIconName:icon completionHandler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"更换app图标发生错误了： %@",error);
+        }
+    }];
+}
 
 @end

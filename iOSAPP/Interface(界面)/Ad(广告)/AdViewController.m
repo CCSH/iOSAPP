@@ -39,7 +39,13 @@
     [btn borderRadius:15 width:0 color:[UIColor clearColor]];
     btn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     btn.titleLabel.font = kWidthFont(12);
-    [btn addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
+    @weakify(self);
+    [btn addClickBlock:^(UIButton * _Nonnull btn) {
+        @strongify(self);
+        //更换图标
+        [SHToolHelper changeIcon:@"icon"];
+        [self doneAction];
+    }];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(kStatusBarH + 10);
         make.right.mas_offset(-kSpaceW);
@@ -60,6 +66,7 @@
 
 #pragma mark - 事件
 - (void)doneAction{
+    
     if (self.timer) {
         [self.timer invalidate];
     }
