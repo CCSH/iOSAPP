@@ -68,19 +68,20 @@
 #pragma mark - 私有方法
 #pragma mark 公共参数
 + (NSMutableDictionary *)getParameter{
-    return [NSMutableDictionary dictionaryWithDictionary:@{}];
+    NSMutableDictionary *para = [NSMutableDictionary dictionary];
+    NSString *uid = [SHToolHelper getUserId];
+    if (uid.length) {
+        para[@"user_id"] = uid;
+    }
+    para[@"device_type"] = @"ios";
+    
+    return para;
 }
 
 #pragma mark 处理参数
 + (NSMutableDictionary *)handleParameter:(NSDictionary *)dic
 {
     NSMutableDictionary *para = [[NSMutableDictionary alloc] initWithDictionary:dic];
-    if (!para[@"user_id"]) {
-        NSString *uid = [SHToolHelper getUserId];
-        if (uid.length) {
-            para[@"user_id"] = uid;
-        }
-    }
     return para;
 }
 
@@ -200,7 +201,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@", kHostUrl, kNewsList];
 
     //数据处理
-    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *param = [self getParameter];
     if (pid)
     {
         param[@"pid"] = pid;
