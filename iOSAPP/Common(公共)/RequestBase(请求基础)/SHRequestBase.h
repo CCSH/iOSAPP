@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //公共参数
 //参数
-@property (nonatomic, copy) id param;
+@property (nonatomic, strong) id param;
 //请求头
 @property (nonatomic, copy) NSDictionary <NSString *, NSString *> *headers;
 //请求标记
@@ -60,6 +60,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 文件下载
 - (void)requestDownLoadFlieWithFlie:(NSString *)file;
+
+#pragma mark 原生GET
+- (void)requestNativeGet;
+
+#pragma mark 原生POST
+- (void)requestNativePOST;
 
 #pragma mark 获取请求队列
 - (NSDictionary *)getRequestQueue;
