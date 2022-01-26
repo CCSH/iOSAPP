@@ -20,18 +20,6 @@ static NSInteger timeOut = 10;
 //日志
 static bool isLog = YES;
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.retry = 1;
-    }
-    return self;
-}
-
-- (void)setUrl:(NSString *)url {
-    _url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-}
-
 #pragma mark - 实例化请求对象
 + (AFHTTPSessionManager *)manager:(SHRequestBase *)model {
     static AFHTTPSessionManager *mgr;
@@ -59,20 +47,19 @@ static bool isLog = YES;
         netQueueDic = [[NSMutableDictionary alloc] init];
     });
     //加上默认的
-    NSMutableDictionary *header = [NSMutableDictionary dictionaryWithDictionary:[SHRequestBase defaultHeader]];
+    NSMutableDictionary *header = [SHRequestBase defaultHeader];
     [header addEntriesFromDictionary:model.headers];
     model.headers = header;
     
     //序列化
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-
+    
     return mgr;
 }
 
 #pragma mark 网络监听
-+ (void)startMonitoring:(AFHTTPSessionManager *)mgr{
-    
++ (void)startMonitoring:(AFHTTPSessionManager *)mgr {
     //网络监听
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         switch (status) {
@@ -91,7 +78,7 @@ static bool isLog = YES;
 }
 
 #pragma mark 设置缓存大小
-+ (void)defaultCacheSize:(AFHTTPSessionManager *)mgr{
++ (void)defaultCacheSize:(AFHTTPSessionManager *)mgr {
     //设置缓存
     NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
                                                       diskCapacity:50 * 1024 * 1024
@@ -215,44 +202,13 @@ static bool isLog = YES;
 #pragma mark 文件上传(单个)
 - (void)requestUploadFileWithName:(NSString *_Nullable)name
                              data:(NSData *)data {
-    name = name ?: @"file.jpg";
-    // 获取对象
-    AFHTTPSessionManager *mgr = [SHRequestBase manager:self];
-    
-    // 开始请求
-    NSURLSessionDataTask *task = [mgr POST:self.url
-                                parameters:self.param
-                                   headers:self.headers
-                 constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
-        if (data) {
-            NSArray *temp = [name componentsSeparatedByString:@"."];
-            if (temp.count != 2) {
-                temp = @[ name, @"jpg" ];
-            }
-            [formData appendPartWithFileData:data name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
-        }
-    }
-                                  progress:self.progress
-                                   success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
-        [self handleSuccess:responseObject];
-    }
-                                   failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
-        if (self.retry > 0) {
-            //重新请求
-            self.retry--;
-            [self requestUploadFileWithName:name data:data];
-            
-        } else {
-            [self handleFailure:error];
-        }
-    }];
-    [self handleTag:task];
+    [self requestUploadFileWithName:name datas:@[ data ]];
 }
 
 #pragma mark 文件上传(多个 一次)
 - (void)requestUploadFileWithName:(NSString *_Nullable)name
                             datas:(NSArray<NSData *> *)datas {
-    name = name ?: @"file.jpg";
+    NSArray *temp = [SHRequestBase handleUpLoad:name];
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager:self];
     
@@ -262,10 +218,6 @@ static bool isLog = YES;
                                    headers:self.headers
                  constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
         [datas enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-            NSArray *temp = [name componentsSeparatedByString:@"."];
-            if (temp.count != 2) {
-                temp = @[ name, @"jpg" ];
-            }
             [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
         }];
     }
@@ -289,12 +241,12 @@ static bool isLog = YES;
 #pragma mark 文件上传(多个 多次)
 - (void)requestUploadFilesManyWithName:(NSString *_Nullable)name
                                  datas:(NSArray<NSData *> *)datas {
-    name = name ?: @"file.jpg";
+    NSArray *temp = [SHRequestBase handleUpLoad:name];
     
     // 获取对象
     AFHTTPSessionManager *mgr = [SHRequestBase manager:self];
     
-    __block NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+    __block NSMutableArray *arr = [[NSMutableArray alloc] init];
     
     dispatch_group_t group = dispatch_group_create();
     
@@ -306,17 +258,13 @@ static bool isLog = YES;
        parameters:self.param
           headers:self.headers
 constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
-            NSArray *temp = [name componentsSeparatedByString:@"."];
-            if (temp.count != 2) {
-                temp = @[ name, @"jpg" ];
-            }
             [formData appendPartWithFileData:obj name:temp[0] fileName:[NSString stringWithFormat:@"file.%@", temp[1]] mimeType:@"application/octet-stream"];
         }
          progress:self.progress
           success:^(NSURLSessionDataTask *_Nullable task, id _Nullable responseObject) {
             dispatch_group_leave(group);
             //存起来
-            [temp setValue:responseObject forKey:[NSString stringWithFormat:@"%lu", (unsigned long)idx]];
+            [arr addObject:responseObject];
         }
           failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nullable error) {
             *stop = YES;
@@ -364,17 +312,16 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
 
 #pragma mark 原生GET
 - (void)requestNativeGet {
-    
     [SHRequestBase manager:self];
     
     NSString *url = [NSString stringWithFormat:@"%@%@", self.url, [self setUrlPara:self.param]];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:url];
-
+    
     req.allHTTPHeaderFields = [SHRequestBase defaultHeader];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
-                                     completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+                                                                 completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 if (self.retry > 0) {
@@ -385,7 +332,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
                 } else {
                     [self handleFailure:error];
                 }
-            }else{
+            } else {
                 [self handleSuccess:data];
             }
         });
@@ -396,10 +343,8 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     [self handleTag:task];
 }
 
-
 #pragma mark 原生POST
-- (void)requestNativePOST{
-    
+- (void)requestNativePOST {
     [SHRequestBase manager:self];
     
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
@@ -409,18 +354,17 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     req.allHTTPHeaderFields = self.headers;
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
-                                     completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+                                                                 completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 if (self.retry > 0) {
                     //重新请求
                     self.retry--;
                     [self requestNativeGet];
-                    
                 } else {
                     [self handleFailure:error];
                 }
-            }else{
+            } else {
                 [self handleSuccess:data];
             }
         });
@@ -514,15 +458,21 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
 }
 
 #pragma mark 默认请求头
-+ (NSDictionary *)defaultHeader{
++ (NSMutableDictionary *)defaultHeader {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
     header[@"Content-Type"] = @"application/json";
-
-    NSDictionary *dic = [kSHUserDefGet(kUserInfo) mj_keyValues];
-    NSString *token = [dic safe_objectForKey:@"token"];
-    header[@"token"] = token ?: @"";
+    
     return header;
 }
 
+#pragma mark 处理文件上传
++ (NSArray *)handleUpLoad:(NSString *)name {
+    name = name ?: @"file.jpg";
+    NSArray *temp = [name componentsSeparatedByString:@"."];
+    if (temp.count != 2) {
+        temp = @[ name, @"jpg" ];
+    }
+    return temp;
+}
 
 @end

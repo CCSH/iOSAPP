@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark FORM
 - (void)requestFormWithFormParam:(id)formParam;
 
-#pragma mark 文件上传(单个)
+#pragma mark 文件上传(一个)
 - (void)requestUploadFileWithName:(NSString *_Nullable)name
                              data:(NSData *)data;
 
