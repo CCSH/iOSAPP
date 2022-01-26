@@ -1,5 +1,4 @@
 platform :ios, '10.0'
-source 'https://gitee.com/CCSHCoder/Specs.git'
 
 target 'iOSAPP' do
   # 使用frameworks

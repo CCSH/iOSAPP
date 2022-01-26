@@ -10,9 +10,9 @@
 
 @implementation SHBaseModel
 
-+ (NSDictionary *)mj_replacedKeyFromPropertyName
-{
-    return @{@"_id" : @"id"};
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{@"_id" : @"id",
+             @"description" : @"_description"};
 }
 
 @end
