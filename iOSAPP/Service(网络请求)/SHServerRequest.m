@@ -101,6 +101,50 @@
     return NO;
 }
 
+#pragma mark 处理请求
++ (void)handleDataWithModel:(SHRequestBaseModel *)model
+                      error:(NSError *)error
+                      block:(RequestBlock)block
+{
+    if (error)
+    {
+        if ([self requestTimeOut:error.code])
+        {
+            //网络请求超时
+            [SHToast showWithText:request_error_timeout];
+        }else{
+            //网络错误
+            [SHToast showWithText:request_error];
+        }
+    }
+    else if (model.code != success_code)
+    {
+        //服务器错误(统一状态码)
+        error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
+        if (model.msg.length) {
+            //服务器错误
+            [SHToast showWithText:model.msg];
+        }
+    }
+    
+    if (block)
+    {
+        block(model, error);
+    }
+}
+
+#pragma mark - 缓存
+#pragma mark 使用缓存
++ (void)userCache:(SHRequestBase *)request result:(RequestBlock _Nullable)result {
+    SHRequestBaseModel *model = [self getCacheData:request];
+    if (model) {
+        [self handleDataWithModel:model error:nil block:result];
+    } else {
+        NSError *error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
+        [self handleDataWithModel:nil error:error block:result];
+    }
+}
+
 #pragma mark 请求写入沙盒
 + (void)saveSandboxData:(SHRequestBase *)request model:(SHRequestBaseModel *)model{
     
@@ -159,38 +203,6 @@
     return [NSString stringWithFormat:@"request_%@",name];
 }
 
-#pragma mark 处理请求
-+ (void)handleDataWithModel:(SHRequestBaseModel *)model
-                      error:(NSError *)error
-                      block:(RequestBlock)block
-{
-    if (error)
-    {
-        if ([self requestTimeOut:error.code])
-        {
-            //网络请求超时
-            [SHToast showWithText:request_error_timeout];
-        }else{
-            //网络错误
-            [SHToast showWithText:request_error];
-        }
-    }
-    else if (model.code != success_code)
-    {
-        //服务器错误(统一状态码)
-        error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
-        if (model.msg.length) {
-            //服务器错误
-            [SHToast showWithText:model.msg];
-        }
-    }
-    
-    if (block)
-    {
-        block(model, error);
-    }
-}
-
 
 #pragma mark - 网络请求
 #pragma mark 新闻列表
@@ -213,6 +225,7 @@
     SHRequestBase *request = [SHRequestBase new];
     request.url = url;
     request.param = param;
+    
     @weakify(self);
     @weakify(request);
     request.success = ^(id  _Nonnull responseObj) {
@@ -230,13 +243,9 @@
     request.failure = ^(NSError * _Nonnull error) {
         @strongify(self);
         @strongify(request);
-        //用个缓存
-        SHRequestBaseModel *model;
         if (!pid) {
-            model = [self getCacheData:request];;
-        }
-        if (model) {
-            [self handleDataWithModel:model error:nil block:result];
+            //用个缓存
+            [self userCache:request result:result];
         }else{
             [self handleDataWithModel:nil error:error block:result];
         }
