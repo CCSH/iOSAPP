@@ -1,10 +1,11 @@
-platform :ios, '10.0'
+platform:ios, '10.0'
 
 target 'iOSAPP' do
-  # 使用frameworks
+  #使用frameworks
   use_frameworks!
-  # 去掉由pod引入的第三方库的警告，需要更新命令才生效
+  #去掉由pod引入的第三方库的警告，需要更新命令才生效
   inhibit_all_warnings!
+
   #Toast
   pod 'SHToast'
   #复杂滚动布局
@@ -58,15 +59,13 @@ target 'iOSAPP' do
   #通用链接
   pod 'mob_linksdk_pro'
   #通信
-#  pod 'XMPPFramework'
-#  pod 'MQTTClient'
-#  pod 'CocoaAsyncSocket'
-#  pod 'SocketRocket'
+  #pod 'XMPPFramework'
+  #pod 'MQTTClient'
+  #pod 'CocoaAsyncSocket'
+  #pod 'SocketRocket'
   #聊天
-#  pod 'EaseIMKit'
-#  pod 'EaseCallKit'
-#  pod 'HyphenateChat'
-  
+  #pod 'EaseIMKit'
+  #pod 'EaseCallKit'
+  #pod 'HyphenateChat'
   
 end
-
