@@ -317,7 +317,6 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     NSString *url = [NSString stringWithFormat:@"%@%@", self.url, [self setUrlPara:self.param]];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:url];
-    
     req.allHTTPHeaderFields = [SHRequestBase defaultHeader];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
@@ -410,15 +409,18 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     //移除队列
     [self cancelOperationsWithTag:self.tag];
     
-    responseObject = [responseObject mj_JSONObject];
+    id obj = [responseObject mj_JSONObject];
+    if (!obj) {
+        obj = [responseObject mj_JSONString];
+    }
     
     //打印
     if (isLog) {
-        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, [self.param mj_JSONString], responseObject);
+        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, [self.param mj_JSONString], obj);
     }
     //回调
     if (self.success) {
-        self.success(responseObject);
+        self.success(obj);
     }
 }
 

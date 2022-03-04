@@ -42,6 +42,10 @@
 //有导航栏内容安全H
 #define kNavContentSafeAreaH (kNavContentAreaH - kSafeBottomH)
 
+//适配X、Y轴
+#define kAdapter_X(V) (V*kSHWidth/375.00)
+#define kAdapter_Y(V) (V*kSHHeight/812.00)
+
 //空插画高度
 #define kEmptyH (260)
 //默认间距
