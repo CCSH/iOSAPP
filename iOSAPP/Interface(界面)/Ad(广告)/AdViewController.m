@@ -42,8 +42,6 @@
     @weakify(self);
     [btn addClickBlock:^(UIButton * _Nonnull btn) {
         @strongify(self);
-        //更换图标
-        [SHToolHelper changeIcon:@"icon"];
         [self doneAction];
     }];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
