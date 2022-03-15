@@ -317,24 +317,26 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     NSString *url = [NSString stringWithFormat:@"%@%@", self.url, [self setUrlPara:self.param]];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:url];
-    req.allHTTPHeaderFields = [SHRequestBase defaultHeader];
+    req.allHTTPHeaderFields = self.headers;
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
                                                                  completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                if (self.retry > 0) {
-                    //重新请求
-                    self.retry--;
-                    [self requestNativeGet];
-                    
-                } else {
-                    [self handleFailure:error];
-                }
+        if (error) {
+            if (self.retry > 0) {
+                //重新请求
+                self.retry--;
+                [self requestNativeGet];
+                
             } else {
-                [self handleSuccess:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self handleFailure:error];
+                });
             }
-        });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self handleSuccess:data];
+            });
+        }
     }];
     
     //启动
@@ -354,19 +356,21 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
                                                                  completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                if (self.retry > 0) {
-                    //重新请求
-                    self.retry--;
-                    [self requestNativeGet];
-                } else {
-                    [self handleFailure:error];
-                }
+        if (error) {
+            if (self.retry > 0) {
+                //重新请求
+                self.retry--;
+                [self requestNativeGet];
             } else {
-                [self handleSuccess:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self handleFailure:error];
+                });
             }
-        });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self handleSuccess:data];
+            });
+        }
     }];
     
     //启动
@@ -416,7 +420,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     
     //打印
     if (isLog) {
-        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, [self.param mj_JSONString], obj);
+        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n回参：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", obj);
     }
     //回调
     if (self.success) {
@@ -430,7 +434,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     [self cancelOperationsWithTag:self.tag];
     //打印
     if (isLog) {
-        SHLog(@"地址：%@\n入参：%@\n回参：%@", self.url, [self.param mj_JSONString], error.description);
+        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n回参：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", error.description);
     }
     //回调
     if (self.failure) {
@@ -462,13 +466,13 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
 #pragma mark 默认请求头
 + (NSMutableDictionary *)defaultHeader {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    header[@"Content-Type"] = @"application/json";
+    header[@"content-type"] = @"application/json";
     
     return header;
 }
 
 #pragma mark 处理文件上传
-+ (NSArray *)handleUpLoad:(NSString *)name {
++ (NSArray *)handleUpLoad:(NSString *_Nullable)name {
     name = name ?: @"file.jpg";
     NSArray *temp = [name componentsSeparatedByString:@"."];
     if (temp.count != 2) {
