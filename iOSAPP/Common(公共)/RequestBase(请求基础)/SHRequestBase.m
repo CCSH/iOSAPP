@@ -467,7 +467,6 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
 + (NSMutableDictionary *)defaultHeader {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
     header[@"content-type"] = @"application/json";
-    
     return header;
 }
 
