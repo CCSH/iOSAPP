@@ -150,15 +150,16 @@
 				83D1E4682570D041003D2674 /* iOSAPP.entitlements */,
 				8331AF5E266A25ED00180DDA /* AppDelegate.h */,
 				8331AF5F266A25ED00180DDA /* AppDelegate.m */,
-				8331AF7A266A25ED00180DDA /* BaseClass(基类) */,
-				8331AF58266A25ED00180DDA /* Category(类别) */,
-				8331AF60266A25ED00180DDA /* Common(公共) */,
 				8331AF74266A25ED00180DDA /* Header(头文件) */,
-				8331AF8A266A25EE00180DDA /* Interface(界面) */,
-				8331AF85266A25ED00180DDA /* Model(模型) */,
 				8331AF6B266A25ED00180DDA /* Service(网络请求) */,
 				8331AF71266A25ED00180DDA /* SHRouting(路由) */,
+				8331AF58266A25ED00180DDA /* Category(类别) */,
+				8331AF7A266A25ED00180DDA /* BaseClass(基类) */,
+				8331AF85266A25ED00180DDA /* Model(模型) */,
+				8331AF8A266A25EE00180DDA /* Interface(界面) */,
+				8331AF60266A25ED00180DDA /* Common(公共) */,
 				8331AF6E266A25ED00180DDA /* Storage(存储) */,
+				5C4B0F4E27E973C1004C34BD /* Resources(资源) */,
 				5C25FEA41F68D72600F080A4 /* Supporting Files */,
 			);
 			path = iOSAPP;
@@ -168,12 +169,19 @@
 			isa = PBXGroup;
 			children = (
 				5C25FEB01F68D72600F080A4 /* Assets.xcassets */,
-				5CE0CDDA279175D000417BEC /* icon.png */,
 				5C25FEB21F68D72600F080A4 /* LaunchScreen.storyboard */,
 				5C25FEB51F68D72600F080A4 /* Info.plist */,
 				5C25FEA51F68D72600F080A4 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5C4B0F4E27E973C1004C34BD /* Resources(资源) */ = {
+			isa = PBXGroup;
+			children = (
+				5CE0CDDA279175D000417BEC /* icon.png */,
+			);
+			path = "Resources(资源)";
 			sourceTree = "<group>";
 		};
 		8331AF58266A25ED00180DDA /* Category(类别) */ = {
