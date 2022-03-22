@@ -121,9 +121,6 @@
 }
 
 - (void)setInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    if (_interfaceOrientation == interfaceOrientation) {
-        return;
-    }
     switch (interfaceOrientation) {
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
@@ -131,6 +128,10 @@
         default:
             interfaceOrientation = UIInterfaceOrientationPortrait;
             break;
+    }
+    
+    if (_interfaceOrientation == interfaceOrientation) {
+        return;
     }
     _interfaceOrientation = interfaceOrientation;
     [self handleRotation];

@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-//是否旋转
+//旋转方向
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 //通知处理
 @property (nonatomic, copy) NSString *notInfo;
