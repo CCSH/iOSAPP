@@ -148,13 +148,14 @@
 			isa = PBXGroup;
 			children = (
 				83D1E4682570D041003D2674 /* iOSAPP.entitlements */,
+				8331AF5E266A25ED00180DDA /* AppDelegate.h */,
+				8331AF5F266A25ED00180DDA /* AppDelegate.m */,
 				8331AF7A266A25ED00180DDA /* BaseClass(基类) */,
 				8331AF58266A25ED00180DDA /* Category(类别) */,
 				8331AF60266A25ED00180DDA /* Common(公共) */,
 				8331AF74266A25ED00180DDA /* Header(头文件) */,
 				8331AF8A266A25EE00180DDA /* Interface(界面) */,
 				8331AF85266A25ED00180DDA /* Model(模型) */,
-				8331AF5D266A25ED00180DDA /* Other(其他) */,
 				8331AF6B266A25ED00180DDA /* Service(网络请求) */,
 				8331AF71266A25ED00180DDA /* SHRouting(路由) */,
 				8331AF6E266A25ED00180DDA /* Storage(存储) */,
@@ -184,15 +185,6 @@
 				8331AF5A266A25ED00180DDA /* UIScrollView+SHExtension.m */,
 			);
 			path = "Category(类别)";
-			sourceTree = "<group>";
-		};
-		8331AF5D266A25ED00180DDA /* Other(其他) */ = {
-			isa = PBXGroup;
-			children = (
-				8331AF5E266A25ED00180DDA /* AppDelegate.h */,
-				8331AF5F266A25ED00180DDA /* AppDelegate.m */,
-			);
-			path = "Other(其他)";
 			sourceTree = "<group>";
 		};
 		8331AF60266A25ED00180DDA /* Common(公共) */ = {
