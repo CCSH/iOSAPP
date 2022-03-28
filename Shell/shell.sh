@@ -49,8 +49,6 @@ configRun () {
     
     #app 名字
     app_name=`find . -name *.ipa | awk -F "[/.]" '{print $(NF-1)}'`
-    echo "\n\033[32m****************\n名字$app_name\n****************\033[0m\n"
-    exit 1
 }
 configRun
 
