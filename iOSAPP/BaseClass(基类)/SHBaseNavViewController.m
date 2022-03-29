@@ -56,7 +56,11 @@
 + (void)navTitle:(NSDictionary<NSAttributedStringKey,id> *)obj{
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.titleTextAttributes = obj;
+<<<<<<< HEAD
     if (IOS(13)) {
+=======
+    if (IOS(15)) {
+>>>>>>> 812afccf5559a8a8edd1dfb1c4c6b43b48731fc1
         UINavigationBarAppearance *appearance = [self getBar];
 //        [appearance configureWithOpaqueBackground];
         appearance.titleTextAttributes = obj;
