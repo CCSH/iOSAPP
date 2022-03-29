@@ -58,7 +58,6 @@
     navBar.titleTextAttributes = obj;
     if (IOS(13)) {
         UINavigationBarAppearance *appearance = [self getBar];
-//        [appearance configureWithOpaqueBackground];
         appearance.titleTextAttributes = obj;
         
         navBar.scrollEdgeAppearance = appearance;
@@ -77,14 +76,14 @@
     navBar.shadowColor = [UIColor clearColor];
 
     if (IOS(13)) {
-        UINavigationBarAppearance *bar = [self getBar];
-        bar.backgroundColor = obj;
-        bar.shadowColor = navBar.shadowColor;
+        UINavigationBarAppearance *appearance = [self getBar];
+        appearance.backgroundColor = obj;
+        appearance.shadowColor = navBar.shadowColor;
         //关闭模糊效果
-        bar.backgroundEffect = nil;
+        appearance.backgroundEffect = nil;
 
-        navBar.scrollEdgeAppearance = bar;
-        navBar.standardAppearance = bar;
+        navBar.scrollEdgeAppearance = appearance;
+        navBar.standardAppearance = appearance;
     }
 }
 
