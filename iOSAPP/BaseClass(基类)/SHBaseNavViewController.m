@@ -19,18 +19,21 @@
     if (self == [self class]) {
         UINavigationBar *navBar = [UINavigationBar appearance];
         
-        //主题颜色(图标，字体颜色)
+        //主题颜色(图标、文字颜色)
         navBar.tintColor = [UIColor whiteColor];
         //半透明(关闭后 导航栏布局起始点为导航栏下方)
         navBar.translucent = NO;
         
-        //标题
-        [self navTitle:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        //navItemText
-        [self navItemText:@{NSFontAttributeName:kFont(14),
-                            NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        //背景
+        //背景颜色
         [self navBGColor:kColorMain];
+        //背景图片
+//        [self navBGImage:[UIImage imageNamed:@"tabbar_min"]];
+        //标题
+        [self navTitle:@{NSFontAttributeName:kBoldFont(18),
+                         NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        //iteam文字
+        [self navItemText:@{NSFontAttributeName:kFont(14),
+                            NSForegroundColorAttributeName:[UIColor redColor]}];
         //返回图片
         [self navBackImage:[UIImage imageNamed:@"left"]];
     }
@@ -53,12 +56,13 @@
 + (void)navTitle:(NSDictionary<NSAttributedStringKey,id> *)obj{
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.titleTextAttributes = obj;
-    if (IOS(15)) {
-        UINavigationBarAppearance *bar = [self getBar];
-        bar.titleTextAttributes = obj;
+    if (IOS(13)) {
+        UINavigationBarAppearance *appearance = [self getBar];
+//        [appearance configureWithOpaqueBackground];
+        appearance.titleTextAttributes = obj;
         
-        navBar.scrollEdgeAppearance = bar;
-        navBar.standardAppearance = bar;
+        navBar.scrollEdgeAppearance = appearance;
+        navBar.standardAppearance = appearance;
     }
 }
 
@@ -67,14 +71,12 @@
     UINavigationBar *navBar = [UINavigationBar appearance];
     
     navBar.barTintColor = obj;
-    //背景图片(比barTintColor大)
-//    [navBar setBackgroundImage:[UIImage getImageWithColor:obj] forBarMetrics:UIBarMetricsDefault];
     //背景颜色(44高度的颜色 最下方, 界面模态跳转不是全屏时用得到)
-//    navBar.backgroundColor = color;
+//    navBar.backgroundColor = obj;
     //分割线
     navBar.shadowColor = [UIColor clearColor];
 
-    if (IOS(15)) {
+    if (IOS(13)) {
         UINavigationBarAppearance *bar = [self getBar];
         bar.backgroundColor = obj;
         bar.shadowColor = navBar.shadowColor;
@@ -86,44 +88,61 @@
     }
 }
 
+#pragma mark 背景图片
++ (void)navBGImage:(UIImage *)obj{
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    
+    [navBar setBackgroundImage:obj forBarMetrics:UIBarMetricsDefault];
+    
+    //分割线
+    navBar.shadowColor = [UIColor clearColor];
+
+    if (IOS(13)) {
+        UINavigationBarAppearance *appearance = [self getBar];
+        appearance.backgroundImage = obj;
+        appearance.shadowColor = navBar.shadowColor;
+
+        navBar.scrollEdgeAppearance = appearance;
+        navBar.standardAppearance = appearance;
+    }
+}
+
 #pragma mark 返回图片
 + (void)navBackImage:(UIImage *)obj{
     
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.backIndicatorImage = obj;
-    navBar.backIndicatorTransitionMaskImage = obj;
     
-    if (IOS(15)) {
-        UINavigationBarAppearance *bar = [self getBar];
-        [bar setBackIndicatorImage:obj transitionMaskImage:obj];
+    if (IOS(13)) {
+        UINavigationBarAppearance *appearance = [self getBar];
+        [appearance setBackIndicatorImage:obj transitionMaskImage:obj];
         
-        navBar.scrollEdgeAppearance = bar;
-        navBar.standardAppearance = bar;
+        navBar.scrollEdgeAppearance = appearance;
+        navBar.standardAppearance = appearance;
     }
 }
 
-#pragma mark itemText
+#pragma mark iteam文字
 + (void)navItemText:(NSDictionary<NSAttributedStringKey,id> *)obj{
     
     UIBarButtonItem *barItem = [UIBarButtonItem appearance];
-//    barItem = 【[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[SHBaseViewController class]]];
     
     [barItem setTitleTextAttributes:obj forState:UIControlStateNormal];
     [barItem setTitleTextAttributes:obj forState:UIControlStateSelected];
-    if (IOS(15)) {
+    if (IOS(13)) {
         UINavigationBar *navBar = [UINavigationBar appearance];
-        UINavigationBarAppearance *bar = [self getBar];
-        UIBarButtonItemAppearance *button = bar.buttonAppearance;
+        UINavigationBarAppearance *appearance = [self getBar];
+        UIBarButtonItemAppearance *button = appearance.buttonAppearance;
         UIBarButtonItemStateAppearance *state = button.normal;
         UIBarButtonItemStateAppearance *state2 = button.highlighted;
         
         state.titleTextAttributes = obj;
         state2.titleTextAttributes = obj;
 
-        bar.buttonAppearance = button;
+        appearance.buttonAppearance = button;
 
-        navBar.scrollEdgeAppearance = bar;
-        navBar.standardAppearance = bar;
+        navBar.scrollEdgeAppearance = appearance;
+        navBar.standardAppearance = appearance;
     }
 }
 
