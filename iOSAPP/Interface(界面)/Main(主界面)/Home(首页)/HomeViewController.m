@@ -34,7 +34,7 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 //    NSDictionary *param = @{@"url":@"https://github.com/CCSH"};
-    NSDictionary *param = @{@"url":@"http://gg.gg/ccsh-blog"};
+    NSDictionary *param = @{@"url":@"https://www.toutiao.com/article/7081282187064361483/?log_from=e66988f347564_1648793191357"};
     [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_web param:param]
                                                 type:SHRoutingType_nav
                                                block:nil];

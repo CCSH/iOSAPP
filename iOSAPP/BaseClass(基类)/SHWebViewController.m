@@ -180,12 +180,11 @@ WKScriptMessageHandler >
         self.navigationItem.leftBarButtonItems = @[[self backItem],[self closeItem]];
     }
     //app 调用 js
-    NSString *js = [NSString stringWithFormat:@"appTojs('%@','%@')", @"reload", @"1"];
-    [_webView evaluateJavaScript:js
-               completionHandler:^(id _Nullable data, NSError *_Nullable error) {
+    NSString *js = [NSString stringWithFormat:@"app2js('%@','%@')", @"reload", @"1"];
+    [webView evaluateJavaScript:js
+              completionHandler:^(id _Nullable data, NSError *_Nullable error) {
         NSLog(@"刷新");
     }];
-    
 }
 
 // 根据WebView对于即将跳转的HTTP请求头信息和相关信息来决定是否跳转
@@ -294,37 +293,16 @@ WKScriptMessageHandler >
 {
     if (!_webView)
     {
-        //创建网页配置对象
-        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-        // 是使用h5的视频播放器在线播放, 还是使用原生播放器全屏播放
-        config.allowsInlineMediaPlayback = YES;
-        //设置视频是否需要用户手动播放  设置为NO则会允许自动播放
-        config.mediaTypesRequiringUserActionForPlayback = YES;
-        //设置是否允许画中画技术 在特定设备上有效
-        config.allowsPictureInPictureMediaPlayback = YES;
-        
-        // 创建设置对象
-        WKPreferences *preference = [[WKPreferences alloc] init];
-        //最小字体大小 当将javaScriptEnabled属性设置为NO时，可以看到明显的效果
-        preference.minimumFontSize = 0;
-        //设置是否支持javaScript 默认是支持的
-        preference.javaScriptEnabled = YES;
-        // 在iOS上默认为NO，表示是否允许不经过用户交互由javaScript自动打开窗口
-        preference.javaScriptCanOpenWindowsAutomatically = YES;
-        config.preferences = preference;
-        
         //自定义的WKScriptMessageHandler 是为了解决内存不释放的问题
         WeakWebViewScriptMessageDelegate *weakScriptMessageDelegate = [[WeakWebViewScriptMessageDelegate alloc] initWithDelegate:self];
+        
         //这个类主要用来做native与JavaScript的交互管理
         WKUserContentController *wkUController = [[WKUserContentController alloc] init];
         //注册一个name为jsToOcNoPrams的js方法
-        [wkUController addScriptMessageHandler:weakScriptMessageDelegate name:@"jsToOcNoPrams"];
-        [wkUController addScriptMessageHandler:weakScriptMessageDelegate name:@"jsToOcWithPrams"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate name:@"js2app"];
         
-        WKUserContentController *userController = [WKUserContentController new];
-        
+        //js
         NSMutableString *javascript = [NSMutableString string];
-        
         //图片自适应
         NSString *js = @"var script = document.createElement('script');"
         "script.type = 'text/javascript';"
@@ -340,38 +318,49 @@ WKScriptMessageHandler >
         "}"
         "}\";"
         "document.getElementsByTagName('head')[0].appendChild(script);";
-        js = [NSString stringWithFormat:js, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width - 20];
-        js = [NSString stringWithFormat:@"%@%@", js, @""];
-        [javascript appendString:js];
+//        [javascript appendFormat:js,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width];
         
         //禁止缩放
-        [javascript appendString:@"var script = document.createElement('meta');"
-         "script.name = 'viewport';"
-         "script.content=\"width=device-width, user-scalable=no\";"
-         "document.getElementsByTagName('head')[0].appendChild(script);"];
+//        [javascript appendString:@"var script = document.createElement('meta'); script.name = 'viewport'; script.content=\"width=device-width, user-scalable=no\"; document.getElementsByTagName('head')[0].appendChild(script);"];
         
         //禁止长按
-        [javascript appendString:@"document.documentElement.style.webkitTouchCallout='none';"];
+//        [javascript appendString:@"document.documentElement.style.webkitTouchCallout='none';"];
         
         //禁止选择
         [javascript appendString:@"document.documentElement.style.webkitUserSelect='none';"];
+ 
+        //字体比例
+//        [javascript appendString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"];
         
-        //以下代码适配文本大小
-        [javascript appendString:@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"];
+        //适配文本大小
+        [javascript appendString:@"<meta name=\"viewport\" content=\"width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0\">"];
         
+        //字体颜色
+//        [javascript appendString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= 'red"];
+
         //用于进行JavaScript注入
         WKUserScript *script = [[WKUserScript alloc] initWithSource:javascript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        [wkUController addUserScript:script];
         
+        // 创建设置对象
+        WKPreferences *preference = [[WKPreferences alloc] init];
+        //最小字体大小 当将javaScriptEnabled属性设置为NO时，可以看到明显的效果
+        preference.minimumFontSize = 0;
+        //设置是否支持javaScript 默认是支持的
+        preference.javaScriptEnabled = YES;
+        // 在iOS上默认为NO，表示是否允许不经过用户交互由javaScript自动打开窗口
+        preference.javaScriptCanOpenWindowsAutomatically = YES;
         
-        WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
-        configuration.preferences = [WKPreferences new];
-        configuration.allowsInlineMediaPlayback = YES;
-        configuration.preferences.minimumFontSize = 10;
-        configuration.preferences.javaScriptEnabled = YES;
-        configuration.preferences.javaScriptCanOpenWindowsAutomatically = YES;
-        
-        [userController addUserScript:script];
-        
+        //创建网页配置对象
+        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+        // 是使用h5的视频播放器在线播放, 还是使用原生播放器全屏播放
+        config.allowsInlineMediaPlayback = YES;
+        //设置视频是否需要用户手动播放  设置为NO则会允许自动播放
+        config.mediaTypesRequiringUserActionForPlayback = YES;
+        //设置是否允许画中画技术 在特定设备上有效
+        config.allowsPictureInPictureMediaPlayback = YES;
+
+        config.preferences = preference;
         config.userContentController = wkUController;
         
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
