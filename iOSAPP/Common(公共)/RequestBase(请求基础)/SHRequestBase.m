@@ -25,7 +25,29 @@ static bool isLog = YES;
     static AFHTTPSessionManager *mgr;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        mgr = [AFHTTPSessionManager manager];
+        
+        //配置
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+
+        //配置代理
+        NSString *proxyHost = @"127.0.0.1";
+        NSNumber *proxyPort = @(8888);
+        NSDictionary *proxyDict = @{
+            //认证
+            (NSString *)kCFProxyUsernameKey:@"ccsh",
+            (NSString *)kCFProxyPasswordKey:@"123456",
+            //http
+            @"HTTPEnable": @YES,
+            @"HTTPProxy": proxyHost,
+            @"HTTPPort": proxyPort,
+            //https
+            @"HTTPSEnable": @YES,
+            @"HTTPSProxy": proxyHost,
+            @"HTTPSPort": proxyPort
+        };
+        config.connectionProxyDictionary = proxyDict;
+        
+        mgr = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
         mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
                                                          @"application/json",
                                                          @"multipart/form-data",
