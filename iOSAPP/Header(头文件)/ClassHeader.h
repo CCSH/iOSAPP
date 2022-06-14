@@ -10,21 +10,9 @@
 #define ClassHeader_h
 
 //类
-#import "AppDelegate+SHExtension.h"
-#import "AppDelegate.h"
-#import "IUserModel.h"
-#import "SHBaseModel.h"
-#import "SHBaseNavViewController.h"
-#import "SHBaseTableViewCell.h"
-#import "SHBaseViewController.h"
-#import "SHRouting.h"
-#import "SHSQLite.h"
-#import "SHServerRequest.h"
-#import "SHServerRequest.h"
-#import "SHToolHelper.h"
-#import "SHWebViewController.h"
-#import "UIScrollView+SHExtension.h"
-#import <Bugly/Bugly.h>
+
+#import <UIScrollView+SHExtension.h>
+//#import <Bugly/Bugly.h>
 #import <FMDB.h>
 #import <MBProgressHUD.h>
 #import <MJExtension.h>
@@ -43,6 +31,21 @@
 #import <Foundation/Foundation.h>
 #import <YYText.h>
 #import <NSString+SHExtension.h>
+
+#import "AppDelegate+SHExtension.h"
+#import "AppDelegate.h"
+#import "IUserModel.h"
+#import "SHBaseModel.h"
+#import "SHBaseNavViewController.h"
+#import "SHBaseTableViewCell.h"
+#import "SHBaseViewController.h"
+#import "SHRouting.h"
+#import "SHSQLite.h"
+#import "SHServerRequest.h"
+#import "SHServerRequest.h"
+#import "SHToolHelper.h"
+#import "SHWebViewController.h"
+
 
 //#import <EaseIMKit.h>
 //#import <HyphenateChat/HyphenateChat.h>

@@ -9,25 +9,25 @@ target 'iOSAPP' do
   #Toast
   pod 'SHToast'
   #复杂滚动布局
-  pod 'SHScrollLayout'
+  #pod 'SHScrollLayout'
   #拓展
   pod 'SHExtension'
   #滚动视图
   pod 'SHScrollView'
   #Alert弹窗
-  pod 'SHAlertView'
+  #pod 'SHAlertView'
   #Sheet弹窗
   #pod 'SHActionSheetView'
   #音视频播放
   #pod 'SHAVPlayer'
   #弹窗
-  pod 'SHPopView'
+  #pod 'SHPopView'
   #空状态
-  pod 'SHEmptyView'
+  #pod 'SHEmptyView'
   #标签
-  pod 'SHLabelPageView'
+  #pod 'SHLabelPageView'
   #水平对齐布局
-  pod 'SHCollectionViewFlowLayout'
+  #pod 'SHCollectionViewFlowLayout'
   #数据请求
   pod 'AFNetworking'
   #刷新
@@ -35,25 +35,25 @@ target 'iOSAPP' do
   #数据处理
   pod 'MJExtension'
   #图片加载
-  pod 'SDWebImage'
+  #pod 'SDWebImage'
   #数据库
   pod 'FMDB'
   #加载框
   pod 'MBProgressHUD'
   #bug收集
-  pod 'Bugly'
+#  pod 'Bugly'
   #统计
-  pod 'BaiduMobStatCodeless'
+  #pod 'BaiduMobStatCodeless'
   #布局
   pod 'Masonry'
   #瀑布流
-  pod 'CHTCollectionViewWaterfallLayout'
+  #pod 'CHTCollectionViewWaterfallLayout'
   #文字处理
   pod 'YYText'
   #图片选择
   pod 'TZImagePickerController'
   #选择器
-  pod 'BRPickerView'
+  #pod 'BRPickerView'
   #键盘
   pod 'IQKeyboardManager'
   #通用链接
