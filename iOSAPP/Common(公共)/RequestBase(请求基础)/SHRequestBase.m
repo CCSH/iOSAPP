@@ -16,50 +16,20 @@
 //请求队列
 static NSMutableDictionary *netQueueDic;
 //默认超时
-static NSInteger timeOut = 10;
+static NSInteger kTimeOut = 10;
 //日志
 static bool isLog = YES;
 
 #pragma mark - 实例化请求对象
 + (AFHTTPSessionManager *)manager:(SHRequestBase *)model {
     static AFHTTPSessionManager *mgr;
+    static AFHTTPSessionManager *mgrProxy;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
-        //配置
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-
-        //配置代理
-        NSString *proxyHost = @"127.0.0.1";
-        NSNumber *proxyPort = @(8888);
-        NSDictionary *proxyDict = @{
-            //认证
-            (NSString *)kCFProxyUsernameKey:@"ccsh",
-            (NSString *)kCFProxyPasswordKey:@"123456",
-            //http
-            @"HTTPEnable": @YES,
-            @"HTTPProxy": proxyHost,
-            @"HTTPPort": proxyPort,
-            //https
-            @"HTTPSEnable": @YES,
-            @"HTTPSProxy": proxyHost,
-            @"HTTPSPort": proxyPort
-        };
-        config.connectionProxyDictionary = proxyDict;
+        mgrProxy = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[self configuration]];
         
-        mgr = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
-        mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
-                                                         @"application/json",
-                                                         @"multipart/form-data",
-                                                         @"text/javascript",
-                                                         @"text/json",
-                                                         @"text/html",
-                                                         @"text/plain",
-                                                         nil];
-        mgr.securityPolicy.allowInvalidCertificates = YES;
-        mgr.securityPolicy.validatesDomainName = NO;
-        mgr.requestSerializer.timeoutInterval = timeOut;
-        
+        mgr = [AFHTTPSessionManager manager];
         //网络监听
         [self startMonitoring:mgr];
         //设置缓存
@@ -68,16 +38,64 @@ static bool isLog = YES;
         //请求队列
         netQueueDic = [[NSMutableDictionary alloc] init];
     });
-    //加上默认的
+    //加上默认的请求头
     NSMutableDictionary *header = [SHRequestBase defaultHeader];
     [header addEntriesFromDictionary:model.headers];
     model.headers = header;
     
+    //代理请求
+    if ([model.url containsString:@"proxy"]) {
+        return mgrProxy;
+    }
+    return mgr;
+}
+
+#pragma mark 处理对象
++ (AFHTTPSessionManager *)handleManager:(AFHTTPSessionManager *)mgr{
+    
+    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
+                                                     @"application/json",
+                                                     @"multipart/form-data",
+                                                     @"text/javascript",
+                                                     @"text/json",
+                                                     @"text/html",
+                                                     @"text/plain",
+                                                     nil];
+    mgr.securityPolicy.allowInvalidCertificates = YES;
+    mgr.securityPolicy.validatesDomainName = NO;
+    mgr.requestSerializer.timeoutInterval = kTimeOut;
+    
     //序列化
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+
     return mgr;
+}
+
+#pragma mark 代理
++ (NSURLSessionConfiguration *)configuration{
+    //配置
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+
+    //配置代理
+    NSString *proxyHost = @"127.0.0.1";
+    NSNumber *proxyPort = @(8888);
+    NSDictionary *proxyDict = @{
+        //认证
+        (NSString *)kCFProxyUsernameKey:@"ccsh",
+        (NSString *)kCFProxyPasswordKey:@"123456",
+        //http
+        @"HTTPEnable": @YES,
+        @"HTTPProxy": proxyHost,
+        @"HTTPPort": proxyPort,
+        //https
+        @"HTTPSEnable": @YES,
+        @"HTTPSProxy": proxyHost,
+        @"HTTPSPort": proxyPort
+    };
+    config.connectionProxyDictionary = proxyDict;
+    
+    return config;
 }
 
 #pragma mark 网络监听
