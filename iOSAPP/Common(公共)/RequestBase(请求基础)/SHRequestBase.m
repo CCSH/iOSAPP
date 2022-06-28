@@ -30,6 +30,10 @@ static bool isLog = YES;
         mgrProxy = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[self configuration]];
         
         mgr = [AFHTTPSessionManager manager];
+        
+        //配置
+        [self handleManager:mgr];
+        [self handleManager:mgrProxy];
         //网络监听
         [self startMonitoring:mgr];
         //设置缓存
@@ -460,7 +464,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     
     //打印
     if (isLog) {
-        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n回参：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", obj);
+        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n响应：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", obj);
     }
     //回调
     if (self.success) {
@@ -474,7 +478,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> _Nullable formData) {
     [self cancelOperationsWithTag:self.tag];
     //打印
     if (isLog) {
-        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n回参：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", error.description);
+        SHLog(@"地址：%@\n请求头：%@\n入参：%@\n响应：%@", self.url, [self.headers mj_JSONString] ?: @"", [self.param mj_JSONString] ?: @"", error.description);
     }
     //回调
     if (self.failure) {

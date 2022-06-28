@@ -55,10 +55,11 @@
 
 //字体
 #define kFont(A) [UIFont systemFontOfSize:A]
-//加粗字体
-#define kBoldFont(A) [UIFont boldSystemFontOfSize:A]
-//等宽字体
-#define kWidthFont(A) [UIFont fontWithName:@"Helvetica Neue" size:A]
+#define kFontBold(A) [UIFont systemFontOfSize:A weight:UIFontWeightBold]
+#define kFontMedium(A) [UIFont systemFontOfSize:A weight:UIFontWeightMedium]
+#define kFontRegular(A) [UIFont systemFontOfSize:A weight:UIFontWeightRegular]
+#define kFontHeavy(A) [UIFont systemFontOfSize:A weight:UIFontWeightHeavy]
+#define kFontWidth(A) [UIFont fontWithName:@"Helvetica Neue" size:A]
 
 //是否为V以上系统
 #define IOS(V) @available(iOS V, *)
