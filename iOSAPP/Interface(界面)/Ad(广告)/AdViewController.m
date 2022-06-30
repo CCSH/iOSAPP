@@ -38,7 +38,7 @@
     [self.view addSubview:btn];
     [btn borderRadius:15 width:0 color:[UIColor clearColor]];
     btn.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-    btn.titleLabel.font = kWidthFont(12);
+    btn.titleLabel.font = kFontWidth(12);
     @weakify(self);
     [btn addClickBlock:^(UIButton * _Nonnull btn) {
         @strongify(self);

@@ -87,7 +87,7 @@
     
     UILabel *lab = [[UILabel alloc]init];
     lab.frame = CGRectMake(10, 0, kSHWidth - 20, kHeadH);
-    lab.font = kBoldFont(16);
+    lab.font = kFontBold(16);
     lab.text = name;
     
     [view addSubview:lab];

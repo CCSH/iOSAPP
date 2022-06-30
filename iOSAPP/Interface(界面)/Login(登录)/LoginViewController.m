@@ -61,7 +61,7 @@
     SHButton *rightBtn = [[SHButton alloc]init];
     [rightBtn setTitle:@"注册" forState:UIControlStateNormal];
     rightBtn.backgroundColor = kColorMain;
-    rightBtn.titleLabel.font = kBoldFont(14);
+    rightBtn.titleLabel.font = kFontBold(14);
     rightBtn.size = CGSizeMake(44, 24);
     [rightBtn addClickBlock:^(UIButton * _Nonnull btn) {
         [SHRouting routingWithUrl:[SHRouting getUrlWithName:RoutingName_register]
@@ -239,7 +239,7 @@
 - (SHButton *)codeBtn{
     if (!_codeBtn) {
         _codeBtn = [SHButton buttonWithType:UIButtonTypeCustom];
-        _codeBtn.titleLabel.font = kWidthFont(14);
+        _codeBtn.titleLabel.font = kFontWidth(14);
         
         @weakify(self);
         [_codeBtn addClickBlock:^(UIButton * _Nonnull btn) {

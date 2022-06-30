@@ -29,7 +29,7 @@
         //背景图片
 //        [self navBGImage:[UIImage imageNamed:@"tabbar_min"]];
         //标题
-        [self navTitle:@{NSFontAttributeName:kBoldFont(18),
+        [self navTitle:@{NSFontAttributeName:kFontBold(18),
                          NSForegroundColorAttributeName:[UIColor whiteColor]}];
         //iteam文字
         [self navItemText:@{NSFontAttributeName:kFont(14),

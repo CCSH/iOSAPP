@@ -121,7 +121,7 @@
 - (SHButton *)codeBtn{
     if (!_codeBtn) {
         _codeBtn = [SHButton buttonWithType:UIButtonTypeCustom];
-        _codeBtn.titleLabel.font = kWidthFont(14);
+        _codeBtn.titleLabel.font = kFontWidth(14);
         [_codeBtn setTitleColor:kColorMain forState:UIControlStateNormal];
         [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         @weakify(self);
