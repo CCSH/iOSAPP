@@ -8,19 +8,19 @@
 //  Copyright © 2019 CSH. All rights reserved.
 //
 
-#import "SHServerRequest.h"
 #import "SHRequestBase.h"
+#import "SHServerRequest.h"
 
 @implementation SHServerRequest
 
 #pragma mark - 缓存路径
 #pragma mark 可清理的缓存
-+ (NSString *)getRequstCacheClean{
++ (NSString *)getRequstCacheClean {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSString *path = [DocumentPatch stringByAppendingPathComponent:@"request_cache_clean"];
     
-    if(![fileManager fileExistsAtPath:path]){
+    if (![fileManager fileExistsAtPath:path]) {
         //不存在则创建
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
     }
@@ -28,12 +28,12 @@
 }
 
 #pragma mark 不可清理的缓存
-+ (NSString *)getRequstCache{
++ (NSString *)getRequstCache {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSString *path = [DocumentPatch stringByAppendingPathComponent:@"request_cache"];
     
-    if(![fileManager fileExistsAtPath:path]){
+    if (![fileManager fileExistsAtPath:path]) {
         //不存在则创建
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
     }
@@ -41,12 +41,12 @@
 }
 
 #pragma mark 缓存不清理白名单
-+ (NSArray *)getCacheList{
++ (NSArray *)getCacheList {
     return @[];
 }
 
 #pragma mark 缓存大小
-+ (CGFloat)getRequstCacheSize{
++ (CGFloat)getRequstCacheSize {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     CGFloat filesize = 0.0;
     NSString *path = [self getRequstCacheClean];
@@ -54,20 +54,20 @@
         //获取文件的属性
         NSDictionary *fileDic = [fileManager attributesOfItemAtPath:path error:nil];
         unsigned long long size = [[fileDic objectForKey:NSFileSize] longLongValue];
-        filesize = size/1024.0;
+        filesize = size / 1024.0;
     }
     return filesize;
 }
 
 #pragma mark 清理缓存
-+ (void)cleanRequstCache{
++ (void)cleanRequstCache {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     [fileManager removeItemAtPath:[self getRequstCacheClean] error:nil];
 }
 
 #pragma mark - 私有方法
 #pragma mark 公共参数
-+ (NSMutableDictionary *)getParameter{
++ (NSMutableDictionary *)getParameter {
     NSMutableDictionary *para = [NSMutableDictionary dictionary];
     NSString *uid = [SHToolHelper getUserId];
     if (uid.length) {
@@ -79,14 +79,13 @@
 }
 
 #pragma mark 处理参数
-+ (NSMutableDictionary *)handleParameter:(NSDictionary *)dic
-{
++ (NSMutableDictionary *)handleParameter:(NSDictionary *)dic {
     NSMutableDictionary *para = [[NSMutableDictionary alloc] initWithDictionary:dic];
     return para;
 }
 
 #pragma mark 请求统一
-+ (SHRequestBaseModel *)handleModel{
++ (SHRequestBaseModel *)handleModel {
     SHRequestBaseModel *model = [SHRequestBaseModel new];
     model.code = success_code;
     model.msg = @"成功";
@@ -94,7 +93,7 @@
 }
 
 #pragma mark 请求超时
-+ (BOOL)requestTimeOut:(NSInteger)code{
++ (BOOL)requestTimeOut:(NSInteger)code {
     if (code == -1001) {
         return YES;
     }
@@ -104,33 +103,36 @@
 #pragma mark 处理请求
 + (void)handleDataWithModel:(SHRequestBaseModel *)model
                       error:(NSError *)error
-                      block:(RequestBlock)block
-{
-    if (error)
-    {
-        if ([self requestTimeOut:error.code])
-        {
+                      block:(RequestBlock)block {
+    if (error) {
+        if (error.code == time_code) {
             //网络请求超时
-            [SHToast showWithText:request_error_timeout];
-        }else{
-            //网络错误
-            [SHToast showWithText:request_error];
+            [SHToast showWithText:request_time];
+            
+        } else {
+            if (error.code != ccsh_code) {
+                //网络错误
+                [SHToast showWithText:request_error];
+            }
         }
-    }
-    else if (model.code != success_code)
-    {
-        //服务器错误(统一状态码)
-        error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
-        if (model.msg.length) {
-            //服务器错误
-            [SHToast showWithText:model.msg];
+    } else {
+        //服务器错误
+        if (model.code != success_code) {
+            if (model.msg.length) {
+                //服务器错误
+                [SHToast showWithText:model.msg];
+            }
         }
     }
     
-    if (block)
-    {
+    if (block) {
         block(model, error);
     }
+}
+
+#pragma mark 自定义错误信息
++ (NSError *)getError {
+    return [NSError errorWithDomain:error_domain code:ccsh_code userInfo:nil];
 }
 
 #pragma mark - 缓存
@@ -146,22 +148,20 @@
 }
 
 #pragma mark 请求写入沙盒
-+ (void)saveSandboxData:(SHRequestBase *)request model:(SHRequestBaseModel *)model{
-    
++ (void)saveSandboxData:(SHRequestBase *)request model:(SHRequestBaseModel *)model {
     if (model.code == success_code) {
         NSError *error;
         NSData *data = model.mj_JSONData;
         NSString *path = [self getPath:request];
         [data writeToFile:path options:NSDataWritingAtomic error:&error];
         if (error) {
-            SHLog(@"写入失败:%@",request.url);
+            SHLog(@"写入失败:%@", request.url);
         }
     }
 }
 
 #pragma mark 获取缓存数据
-+ (SHRequestBaseModel *)getCacheData:(SHRequestBase *)request{
-    
++ (SHRequestBaseModel *)getCacheData:(SHRequestBase *)request {
     //没网络 获取缓存中成功的数据
     NSString *path = [self getPath:request];
     NSData *data = [NSData dataWithContentsOfFile:path];
@@ -176,8 +176,7 @@
 }
 
 #pragma mark 获取默认数据
-+ (SHRequestBaseModel *)getDefaultData:(SHRequestBase *)request{
-    
++ (SHRequestBaseModel *)getDefaultData:(SHRequestBase *)request {
     NSString *path = [[NSBundle mainBundle] pathForResource:[self getCacheName:request] ofType:nil];
     NSData *data = [NSData dataWithContentsOfFile:path];
     SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:data];
@@ -185,8 +184,7 @@
 }
 
 #pragma mark 获取文件路径
-+ (NSString *)getPath:(SHRequestBase *)request{
-    
++ (NSString *)getPath:(SHRequestBase *)request {
     NSString *path = [self getRequstCacheClean];
     for (NSString *url in [self getCacheList]) {
         if ([request.url containsString:url]) {
@@ -194,28 +192,25 @@
             break;
         }
     }
-    return [NSString stringWithFormat:@"%@/%@",path,[self getCacheName:request]];
+    return [NSString stringWithFormat:@"%@/%@", path, [self getCacheName:request]];
 }
 
 #pragma mark 获取文件名
-+ (NSString *)getCacheName:(SHRequestBase *)request{
-    NSString *name = [NSString stringWithFormat:@"%@%@",request.url,[request.param mj_JSONString]].md5;
-    return [NSString stringWithFormat:@"request_%@",name];
++ (NSString *)getCacheName:(SHRequestBase *)request {
+    NSString *name = [NSString stringWithFormat:@"%@%@", request.url, [request.param mj_JSONString]].md5;
+    return [NSString stringWithFormat:@"request_%@", name];
 }
-
 
 #pragma mark - 网络请求
 #pragma mark 新闻列表
 + (void)requestNewsListWithPid:(NSString *)pid
-                        result:(RequestBlock)result
-{
+                        result:(RequestBlock)result {
     //网址
     NSString *url = [NSString stringWithFormat:@"%@%@", kHostUrl, kNewsList];
-
+    
     //数据处理
     NSMutableDictionary *param = [self getParameter];
-    if (pid)
-    {
+    if (pid) {
         param[@"pid"] = pid;
     }
     //处理参数
@@ -228,7 +223,7 @@
     
     @weakify(self);
     @weakify(request);
-    request.success = ^(id  _Nonnull responseObj) {
+    request.success = ^(id _Nonnull responseObj) {
         @strongify(self);
         @strongify(request);
         //处理数据
@@ -240,13 +235,13 @@
             [self saveSandboxData:request model:model];
         }
     };
-    request.failure = ^(NSError * _Nonnull error) {
+    request.failure = ^(NSError *_Nonnull error) {
         @strongify(self);
         @strongify(request);
         if (!pid) {
             //用个缓存
             [self userCache:request result:result];
-        }else{
+        } else {
             [self handleDataWithModel:nil error:error block:result];
         }
     };

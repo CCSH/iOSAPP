@@ -11,11 +11,17 @@
 
 //网络请求接口
 
+//定义请求信息
+static NSString *request_time = @"请求超时，请检查网络";
 static NSString *request_error = @"网络异常，请检查网络";
-static NSString *request_error_timeout = @"网络超时，请重试";
 static NSString *error_domain = @"ccsh_domain";
+//请求code
+//自定义code
+static NSInteger ccsh_code = -1;
+//超时
+static NSInteger time_code = -1001;
+//成功
 static NSInteger success_code = 200;
-static NSInteger time_out_code = -1001;
 
 #pragma mark - 三方
 #define kBuglyID @"fc42b13a1b"
