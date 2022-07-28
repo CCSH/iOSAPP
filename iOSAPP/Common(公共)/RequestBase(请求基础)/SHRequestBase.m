@@ -54,6 +54,12 @@ static bool isLog = YES;
     return mgr;
 }
 
+
+- (void)setUrl:(NSString *)url {
+    //处理中文编码
+    _url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
 #pragma mark 处理对象
 + (AFHTTPSessionManager *)handleManager:(AFHTTPSessionManager *)mgr{
     
