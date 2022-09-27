@@ -19,7 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = kColor245;
-    self.statusBarStyle = UIStatusBarStyleDefault;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     self.isOpenKeyboard = YES;
     [self closeAutomatically];
@@ -32,23 +31,17 @@
     if (self.isNavHide) {
         self.isNavHide = NO;
     }
-    if (self.isStatusBarHide) {
-        self.isStatusBarHide = NO;
-    }
     if (self.navBarAlpha < 1) {
         self.navBarAlpha = 1;
     }
     if (self.navBarBGAlpha < 1) {
         self.navBarBGAlpha = 1;
     }
-    if (IOS(13)) {
-        if (self.statusBarStyle != UIStatusBarStyleDarkContent) {
-            self.statusBarStyle = UIStatusBarStyleDarkContent;
-        }
-    } else {
-        if (self.statusBarStyle != UIStatusBarStyleDefault) {
-            self.statusBarStyle = UIStatusBarStyleDefault;
-        }
+    if (self.statusBarStyle != UIStatusBarStyleDefault) {
+        self.statusBarStyle = UIStatusBarStyleDefault;
+    }
+    if (self.isStatusBarHide) {
+        self.isStatusBarHide = NO;
     }
     if (!self.isOpenKeyboard) {
         self.isOpenKeyboard = YES;
@@ -67,6 +60,15 @@
     if (scrollView.isDecelerating || scrollView.isDragging || scrollView.isTracking) {
         [self.window endEditing:YES];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    //View controller-based status bar appearance :YES
+    return self.statusBarStyle;
+}
+
+- (BOOL)prefersStatusBarHidden{
+    return self.isStatusBarHide;
 }
 
 #pragma mark - 属性
@@ -92,12 +94,14 @@
 
 - (void)setIsStatusBarHide:(BOOL)isStatusBarHide {
     _isStatusBarHide = isStatusBarHide;
-    [UIApplication sharedApplication].statusBarHidden = isStatusBarHide;
+    [[UIApplication sharedApplication] setStatusBarHidden:isStatusBarHide animated:NO];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle {
     _statusBarStyle = statusBarStyle;
-    [UIApplication sharedApplication].statusBarStyle = statusBarStyle;
+    [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle animated:NO];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)setIsOpenKeyboard:(BOOL)isOpenKeyboard {
