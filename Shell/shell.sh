@@ -6,18 +6,18 @@
 # 配置信息
 
 #这里配置完参数则下方不用进行手动输入（用于参数化构建）
-##是否为工作组
-#parameter_workspace="1"
-##打包模式
-#parameter_configuration="1"
-##打包类型
-#parameter_type="1"
-##上传类型
-#parameter_upload="1"
-##上传appstore
-##账号
+#是否为工作组
+# parameter_workspace="1"
+#打包类型
+# parameter_type="4"
+#打包模式
+# parameter_configuration="2"
+#上传类型
+# parameter_upload="1"
+#上传appstore
+#账号
 #parameter_username=""
-##独立密码
+#独立密码
 #parameter_password=""
 
 echo "\033[32m****************\n开始自动打包\n****************\033[0m\n"
@@ -60,19 +60,19 @@ archiveRun () {
     echo "\033[33;1m2. 否 \033[0m"
     
     if [ ${#parameter_workspace} == 0 ]; then
-    #读取用户输入
-    read parameter_workspace
-    sleep 0.5
+        #读取用户输入
+        read parameter_workspace
+        sleep 0.5
     fi
-    
+        
     if [ "$parameter_workspace" == "1" ]; then
-    echo "\n\033[32m****************\n将采用：xcworkspace\n****************\033[0m\n"
+        echo "\n\033[32m****************\n将采用：xcworkspace\n****************\033[0m\n"
     elif [ "$parameter_workspace" == "2" ]; then
-    echo "\n\033[32m****************\n将采用：xcodeproj\n****************\033[0m\n"
+        echo "\n\033[32m****************\n将采用：xcodeproj\n****************\033[0m\n"
     else
-    echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
-    parameter_workspace=""
-    archiveRun
+        echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
+        parameter_workspace=""
+        archiveRun
     fi
 }
 archiveRun
@@ -86,26 +86,25 @@ methodRun () {
     echo "\033[33;1m4. Development(测试) \033[0m\n"
     
     if [ ${#parameter_type} == 0 ]; then
-    #读取用户输入
-    read parameter_type
-    sleep 0.5
+        #读取用户输入
+        read parameter_type
+        sleep 0.5
     fi
-    
+        
     if [ "$parameter_type" == "1" ]; then
-    parameter_type="AdHoc"
+        parameter_type="AdHoc"
     elif [ "$parameter_type" == "2" ]; then
-    parameter_type="AppStore"
-    parameter_configuration="1"
+        parameter_type="AppStore"
+        parameter_configuration="1"
     elif [ "$parameter_type" == "3" ]; then
-    parameter_type="Enterprise"
+        parameter_type="Enterprise"
     elif [ "$parameter_type" == "4" ]; then
-    parameter_type="Development"
+        parameter_type="Development"
     else
-    echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
-    parameter_type=""
-    methodRun
+        echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
+        parameter_type=""
+        methodRun
     fi
-    
     echo "\033[32m****************\n您选择了 ${parameter_type} 打包类型\n****************\033[0m\n"
 }
 methodRun
@@ -117,19 +116,19 @@ configurationRun () {
     echo "\033[33;1m2. Debug \033[0m"
     
     if [ ${#parameter_configuration} == 0 ]; then
-    #读取用户输入
-    read parameter_configuration
-    sleep 0.5
+        #读取用户输入
+        read parameter_configuration
+        sleep 0.5
     fi
     
     if [ "$parameter_configuration" == "1" ]; then
-    parameter_configuration="Release"
+        parameter_configuration="Release"
     elif [ "$parameter_configuration" == "2" ]; then
-    parameter_configuration="Debug"
+        parameter_configuration="Debug"
     else
-    echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
-    parameter_configuration=""
-    configurationRun
+        echo "\n\033[31;1m****************\n您输入的参数,无效请重新输入!!! \n****************\033[0m\n"
+        parameter_configuration=""
+        configurationRun
     fi
     
     echo "\n\033[32m****************\n打包模式：${parameter_configuration} \n****************\033[0m\n"
@@ -144,21 +143,21 @@ publishRun () {
     echo "\033[33;1m3. 不上传 \033[0m"
     
     if [ ${#parameter_upload} == 0 ]; then
-    #读取用户输入
-    read parameter_upload
-    sleep 0.5
+        #读取用户输入
+        read parameter_upload
+        sleep 0.5
     fi
     
     if [ "$parameter_upload" == "1" ]; then
-    echo "\033[32m****************\n您选择了上传 蒲公英\n****************\033[0m\n"
+        echo "\033[32m****************\n您选择了上传 蒲公英\n****************\033[0m\n"
     elif [ "$parameter_upload" == "2" ]; then
-    echo "\033[32m****************\n您选择了上传 AppStore\n****************\033[0m\n"
+        echo "\033[32m****************\n您选择了上传 AppStore\n****************\033[0m\n"
     elif [ "$parameter_upload" == "3" ]; then
-    echo "\033[32m****************\n您选择了不上传\n****************\033[0m\n"
+        echo "\033[32m****************\n您选择了不上传\n****************\033[0m\n"
     else
-    echo "\n\033[31;1m**************** 您输入的参数,无效请重新输入!!! ****************\033[0m\n"
-    parameter_upload=""
-    publishRun
+        echo "\n\033[31;1m**************** 您输入的参数,无效请重新输入!!! ****************\033[0m\n"
+        parameter_upload=""
+        publishRun
     fi
 }
 publishRun
@@ -167,16 +166,16 @@ publishRun
 appStoreUserNameRun () {
     echo "\033[36;1m请输入APPStore账号(输入完毕, 按回车即可) \033[0m"
     if [ ${#parameter_username} == 0 ]; then
-    #读取用户输入
-    read parameter_username
-    sleep 0.5
+        #读取用户输入
+        read parameter_username
+        sleep 0.5
     fi
     
     echo "\033[36;1m请输入APPStore独立密码(输入完毕, 按回车即可) \033[0m"
     if [ ${#parameter_password} == 0 ]; then
-    #读取用户输入
-    read parameter_password
-    sleep 0.5
+        #读取用户输入
+        read parameter_password
+        sleep 0.5
     fi
 }
 
@@ -195,11 +194,10 @@ archiveRun (){
     rm -rf $export_path_ipa
     
     # 指定输出文件目录不存在则创建
-    if test -d "$export_path_ipa" ;
-    then
-    echo $export_path_ipa
+    if test -d "$export_path_ipa" ; then
+        echo $export_path_ipa
     else
-    mkdir -pv $export_path_ipa
+        mkdir -pv $export_path_ipa
     fi
     
     # 清理工程
@@ -210,29 +208,29 @@ archiveRun (){
     
     if [ "$parameter_workspace" == "1" ]
     then
-    #工作空间
-    xcodebuild archive \
-    -workspace ${project_name}.xcworkspace \
-    -scheme ${project_name} \
-    -configuration ${parameter_configuration} \
-    -destination generic/platform=ios \
-    -archivePath ${export_path_archive}
+        #工作空间
+        xcodebuild archive \
+        -workspace ${project_name}.xcworkspace \
+        -scheme ${project_name} \
+        -configuration ${parameter_configuration} \
+        -destination generic/platform=ios \
+        -archivePath ${export_path_archive}
     else
-    #不是工作空间
-    xcodebuild archive \
-    -project ${project_name}.xcodeproj \
-    -scheme ${project_name} \
-    -configuration ${parameter_configuration} \
-    -archivePath ${export_path_archive}
+        #不是工作空间
+        xcodebuild archive \
+        -project ${project_name}.xcodeproj \
+        -scheme ${project_name} \
+        -configuration ${parameter_configuration} \
+        -archivePath ${export_path_archive}
     fi
     
     # 检查是否构建成功
     # xcarchive 实际是一个文件夹不是一个文件所以使用 -d 判断
     if test -d "$export_path_archive" ; then
-    echo "\n\033[32m****************\n项目编译成功\n****************\033[0m\n"
+        echo "\n\033[32m****************\n项目编译成功\n****************\033[0m\n"
     else
-    echo "\n\033[32m****************\n项目编译失败\n****************\033[0m\n"
-    exit 1
+        echo "\n\033[32m****************\n项目编译失败\n****************\033[0m\n"
+        exit 1
     fi
 }
 archiveRun
@@ -266,10 +264,10 @@ exportRun(){
     
     # 检查文件是否存在
     if test -f "$path_ipa" ; then
-    echo "\n\033[32m****************\n导出 $app_name.ipa 包成功\n****************\033[0m\n"
+        echo "\n\033[32m****************\n导出 $app_name.ipa 包成功\n****************\033[0m\n"
     else
-    echo "\n\033[32m****************\n导出 $app_name.ipa 包失败\n****************\033[0m\n"
-    exit 1
+        echo "\n\033[32m****************\n导出 $app_name.ipa 包失败\n****************\033[0m\n"
+        exit 1
     fi
 }exportRun
 
@@ -280,14 +278,14 @@ uploadRun() {
     #上传 蒲公英
     if [ "$parameter_upload" == "1" ]
     then
-    echo "\033[32m****************\n开始上传蒲公英\n****************\033[0m\n"
-    
-    curl -F "file=@$path_ipa" \
-    -F "uKey=e5a9331a3fd25bc36646f831e4d42f2d" \
-    -F "_api_key=ce1874dcf4523737c9c1d3eafd99164f" \
-    https://upload.pgyer.com/apiv1/app/upload
-    
-    echo "\n\033[32m\n****************\n上传蒲公英完毕\n****************\033[0m\n"
+        echo "\033[32m****************\n开始上传蒲公英\n****************\033[0m\n"
+        
+        curl -F "file=@$path_ipa" \
+        -F "uKey=e5a9331a3fd25bc36646f831e4d42f2d" \
+        -F "_api_key=ce1874dcf4523737c9c1d3eafd99164f" \
+        https://upload.pgyer.com/apiv1/app/upload
+        
+        echo "\n\033[32m\n****************\n上传蒲公英完毕\n****************\033[0m\n"
     fi
     
     #上传 AppStore
@@ -296,25 +294,25 @@ uploadRun() {
         #验证账号密码
         if [ ${#parameter_username} != 0 -a ${#parameter_username} != 0 ]
         then
-        echo "\n\033[32m****************\n开始上传AppStore\n****************\033[0m\n"
-    
-        #验证APP
-        xcrun altool --validate-app \
-        -f "$path_ipa" \
-        -t iOS \
-        -u "$parameter_username" \
-        -p "$parameter_password" \
-        --output-format xml
-    
-        #上传APP
-        xcrun altool --upload-app \
-        -f "$path_ipa" \
-        -t iOS \
-        -u "$parameter_username" \
-        -p "$parameter_password" \
-        --output-format xml
-    
-        echo "\n\033[32m****************\n上传AppStore完毕\n****************\033[0m\n"
+            echo "\n\033[32m****************\n开始上传AppStore\n****************\033[0m\n"
+
+            #验证APP
+            xcrun altool --validate-app \
+            -f "$path_ipa" \
+            -t iOS \
+            -u "$parameter_username" \
+            -p "$parameter_password" \
+            --output-format xml
+
+            #上传APP
+            xcrun altool --upload-app \
+            -f "$path_ipa" \
+            -t iOS \
+            -u "$parameter_username" \
+            -p "$parameter_password" \
+            --output-format xml
+
+            echo "\n\033[32m****************\n上传AppStore完毕\n****************\033[0m\n"
         fi
     fi
 }uploadRun
