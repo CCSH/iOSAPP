@@ -188,8 +188,8 @@ fi
 pgyUpdateContent(){
     echo "\033[36;1m请输入蒲公英更新文案，选填(输入完毕, 按回车即可) \033[0m"
     #读取用户输入
-    read buildUpdateDescription
-    echo "\n\033[32m****************\n更新文案\n$buildUpdateDescription\n****************\033[0m\n"
+    read updateDescription
+    echo "\n\033[32m****************\n更新文案\n$updateDescription\n****************\033[0m\n"
     sleep 0.5
 }
 #选择上传 蒲公英
@@ -299,7 +299,7 @@ uploadRun() {
     -F "file=@$path_ipa" \
     -F "uKey=e5a9331a3fd25bc36646f831e4d42f2d" \
     -F "_api_key=ce1874dcf4523737c9c1d3eafd99164f" \
-    -F "buildUpdateDescription=$buildUpdateDescription" \
+    -F "updateDescription=$updateDescription" \
     https://upload.pgyer.com/apiv1/app/upload
     
     echo "\n\033[32m\n****************\n上传蒲公英完毕\n****************\033[0m\n"
