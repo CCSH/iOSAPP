@@ -7,13 +7,13 @@
 
 #这里配置完参数则下方不用进行手动输入（用于参数化构建）
 #是否为工作组
-parameter_workspace="1"
+#parameter_workspace="1"
 #打包类型
-parameter_type="1"
+#parameter_type="1"
 #打包模式
-parameter_configuration="1"
+#parameter_configuration="1"
 #上传类型
-parameter_upload="1"
+#parameter_upload="1"
 #上传appstore
 #账号
 #parameter_username=""
@@ -26,7 +26,7 @@ echo "\033[32m****************\n开始自动打包\n****************\033[0m\n"
 
 #返回上一级目录,进入项目工程目录
 cd ..
-configRun () {
+configRun() {
     #获取项目名称
     project_name=`find . -name *.xcodeproj | awk -F "[/.]" '{print $(NF-1)}'`
     
@@ -51,7 +51,7 @@ echo "\033[32m****************\n自动打包选择配置部分\n****************
 
 # ==========自动打包可选择信息部分========== #
 # 输入是否为工作空间
-archiveRun () {
+archiveRun() {
     echo "\033[36;1m是否是工作空间(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. 是 \033[0m"
     echo "\033[33;1m2. 否 \033[0m"
@@ -75,7 +75,7 @@ archiveRun () {
 archiveRun
 
 # 输入打包类型
-methodRun () {
+methodRun() {
     echo "\033[36;1m请选择打包方式(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. AdHoc(预发) \033[0m"
     echo "\033[33;1m2. AppStore(发布) \033[0m"
@@ -92,8 +92,7 @@ methodRun () {
     parameter_type="AdHoc"
     elif [ "$parameter_type" == "2" ]; then
     parameter_type="AppStore"
-    
-    ="1"
+    parameter_configuration="1"
     elif [ "$parameter_type" == "3" ]; then
     parameter_type="Enterprise"
     elif [ "$parameter_type" == "4" ]; then
@@ -109,7 +108,7 @@ methodRun () {
 methodRun
 
 # 输入打包模式
-configurationRun () {
+configurationRun() {
     echo "\033[36;1m请选择打包模式(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. Release \033[0m"
     echo "\033[33;1m2. Debug \033[0m"
@@ -135,7 +134,7 @@ configurationRun () {
 configurationRun
 
 # 输入上传类型
-publishRun () {
+publishRun() {
     echo "\033[36;1m请选择上传类型(输入序号, 按回车即可) \033[0m"
     echo "\033[33;1m1. 蒲公英 \033[0m"
     echo "\033[33;1m2. AppStore \033[0m"
@@ -162,7 +161,7 @@ publishRun () {
 publishRun
 
 # 输入APPStore信息
-appStoreUserNameRun () {
+appStoreUserNameRun() {
     echo "\033[36;1m请输入APPStore账号(输入完毕, 按回车即可) \033[0m"
     if [ ${#parameter_username} == 0 ]; then
     #读取用户输入
@@ -185,13 +184,14 @@ appStoreUserNameRun
 fi
 
 #选填蒲公英更新文案
-pgyUpdateContent(){
+pgyUpdateContent() {
     echo "\033[36;1m请输入蒲公英更新文案，选填(输入完毕, 按回车即可) \033[0m"
     #读取用户输入
     read updateDescription
     echo "\n\033[32m****************\n更新文案\n$updateDescription\n****************\033[0m\n"
     sleep 0.5
 }
+
 #选择上传 蒲公英
 if [ "$parameter_upload" == "1" ]
 then
@@ -199,8 +199,9 @@ pgyUpdateContent
 fi
 
 echo "\n\033[32m****************\n打包信息配置完毕，开始进行打包\n****************\033[0m\n"
+
 # 归档编译
-archiveRun (){
+archiveRun() {
     echo "\n\033[32m****************\n开始清理工程\n****************\033[0m\n"
     
     #强制删除旧的文件夹
@@ -250,8 +251,9 @@ archiveRun (){
 archiveRun
 
 echo "\n\033[32m****************\n开始导出ipa文件\n****************\033[0m\n"
+
 # 导出ipa
-exportRun(){
+exportRun() {
     #1、打包命令
     #2、归档文件地址
     #3、ipa输出地址
@@ -334,3 +336,4 @@ uploadRun() {
     fi
 }
 uploadRun
+
