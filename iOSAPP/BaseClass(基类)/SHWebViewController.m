@@ -361,7 +361,7 @@ WKScriptMessageHandler >
         
         //创建网页配置对象
         WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-        // 是使用h5的视频播放器在线播放, 还是使用原生播放器全屏播放
+        //不需要在线媒体全屏播放
         config.allowsInlineMediaPlayback = YES;
         //设置视频是否需要用户手动播放  设置为NO则会允许自动播放
         config.mediaTypesRequiringUserActionForPlayback = YES;
