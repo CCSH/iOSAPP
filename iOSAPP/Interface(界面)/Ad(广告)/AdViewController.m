@@ -23,7 +23,8 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [self doneAction];
+    [self doneAction];
+    [SHToolHelper changeIcon:@"icon"];
 }
 
 #pragma mark - 配置

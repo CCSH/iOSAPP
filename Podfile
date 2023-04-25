@@ -1,4 +1,4 @@
-platform:ios, '10.0'
+platform:ios, '11.0'
 
 target 'iOSAPP' do
   #使用frameworks
@@ -68,4 +68,16 @@ target 'iOSAPP' do
   #pod 'EaseCallKit'
   #pod 'HyphenateChat'
   
+end
+
+post_install do |installer|
+  # 1. 遍历项目中所有target
+  installer.pods_project.targets.each do |target|
+     # 2. 遍历build_configurationss
+    target.build_configurations.each do |config|
+      # 3. 修改build_settings
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+  end
 end

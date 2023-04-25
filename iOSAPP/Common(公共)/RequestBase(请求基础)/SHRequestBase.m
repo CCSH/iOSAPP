@@ -26,7 +26,6 @@ static bool isLog = YES;
     static AFHTTPSessionManager *mgrProxy;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         mgrProxy = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[self configuration]];
         
         mgr = [AFHTTPSessionManager manager];
@@ -54,15 +53,16 @@ static bool isLog = YES;
     return mgr;
 }
 
-
 - (void)setUrl:(NSString *)url {
-    //处理中文编码
-    _url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    _url = url;
+    if (url.length != url.textLength) {
+        //处理中文编码
+        _url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    }
 }
 
 #pragma mark 处理对象
-+ (AFHTTPSessionManager *)handleManager:(AFHTTPSessionManager *)mgr{
-    
++ (AFHTTPSessionManager *)handleManager:(AFHTTPSessionManager *)mgr {
     mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:
                                                      @"application/json",
                                                      @"multipart/form-data",
@@ -78,30 +78,30 @@ static bool isLog = YES;
     //序列化
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-
+    
     return mgr;
 }
 
 #pragma mark 代理
-+ (NSURLSessionConfiguration *)configuration{
++ (NSURLSessionConfiguration *)configuration {
     //配置
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-
+    
     //配置代理
     NSString *proxyHost = @"127.0.0.1";
     NSNumber *proxyPort = @(8888);
     NSDictionary *proxyDict = @{
         //认证
-        (NSString *)kCFProxyUsernameKey:@"ccsh",
-        (NSString *)kCFProxyPasswordKey:@"123456",
-        //http
-        @"HTTPEnable": @YES,
-        @"HTTPProxy": proxyHost,
-        @"HTTPPort": proxyPort,
-        //https
-        @"HTTPSEnable": @YES,
-        @"HTTPSProxy": proxyHost,
-        @"HTTPSPort": proxyPort
+        (NSString *)kCFProxyUsernameKey : @"ccsh",
+        (NSString *)kCFProxyPasswordKey : @"123456",
+        // http
+        @"HTTPEnable" : @YES,
+        @"HTTPProxy" : proxyHost,
+        @"HTTPPort" : proxyPort,
+        // https
+        @"HTTPSEnable" : @YES,
+        @"HTTPSProxy" : proxyHost,
+        @"HTTPSPort" : proxyPort
     };
     config.connectionProxyDictionary = proxyDict;
     

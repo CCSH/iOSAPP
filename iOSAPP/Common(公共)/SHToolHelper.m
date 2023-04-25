@@ -181,7 +181,7 @@
          void (*func)(id, SEL, id, id) = (void *)imp;
          if (func)
          {
-             func([UIApplication sharedApplication], selector, iconName, ^(NSError * _Nullable error) {});
+             func([UIApplication sharedApplication], selector, icon, ^(NSError * _Nullable error) {});
          }
      }
 }

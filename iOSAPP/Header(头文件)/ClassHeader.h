@@ -45,6 +45,7 @@
 #import "SHServerRequest.h"
 #import "SHToolHelper.h"
 #import "SHWebViewController.h"
+#import <SHExtension.h>
 
 
 //#import <EaseIMKit.h>
