@@ -6,8 +6,8 @@
 //  Copyright © 2019 CSH. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "SHRequestBaseModel.h"
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,21 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SHServerRequest : NSObject
 
-#pragma mark - 缓存路径
+#pragma mark - 缓存
 #pragma mark 可清理的缓存
 + (NSString *)getRequstCacheClean;
 #pragma mark 缓存大小
 + (CGFloat)getRequstCacheSize;
 #pragma mark 清理缓存
 + (void)cleanRequstCache;
-
 #pragma mark 不可清理的缓存
 + (NSString *)getRequstCache;
 
 #pragma mark - 网络请求
 #pragma mark 新闻列表
-+ (void)requestNewsListWithPid:(NSString *)pid
-                        result:(RequestBlock)result;
++ (void)requestListWithPid:(NSString *)pid
+                    result:(RequestBlock)result;
 
 @end
 

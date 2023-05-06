@@ -13,13 +13,13 @@
 
 @implementation SHServerRequest
 
-#pragma mark - 缓存路径
+#pragma mark - 缓存
 #pragma mark 可清理的缓存
 + (NSString *)getRequstCacheClean {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+
     NSString *path = [DocumentPatch stringByAppendingPathComponent:@"request_cache_clean"];
-    
+
     if (![fileManager fileExistsAtPath:path]) {
         //不存在则创建
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
@@ -30,9 +30,9 @@
 #pragma mark 不可清理的缓存
 + (NSString *)getRequstCache {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
+
     NSString *path = [DocumentPatch stringByAppendingPathComponent:@"request_cache"];
-    
+
     if (![fileManager fileExistsAtPath:path]) {
         //不存在则创建
         [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
@@ -74,7 +74,7 @@
         para[@"user_id"] = uid;
     }
     para[@"device_type"] = @"ios";
-    
+
     return para;
 }
 
@@ -108,7 +108,6 @@
         if (error.code == time_code) {
             //网络请求超时
             [SHToast showWithText:request_time];
-            
         } else {
             if (error.code != ccsh_code) {
                 //网络错误
@@ -124,7 +123,7 @@
             }
         }
     }
-    
+
     if (block) {
         block(model, error);
     }
@@ -142,6 +141,7 @@
     if (model) {
         [self handleDataWithModel:model error:nil block:result];
     } else {
+        //没有缓存
         NSError *error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
         [self handleDataWithModel:nil error:error block:result];
     }
@@ -202,12 +202,12 @@
 }
 
 #pragma mark - 网络请求
-#pragma mark 新闻列表
-+ (void)requestNewsListWithPid:(NSString *)pid
-                        result:(RequestBlock)result {
+#pragma mark 列表
++ (void)requestListWithPid:(NSString *)pid
+                    result:(RequestBlock)result {
     //网址
     NSString *url = [NSString stringWithFormat:@"%@%@", kHostUrl, kNewsList];
-    
+
     //数据处理
     NSMutableDictionary *param = [self getParameter];
     if (pid) {
@@ -215,35 +215,38 @@
     }
     //处理参数
     param = [self handleParameter:param];
-    
+
     //请求
     SHRequestBase *request = [SHRequestBase new];
     request.url = url;
     request.param = param;
-    
+
+    //使用缓存
+    BOOL isCache = [pid intValue] <= 1;
+
     @weakify(self);
     @weakify(request);
     request.success = ^(id _Nonnull responseObj) {
-        @strongify(self);
-        @strongify(request);
-        //处理数据
-        SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];
-        [self handleDataWithModel:model error:nil block:result];
-        
-        if (!pid) {
-            //写入沙盒
-            [self saveSandboxData:request model:model];
-        }
+      @strongify(self);
+      @strongify(request);
+      //处理数据
+      SHRequestBaseModel *model = [SHRequestBaseModel mj_objectWithKeyValues:responseObj];
+      [self handleDataWithModel:model error:nil block:result];
+
+      if (isCache) {
+          //写入沙盒
+          [self saveSandboxData:request model:model];
+      }
     };
     request.failure = ^(NSError *_Nonnull error) {
-        @strongify(self);
-        @strongify(request);
-        if (!pid) {
-            //用个缓存
-            [self userCache:request result:result];
-        } else {
-            [self handleDataWithModel:nil error:error block:result];
-        }
+      @strongify(self);
+      @strongify(request);
+      if (isCache) {
+          //用个缓存
+          [self userCache:request result:result];
+      } else {
+          [self handleDataWithModel:nil error:error block:result];
+      }
     };
     [request requestGet];
 }
