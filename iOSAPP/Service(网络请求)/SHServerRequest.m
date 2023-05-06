@@ -142,8 +142,7 @@
         [self handleDataWithModel:model error:nil block:result];
     } else {
         //没有缓存
-        NSError *error = [NSError errorWithDomain:error_domain code:500 userInfo:nil];
-        [self handleDataWithModel:nil error:error block:result];
+        [self handleDataWithModel:nil error:[self getError] block:result];
     }
 }
 
