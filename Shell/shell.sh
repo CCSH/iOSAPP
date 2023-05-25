@@ -44,8 +44,10 @@ configRun() {
     #获取项目名称
     project_name=$(find . -name *.xcodeproj | awk -F "[/.]" '{print $(NF-1)}')
 
-    #获取工程plist配置文件 路径不对自己改下
+    #获取工程plist配置文件 路径不对的自己改下
     info_plist_path="$project_name/Info.plist"
+    #获取scheme 名字不对的自己改下
+    scheme=$project_name
 
     #设置Build版本号（可以不进行设置）
     date=$(date +"%Y%m%d%H%M")
@@ -316,7 +318,7 @@ archiveRun() {
             #工作空间
             xcodebuild archive \
             -workspace $project_name.xcworkspace \
-            -scheme $project_name \
+            -scheme $scheme \
             -configuration $parameter_configuration \
             -destination generic/platform=ios \
             -archivePath $export_path_archive
@@ -324,7 +326,7 @@ archiveRun() {
             #不是工作空间
             xcodebuild archive \
             -project $project_name.xcodeproj \
-            -scheme $project_name \
+            -scheme $scheme \
             -configuration $parameter_configuration \
             -archivePath $export_path_archive
         fi
